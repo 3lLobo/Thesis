@@ -1,0 +1,106 @@
+\begin{thebibliography}{10}
+
+\bibitem{kertkeidkachorn_t2kg_2018}
+N.~Kertkeidkachorn and R.~Ichise.
+\newblock {T2KG}: {A} demonstration of knowledge graph population from text and
+  its challenges.
+\newblock volume 2293, pages 110--113, 2018.
+
+\bibitem{che_towards_2018}
+Wanxiang Che, Yijia Liu, Yuxuan Wang, Bo~Zheng, and Ting Liu.
+\newblock Towards {Better} {UD} {Parsing}: {Deep} {Contextualized} {Word}
+  {Embeddings}, {Ensemble}, and {Treebank} {Concatenation}.
+\newblock {\em arXiv:1807.03121 [cs]}, July 2018.
+\newblock arXiv: 1807.03121.
+
+\bibitem{mikolov_efficient_2013}
+Tomas Mikolov, Kai Chen, Greg Corrado, and Jeffrey Dean.
+\newblock Efficient {Estimation} of {Word} {Representations} in {Vector}
+  {Space}.
+\newblock {\em arXiv:1301.3781 [cs]}, September 2013.
+\newblock arXiv: 1301.3781.
+
+\bibitem{devlin_bert_2019}
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
+\newblock {BERT}: {Pre}-training of {Deep} {Bidirectional} {Transformers} for
+  {Language} {Understanding}.
+\newblock {\em arXiv:1810.04805 [cs]}, May 2019.
+\newblock arXiv: 1810.04805.
+
+\bibitem{vaswani_attention_2017}
+Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones,
+  Aidan~N. Gomez, Lukasz Kaiser, and Illia Polosukhin.
+\newblock Attention {Is} {All} {You} {Need}.
+\newblock {\em arXiv:1706.03762 [cs]}, December 2017.
+\newblock arXiv: 1706.03762.
+
+\bibitem{bordes_translating_2013}
+Antoine Bordes, Nicolas Usunier, Alberto Garcia-Duran, Jason Weston, and Oksana
+  Yakhnenko.
+\newblock Translating {Embeddings} for {Modeling} {Multi}-relational {Data}.
+\newblock In C.~J.~C. Burges, L.~Bottou, M.~Welling, Z.~Ghahramani, and K.~Q.
+  Weinberger, editors, {\em Advances in {Neural} {Information} {Processing}
+  {Systems} 26}, pages 2787--2795. Curran Associates, Inc., 2013.
+
+\bibitem{kipf_contrastive_2020}
+Thomas Kipf, Elise van~der Pol, and Max Welling.
+\newblock Contrastive {Learning} of {Structured} {World} {Models}.
+\newblock {\em arXiv:1911.12247 [cs, stat]}, January 2020.
+\newblock arXiv: 1911.12247.
+
+\bibitem{belli_image-conditioned_2019}
+Davide Belli and Thomas Kipf.
+\newblock Image-{Conditioned} {Graph} {Generation} for {Road} {Network}
+  {Extraction}.
+\newblock {\em arXiv:1910.14388 [cs, stat]}, October 2019.
+\newblock arXiv: 1910.14388.
+
+\bibitem{li_learning_2018}
+Yujia Li, Oriol Vinyals, Chris Dyer, Razvan Pascanu, and Peter Battaglia.
+\newblock Learning {Deep} {Generative} {Models} of {Graphs}.
+\newblock {\em arXiv:1803.03324 [cs, stat]}, March 2018.
+\newblock arXiv: 1803.03324.
+
+\bibitem{jin_unsupervised_2019}
+Lifeng Jin, Finale Doshi-Velez, Timothy Miller, Lane Schwartz, and William
+  Schuler.
+\newblock Unsupervised {Learning} of {PCFGs} with {Normalizing} {Flow}.
+\newblock In {\em Proceedings of the 57th {Annual} {Meeting} of the
+  {Association} for {Computational} {Linguistics}}, pages 2442--2452, Florence,
+  Italy, July 2019. Association for Computational Linguistics.
+
+\bibitem{kingma_auto-encoding_2014}
+Diederik~P. Kingma and Max Welling.
+\newblock Auto-{Encoding} {Variational} {Bayes}.
+\newblock {\em arXiv:1312.6114 [cs, stat]}, May 2014.
+\newblock arXiv: 1312.6114.
+
+\bibitem{tiao_variational_nodate}
+Louis Tiao, Pantelis Elinas, Harrison Nguyen, and Edwin~V Bonilla.
+\newblock Variational {Graph} {Convolutional} {Networks}.
+\newblock page~11.
+
+\bibitem{simonovsky_graphvae_2018}
+Martin Simonovsky and Nikos Komodakis.
+\newblock {GraphVAE}: {Towards} {Generation} of {Small} {Graphs} {Using}
+  {Variational} {Autoencoders}.
+\newblock {\em arXiv:1802.03480 [cs]}, February 2018.
+\newblock arXiv: 1802.03480.
+
+\bibitem{andreoli_convolution_nodate}
+Jean-Marc Andreoli.
+\newblock Convolution, attention and structure embedding.
+\newblock page~8.
+
+\bibitem{battaglia_relational_2018}
+Peter~W. Battaglia, Jessica~B. Hamrick, Victor Bapst, Alvaro Sanchez-Gonzalez,
+  Vinicius Zambaldi, Mateusz Malinowski, Andrea Tacchetti, David Raposo, Adam
+  Santoro, Ryan Faulkner, Caglar Gulcehre, Francis Song, Andrew Ballard, Justin
+  Gilmer, George Dahl, Ashish Vaswani, Kelsey Allen, Charles Nash, Victoria
+  Langston, Chris Dyer, Nicolas Heess, Daan Wierstra, Pushmeet Kohli, Matt
+  Botvinick, Oriol Vinyals, Yujia Li, and Razvan Pascanu.
+\newblock Relational inductive biases, deep learning, and graph networks.
+\newblock {\em arXiv:1806.01261 [cs, stat]}, October 2018.
+\newblock arXiv: 1806.01261.
+
+\end{thebibliography}
