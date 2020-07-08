@@ -1,0 +1,45 @@
+
+
+The bigger picture of this thesis is to efficiently generate a representation of the information hold in plain text. This representation has the form of a knowledge graph and consists of subject-relation-object triples.
+\\
+\textbf{Challenges:}\\
+\begin{itemize}
+    \item What knowledge are we looking for?
+    I would like the model to focus on the most important information. This could for example be topic specific.
+    \item Another option would be to extract based on a query or point of interest.
+    Especially if we build the KG incrementally we can use this input as starting point and recursively build from there. 
+\end{itemize}
+
+
+\subsection{Use Normalizing Flows}\label{idea:NF}
+
+\begin{itemize}
+    \item Is it possible to generate a graph from text using Normalizing flow (NF)?
+    \item Can we train such a NF unsupervised, using the output distributions as loss function?
+    \item NFs can build KG at once or incrementally.
+No one is using it, could have a reason.
+\end{itemize}
+
+    
+\subsection{Recurrent VAE}\label{idea:VAE}
+
+\begin{itemize}
+    \item Recursively generate graph using a Variational Auto Encoder.
+    \item Use query as start node.
+    \item expand graph on that node.
+Thiviyan and others work on VAEs as well.
+Seems an easier approach.
+Can analyze the latent space.
+
+\end{itemize}
+
+The encoder decoder strategy has been applied successfully in many cases.
+Bellis thesis about modeling a graph from images can be applied to text as well by changing the input to a text vector \cite{belli_image-conditioned_2019}. Note that this is a supervised method and would require a dataset of text labeld with resulting KGs. To the best of my knowledge this does not exist yet.
+\\
+Same holds for the contrastive world model by Kipf. If we input text vectors instead of an image the model could recognize different objects in the text as it does with pixels \cite{kipf_contrastive_2020}. Here the model is trained unsupervised using a loss over the energy function of the graph embedding space TransE \cite{bordes_translating_2013}. An open question is if this would work for our approach.
+\\
+A bit more abstract is the idea of the feedback recurrent VAE \cite{yang_feedback_2020} where sound signals are encoded and decoded. This could also be adopted to text for instance with one sentence at a time, or a fixed number of tokens. Here the text vector would be induced as the latent input to the decoder. This would mean finding an translation of the models latent space to the work embedding. The dataset would consist of positive and negative examples of resulting graphs over timesteps.
+\\
+While text can be easily vectorized by word embeddings like word2vec, the graph representation seems more tricky. A reasonable approach following Bellis example would be to output a coordinates vector for the nodes and an adjantency matrix for their relationships. Here one node at a time is outputted and the relation is conditioned on the number of previous nodes.
+Alternatively we could make use of the graph embeddings RASCAL or TransE.
+Lastly the question remains how to model the graph when the nodes need to be predefined. A subgraph of DBpedia could be a good starting point.

@@ -1,0 +1,74 @@
+In this section I will present my literature research up-to-date. The included topics are either relevant as background knowledge or state-of-the-art models.
+
+
+
+\subsection{Knowledge}
+% Get knowledge out of text.
+% Humans read text and understand the knowledge.
+% Make text machine readable. new format.
+% Get accurate knowledge.
+% Get background knowledge.
+
+We humans aquire knowledge audio-visually. This can be in form of a lecture, a movie, or book. The most common way to transfer knowledge is by text. For machines to be able to reason and work with knowledge, it needs to be transferred to a machine readable format. The most popular format is a tabular database. A newer database approach is the knowledge graph (KR) which is based on relations between entities. This lets the machine reason on this knowledge, answer complex questions and make conclusions more similar to human thinking.
+The format of KG is a triple consisting of a subject, a directed relation and an object.
+The task of converting knowledge from text to KG format is non-trivial. In this thesis, we would like to focus on the extraction of accurate knowledge. The idea behind it is that text possesses various levels of knowledge and we, as reader, are biased by our prior knowledge and the intention or drive for reading the text. 
+
+\begin{itemize}
+    \item Semantic Parsing\\
+    The most old-school and technical approach is to tackle each sentence with NLP methods. This means tagging each word, linking references and finding relations. This will extract all possible triples. This can then be aligned with an existing database \cite{kertkeidkachorn_t2kg_2018}.
+    \item Knowledge Graph\\
+    Form of representing knowledge or simply a database. Makes information machine readable. It is build of relation triples.
+    \item Triple SRO\\
+    Triples are formed by two nodes and on link. The starting node is the subject, the second node is the object and the directed link is the relation of the subject with the object. 
+    \item Semantic Web\\
+    The future of the internet where the data presented on websites can be read and understood by the browser. For this to be possible, websites should present its information in KG format in the metadata.
+    \item Existing Methods in NLP\\
+    Different semantic parser have been developed. They extract all possible kind of triples from text. While being grammatically correct, the extracted triples do not represent the information a human reader would get by reading the text. The Stanford Parser might be the most popular and advanced one \cite{che_towards_2018}. Further the Allen NLP and OpenIE projects offer powerful parsing tools.
+\end{itemize}
+
+\subsection{Embeddings}
+% Plain text can not be used as input to a model. We need a valid representation of the words. Word embeddings are generated on the full corpus covering all words which might appear. Each word is represented by a high dimensional vector. this can be used to encode the text as input or decode it back from the model output.
+For any model we need an encoding to input text. Word embeddings have established themselves over the last decade as the solution. There are differences in how they are trained , how the relations between words is captured and how the context is represented.
+\begin{itemize}
+    \item Word Embeddings\\
+    word2vec is the most established word embedding, easy to train and implement \cite{mikolov_efficient_2013}. Yet this method is becoming outdated and being replaced by newer solutions. \\
+    \\BERT, also by Google, seems to be the sate of the art. It is able to predict words or full sentences as vectors. Using a bidirectional architecture and an attention score for each token, this model is able to catch much more context than its predecessors \cite{devlin_bert_2019}. The attention score indicates how much other words point towards the selected word within a sentence \cite{vaswani_attention_2017}. This way the importance of the words can be compared. The model on it's own is a text classifier but can be tweaked to output word embeddings.
+    \item Graph Embeddings\\
+    TransE represents entities in in low-dimensional embedding. The relationships between entities are represented by the vector between two entities \cite{bordes_translating_2013}.
+    (How are different relation between the same entities represented?)
+    \item OntoUSP\\
+    This method learns a hierarchical structure to better represent the relations between entities in embedding space.
+\end{itemize}
+
+\subsection{Learning Methods}
+A big challenge of this field is the lack of labeled data. Public knowledge graphs like DBpedia hold huge collections of knowledge. In my opinion, the size is the problem. The plain amount of data makes it hard to incorporate it in an efficient pipeline. Further, since it needs to cover all topics, the representation becomes less specific.
+Looking at the usecases of KGs, most tasks actually do not require this total coverage and instead are topic specific. Thus, we would like to focus on a targeted approach.
+\begin{itemize}
+    \item Supervised Learning\\ requires a labeled dataset. For the case of text to graph the options are limited. Adecorpus provides such a dataset for drug interactions. Facebook research offers a Q&A text to graph dataset called babi. This dataset is a benchmark for question answering algorithms. 
+    \\
+    \item Distant supervision\\ makes use of the a database like DBpedia and infers labels by comparing the similarity of entities.
+    \\
+    \item Contrastive Learning\\
+    Can be supervised or unsupervised approach and focuses on similarities between predictions. The loss is computed by the energy function of the output. To me this seems like an interesting approach to create a world model \cite{kipf_contrastive_2020} and it has not yet been applied to plain text.
+\end{itemize}
+
+
+\subsection{Recurrent Graph Models}
+The idea of creating a graph recurrently node by node seems intuitive. One recent example of generating a graph using a recurrent VAE architecture was \cite{belli_image-conditioned_2019}. Here the model generates gets bird-view images of roadmaps and generates a graph representation. each generated node is fed back into the encoder as prior and a stop signal is generated once finished.
+Applying this to knowledge from text is one of my two main ideas \ref{idea:VAE}.
+
+Another recent approach uses recurrent Graph GAN \cite{li_learning_2018}. Learns distribution of the training graphs. Creates Graph sequentially.
+
+\subsection{Graph Normalizing Flows}
+Create Graph all at once. Would it be possible to generate it recursively? Conditioned on query?
+\begin{itemize}
+    \item unsupervised learning with CFG
+    In the application of context free grammar, NFs have been trained on plain text \cite{jin_unsupervised_2019}. The approach was unsupervised with a loss function which takes in account the distribution of the output prediction and the KL divergence between the distributions of each output. This made the model generate outputs with high certainty and which lay far apart from each other. The loss also encourages the output to be close to the input. For the input and output two different embeddings are needed. Thus, we need a similarity measure between them.
+    
+\end{itemize}
+
+\subsection{Variational Auto Encoder (VAE)}
+
+These models consist of an encode and a decoder. The encoder encodes the input to an low-dimensional latent space. The decoder takes a signal from latent space and reconstructs the input. 
+Exploring the latent space makes it ossible to use the decoder as generative model.
+The posterior can only be aproximated by the ELBO
