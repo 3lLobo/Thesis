@@ -127,6 +127,8 @@ INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
+INPUT /home/wolf/Thesis/Code/Thesis/issues.tex
+INPUT /home/wolf/Thesis/Code/Thesis/issues.tex
 INPUT /home/wolf/Thesis/Code/Thesis/main.aux
 INPUT /home/wolf/Thesis/Code/Thesis/main.out
 INPUT /home/wolf/Thesis/Code/Thesis/main.out

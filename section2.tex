@@ -44,10 +44,10 @@ For any model we need an encoding to input text. Word embeddings have establishe
 A big challenge of this field is the lack of labeled data. Public knowledge graphs like DBpedia hold huge collections of knowledge. In my opinion, the size is the problem. The plain amount of data makes it hard to incorporate it in an efficient pipeline. Further, since it needs to cover all topics, the representation becomes less specific.
 Looking at the usecases of KGs, most tasks actually do not require this total coverage and instead are topic specific. Thus, we would like to focus on a targeted approach.
 \begin{itemize}
-    \item Supervised Learning\\ requires a labeled dataset. For the case of text to graph the options are limited. Adecorpus provides such a dataset for drug interactions. Facebook research offers a Q&A text to graph dataset called babi. This dataset is a benchmark for question answering algorithms. 
-    \\
-    \item Distant supervision\\ makes use of the a database like DBpedia and infers labels by comparing the similarity of entities.
-    \\
+    \item Supervised Learning\\
+    Requires a labeled dataset. For the case of text to graph the options are limited. Adecorpus provides such a dataset for drug interactions. Facebook research offers a Q&A text to graph dataset called babi. This dataset is a benchmark for question answering algorithms.\\
+    \item Distant supervision\\ 
+    makes use of the a database like DBpedia and infers labels by comparing the similarity of entities.\\
     \item Contrastive Learning\\
     Can be supervised or unsupervised approach and focuses on similarities between predictions. The loss is computed by the energy function of the output. To me this seems like an interesting approach to create a world model \cite{kipf_contrastive_2020} and it has not yet been applied to plain text.
 \end{itemize}

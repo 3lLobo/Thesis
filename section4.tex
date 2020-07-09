@@ -10,13 +10,29 @@ Graph embeddings? unsupervised approach
 
 \subsection{Graph VAE}
 
-Convolution part
-MLP encoder
-Latent space
-reparametrization trick
-MLP decoder
-Graph matching
-Discretization of prediction
+\\Convolution part
+\\RCGN relation Convolution neural net
+\\MLP encoder
+\\Latent space
+\\reparametrization trick
+\\MLP decoder
+\\Graph matching
+\\Discretization of prediction
+
+\subsection{Loss function}
+
+If loss function should be permutaion invariant we need to do some kind of graph matching.\\
+Different options for graph matching.\\
+Maxpooling-algorithm:\\
+Assumptions\\
+Node to edge affinity equals 0
+Summing over the neighbors means summing over the whole column
+
+Hungarian algorighm for discretization of X
+\\
+second option:
+Compare only graph structure. 
+NX algorithms: Greedy, Shortest path \dots
 
 \subsection{Metrics}
 
