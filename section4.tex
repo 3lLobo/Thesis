@@ -2,9 +2,11 @@ This section describes the methodology for this thesis. The first part includes 
 
 \subsection{Knowledge graph representation}
 
-adjacency matrix
-edge attribute matrix
-node attribute matrix
+% adjacency matrix
+% edge attribute matrix
+% node attribute matrix
+The first step in our pipeline is the representation of the KG in tensor format. In order to represent the graph structure we use an adjacency matrix $A$ of shape $n\times n$ with $n$ being the number of nodes in our graph. The edge attribute or directed relations between the nodes are represented in the matrix $E$ of shape $n\times n\times d_E$ with $d_E$ being the number of edge attributes. Similarly for node attributes we have the matrix $F$ of shape $n\times d_N$ with $d_N$ number of node attributes. The input graph can have less nodes than the maximum $n$ but not more. The diagonal of the adjacency matrix is filled with $1$ if the indexed node exists, and with $0$ otherwise. The number and encoding of the attributes must be predefined and cannot be changed after training. This way we can uniquely represent a KG.\\
+
 
 Graph embeddings? unsupervised approach
 
@@ -21,20 +23,17 @@ Graph embeddings? unsupervised approach
 
 \subsection{Loss function}
 
-If loss function should be permutaion invariant we need to do some kind of graph matching.\\
+If loss function should be permutation invariant we need to do some kind of graph matching.\\
 Different options for graph matching.\\
 Maxpooling-algorithm:\\
 Assumptions\\
 Node to edge affinity equals 0
 Summing over the neighbors means summing over the whole column
 
-Hungarian algorighm for discretization of X
+Hungarian algorithm for discrimination of X
 \\
-second option:
-Compare only graph structure. 
-NX algorithms: Greedy, Shortest path \dots
 
 \subsection{Metrics}
 
-WHAAAA O.o
+Wasserstein distance???
 Link prediction?
