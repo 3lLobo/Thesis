@@ -4,10 +4,10 @@
   "fullrefs.bib" 1594214897 189462 3d26f6dc8eba956385a219cd623a45b6 ""
   "main.aux" 0 -1 0 "pdflatex"
   (generated)
-  "main.bbl"
   "main.blg"
-["pdflatex"] 1594382241 "/home/wolf/Thesis/Code/Thesis/main.tex" "/home/wolf/Thesis/Code/Thesis/main.pdf" "main" 1594382241
-  "/home/wolf/Thesis/Code/Thesis/main.aux" 1594382241 8 a94a2480d3289e625eea47cd1b285758 ""
+  "main.bbl"
+["pdflatex"] 1594394960 "/home/wolf/Thesis/Code/Thesis/main.tex" "/home/wolf/Thesis/Code/Thesis/main.pdf" "main" 1594394960
+  "/home/wolf/Thesis/Code/Thesis/main.aux" 1594394960 8 a94a2480d3289e625eea47cd1b285758 ""
   "/home/wolf/Thesis/Code/Thesis/main.tex" 1594214897 3394 d1fcf6555f352092a390cdfc6de81d59 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -92,12 +92,12 @@
   "main.tex" 1594214897 3394 d1fcf6555f352092a390cdfc6de81d59 ""
   "section1.tex" 1594187892 44 826a0faaf48d99b77731ce7641994f78 ""
   "section2.tex" 1594300950 7682 a0a4f8cfeba3a2c17395e8bfc76c453f ""
-  "section3.tex" 1594375821 4605 8bf4c34805218f941cfe0e9b71c40106 ""
-  "section4.tex" 1594382239 1990 2aa761011b8a524c9237f4d1610b7dde ""
+  "section3.tex" 1594394959 5333 1acd779545a29836cf2c64b430d5dc60 ""
+  "section4.tex" 1594392613 1997 de81062b8176b3767f77fb2ba0702008 ""
   (generated)
-  "main.log"
-  "/home/wolf/Thesis/Code/Thesis/main.log"
-  "main.aux"
-  "main.pdf"
-  "/home/wolf/Thesis/Code/Thesis/main.pdf"
   "main.out"
+  "main.pdf"
+  "main.log"
+  "main.aux"
+  "/home/wolf/Thesis/Code/Thesis/main.log"
+  "/home/wolf/Thesis/Code/Thesis/main.pdf"

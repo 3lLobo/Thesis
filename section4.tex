@@ -1,11 +1,12 @@
-This section describes the methodology for this thesis. The first part includes the presentation of the model, the reprocessing of the input and the evaluation metrics. The second part describes the experimental setup and the different experimental runs. The work of this thesis has aimed to be fully reproducable, thus the code is opensourced and available on Github \footnote{***Thesis Repo***}.
+This section describes the methodology for this thesis. The first part includes the presentation of the model, the reprocessing of the input and the evaluation metrics. The second part describes the experimental setup and the different experimental runs. The work of this thesis has aimed to be fully reproducable, thus the code is opensourced and available on Github \footnote{***Thesis Repo Link***}.
 
 \subsection{Knowledge graph representation}
 
 % adjacency matrix
 % edge attribute matrix
 % node attribute matrix
-The first step in our pipeline is the representation of the KG in tensor format. In order to represent the graph structure we use an adjacency matrix $A$ of shape $n\times n$ with $n$ being the number of nodes in our graph. The edge attribute or directed relations between the nodes are represented in the matrix $E$ of shape $n\times n\times d_E$ with $d_E$ being the number of edge attributes. Similarly for node attributes we have the matrix $F$ of shape $n\times d_N$ with $d_N$ number of node attributes. The input graph can have less nodes than the maximum $n$ but not more. The diagonal of the adjacency matrix is filled with $1$ if the indexed node exists, and with $0$ otherwise. The number and encoding of the attributes must be predefined and cannot be changed after training. This way we can uniquely represent a KG.\\
+The first step in our pipeline is the representation of the KG in tensor format. In order to represent the graph structure we use an adjacency matrix $A$ of shape $n\times n$ with $n$ being the number of nodes in our graph. The edge attribute or directed relations between the nodes are represented in the matrix $E$ of shape $n\times n\times d_E$ with $d_E$ being the number of edge attributes. Similarly for node attributes we have the matrix $F$ of shape $n\times d_N$ with $d_N$ number of node attributes. The input graph can have less nodes than the maximum $n$ but not more. The diagonal of the adjacency matrix is filled with $1$ if the indexed node exists, and with $0$ otherwise. The number and encoding of the attributes must be predefined and cannot be changed after training. This way we can uniquely represent a KG.
+\\
 
 
 Graph embeddings? unsupervised approach

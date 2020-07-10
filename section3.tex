@@ -10,18 +10,19 @@ The Multi-Layer Perceptron (MLP) was one on the first machine learning models. I
 Images or higher dimensional tensors can be processed by flattening them to a one dimensional tensor and adjusting the input dimensions. This makes the MLP a flexible and easy to implement model.(reference)
 \\
 \textbf{Graph convolutions}\\
-CNNs have shown great results in the field of images classification and object detection. This is due to the fact that a convolution layer takes into account the relation of one pixel to its neighbors. The same holds for graph CNNs where at each convolution the node attributes are passed on as messages to all their neighbors. Each convolution applies an activation function in between the steps \cite{tiao_variational_nodate}. 
+CNNs have shown great results in the field of images classification and object detection. This is due to the fact that a convolution layer takes into account the relation of one pixel to its neighbors. The same holds for graph CNNs where at each convolution the information of each node is passed on as messages to all its neighbors. Each convolution applies an activation function in between the steps. In this case the information is the edges each node has. To process node attributes and edge atributes we have to look at more complex models \cite{tiao_variational_nodate}. 
 \\
 \textbf{RGCN}\\
-Realtional Graph Convolution Net (RGCN) is the schieeed.
+Realtional Graph Convolution Net (RGCN) was presented in \cite{kipf_semi-supervised_2017} for edge prediction. This model takes into account features of nodes. ***Elaborate***
 \\
 \textbf{Graph VAE}\\
-Encoder options: MLP RGCN
-Decoder MLP
+% Encoder options: MLP RGCN
+% Decoder MLP
 % One shot: creating adjacency and feature matrix at once.
-The model architecture of the Graph VAE presented in \cite{simonovsky_graphvae_2018} combines both the previous methods. The input graph undergoes graph convolutions before it is flattened and projected into latent space. Next the reparametrization trick is applied and a simple MLP decoder is used to regenerate the graph.
-Graphs can be generated recursively or in an one-shot approach, as this paper does.
-This model will be the starting point for our research.
+Now we have all the building bocks for a Graph VAE. The encode can either be a MLP, a GCNN or an RGCN. The same holds for the decoder with the addition that model architechture needs to be inverted. An verison of a Graph VAE presented in \cite{simonovsky_graphvae_2018}. This model combines both the previous methods. The input graph undergoes relational graph convolutions before it is flattened and projected into latent space. After applying the reparametrization trick, a simple MLP decoder is used to regenerate the graph. In addition the model concatenates the input with a target vector $y$, which represents ???. The same vector is concatenated with the latent tensor. ***Elborate why they do that***.
+
+Graphs can be generated recursively or in an one-shot approach. This paper uses the second approach and generates the full graph in one go. ***Cite?***
+% This model will be the starting point for our research.
 
 
 
@@ -46,7 +47,7 @@ The max-pooling graph matching algorithm presented by
 
 The algorithm returns a symmetric affinity matrix for all nodes
 
-The resulting similartiry matrix gives us $X*$ which is continuous and therefore useless. To transform is to a discrete $X$ we use the hungarian algorithm (GPU-accelerated Hungarian algorithms for the Linear
+The resulting similarity matrix gives us $X*$ which is continuous and therefore useless. To transform is to a discrete $X$ we use the hungarian algorithm (GPU-accelerated Hungarian algorithms for the Linear
 Assignment Problem)
 
 Hungarian algorithm for discrimination of X
