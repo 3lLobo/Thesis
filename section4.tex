@@ -30,9 +30,12 @@ Maxpooling-algorithm:\\
 Assumptions\\
 Node to edge affinity equals 0
 Summing over the neighbors means summing over the whole column
+Normalize matrix with Frobenius Norm
 
-Hungarian algorithm for discrimination of X
+
+Hungarian algorithm for discrimination of X \\
 \\
+The hungarian algorithm as presented in section 2 return the shortest path in a matrix. We use this shortest path as bast match between the two graphs. The node paris identified as optimal are masked as $1$ and the rest of the matrix as $0$. This way we discretizice $X\star$ to $X$. 
 
 \subsection{Metrics}
 

@@ -3,8 +3,12 @@ A section where note will be made on open issus. These aissues are ment to be di
 
 \subsection{Graph matching}
 
-NetworkX offers graph matching algorithms as do other repos. The drawback is that they are programmed for smaller graph such as molecule graphs with undirected edges and no edge atribues, or these attributes are not taken into account and only the structure is compared.
-My implementation of the max-pooling graph matching algorithm from \cite{simonovsky_graphvae_2018} return a $n\times n\times k\times k$ matrix with integer values ${0,2}$. Most probably something went wrong here since this makes little sense regarding interpretation.
-When graphs are compared with NetworkX using the greedy-matching or minimum distance, the similarity matrix is a $2\times 2$ matrix for comparing two graphs.
-My question is which sort of graph matching makes more sense for our usecase.
-Further I struggle to interprete the similarity matrix - is that my job tho? Maybe its just meant to be used in the loss function as described! 
+% NetworkX offers graph matching algorithms as do other repos. The drawback is that they are programmed for smaller graph such as molecule graphs with undirected edges and no edge atribues, or these attributes are not taken into account and only the structure is compared.
+% My implementation of the max-pooling graph matching algorithm from \cite{simonovsky_graphvae_2018} return a $n\times n\times k\times k$ matrix with integer values ${0,2}$. Most probably something went wrong here since this makes little sense regarding interpretation.
+% When graphs are compared with NetworkX using the greedy-matching or minimum distance, the similarity matrix is a $2\times 2$ matrix for comparing two graphs.
+% My question is which sort of graph matching makes more sense for our usecase.
+% Further I struggle to interprete the similarity matrix - is that my job tho? Maybe its just meant to be used in the loss function as described! 
+
+Hungarian algorithm:
+Should we assume the affinity matrix is a cost or a profit matrix. If we assume it is a cost matrix and n != k the algorithm returns an error while padding. If we assume it is a profit matrix and convert it to a profit matrix it can handle any dimension. The shortest path varies with both approaches.
+Further I assume the shortest path is what we are looking for and mask these entries with 1 and the rest of the matrix with 0.

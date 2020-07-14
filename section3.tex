@@ -50,9 +50,12 @@ The algorithm returns a symmetric affinity matrix for all nodes
 The resulting similarity matrix gives us $X*$ which is continuous and therefore useless. To transform is to a discrete $X$ we use the hungarian algorithm (GPU-accelerated Hungarian algorithms for the Linear
 Assignment Problem)
 
-Hungarian algorithm for discrimination of X
+\textbf{Hungarian algorithm}\\
+The hungarian algorithm is used to find the shortest path within a matrix. This could be the most efficient work-distribution in a cost matrix. Or \dots \\
+It consists of four steps of which the last two are repeated until convergence. This algorithm is not scalable. The Munks aalgorithm (refference) takles this problem by?? and is scalable.
+
 \\
-second option:
+second option:\\
 Compare only graph structure. 
 NX algorithms: Greedy, Shortest path \dots
 
