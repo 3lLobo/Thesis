@@ -12,3 +12,9 @@ A section where note will be made on open issus. These aissues are ment to be di
 Hungarian algorithm:
 Should we assume the affinity matrix is a cost or a profit matrix. If we assume it is a cost matrix and n != k the algorithm returns an error while padding. If we assume it is a profit matrix and convert it to a profit matrix it can handle any dimension. The shortest path varies with both approaches.
 Further I assume the shortest path is what we are looking for and mask these entries with 1 and the rest of the matrix with 0.
+\\
+Diagonal of A is zeros. As soon as I do this, code crashes.
+\\
+Do we backpropagate through the graph matching? then all torch functions, otherwise np.
+\\
+Martin takes 300 iterations for hungarian. also not looping over pairs.
