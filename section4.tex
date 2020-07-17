@@ -28,7 +28,9 @@ If loss function should be permutation invariant we need to do some kind of grap
 Different options for graph matching.\\
 Maxpooling-algorithm:\\
 Assumptions\\
-Node to edge affinity equals 0
+Node to edge affinity equals 0\\
+Self-loops are possible, adjacency matrix can be zero or one.\\
+
 Summing over the neighbors means summing over the whole column
 Normalize matrix with Frobenius Norm
 
@@ -40,7 +42,14 @@ The hungarian algorithm as presented in section 2 return the shortest path in a 
 \\
 \textbf{The equations}
 
-\subsection{Metrics}
+\subsection{Experiments and Metrics}
+
+Fist:
+Link prediction to make a proof of concept, not brake SOTA.\\
+Node classifier by only using encoder.\\
+latent space interpolation to find analogies to smile vector in the latent space of a face VAEs.\\
+Identify if VAE learns semantics. OWL, onthology datasetbatch_size,  required.\\
 
 Wasserstein distance???
 Link prediction?
+blabl

@@ -1,0 +1,18 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Background knowledge}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Knowledge}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Embeddings}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Learning Methods}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.4}{Recurrent Graph Models}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.5}{Graph Normalizing Flows}{section.2}% 7
+\BOOKMARK [2][-]{subsection.2.6}{Variational Auto Encoder \(VAE\)}{section.2}% 8
+\BOOKMARK [1][-]{section.3}{Related Work summary}{}% 9
+\BOOKMARK [2][-]{subsection.3.1}{The Graph VAE \205 one shot method}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.2}{Permutation Invariance}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.3}{Knowledge Graphs}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Metodology}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{Knowledge graph representation}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{Graph VAE}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.3}{Loss function}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.4}{Experiments and Metrics}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.5}{Graph matching}{section.4}% 18
