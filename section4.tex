@@ -29,10 +29,15 @@ Different options for graph matching.\\
 Maxpooling-algorithm:\\
 Assumptions\\
 Node to edge affinity equals 0\\
+
 Self-loops are possible, adjacency matrix can be zero or one.\\
 
 Summing over the neighbors means summing over the whole column
 Normalize matrix with Frobenius Norm
+
+Batch version:
+Only matmul and dot. keep dimension of S with shape (bs,n,n,k,k)
+When maxpooling, flatten Xs (n,k) for batch dot multiplication. This way (i think) we sum over all j nad b neighbors instead of taking the max.  
 
 
 Hungarian algorithm for discrimination of X \\
@@ -44,8 +49,8 @@ The hungarian algorithm as presented in section 2 return the shortest path in a 
 
 \subsection{Experiments and Metrics}
 
-Fist:
-Link prediction to make a proof of concept, not brake SOTA.\\
+First:
+Link prediction to make a proof of concept, not achieve SOTA.\\
 Node classifier by only using encoder.\\
 latent space interpolation to find analogies to smile vector in the latent space of a face VAEs.\\
 Identify if VAE learns semantics. OWL, onthology datasetbatch_size,  required.\\
