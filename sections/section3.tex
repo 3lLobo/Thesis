@@ -54,28 +54,26 @@ Assignment Problem)
 The hungarian algorithm is used to find the shortest path within a matrix. This could be the most efficient work-distribution in a cost matrix. Or \dots \\
 It consists of four steps of which the last two are repeated until convergence. This algorithm is not scalable. The Munks aalgorithm (refference) takles this problem by?? and is scalable.
 
-\\
-second option:\\
+second option: \leavevmode
 Compare only graph structure. 
 NX algorithms: Greedy, Shortest path \dots
 \\
-\textbf{Graph VAE loss}\\
-The loss is discribed in \cite{simonovsky_graphvae_2018} as:
-
-\begin{align*}
-    -\log p(G \mid \mathbf{z}) &=-\lambda_{A} \log p\left(A^{\prime} \mid \mathbf{z}\right)-\lambda_{F} \log p(F \mid \mathbf{z})-\\
-    &-\lambda_{E} \log p(E \mid \mathbf{z})
-    &\log p\left(A^{\prime} \mid \mathbf{z}\right)=\\
-    &=1 / k \sum_{a} A_{a, a}^{\prime} \log \widetilde{A}_{a, a}+\left(1-A_{a, a}^{\prime}\right) \log \left(1-\widetilde{A}_{a, a}\right)+\\
-    &+1 / k(k-1) \sum_{a \neq b} A_{a, b}^{\prime} \log \widetilde{A}_{a, b}+\left(1-A_{a, b}^{\prime}\right) \log \left(1-\widetilde{A}_{a, b}\right)\\
-    &\log p(F \mid \mathbf{z})=1 / n \sum_{i} \log F_{i, \cdot}^{T} \tilde{F}_{i,}^{\prime}\\
-    &\log p(E \mid \mathbf{z})=1 /\left(\|A\|_{1}-n\right) \sum_{i \neq j} \log E_{i, j}^{T}, \widetilde{E}_{i, j, \cdot}^{\prime}
-\end{align*}
+\textbf{Graph VAE loss}\leavevmode
+The loss is discribed in \cite{simonovsky_graphvae_2018} as.
+% \begin{align*}
+%     -\log p(G \mid \mathbf{z}) &=-\lambda_{A} \log p\left(A^{\prime} \mid \mathbf{z}\right)-\lambda_{F} \log p(F \mid \mathbf{z})-\\
+%     &-\lambda_{E} \log p(E \mid \mathbf{z})
+%     &\log p\left(A^{\prime} \mid \mathbf{z}\right)=\\
+%     &=1 / k \sum_{a} A_{a, a}^{\prime} \log \widetilde{A}_{a, a}+\left(1-A_{a, a}^{\prime}\right) \log \left(1-\widetilde{A}_{a, a}\right)+\\
+%     &+1 / k(k-1) \sum_{a \neq b} A_{a, b}^{\prime} \log \widetilde{A}_{a, b}+\left(1-A_{a, b}^{\prime}\right) \log \left(1-\widetilde{A}_{a, b}\right)\\
+%     &\log p(F \mid \mathbf{z})=1 / n \sum_{i} \log F_{i, \cdot}^{T} \tilde{F}_{i,}^{\prime}\\
+%     &\log p(E \mid \mathbf{z})=1 /\left(\|A\|_{1}-n\right) \sum_{i \neq j} \log E_{i, j}^{T}, \widetilde{E}_{i, j, \cdot}^{\prime}
+% \end{align*}
 
 In contrast to his implementation we assume, that a node or edge can have none, one or multiple attributes. Therefore our attributes are also not sigmoided and do not sum up to one. This leads o the modification of term logF and logE where we do not matrix multiply over the attribute vector but take the BCE as over the rest of the points.
 KG can have multiple or no attributes vs molecular graphs can be one hot encoded.
 
-Okay, further we need to treat the log_pE and log_pF just like log_pA and subtract the inverse. Otherwise the model learn to predict very high values only. 
+Okay, further we need to treat the $log_pE$ and $log_pF$ just like $log_pA$ and subtract the inverse. Otherwise the model learn to predict very high values only. 
 
 A note to the node features, these stay softmaxed and one-hot encoded since we will use them as node labels.
 

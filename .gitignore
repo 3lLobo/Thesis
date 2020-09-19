@@ -1,0 +1,10 @@
+.vscode
+
+# Latex auxiliary files
+*.log
+*.aux
+*.dvi
+*.out
+*.bbl
+*.blg
+*.xml

@@ -10,8 +10,9 @@
 
 \newcommand{\red}[1]{{\color{red}{#1}}}
 
-\RequirePackage[backend=biber,style=nature]{biblatex}
+\RequirePackage[backend=bibtex,style=nature]{biblatex}
 
+\addbibresource{fullrefs.bib}
 
 \begin{document}
 
@@ -157,21 +158,24 @@ Dr Paul \textsc{Groth}\\
 
 \end{titlepage}
 
+\section*{Abstract}
+We generate Knowledge! \cite{kipf_contrastive_2020}
+
 % \section*{Notes}
 % \input{notes}
 
 \section{Introduction}
 \input{section1}
 
-\section{Background knowledge}
-\input{section2}
+% \section{Background knowledge}
+% \input{section2}
 
 \section{Related Work summary}
 \input{section3}
 
 
-\section{Metodology}
-\input{section4}
+% \section{Metodology}
+% \input{section4}
 
 
 % \section*{Ideas}
@@ -180,10 +184,9 @@ Dr Paul \textsc{Groth}\\
 \section*{Open Issues}
 \input{issues}
 
+\printbibliography
 \end{document}
 
-\printbibliography
-
 % \bibliographystyle{unsrt} % We choose the "plain" reference style
-\bibliography{fullrefs} % Entries are in the "refs.bib" file
+% \bibliography{fullrefs} % Entries are in the "refs.bib" file
 
