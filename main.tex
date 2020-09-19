@@ -10,6 +10,7 @@
 
 \newcommand{\red}[1]{{\color{red}{#1}}}
 
+\RequirePackage[backend=biber,style=nature]{biblatex}
 
 
 \begin{document}
@@ -179,9 +180,10 @@ Dr Paul \textsc{Groth}\\
 \section*{Open Issues}
 \input{issues}
 
+\end{document}
 
-\bibliographystyle{unsrt} % We choose the "plain" reference style
+\printbibliography
+
+% \bibliographystyle{unsrt} % We choose the "plain" reference style
 \bibliography{fullrefs} % Entries are in the "refs.bib" file
 
-
-\end{document}
