@@ -157,10 +157,10 @@ INPUT /home/wolf/Thesis/Code/Thesis/data/images/uva.png
 INPUT /home/wolf/Thesis/Code/Thesis/data/images/uva.png
 INPUT /usr/local/texlive/2020/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT /home/wolf/Thesis/Code/Thesis/section1.tex
-INPUT /home/wolf/Thesis/Code/Thesis/section1.tex
-INPUT /home/wolf/Thesis/Code/Thesis/section3.tex
-INPUT /home/wolf/Thesis/Code/Thesis/section3.tex
+INPUT /home/wolf/Thesis/Code/Thesis/sections/section1.tex
+INPUT /home/wolf/Thesis/Code/Thesis/sections/section1.tex
+INPUT /home/wolf/Thesis/Code/Thesis/sections/section3.tex
+INPUT /home/wolf/Thesis/Code/Thesis/sections/section3.tex
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/local/texlive/2020/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /home/wolf/Thesis/Code/Thesis/issues.tex
