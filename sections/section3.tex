@@ -13,7 +13,7 @@ Images or higher dimensional tensors can be processed by flattening them to a on
 CNNs have shown great results in the field of images classification and object detection. This is due to the fact that a convolution layer takes into account the relation of one pixel to its neighbors. The same holds for graph CNNs where at each convolution the information of each node is passed on as messages to all its neighbors. Each convolution applies an activation function in between the steps. In this case the information is the edges each node has. To process node attributes and edge atributes we have to look at more complex models \cite{tiao_variational_nodate}. 
 \\
 \textbf{RGCN}\\
-Realtional Graph Convolution Net (RGCN) was presented in \cite{kipf_semi-supervised_2017} for edge prediction. This model takes into account features of nodes. ***Elaborate***
+Realtional Graph Convolution Net (RGCN) was presented in \cite{kipf_semi-supervised_2017} for edge prediction. This model takes into account features of nodes. Both the adjacency and the feature matrix are matrix-multiplied with the weight matrix and then with them-selves. The resulting vector is a classification of the nodes.
 \\
 \textbf{Graph VAE}\\
 % Encoder options: MLP RGCN
