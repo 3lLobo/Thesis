@@ -12,7 +12,7 @@ The first step in our pipeline is the representation of the KG in tensor format.
 Graph embeddings? unsupervised approach
 
 \subsection{Graph VAE}
-
+hi
 \\Convolution part
 \\RCGN relation Convolution neural net
 \\MLP encoder
@@ -43,18 +43,25 @@ When maxpooling, flatten Xs (n,k) for batch dot multiplication. This way (i thin
 Hungarian algorithm for discrimination of X \\
 \\
 The hungarian algorithm as presented in section 2 return the shortest path in a matrix. We use this shortest path as bast match between the two graphs. The node paris identified as optimal are masked as $1$ and the rest of the matrix as $0$. This way we discretizice $X\star$ to $X$. 
-
 \\
 \textbf{The equations}
 
 \subsection{Experiments and Metrics}
 
+
 First:
 Link prediction to make a proof of concept, not achieve SOTA.\\
 Node classifier by only using encoder.\\
 latent space interpolation to find analogies to smile vector in the latent space of a face VAEs.\\
-Identify if VAE learns semantics. OWL, onthology datasetbatch_size,  required.\\
-
+Identify if VAE learns semantics. OWL, onthology datasetbatch_size, required.\\
 Wasserstein distance???
 Link prediction?
 blabl
+
+\subsection{{Datasets & Preproceccing}
+We used two popular datasets in this field to test our model and compare to State of the art (SOTA) results.
+
+\subsubsection{Fb15k-237}
+This dataset is a subset of the FreeBase KG (cite).[Explain Free Base] The original Fb15k had redundant triples, creating ambiguity during training. In the updated version, Fb15k-237, these triples were removed what led to a more robust dataset, which is comonly used as benchmark for several NLP tasks.
+
+\subsubsection{WN18rr}
