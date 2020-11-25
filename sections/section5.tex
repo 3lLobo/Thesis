@@ -2,10 +2,42 @@
 
 This section presents the experiments we ran. We covered link and node prediction and compared those to SOTA scores. Further we ran experiments on investigating the coherence of the reproduced graph structure. Lastly we measured the adherence of our model to the KG's underlying syntax.
 
-\subsection{Link Prediction}
-The task of link prediction, tests, if the model can recognize the relation between two entities. In order to do so, we hide the second entity of a triple and let our model to predict it.
+\subsection{Datasets}
+For this sake of meaningful results, we chose to use the two most popular dataset used in this field.
 
-\subsection{Node Prediciton}
+
+\textbf{FB15k237}
+A subset from on of the first and largest KGs, called FreeBase. In the first version of this dataset, it was possible to infer most of the test triples by inverting trples in the trainset, Thus the latest $237$ version filtered these triples out.
+The dataset contains $14,951$ entities and $1,345$ different relations.
+\vskip
+\textbf{WN18kRR}
+Subset from the KG WordNet.
+
+\subsection{Link Prediction}
+% The task of link prediction, tests, if the model can recognize the relation between two entities. In order to do so, we hide the second entity of a triple and let our model to predict it.
+
+We used link prediction as evaluation protocol and for comparison state of the art models. For each triple in the dataset, we remove the tail and combine it with all possible entities in our dataset. EVen though this is called 'triple-corruption', also correct triples can be generated, which could appear in the trainset. These have bo the filtered out before evaluation. Link prediction on unfiltered test data is termed 'raw'. Our model then computes the ELBO loss for all corrupted triples, which are sorted and stored in ascending order. The same procedure is repeated the triple's head in place of the tail.
+
+
+The metrics used to evaluate the predictions, is the mean reciprocal rank (MRR) and hits at 1,3 and 10.
+The MRR ???
+Hits at 1 indicates what percentage of the triples in the test set have been ranked the highest compared to their corruptions. Similar, hits at 3 and 10, give a percentage of triples ranked in the top 3 and top 10.
+These metrics allow a fair comparison on a dataset between models, regardless of the ranking method of each model.
+
+
+
+% Evaluation protocol For evaluation, we use the same ranking procedure as in [3]. For each test
+% triplet, the head is removed and replaced by each of the entities of the dictionary in turn. Dissimilarities (or energies) of those corrupted triplets are first computed by the models and then sorted by
+% ascending order; the rank of the correct entity is finally stored. This whole procedure is repeated
+% while removing the tail instead of the head. We report the mean of those predicted ranks and the
+% hits@10, i.e. the proportion of correct entities ranked in the top 10.
+% These metrics are indicative but can be flawed when some corrupted triplets end up being valid
+% ones, from the training set for instance. In this case, those may be ranked above the test triplet, but
+% this should not be counted as an error because both triplets are true. To avoid such a misleading
+% behavior, we propose to remove from the list of corrupted triplets all the triplets that appear either in
+% the training, validation or test set (except the test triplet of interest). This ensures that all corrupted
+% triplets do not belong to the data set. In the following, we report mean ranks and hits@10 according
+% to both settings: the original (possibly flawed) one is termed raw, while w
 
 \subsection{Sanity Checks}
 
