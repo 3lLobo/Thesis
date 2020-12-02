@@ -2,16 +2,10 @@
 
 This section presents the experiments we ran. We covered link and node prediction and compared those to SOTA scores. Further we ran experiments on investigating the coherence of the reproduced graph structure. Lastly we measured the adherence of our model to the KG's underlying syntax.
 
-\subsection{Datasets}
-For this sake of meaningful results, we chose to use the two most popular dataset used in this field.
+\subsection{Datasets and Training}
+For this sake of meaningful results, we chose to use the earlier presented, two most popular dataset used in this field, FB15k237 and WN18rr.
 
-
-\textbf{FB15k237}
-A subset from on of the first and largest KGs, called FreeBase. In the first version of this dataset, it was possible to infer most of the test triples by inverting trples in the trainset, Thus the latest $237$ version filtered these triples out.
-The dataset contains $14,951$ entities and $1,345$ different relations.
-\vskip
-\textbf{WN18kRR}
-Subset from the KG WordNet.
+Training models on each dataset for 333 epochs, without early stopping.
 
 \subsection{Link Prediction}
 % The task of link prediction, tests, if the model can recognize the relation between two entities. In order to do so, we hide the second entity of a triple and let our model to predict it.
@@ -20,7 +14,7 @@ We used link prediction as evaluation protocol and for comparison state of the a
 
 
 The metrics used to evaluate the predictions, is the mean reciprocal rank (MRR) and hits at 1,3 and 10.
-The MRR ???
+The MRR ??? explain what the MRR is. \linebreak
 Hits at 1 indicates what percentage of the triples in the test set have been ranked the highest compared to their corruptions. Similar, hits at 3 and 10, give a percentage of triples ranked in the top 3 and top 10.
 These metrics allow a fair comparison on a dataset between models, regardless of the ranking method of each model.
 
@@ -40,5 +34,25 @@ These metrics allow a fair comparison on a dataset between models, regardless of
 % to both settings: the original (possibly flawed) one is termed raw, while w
 
 \subsection{Sanity Checks}
+Check if adj matrix adheres to edge attribute matrix.
+
+\subsection{Interpolate Latent Space}
+We tale two random triples and interpolate the latent space of these two triples. The interpolations result in: HERE AN EXAMPLE.
+
+Further we go ahead and test what happens if we modify one latent dimension of a triple. HERE AN EXAPMPLE.
+Can the model assign logical features to latent dimensions?
+
+\subsection{Subgraph Generation}
+Until now our model trained on only one triple per sparse graph. What will happen if we train it on more than one triples?
 
 \subsection{Syntax coherence}
+Check if generated triples follow basic logic.
+\begin{itemize}
+    \item Generate triples by random signals
+    \item Filter these triples on a certain relation
+    \item Check if the entities are part of the linked class
+\end{itemize}
+
+Since there is no preset for how to check the semantics of a KG, we will use simple basic logical criteria.
+The generated triples are filtered for the relation 'is capital of', thus the subject enntity should be a city and he object entity member of the class 'country',
+Hope this gives good results.

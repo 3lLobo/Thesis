@@ -52,6 +52,7 @@ beta for regularization term
 hidden dimensions
 latent dimensions
 Convolutions vs no convolutions
+IDEA: Convolutions + MLP
 
 \subsection{Experiments and Metrics}
 
@@ -69,6 +70,32 @@ blabl
 We used two popular datasets in this field to test our model and compare to State of the art (SOTA) results.
 
 \subsubsection{Fb15k-237}
-This dataset is a subset of the FreeBase KG (cite).[Explain Free Base] The original Fb15k had redundant triples, creating ambiguity during training. In the updated version, Fb15k-237, these triples were removed what led to a more robust dataset, which is comonly used as benchmark for several NLP tasks.
+This dataset is a subset of the FreeBase KG (cite).[Explain Free Base] The original Fb15k had redundant triples, creating ambiguity during training. In the updated version, Fb15k-237, these triples were removed what led to a more robust dataset, which is commonly used as benchmark for several NLP tasks.
+
+% or/and
+A subset from on of the first and largest KGs, called FreeBase. In the first version of this dataset, it was possible to infer most of the test triples by inverting triples in the trainset, Thus the latest $237$ version filtered these triples out.
+The dataset contains $14,951$ entities and $1,345$ different relations.
 
 \subsubsection{WN18rr}
+Based on the wordnet KG.
+
+\subsubsection{Data Preprocessing}
+Converting from dense to sparse.
+
+Learning histogram for link prediction.
+
+\subsection{Model Training}
+Lay out pipeline.
+\begin{itemize}
+    \item Load Dataset
+    \item Convert to sparse in batches
+    \item forward pass through VAE
+    \item MPGM loss
+    \item Backward pass
+    \item test on val set
+    \item calculate MRR on subset of val set
+    \item draw graphs
+\end{itemize}
+
+GPU requirements.
+Nvidia titan RX 25GB 60h
