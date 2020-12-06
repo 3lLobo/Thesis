@@ -3,11 +3,49 @@ In this section we will go over related work and relevant background information
 \subsection{The Graph VAE – one shot method}
 
 \subsubsection{VAE}
-The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model consisting of an encoder and a decoder. The architecture of the VAE differs from a common autoencoder by having a stochastic module between encoder and decoder. Instead of directly using the output of the encoder, a distribution of the latent space is predicted from which we sample the input to the decoder. The reparameterization trick allows the model to be differentiable. By places the sampling module outside the model we get a deterministic model which can be backpropagated.
+% The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model consisting of an encoder and a decoder. The architecture of the VAE differs from a common autoencoder by having a stochastic module between encoder and decoder. Instead of directly using the output of the encoder, a distribution of the latent space is predicted from which we sample the input to the decoder. The reparameterization trick allows the model to be differentiable. By placing the sampling module outside the model we get a deterministic model which can be backpropagated.
 
-\textbsubsubsectionf{MLP}
-The Multi-Layer Perceptron (MLP) was one on the first machine learning models. In its basic structure it takes a one dimensional input, fully-connected hidden layer, activation function and finally output layer with normalized predictions.
-Images or higher dimensional tensors can be processed by flattening them to a one dimensional tensor and adjusting the input dimensions. This makes the MLP a flexible and easy to implement model.(reference)
+
+
+The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model in form of an autoencoder, consisting of an encoder and a decoder. We will The architecture of the VAE differs from a common autoencoder by having a stochastic module between encoder and decoder. The encoder can be represented as recognition model with the probability $p_{\boldsymbol{\Theta}}(\mathbf{z} \mid x)$ with $x$ being the varbiable we want to inference and $z$ being the latent representation given an observed value of $x$. The encoder parameters are represented by $\Theta$. Sinilarly, We denote the decoder as $p_{\boldsymbol{\Theta}}(\mathbf{x} \mid z)$, which given a latent representation $z$ produces a probability distribution for the possible values, corresponding to the input of $x$. This will be the base architecture of all our models in this thesis.
+
+The main contribution of the VAE is the so called reparameterization trick. By sampling from the latent prior distribution, we get stochastic module inside our model, which can not be backpropagates through and makes machine learning not possible. By placing the stochastic module outside the model FIGURE!!!, we can again backpropagate. We use the predicted latent space as mean and variance for a Gaussian normal distribution, from which we then sample $\epsilon$, which acts as external parameter and does not need to be updated.
+
+This makes the true posterior $p_{\boldsymbol{\theta}}(\mathbf{z} \mid \mathbf{x})$ intractable. Thus, we assume that the prior to the decoder to be Gaussian with an approximately diagonal covariance, which gives us the approximated posterior.
+
+\begin{equation}
+    \log q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)=\log \mathcal{N}\left(\mathbf{z} ; \boldsymbol{\mu}^{(i)}, \boldsymbol{\sigma}^{2(i)} \mathbf{I}\right)
+\end{equation}
+    
+This gives us computational freedom. meaning we can compute the posterior probability. Using the Monte Carlo estimation of $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ we get the so called estimated lower bound (ELBO):
+\begin{equation}
+    y_{k}(\mathbf{x}, \mathbf{w})=\sigma\left(\sum_{j=0}^{M} w_{k j}^{(2)} h\left(\sum_{i=0}^{D} w_{j i}^{(1)} x_{i}\right)\right)
+\end{equation}
+We denote the first term the regularization term, as it forces the model into using a Gaussian normal prior. The second term represents the reconstruction loss, matching the prediction with the target.
+
+While we use a discrete input space, the output space is a continuous probability. To generate final result, the prediction is used as binomial probability distribution, from which we then sample. Once training  of a VAE is completed, the Decoder can be used on its own to generate new samples by using latent input signals \cite{kingma_auto-encoding_2014}.
+
+
+\subsubsection{MLP}
+% History introduction
+The Multi-Layer Perceptron (MLP) was the beginning of machine learning models.
+% Invented by who when
+Its properties as universal approximator has been discovered and widely studied since 1989. The innovation it brought to existing models was the hidden layer between the input and the output.
+
+% Functionality
+% In its basic structure it takes a one dimensional input, fully-connected hidden layer, activation function and finally output layer with normalized predictions.
+The mathematical definition of the MLP is rather simple. It takes linear input vector of the form $x_1,...,x_D$ which is multiplied by the weight matrix $\mathbf{w^{(1)}}$ and then transformed using a non-linear activation function $h(\dot$. Due to its simple derivative, mostly the rectified linear unit (ReLU) function is used. This results in the hidden layer, consisting of hidden units. The hidden units get multiplied with the second weight matrix, denoted $\mathbf{w^{(2)}}$ and finally transformed by a sigmoid function $\sigma(\dot)$, which produces the output.Grouping all weight and bias parameter together we get the following equation for the MLP:
+
+\begin{equation}
+    y_{k}(\mathbf{x}, \mathbf{w})=\sigma\left(\sum_{j=1}^{M} w_{k j}^{(2)} h\left(\sum_{i=1}^{D} w_{j i}^{(1)} x_{i}+w_{j 0}^{(1)}\right)+w_{k 0}^{(2)}\right)
+\end{equation}
+
+for $j=1, \ldots, M$ and $k=1, \ldots, K$, with $M$ being the total number of hidden units and $K$ of the output.
+
+
+% Application
+Since the sigmoid function gives us a probability output, the main function of the MLP is as a classifier. Instead of the initial sigmoid function, it was found to also produce good results for multi label classification transforming the output with a softmax function instead. Images or higher dimensional tensors can be processed by flattening them to a one dimensional tensor. This makes the MLP a flexible and easy to implement model \cite{bishop2006pattern}.
+
 \\
 \subsubsection{Graph convolutions}\\
 CNNs have shown great results in the field of images classification and object detection. This is due to the fact that a convolution layer takes into account the relation of one pixel to its neighbors. The same holds for graph CNNs where at each convolution the information of each node is passed on as messages to all its neighbors. Each convolution applies an activation function in between the steps. In this case the information is the edges each node has. To process node attributes and edge atributes we have to look at more complex models \cite{tiao_variational_nodate}. 
