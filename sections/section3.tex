@@ -1,4 +1,6 @@
-In this section we will go over related work and relevant background information. The depth of the explanation is adopted to the expected prior knowledge of the reader. The reader is supposed to know the basics of machine learning, including probability theory and basic knowledge on neural networks and their different architectures.
+In this section we will go over related work and relevant background information for our model and experiments. The depth of the explanation is adopted to the expected prior knowledge of the reader. The reader is supposed to know the basics of machine learning and deep learning, including probability theory and basic knowledge on neural networks and their different architectures. Basic principles such as forward pass, backpropagation and convolutions are expected to be understood. Further the use and functionality of deep learning modules such as the model, the optimizer and the terms target and prediction should be known. This also includes being familiar with the training and testing pipeline of a model in deep learning.
+
+Should all these boxes be checked, then we can expect to get a deeper understanding of the magic behind the VAE and its differences to a normal autoencoder. After that we will present how convolutional layers can be used on graphs. Of course where there is a layer there is a model, thus we are presenting the graph convolutional network (GCN). Closing the circle we show how we can adopt the VAE to graph convolutions. Wrapping things up, we present the state of the art algorithms for graph matching, which will be util to allow permutation invariance when matching prediction and target.  
 
 \subsection{The Graph VAE – one shot method}
 
@@ -126,8 +128,12 @@ Knowledge Graphs are great! The best in the world.
 % Knowledge Graphs which we will be using
 % We will focus on the generation of KGs.
 % Representation of KG as adjacency, edge feature and node feature matrix
-Knowledge graphs have very different formats. The datasets we will be sorking with are in rdf format.
+Knowledge graphs have very different formats. The datasets we will be sorting with are in rdf format.
 This format can include an defined onthology or not.
 This means the KG consists of triples subject, relation, object.
 when indexing these triples. we get a dense representation of the KG.
 About sparse KGs
+
+\subsection{Ranger Optimizer}
+A optimizer, which manged to improve results upon state of the art models. It combines rectified adam, lookahead and gradient centralization.
+HOW ABOUT A CITATION
