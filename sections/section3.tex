@@ -64,6 +64,17 @@ Now we have all the building bocks for a Graph VAE. The encode can either be a M
 Graphs can be generated recursively or in an one-shot approach. This paper uses the second approach and generates the full graph in one go. ***Cite?***
 % This model will be the starting point for our research.
 
+\subsubsection{One Shot vs. Recursive}
+% One shot: MNIST vs recursive on graphs: Belli
+The concept of the VAE has been used to generate data for various usecases. When using the VAE as generator, by sampling from the approximated posterior distribution $q_{\phi}\left(\mathbf{z}$, we can reconstruct the data in a singular run or recursive manner.
+
+The one shot method is the used in the popular example of the VAE generator on the MNIST daataset [cite], as well as on [the faces dataset]. each sample is independent from each other.
+
+Recursive methods take part of the generated datapoint as input for the next datapoint, thus continuously generating the sample. This has been appied to [voice] and to reproduce videogame environments \cite{ha_world_2018}. In \cite{belli_image-conditioned_2019} variation of the GraphVAE has been used to recursively construct a vector roadmap, which has been presented in [link].
+
+For this thesis, we will use the one-shot method, predicting each datapoint independent from each other. The predictions will sparse graph representation with $n$ nodes. A single triple being $n=2$ and a subgraph representation $2<n<100$. [TODO]
+
+
 \subsection{Graph Matching}
 Intro to graph matching on sparse graphs.
 
@@ -128,11 +139,27 @@ Knowledge Graphs are great! The best in the world.
 % Knowledge Graphs which we will be using
 % We will focus on the generation of KGs.
 % Representation of KG as adjacency, edge feature and node feature matrix
-Knowledge graphs have very different formats. The datasets we will be sorting with are in rdf format.
-This format can include an defined onthology or not.
-This means the KG consists of triples subject, relation, object.
-when indexing these triples. we get a dense representation of the KG.
-About sparse KGs
+
+% What is a KG
+
+
+% Hirarchy, enteties, classses
+
+
+% Othollogy - semantics
+
+
+% Sparse and dense representation
+
+
+% Usecases of KG
+
+
+% Knowledge graphs have very different formats. The datasets we will be sorting with are in rdf format.
+% This format can include an defined onthology or not.
+% This means the KG consists of triples subject, relation, object.
+% when indexing these triples. we get a dense representation of the KG.
+% About sparse KGs
 
 \subsection{Ranger Optimizer}
 A optimizer, which manged to improve results upon state of the art models. It combines rectified adam, lookahead and gradient centralization.

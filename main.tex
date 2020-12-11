@@ -8,7 +8,7 @@
 % Here are my package imports:
 \usepackage{hyperref}
 
-\setlength{\parindent}{4em}
+\setlength{\parindent}{3em}
 \setlength{\parskip}{1em}
 \newcommand{\red}[1]{{\color{red}{#1}}}
 
@@ -166,6 +166,15 @@ Dr Paul \textsc{Groth}\\
 \section*{Abstract}
 We generate Knowledge! \cite{kipf_contrastive_2020}
 
+We apply genius idea of having a VAE learn latent features of the data to KGs. Building on successful models of prior work, a linear, a convolutional and a architecture combining both methods are tested on the two most popular KGs. To best possible train out models on sparse graph representation, we implement a permutation invariant loss function.
+We compare the performance of our models to sate of the art link predictors, as well as link predictors including the variational module.
+The results compare ???
+The model $x$ outperfoms the others, indicating that convolutions are [not] necessary.
+Interpolation of the latent space shows that the model learns features???
+When generating subgraphs with up to $x$ nodes, we see ???
+Finally we filter generated triples for predicates which imply the subject or object to be entity of the class location. $x$ out of these triples adhere to this axiom. Thus we can say that VAE's are to a certain extend able to capture the underlying semantics of a KG.   
+
+
 % \section*{Notes}
 % \input{notes}
 
@@ -178,14 +187,14 @@ We generate Knowledge! \cite{kipf_contrastive_2020}
 \section{Background}
 \input{sections/section3}
 
-\section{Methodology}
+\section{Methods}
 \input{sections/section4}
 
-\section{Experiments}
+\section{Experiments \& Results}
 \input{sections/section5}
 
-\section{Results}
-\input{sections/section6}
+% \section{Results}
+% \input{sections/section6}
 
 \section{Discussion \& Future Work}
 \input{sections/section7}
