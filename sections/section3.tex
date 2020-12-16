@@ -2,6 +2,35 @@ In this section we will go over related work and relevant background information
 
 Should all these boxes be checked, then we can expect to get a deeper understanding of the magic behind the VAE and its differences to a normal autoencoder. After that we will present how convolutional layers can be used on graphs. Of course where there is a layer there is a model, thus we are presenting the graph convolutional network (GCN). Closing the circle we show how we can adopt the VAE to graph convolutions. Wrapping things up, we present the state of the art algorithms for graph matching, which will be util to allow permutation invariance when matching prediction and target.  
 
+
+\subsection{Knowledge Graphs}
+
+Knowledge Graphs are great! The best in the world.
+% Knowledge Graphs which we will be using
+% We will focus on the generation of KGs.
+% Representation of KG as adjacency, edge feature and node feature matrix
+
+% What is a KG
+
+
+% Hirarchy, enteties, classses
+
+
+% Othollogy - semantics
+
+
+% Sparse and dense representation
+
+
+% Usecases of KG
+
+
+% Knowledge graphs have very different formats. The datasets we will be sorting with are in rdf format.
+% This format can include an defined onthology or not.
+% This means the KG consists of triples subject, relation, object.
+% when indexing these triples. we get a dense representation of the KG.
+% About sparse KGs
+
 \subsection{The Graph VAE – one shot method}
 
 \subsubsection{VAE}
@@ -50,16 +79,56 @@ Since the sigmoid function gives us a probability output, the main function of t
 
 \\
 \subsubsection{Graph convolutions}\\
-CNNs have shown great results in the field of images classification and object detection. This is due to the fact that a convolution layer takes into account the relation of one pixel to its neighbors. The same holds for graph CNNs where at each convolution the information of each node is passed on as messages to all its neighbors. Each convolution applies an activation function in between the steps. In this case the information is the edges each node has. To process node attributes and edge atributes we have to look at more complex models \cite{tiao_variational_nodate}. 
+
+% TODO pretty write this
+%  Intro on convolutions
+Convolutional neural nets (CNN) have the advantage to be invariant to permutations od the input. Convolutional layers exploit the property of datapoints which are close to each other and thus, have a higher correlation. 
+
+CNNs have shown great results in the field of images classification and object detection. Neighboring pixel contain information about each other which can let the model detect local features which can then be merged to high-level features \cite{bishop2006pattern}.
+
+Similar conditions hold for graphs. Neighboring nodes contain information about each other and can used to infer local features. 
+
+% How do Graph convs work???
+Let us shortly go over the definition and math behind graph convolutions. Different approaches have been published on this topic, here we will present the graph convolution network (GCN) of \cite{kipf_semi-supervised_2017}.
+We consider $f(X,A)$ a GCN with an undirected graph input $\mathcal{G}=(\mathcal{V}, \mathcal{E})$, where $v_{i} \in \mathcal{V}$ is a set of $N$ nodes and  $\left(v_{i}, v_{i}\right) \in \mathcal{E}$ the set of edges. The input is a sparse graph representation, with $X$ being a node feature matrix and $A \in \mathbb{R}^{N \times N}$ being the adjacency matrix, defining the position of edges between nodes. In the initial case, where self-connections are not considered, the adjacency's diagonal has to be one resulting in $\vec{A}=A+I_{N}$. The graph forward pass through the convolutional layer $l$ is then defined as
+
+% equation
+\begin{equation}
+    H^{(l+1)}=\sigma\left(\tilde{D}^{-\frac{1}{2}} \tilde{A} \tilde{D}^{-\frac{1}{2}} H^{(l)} W^{(l)}\right).
+\end{equation}
+
+Here $\tilde{D}_{i i}=\sum_{j} \tilde{A}_{i j}$ acts as normalizing constant. $W^{(l)}$ is the layer-specific weight matrix and contains the learnable parameters. $H$ returns then the hidden representation of the input graph.
+
+The GCN was first introduced as node classifier, meaning it returns a probability distribution over all classes for each node in the input graph $\mathcal{V}$. Assuming that we preprocess $\vec{A}$ as $\hat{A}=\tilde{D}^{-\frac{1}{2}} \vec{A} \tilde{D}^{-\frac{1}{2}}$, the equation for a two-layer GCN for $z$ classes is
+
+\begin{equation}
+    Z=f(X, A)=\operatorname{softmax}\left(\hat{A} \operatorname{ReLU}\left(\hat{A} X W^{(0)}\right) W^{(1)}\right).
+\end{equation}
+
 \\
 \subsubsection{RGCN}
-Realtional Graph Convolution Net (RGCN) was presented in \cite{kipf_semi-supervised_2017} for edge prediction. This model takes into account features of nodes. Both the adjacency and the feature matrix are matrix-multiplied with the weight matrix and then with them-selves. The resulting vector is a classification of the nodes.
+
+GCN which takes further input of edge attribute matrix.
+
+Either present\\
+Dynamic Edge-Conditioned Filters in Convolutional Neural Networks on Graphs\\
+or nixx
+% Realational Graph Convolution Net (RGCN) was presented in \cite{kipf_semi-supervised_2017} for edge prediction. This model takes into account features of nodes. Both the adjacency and the feature matrix are matrix-multiplied with the weight matrix and then with them-selves. The resulting vector is a classification of the nodes.
 \\
 \subsubsection{Graph VAE}
 % Encoder options: MLP RGCN
 % Decoder MLP
 % One shot: creating adjacency and feature matrix at once.
-Now we have all the building bocks for a Graph VAE. The encode can either be a MLP, a GCNN or an RGCN. The same holds for the decoder with the addition that model architechture needs to be inverted. An verison of a Graph VAE presented in \cite{simonovsky_graphvae_2018}. This model combines both the previous methods. The input graph undergoes relational graph convolutions before it is flattened and projected into latent space. After applying the reparametrization trick, a simple MLP decoder is used to regenerate the graph. In addition the model concatenates the input with a target vector $y$, which represents ???. The same vector is concatenated with the latent tensor. ***Elborate why they do that***.
+
+% the model we are going to use for challenging KG datasets
+Now we have all the building bocks for a Graph VAE. The encode can either be a MLP, a GCNN or an RGCN. The same holds for the decoder with the addition that model architecture needs to be inverted. An verison of a Graph VAE presented in \cite{simonovsky_graphvae_2018}. This model combines both the previous methods. The input graph undergoes relational graph convolutions before it is flattened and projected into latent space. After applying the reparametrization trick, a simple MLP decoder is used to regenerate the graph. In addition the model concatenates the input with a target vector $y$, which represents ???. The same vector is concatenated with the latent tensor. ***Elborate why they do that***.
+
+% Reverse MLP
+
+% Loss function
+
+% What information can you capture when sparse compared to dense?
+
 
 Graphs can be generated recursively or in an one-shot approach. This paper uses the second approach and generates the full graph in one go. ***Cite?***
 % This model will be the starting point for our research.
@@ -133,33 +202,6 @@ Okay, further we need to treat the $log_pE$ and $log_pF$ just like $log_pA$ and 
 
 A note to the node features, these stay softmaxed and one-hot encoded since we will use them as node labels.
 
-\subsection{Knowledge Graphs}
-
-Knowledge Graphs are great! The best in the world.
-% Knowledge Graphs which we will be using
-% We will focus on the generation of KGs.
-% Representation of KG as adjacency, edge feature and node feature matrix
-
-% What is a KG
-
-
-% Hirarchy, enteties, classses
-
-
-% Othollogy - semantics
-
-
-% Sparse and dense representation
-
-
-% Usecases of KG
-
-
-% Knowledge graphs have very different formats. The datasets we will be sorting with are in rdf format.
-% This format can include an defined onthology or not.
-% This means the KG consists of triples subject, relation, object.
-% when indexing these triples. we get a dense representation of the KG.
-% About sparse KGs
 
 \subsection{Ranger Optimizer}
 A optimizer, which manged to improve results upon state of the art models. It combines rectified adam, lookahead and gradient centralization.

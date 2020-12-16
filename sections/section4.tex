@@ -22,6 +22,17 @@ hi
 \\Graph matching
 \\Discretization of prediction
 
+Limitations. The proposed model is expected to be useful
+only for generating small graphs. This is due to growth
+of GPU memory requirements and number of parameters
+(O(k
+2
+)) as well as matching complexity (O(k
+4
+)), with small
+decrease in quality for high values of k. I
+\cite{simonovsky_graphvae_2018}
+
 \subsection{Loss function}
 
 If loss function should be permutation invariant we need to do some kind of graph matching.\\
