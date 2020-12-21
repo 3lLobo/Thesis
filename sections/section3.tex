@@ -9,15 +9,24 @@ Knowledge Graphs are great! The best in the world.
 % Knowledge Graphs which we will be using
 % We will focus on the generation of KGs.
 % Representation of KG as adjacency, edge feature and node feature matrix
+Knowledge graph has become a popular key phrase. Yet, the term is so broad, that it can have various definitions. In this thesis we are going to focus on KGs in the context of relational machine learning.
 
 % What is a KG
+A KG is a database and as all other databases it is used to store data. The main difference to tabular databases is that KGs store data in a relational fashion.
+A set of triples of the form $(s,r,o)$ with:
+\begin{itemize}
+    \item $s$: subjecct
+    \item $r$: relation
+    \item $o$: object/predicate
+\end{itemize}
+For all triples $s$ and $o$ are part of a set of so called entities, while $r$ is part od a set of relations. This is enough to define a basic KG.
 
-
-% Hirarchy, enteties, classses
-
+% Hirarchy, entities, classses
+More sophisticated KGs can include classes and hierarchies. Classes group certain entities together, based on common criteria, e.g all names can be grouped in the class 'person'.
+Hierarchies define the inheriting structure of classes and subclasses. Picking up our previous example, 'child' would be a subclass of 'person' and inherit its properties. At the same time the class of an entity can be key to its relation, since some relations can only be used in conjunction with entities fulfilling certain attributes.
 
 % Othollogy - semantics
-
+The rules of a KG are defined in its onthology. Here properties of classes, subclasses and constrains for relations
 
 % Sparse and dense representation
 
