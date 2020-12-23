@@ -3,33 +3,47 @@ In this section we will go over related work and relevant background information
 Should all these boxes be checked, then we can expect to get a deeper understanding of the magic behind the VAE and its differences to a normal autoencoder. After that we will present how convolutional layers can be used on graphs. Of course where there is a layer there is a model, thus we are presenting the graph convolutional network (GCN). Closing the circle we show how we can adopt the VAE to graph convolutions. Wrapping things up, we present the state of the art algorithms for graph matching, which will be util to allow permutation invariance when matching prediction and target.  
 
 
-\subsection{Knowledge Graphs}
+\subsection{Knowledge Graph}
 
-Knowledge Graphs are great! The best in the world.
+% Knowledge Graphs are great! The best in the world.
 % Knowledge Graphs which we will be using
 % We will focus on the generation of KGs.
 % Representation of KG as adjacency, edge feature and node feature matrix
 Knowledge graph has become a popular key phrase. Yet, the term is so broad, that it can have various definitions. In this thesis we are going to focus on KGs in the context of relational machine learning.
 
 % What is a KG
-A KG is a database and as all other databases it is used to store data. The main difference to tabular databases is that KGs store data in a relational fashion.
-A set of triples of the form $(s,r,o)$ with:
+A KG is a database and as all other databases it is used to store data. The main difference to tabular databases is that KGs store data in a relational fashion. A standard KG structure, introduced by the semantic-web community, is the Resource
+Description Framework (RDF). 
+A set of triples of the form
+\begin{equation}
+    (Michelangelo,  painted,    Sixtine Chapel)
+\end{equation}
+\begin{equation}
+    (s, r,  o)
+\end{equation}
+ 
+ with:
 \begin{itemize}
-    \item $s$: subjecct
-    \item $r$: relation
-    \item $o$: object/predicate
+    \item Subject $s:   Michelangelo$ 
+    \item Relation/Predicate $r:    painted$
+    \item Object $o:     Sixtine Chapel$
 \end{itemize}
-For all triples $s$ and $o$ are part of a set of so called entities, while $r$ is part od a set of relations. This is enough to define a basic KG.
 
-% Hirarchy, entities, classses
-More sophisticated KGs can include classes and hierarchies. Classes group certain entities together, based on common criteria, e.g all names can be grouped in the class 'person'.
-Hierarchies define the inheriting structure of classes and subclasses. Picking up our previous example, 'child' would be a subclass of 'person' and inherit its properties. At the same time the class of an entity can be key to its relation, since some relations can only be used in conjunction with entities fulfilling certain attributes.
+For all triples $s$ and $o$ are part of a set of so called entities, while $r$ is part of a set of relations. This is enough to define a basic KG.
+
+% Hirarchy, entities, classes
+More sophisticated KGs can include type hierarchies and tyoe constrains. Classes group entities of the same type together, based on common criteria, e.g all names of people can be grouped in the class 'person'.
+Hierarchies define the inheriting structure of classes and subclasses. Picking up our previous example, 'child' would be a subclass of 'person' and inherit its properties. At the same time the class of an entity can be key to a relation with tpye constrain, since some relations can only be used in conjunction with entities fulfilling the constraining type criteria.
 
 % Othollogy - semantics
 The rules of a KG are defined in its onthology. Here properties of classes, subclasses and constrains for relations
 
 % Sparse and dense representation
+A major difference in Kg's is the representation. RDF KGs are represented as numeric triples, with the numerics inidices linking to the right entry in the entity and relation set. This is called dense representation and beneits from fast computation due to an optimized use of memory.
 
+In contrary the dense representation of a triple is a binary square matrix, with ones indicating a link between two entities, also called the adjacency matrix.
+node atributes 
+edge atributes
 
 % Usecases of KG
 
@@ -40,7 +54,7 @@ The rules of a KG are defined in its onthology. Here properties of classes, subc
 % when indexing these triples. we get a dense representation of the KG.
 % About sparse KGs
 
-\subsection{The Graph VAE – one shot method}
+\subsection{Graph VAE – one shot method}
 
 \subsubsection{VAE}
 % The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model consisting of an encoder and a decoder. The architecture of the VAE differs from a common autoencoder by having a stochastic module between encoder and decoder. Instead of directly using the output of the encoder, a distribution of the latent space is predicted from which we sample the input to the decoder. The reparameterization trick allows the model to be differentiable. By placing the sampling module outside the model we get a deterministic model which can be backpropagated.
