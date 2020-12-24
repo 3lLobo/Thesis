@@ -1,0 +1,1611 @@
+% Custom
+
+@book{bishop2006pattern,
+  title={Pattern recognition and machine learning},
+  author={Bishop, Christopher M},
+  year={2006},
+  publisher={springer}
+}
+@article{nickel2015review,
+  title={A review of relational machine learning for knowledge graphs},
+  author={Nickel, Maximilian and Murphy, Kevin and Tresp, Volker and Gabrilovich, Evgeniy},
+  journal={Proceedings of the IEEE},
+  volume={104},
+  number={1},
+  pages={11--33},
+  year={2015},
+  publisher={IEEE}
+}
+
+% End Custom
+
+@article{andreoli_convolution_nodate,
+  title    = {Convolution, attention and structure embedding},
+  abstract = {Deep neural networks are composed of layers of parametrised linear operations intertwined with non linear activations. In basic models, such as the multi-layer perceptron, a linear layer operates on a simple input vector embedding of the instance being processed, and produces an output vector embedding by straight multiplication by a matrix parameter. In more complex models, the input and output are structured and their embeddings are higher order tensors. The parameter of each linear operation must then be controlled so as not to explode with the complexity of the structures involved. This is essentially the role of convolution models, which exist in many ﬂavours dependent on the type of structure they deal with (grids, networks, time series etc.). We present here a uniﬁed framework which aims at capturing the essence of these diverse models, allowing a systematic analysis of their properties and their mutual enrichment. We also show that attention models naturally ﬁt in the same framework: attention is convolution in which the structure itself is adaptive, and learnt, instead of being given a priori.},
+  language = {en},
+  author   = {Andreoli, Jean-Marc},
+  pages    = {8},
+  file     = {Andreoli - Convolution, attention and structure embedding.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\2UMFVGX8\\Andreoli - Convolution, attention and structure embedding.pdf:application/pdf}
+}
+
+@article{arora_iterefine_2020,
+  title      = {{IterefinE}: {Iterative} {KG} {Refinement} {Embeddings} using {Symbolic} {Knowledge}},
+  shorttitle = {{IterefinE}},
+  url        = {http://arxiv.org/abs/2006.04509},
+  abstract   = {Knowledge Graphs (KGs) extracted from text sources are often noisy and lead to poor performance in downstream application tasks such as KG-based question answering.While much of the recent activity is focused on addressing the sparsity of KGs by using embeddings for inferring new facts, the issue of cleaning up of noise in KGs through KG refinement task is not as actively studied. Most successful techniques for KG refinement make use of inference rules and reasoning over ontologies. Barring a few exceptions, embeddings do not make use of ontological information, and their performance in KG refinement task is not well understood. In this paper, we present a KG refinement framework called IterefinE which iteratively combines the two techniques - one which uses ontological information and inferences rules, PSL-KGI, and the KG embeddings such as ComplEx and ConvE which do not. As a result, IterefinE is able to exploit not only the ontological information to improve the quality of predictions, but also the power of KG embeddings which (implicitly) perform longer chains of reasoning. The IterefinE framework, operates in a co-training mode and results in explicit type-supervised embedding of the refined KG from PSL-KGI which we call as TypeE-X. Our experiments over a range of KG benchmarks show that the embeddings that we produce are able to reject noisy facts from KG and at the same time infer higher quality new facts resulting in up to 9\% improvement of overall weighted F1 score},
+  urldate    = {2020-07-02},
+  journal    = {arXiv:2006.04509 [cs, stat]},
+  author     = {Arora, Siddhant and Bedathur, Srikanta and Ramanath, Maya and Sharma, Deepak},
+  month      = jun,
+  year       = {2020},
+  note       = {arXiv: 2006.04509},
+  keywords   = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Databases},
+  annote     = {Comment: 16 pages, 7 figures, AKBC 2020 Conference},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\NCTIAC5X\\Arora et al. - 2020 - IterefinE Iterative KG Refinement Embeddings usin.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\XV78I9GU\\2006.html:text/html}
+}
+
+@article{battaglia_relational_2018,
+  title    = {Relational inductive biases, deep learning, and graph networks},
+  url      = {http://arxiv.org/abs/1806.01261},
+  abstract = {Artificial intelligence (AI) has undergone a renaissance recently, making major progress in key domains such as vision, language, control, and decision-making. This has been due, in part, to cheap data and cheap compute resources, which have fit the natural strengths of deep learning. However, many defining characteristics of human intelligence, which developed under much different pressures, remain out of reach for current approaches. In particular, generalizing beyond one's experiences--a hallmark of human intelligence from infancy--remains a formidable challenge for modern AI. The following is part position paper, part review, and part unification. We argue that combinatorial generalization must be a top priority for AI to achieve human-like abilities, and that structured representations and computations are key to realizing this objective. Just as biology uses nature and nurture cooperatively, we reject the false choice between "hand-engineering" and "end-to-end" learning, and instead advocate for an approach which benefits from their complementary strengths. We explore how using relational inductive biases within deep learning architectures can facilitate learning about entities, relations, and rules for composing them. We present a new building block for the AI toolkit with a strong relational inductive bias--the graph network--which generalizes and extends various approaches for neural networks that operate on graphs, and provides a straightforward interface for manipulating structured knowledge and producing structured behaviors. We discuss how graph networks can support relational reasoning and combinatorial generalization, laying the foundation for more sophisticated, interpretable, and flexible patterns of reasoning. As a companion to this paper, we have released an open-source software library for building graph networks, with demonstrations of how to use them in practice.},
+  urldate  = {2020-06-18},
+  journal  = {arXiv:1806.01261 [cs, stat]},
+  author   = {Battaglia, Peter W. and Hamrick, Jessica B. and Bapst, Victor and Sanchez-Gonzalez, Alvaro and Zambaldi, Vinicius and Malinowski, Mateusz and Tacchetti, Andrea and Raposo, David and Santoro, Adam and Faulkner, Ryan and Gulcehre, Caglar and Song, Francis and Ballard, Andrew and Gilmer, Justin and Dahl, George and Vaswani, Ashish and Allen, Kelsey and Nash, Charles and Langston, Victoria and Dyer, Chris and Heess, Nicolas and Wierstra, Daan and Kohli, Pushmeet and Botvinick, Matt and Vinyals, Oriol and Li, Yujia and Pascanu, Razvan},
+  month    = oct,
+  year     = {2018},
+  note     = {arXiv: 1806.01261},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Artificial Intelligence},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\VS86M86Z\\Battaglia et al. - 2018 - Relational inductive biases, deep learning, and gr.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\DK3PV6SZ\\1806.html:text/html}
+}
+
+@article{belli_image-conditioned_2019,
+  title    = {Image-{Conditioned} {Graph} {Generation} for {Road} {Network} {Extraction}},
+  url      = {http://arxiv.org/abs/1910.14388},
+  abstract = {Deep generative models for graphs have shown great promise in the area of drug design, but have so far found little application beyond generating graph-structured molecules. In this work, we demonstrate a proof of concept for the challenging task of road network extraction from image data. This task can be framed as image-conditioned graph generation, for which we develop the Generative Graph Transformer (GGT), a deep autoregressive model that makes use of attention mechanisms for image conditioning and the recurrent generation of graphs. We benchmark GGT on the application of road network extraction from semantic segmentation data. For this, we introduce the Toulouse Road Network dataset, based on real-world publicly-available data. We further propose the StreetMover distance: a metric based on the Sinkhorn distance for effectively evaluating the quality of road network generation. The code and dataset are publicly available.},
+  urldate  = {2020-05-08},
+  journal  = {arXiv:1910.14388 [cs, stat]},
+  author   = {Belli, Davide and Kipf, Thomas},
+  month    = oct,
+  year     = {2019},
+  note     = {arXiv: 1910.14388},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  annote   = {Comment: Presented at NeurIPS 2019 Workshop on Graph Representation Learning},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\J62CRRMB\\Belli and Kipf - 2019 - Image-Conditioned Graph Generation for Road Networ.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\BA9GESIJ\\1910.html:text/html}
+}
+
+@article{birchfield_grid_2017,
+  title    = {Grid {Structural} {Characteristics} as {Validation} {Criteria} for {Synthetic} {Networks}},
+  volume   = {32},
+  issn     = {0885-8950, 1558-0679},
+  url      = {http://ieeexplore.ieee.org/document/7725528/},
+  doi      = {10.1109/TPWRS.2016.2616385},
+  abstract = {While there have been many works on Graph Neural Networks (GNNs), most of these approaches only consider homogeneous-node graphs without edge features. However, many interesting problems feature different types of nodes and edge features. Based on the example of a power grid, we show that GNNs can learn to model heterogeneous nodes with little additional information given, but that special-purpose network architectures can improve upon that. We compare ﬁve different approaches which form a base for any practitioner to start experiments for their speciﬁc problem.},
+  language = {en},
+  number   = {4},
+  urldate  = {2020-06-12},
+  journal  = {IEEE Transactions on Power Systems},
+  author   = {Birchfield, Adam B. and Xu, Ti and Gegner, Kathleen M. and Shetye, Komal S. and Overbye, Thomas J.},
+  month    = jul,
+  year     = {2017},
+  pages    = {3258--3265},
+  file     = {Birchfield et al. - 2017 - Grid Structural Characteristics as Validation Crit.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\PBFDQ8WF\\Birchfield et al. - 2017 - Grid Structural Characteristics as Validation Crit.pdf:application/pdf}
+}
+
+@incollection{bordes_translating_2013,
+  title     = {Translating {Embeddings} for {Modeling} {Multi}-relational {Data}},
+  url       = {http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf},
+  urldate   = {2020-05-12},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 26},
+  publisher = {Curran Associates, Inc.},
+  author    = {Bordes, Antoine and Usunier, Nicolas and Garcia-Duran, Alberto and Weston, Jason and Yakhnenko, Oksana},
+  editor    = {Burges, C. J. C. and Bottou, L. and Welling, M. and Ghahramani, Z. and Weinberger, K. Q.},
+  year      = {2013},
+  pages     = {2787--2795},
+  file      = {NIPS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\LDL9FB3L\\5071-translating-embeddings-for-modeling-multi-rela.html:text/html}
+}
+
+@incollection{bordes_translating_2013-1,
+  title     = {Translating {Embeddings} for {Modeling} {Multi}-relational {Data}},
+  url       = {http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf},
+  urldate   = {2020-05-12},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 26},
+  publisher = {Curran Associates, Inc.},
+  author    = {Bordes, Antoine and Usunier, Nicolas and Garcia-Duran, Alberto and Weston, Jason and Yakhnenko, Oksana},
+  editor    = {Burges, C. J. C. and Bottou, L. and Welling, M. and Ghahramani, Z. and Weinberger, K. Q.},
+  year      = {2013},
+  pages     = {2787--2795},
+  file      = {NIPS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\ATMVE5SK\\5071-translating-embeddings-for-modeling-multi-rela.html:text/html}
+}
+
+@incollection{bordes_translating_2013-2,
+  title     = {Translating {Embeddings} for {Modeling} {Multi}-relational {Data}},
+  url       = {http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf},
+  urldate   = {2020-05-12},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 26},
+  publisher = {Curran Associates, Inc.},
+  author    = {Bordes, Antoine and Usunier, Nicolas and Garcia-Duran, Alberto and Weston, Jason and Yakhnenko, Oksana},
+  editor    = {Burges, C. J. C. and Bottou, L. and Welling, M. and Ghahramani, Z. and Weinberger, K. Q.},
+  year      = {2013},
+  pages     = {2787--2795},
+  file      = {NIPS Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\GBDFAVPW\\Bordes et al. - 2013 - Translating Embeddings for Modeling Multi-relation.pdf:application/pdf;NIPS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\ZSIARUH9\\5071-translating-embeddings-for-modeling-multi-relational-data.html:text/html}
+}
+
+@incollection{bordes_translating_2013-3,
+  title     = {Translating {Embeddings} for {Modeling} {Multi}-relational {Data}},
+  url       = {http://papers.nips.cc/paper/5071-translating-embeddings-for-modeling-multi-relational-data.pdf},
+  urldate   = {2020-06-03},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 26},
+  publisher = {Curran Associates, Inc.},
+  author    = {Bordes, Antoine and Usunier, Nicolas and Garcia-Duran, Alberto and Weston, Jason and Yakhnenko, Oksana},
+  editor    = {Burges, C. J. C. and Bottou, L. and Welling, M. and Ghahramani, Z. and Weinberger, K. Q.},
+  year      = {2013},
+  pages     = {2787--2795},
+  file      = {NIPS Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\IN3R2PVL\\Bordes et al. - 2013 - Translating Embeddings for Modeling Multi-relation.pdf:application/pdf;NIPS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\LZ6ZCULM\\5071-translating-embeddings-for-modeling-multi-relational-data.html:text/html}
+}
+
+@article{brockschmidt_gnn-film_2019,
+  title      = {{GNN}-{FiLM}: {Graph} {Neural} {Networks} with {Feature}-wise {Linear} {Modulation}},
+  shorttitle = {{GNN}-{FiLM}},
+  url        = {http://arxiv.org/abs/1906.12192},
+  abstract   = {This paper presents a new Graph Neural Network (GNN) type using feature-wise linear modulation (FiLM). Many standard GNN variants propagate information along the edges of a graph by computing "messages" based only on the representation of the source of each edge. In GNN-FiLM, the representation of the target node of an edge is additionally used to compute a transformation that can be applied to all incoming messages, allowing feature-wise modulation of the passed information. Results of experiments comparing different GNN architectures on three tasks from the literature are presented, based on re-implementations of baseline methods. Hyperparameters for all methods were found using extensive search, yielding somewhat surprising results: differences between baseline models are smaller than reported in the literature. Nonetheless, GNN-FiLM outperforms baseline methods on a regression task on molecular graphs and performs competitively on other tasks.},
+  urldate    = {2020-05-08},
+  journal    = {arXiv:1906.12192 [cs, stat]},
+  author     = {Brockschmidt, Marc},
+  month      = nov,
+  year       = {2019},
+  note       = {arXiv: 1906.12192},
+  keywords   = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\T8WD7IT2\\Brockschmidt - 2019 - GNN-FiLM Graph Neural Networks with Feature-wise .pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\9LMU5ZCW\\1906.html:text/html}
+}
+
+@article{byun_chronograph_2020,
+  title      = {{ChronoGraph}: {Enabling} {Temporal} {Graph} {Traversals} for {Efficient} {Information} {Diffusion} {Analysis} over {Time}},
+  volume     = {32},
+  issn       = {1558-2191},
+  shorttitle = {{ChronoGraph}},
+  doi        = {10.1109/TKDE.2019.2891565},
+  abstract   = {ChronoGraph is a novel system enabling temporal graph traversals. Compared to snapshot-oriented systems, this traversal-oriented system is suitable for analyzing information diffusion over time without violating a time constraint on temporal paths. The cornerstone of ChronoGraph aims at bridging the chasm between point-based semantics and period-based semantics and the gap between temporal graph traversals and static graph traversals. Therefore, our graph model and traversal language provide the temporal syntax for both semantics, and we present a method converting point-based semantics to period-based ones. Also, ChronoGraph exploits the temporal support and parallelism to handle the temporal degree, which explosively increases compared to static graphs. We demonstrate how three traversal recipes can be implemented on top of our system: temporal breadth-first search (tBFS), temporal depth-first search (tDFS), and temporal single source shortest path (tSSSP). According to our evaluation, our temporal support and parallelism enhance temporal graph traversals in terms of convenience and efficiency. Also, ChronoGraph outperforms existing property graph databases in terms of temporal graph traversals. We prototype ChronoGraph by extending Tinkerpop, a de facto standard for property graphs. Therefore, we expect that our system would be readily accessible to existing property graph users.},
+  number     = {3},
+  journal    = {IEEE Transactions on Knowledge and Data Engineering},
+  author     = {Byun, Jaewook and Woo, Sungpil and Kim, Daeyoung},
+  month      = mar,
+  year       = {2020},
+  note       = {Conference Name: IEEE Transactions on Knowledge and Data Engineering},
+  keywords   = {graph theory, ChronoGraph, Databases, graph model, graph traversal language, Parallel processing, parallelism, point-based semantics, programming language semantics, Prototypes, Semantics, Standards, static graph traversals, Syntactics, temporal aggregation, temporal breadth-first search, temporal degree, temporal depth-first search, temporal graph, temporal graph traversals, temporal networks, temporal paths, temporal single source shortest path, temporal support, temporal syntax, Time factors, Tinkerpop, traversal language, traversal-oriented system, tree searching},
+  pages      = {424--437},
+  file       = {IEEE Xplore Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\6T2NPKPT\\Byun et al. - 2020 - ChronoGraph Enabling Temporal Graph Traversals fo.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\fwolf\\Zotero\\storage\\PCGCTDJX\\8606161.html:text/html}
+}
+
+@article{chami_low-dimensional_nodate,
+  title    = {Low-{Dimensional} {Knowledge} {Graph} {Embeddings} via {Hyperbolic} {Rotations}},
+  abstract = {Knowledge graphs (KGs) capture rich relationships between a large number of entities. Embeddings of these structures must preserve these relationships with high ﬁdelity. Recently, hyperbolic embedding methods have achieved state-ofthe-art quality in graph representation learning tasks; when embedding certain graphs, they can produce parsimonious embeddings that have higher ﬁdelity while using much fewer dimensions than their Euclidean counterparts. Mirroring work in Euclidean space, we are the ﬁrst to leverage trainable hyperbolic rotations, a key notion in providing sufﬁciently rich representations for the complex logical patterns found in KGs. Coupled with trainable curvature, this approach yields improved embeddings in fewer dimensions. We evaluate our method, ROTATIONH, on the WN18RR link prediction task; in the low-dimensional setting, we improve on previous Euclidean-based efforts by 2.2\% in mean reciprocal rank (MRR), and in the high-dimensional setting, we achieve a new state-of-the-art MRR of 49.2\%, improving on existing methods by 1.1\%.},
+  language = {en},
+  author   = {Chami, Ines and Wolf, Adva and Sala, Frederic and Ré, Christopher},
+  pages    = {6},
+  file     = {Chami et al. - Low-Dimensional Knowledge Graph Embeddings via Hyp.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\W6ZDCUUB\\Chami et al. - Low-Dimensional Knowledge Graph Embeddings via Hyp.pdf:application/pdf}
+}
+
+@article{che_towards_2018,
+  title      = {Towards {Better} {UD} {Parsing}: {Deep} {Contextualized} {Word} {Embeddings}, {Ensemble}, and {Treebank} {Concatenation}},
+  shorttitle = {Towards {Better} {UD} {Parsing}},
+  url        = {http://arxiv.org/abs/1807.03121},
+  abstract   = {This paper describes our system (HIT-SCIR) submitted to the CoNLL 2018 shared task on Multilingual Parsing from Raw Text to Universal Dependencies. We base our submission on Stanford's winning system for the CoNLL 2017 shared task and make two effective extensions: 1) incorporating deep contextualized word embeddings into both the part of speech tagger and parser; 2) ensembling parsers trained with different initialization. We also explore different ways of concatenating treebanks for further improvements. Experimental results on the development data show the effectiveness of our methods. In the final evaluation, our system was ranked first according to LAS (75.84\%) and outperformed the other systems by a large margin.},
+  urldate    = {2020-05-05},
+  journal    = {arXiv:1807.03121 [cs]},
+  author     = {Che, Wanxiang and Liu, Yijia and Wang, Yuxuan and Zheng, Bo and Liu, Ting},
+  month      = jul,
+  year       = {2018},
+  note       = {arXiv: 1807.03121},
+  keywords   = {Computer Science - Computation and Language},
+  annote     = {Comment: System description paper of our system (HIT-SCIR) for the CoNLL 2018 shared task on Universal Dependency parsing, which was ranked first in the LAS evaluation. Fix typos and grammar errors. Add the results of parser without ensemble},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\IMFY9XFP\\Che et al. - 2018 - Towards Better UD Parsing Deep Contextualized Wor.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\KL6352GX\\1807.html:text/html}
+}
+
+@inproceedings{chen_meta_2019,
+  address   = {Hong Kong, China},
+  title     = {Meta {Relational} {Learning} for {Few}-{Shot} {Link} {Prediction} in {Knowledge} {Graphs}},
+  url       = {https://www.aclweb.org/anthology/D19-1431},
+  doi       = {10.18653/v1/D19-1431},
+  abstract  = {Link prediction is an important way to complete knowledge graphs (KGs), while embedding-based methods, effective for link prediction in KGs, perform poorly on relations that only have a few associative triples. In this work, we propose a Meta Relational Learning (MetaR) framework to do the common but challenging few-shot link prediction in KGs, namely predicting new triples about a relation by only observing a few associative triples. We solve few-shot link prediction by focusing on transferring relation-specific meta information to make model learn the most important knowledge and learn faster, corresponding to relation meta and gradient meta respectively in MetaR. Empirically, our model achieves state-of-the-art results on few-shot link prediction KG benchmarks.},
+  urldate   = {2020-06-02},
+  booktitle = {Proceedings of the 2019 {Conference} on {Empirical} {Methods} in {Natural} {Language} {Processing} and the 9th {International} {Joint} {Conference} on {Natural} {Language} {Processing} ({EMNLP}-{IJCNLP})},
+  publisher = {Association for Computational Linguistics},
+  author    = {Chen, Mingyang and Zhang, Wen and Zhang, Wei and Chen, Qiang and Chen, Huajun},
+  month     = nov,
+  year      = {2019},
+  pages     = {4217--4226},
+  file      = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\HFWB38UN\\Chen et al. - 2019 - Meta Relational Learning for Few-Shot Link Predict.pdf:application/pdf}
+}
+
+@article{chen_review_2020,
+  title      = {A review: {Knowledge} reasoning over knowledge graph},
+  volume     = {141},
+  shorttitle = {A review},
+  doi        = {10.1016/j.eswa.2019.112948},
+  abstract   = {Mining valuable hidden knowledge from large-scale data relies on the support of reasoning technology. Knowledge graphs, as a new type of knowledge representation, have gained much attention in natural language processing. Knowledge graphs can effectively organize and represent knowledge so that it can be efficiently utilized in advanced applications. Recently, reasoning over knowledge graphs has become a hot research topic, since it can obtain new knowledge and conclusions from existing data. Herein we review the basic concept and definitions of knowledge reasoning and the methods for reasoning over knowledge graphs. Specifically, we dissect the reasoning methods into three categories: rule-based reasoning, distributed representation-based reasoning and neural network-based reasoning. We also review the related applications of knowledge graph reasoning, such as knowledge graph completion, question answering, and recommender systems. Finally, we discuss the remaining challenges and research opportunities for knowledge graph reasoning. © 2019 Elsevier Ltd},
+  journal    = {Expert Systems with Applications},
+  author     = {Chen, X. and Jia, S. and Xiang, Y.},
+  year       = {2020},
+  keywords   = {Knowledge graph, Distributed representation-based reasoning, Neural network-based reasoning, Reasoning, Rule-based reasoning},
+  annote     = {Cited By :2},
+  file       = {SCOPUS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\IHHPGCZP\\display.html:text/html;Chen et al. - 2020 - A review Knowledge reasoning over knowledge graph.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\T4CDVCYP\\Chen et al. - 2020 - A review Knowledge reasoning over knowledge graph.pdf:application/pdf}
+}
+
+@article{cowen-rivers_neural_2019,
+  title    = {Neural {Variational} {Inference} {For} {Estimating} {Uncertainty} in {Knowledge} {Graph} {Embeddings}},
+  url      = {http://arxiv.org/abs/1906.04985},
+  abstract = {Recent advances in Neural Variational Inference allowed for a renaissance in latent variable models in a variety of domains involving high-dimensional data. While traditional variational methods derive an analytical approximation for the intractable distribution over the latent variables, here we construct an inference network conditioned on the symbolic representation of entities and relation types in the Knowledge Graph, to provide the variational distributions. The new framework results in a highly-scalable method. Under a Bernoulli sampling framework, we provide an alternative justification for commonly used techniques in large-scale stochastic variational inference, which drastically reduce training time at a cost of an additional approximation to the variational lower bound. We introduce two models from this highly scalable probabilistic framework, namely the Latent Information and Latent Fact models, for reasoning over knowledge graph-based representations. Our Latent Information and Latent Fact models improve upon baseline performance under certain conditions. We use the learnt embedding variance to estimate predictive uncertainty during link prediction, and discuss the quality of these learnt uncertainty estimates. Our source code and datasets are publicly available online at https://github.com/alexanderimanicowenrivers/Neural-Variational-Knowledge-Graphs.},
+  urldate  = {2020-06-18},
+  journal  = {arXiv:1906.04985 [cs, stat]},
+  author   = {Cowen-Rivers, Alexander I. and Minervini, Pasquale and Rocktaschel, Tim and Bosnjak, Matko and Riedel, Sebastian and Wang, Jun},
+  month    = aug,
+  year     = {2019},
+  note     = {arXiv: 1906.04985},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Symbolic Computation},
+  annote   = {Comment: Accepted at IJCAI 19 Neural-Symbolic Learning and Reasoning Workshop},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\5M7JNCLI\\Cowen-Rivers et al. - 2019 - Neural Variational Inference For Estimating Uncert.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\Y3ARRDSN\\1906.html:text/html}
+}
+
+@article{de_cao_molgan_2018,
+  title      = {{MolGAN}: {An} implicit generative model for small molecular graphs},
+  shorttitle = {{MolGAN}},
+  url        = {http://arxiv.org/abs/1805.11973},
+  abstract   = {Deep generative models for graph-structured data offer a new angle on the problem of chemical synthesis: by optimizing differentiable models that directly generate molecular graphs, it is possible to side-step expensive search procedures in the discrete and vast space of chemical structures. We introduce MolGAN, an implicit, likelihood-free generative model for small molecular graphs that circumvents the need for expensive graph matching procedures or node ordering heuristics of previous likelihood-based methods. Our method adapts generative adversarial networks (GANs) to operate directly on graph-structured data. We combine our approach with a reinforcement learning objective to encourage the generation of molecules with specific desired chemical properties. In experiments on the QM9 chemical database, we demonstrate that our model is capable of generating close to 100\% valid compounds. MolGAN compares favorably both to recent proposals that use string-based (SMILES) representations of molecules and to a likelihood-based method that directly generates graphs, albeit being susceptible to mode collapse.},
+  urldate    = {2020-05-19},
+  journal    = {arXiv:1805.11973 [cs, stat]},
+  author     = {De Cao, Nicola and Kipf, Thomas},
+  month      = may,
+  year       = {2018},
+  note       = {arXiv: 1805.11973},
+  keywords   = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  annote     = {Comment: 11 pages, 3 figures, 3 tables},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\5RHQFWC9\\De Cao and Kipf - 2018 - MolGAN An implicit generative model for small mol.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\T6A8WBAL\\1805.html:text/html}
+}
+
+@incollection{de_haan_causal_2019,
+  title     = {Causal {Confusion} in {Imitation} {Learning}},
+  url       = {http://papers.nips.cc/paper/9343-causal-confusion-in-imitation-learning.pdf},
+  urldate   = {2020-05-12},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 32},
+  publisher = {Curran Associates, Inc.},
+  author    = {de Haan, Pim and Jayaraman, Dinesh and Levine, Sergey},
+  editor    = {Wallach, H. and Larochelle, H. and Beygelzimer, A. and Alché-Buc, F. d{\textbackslash}textquotesingle and Fox, E. and Garnett, R.},
+  year      = {2019},
+  pages     = {11698--11709},
+  file      = {NIPS Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\5KMEJJXT\\de Haan et al. - 2019 - Causal Confusion in Imitation Learning.pdf:application/pdf;NIPS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\LAIHXSJ4\\9343-causal-confusion-in-imitation-learning.html:text/html}
+}
+
+@article{devlin_bert_2019,
+  title      = {{BERT}: {Pre}-training of {Deep} {Bidirectional} {Transformers} for {Language} {Understanding}},
+  shorttitle = {{BERT}},
+  url        = {http://arxiv.org/abs/1810.04805},
+  abstract   = {We introduce a new language representation model called BERT, which stands for Bidirectional Encoder Representations from Transformers. Unlike recent language representation models, BERT is designed to pre-train deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context in all layers. As a result, the pre-trained BERT model can be fine-tuned with just one additional output layer to create state-of-the-art models for a wide range of tasks, such as question answering and language inference, without substantial task-specific architecture modifications. BERT is conceptually simple and empirically powerful. It obtains new state-of-the-art results on eleven natural language processing tasks, including pushing the GLUE score to 80.5\% (7.7\% point absolute improvement), MultiNLI accuracy to 86.7\% (4.6\% absolute improvement), SQuAD v1.1 question answering Test F1 to 93.2 (1.5 point absolute improvement) and SQuAD v2.0 Test F1 to 83.1 (5.1 point absolute improvement).},
+  urldate    = {2020-05-19},
+  journal    = {arXiv:1810.04805 [cs]},
+  author     = {Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  month      = may,
+  year       = {2019},
+  note       = {arXiv: 1810.04805},
+  keywords   = {Computer Science - Computation and Language},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\NMZXGRF9\\Devlin et al. - 2019 - BERT Pre-training of Deep Bidirectional Transform.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\ADZAWADK\\1810.html:text/html}
+}
+
+@article{duan_graph_2019,
+  title    = {Graph {Embedding} {VAE}: {A} {Permutation} {Invariant} {Model} of {Graph} {Structure}},
+  abstract = {Generative models of graph structure have applications in biology and social sciences. The state of the art is GraphRNN, which decomposes the graph generation process into a series of sequential steps. While effective for modest sizes, it loses its permutation invariance for larger graphs. Instead, we present a permutation invariant latent-variable generative model relying on graph embeddings to encode structure. Using tools from the random graph literature, our model is highly scalable to large graphs with likelihood evaluation and generation in O({\textbar}V {\textbar} + {\textbar}E{\textbar}).},
+  language = {en},
+  author   = {Duan, Tony and Lee, Juho},
+  year     = {2019},
+  pages    = {8},
+  file     = {Duan and Lee - Graph Embedding VAE A Permutation Invariant Model.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\F4HCGMJX\\Duan and Lee - Graph Embedding VAE A Permutation Invariant Model.pdf:application/pdf}
+}
+
+@incollection{gangemi_modeling_2018,
+  address   = {Cham},
+  title     = {Modeling {Relational} {Data} with {Graph} {Convolutional} {Networks}},
+  volume    = {10843},
+  isbn      = {978-3-319-93416-7 978-3-319-93417-4},
+  url       = {http://link.springer.com/10.1007/978-3-319-93417-4_38},
+  abstract  = {Knowledge graphs enable a wide variety of applications, including question answering and information retrieval. Despite the great effort invested in their creation and maintenance, even the largest (e.g., Yago, DBPedia or Wikidata) remain incomplete. We introduce Relational Graph Convolutional Networks (R-GCNs) and apply them to two standard knowledge base completion tasks: Link prediction (recovery of missing facts, i.e. subject-predicate-object triples) and entity classiﬁcation (recovery of missing entity attributes). RGCNs are related to a recent class of neural networks operating on graphs, and are developed speciﬁcally to deal with the highly multi-relational data characteristic of realistic knowledge bases. We demonstrate the effectiveness of R-GCNs as a stand-alone model for entity classiﬁcation. We further show that factorization models for link prediction such as DistMult can be signiﬁcantly improved by enriching them with an encoder model to accumulate evidence over multiple inference steps in the relational graph, demonstrating a large improvement of 29.8\% on FB15k-237 over a decoder-only baseline.},
+  language  = {en},
+  urldate   = {2020-06-03},
+  booktitle = {The {Semantic} {Web}},
+  publisher = {Springer International Publishing},
+  author    = {Schlichtkrull, Michael and Kipf, Thomas N. and Bloem, Peter and van den Berg, Rianne and Titov, Ivan and Welling, Max},
+  editor    = {Gangemi, Aldo and Navigli, Roberto and Vidal, Maria-Esther and Hitzler, Pascal and Troncy, Raphaël and Hollink, Laura and Tordai, Anna and Alam, Mehwish},
+  year      = {2018},
+  doi       = {10.1007/978-3-319-93417-4_38},
+  note      = {Series Title: Lecture Notes in Computer Science},
+  pages     = {593--607},
+  file      = {Schlichtkrull et al. - 2018 - Modeling Relational Data with Graph Convolutional .pdf:C\:\\Users\\fwolf\\Zotero\\storage\\3IYY6WVU\\Schlichtkrull et al. - 2018 - Modeling Relational Data with Graph Convolutional .pdf:application/pdf}
+}
+
+@inproceedings{grainger_semantic_2016,
+  title      = {The {Semantic} {Knowledge} {Graph}: {A} {Compact}, {Auto}-{Generated} {Model} for {Real}-{Time} {Traversal} and {Ranking} of any {Relationship} within a {Domain}},
+  shorttitle = {The {Semantic} {Knowledge} {Graph}},
+  doi        = {10.1109/DSAA.2016.51},
+  abstract   = {This paper describes a new kind of knowledge representation and mining system which we are calling the Semantic Knowledge Graph. At its heart, the Semantic Knowledge Graph leverages an inverted index, along with a complementary uninverted index, to represent nodes (terms) and edges (the documents within intersecting postings lists for multiple terms/nodes). This provides a layer of indirection between each pair of nodes and their corresponding edge, enabling edges to materialize dynamically from underlying corpus statistics. As a result, any combination of nodes can have edges to any other nodes materialize and be scored to reveal latent relationships between the nodes. This provides numerous benefits: the knowledge graph can be built automatically from a real-world corpus of data, new nodes - along with their combined edges - can be instantly materialized from any arbitrary combination of preexisting nodes (using set operations), and a full model of the semantic relationships between all entities within a domain can be represented and dynamically traversed using a highly compact representation of the graph. Such a system has widespread applications in areas as diverse as knowledge modeling and reasoning, natural language processing, anomaly detection, data cleansing, semantic search, analytics, data classification, root cause analysis, and recommendations systems. The main contribution of this paper is the introduction of a novel system - the Semantic Knowledge Graph - which is able to dynamically discover and score interesting relationships between any arbitrary combination of entities (words, phrases, or extracted concepts) through dynamically materializing nodes and edges from a compact graphical representation built automatically from a corpus of data representative of a knowledge domain. The source code for our Semantic Knowledge Graph implementation is being published along with this paper to facilitate further research and extensions of this work.},
+  booktitle  = {2016 {IEEE} {International} {Conference} on {Data} {Science} and {Advanced} {Analytics} ({DSAA})},
+  author     = {Grainger, Trey and Aljadda, Khalifeh and Korayem, Mohammed and Smith, Andries},
+  month      = oct,
+  year       = {2016},
+  keywords   = {graph theory, Knowledge Graph, Semantics, anomaly detection, Anomaly Detection, auto-generated model, compact graph representation, compact graphical representation, Context, corpus statistics, data classification, data cleansing, data mining, Data models, Graph Compression, indexing, Information Retrieval, inverted index, knowledge modeling, knowledge representation, Learning systems, mining system, natural language processing, Natural Language Processing, Natural languages, Ontologies, Ontology Learning, Pragmatics, real-time relationship traversal, recommendations systems, Relationship Extraction, relationship ranking, root cause analysis, semantic knowledge graph, semantic search, Semantic Search, semantic Web, Text Analytics},
+  pages      = {420--429},
+  file       = {IEEE Xplore Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\BNULC8WD\\Grainger et al. - 2016 - The Semantic Knowledge Graph A Compact, Auto-Gene.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\fwolf\\Zotero\\storage\\CXYHJUKJ\\7796928.html:text/html}
+}
+
+@inproceedings{grainger_semantic_2016-1,
+  title      = {The {Semantic} {Knowledge} {Graph}: {A} {Compact}, {Auto}-{Generated} {Model} for {Real}-{Time} {Traversal} and {Ranking} of any {Relationship} within a {Domain}},
+  shorttitle = {The {Semantic} {Knowledge} {Graph}},
+  doi        = {10.1109/DSAA.2016.51},
+  abstract   = {This paper describes a new kind of knowledge representation and mining system which we are calling the Semantic Knowledge Graph. At its heart, the Semantic Knowledge Graph leverages an inverted index, along with a complementary uninverted index, to represent nodes (terms) and edges (the documents within intersecting postings lists for multiple terms/nodes). This provides a layer of indirection between each pair of nodes and their corresponding edge, enabling edges to materialize dynamically from underlying corpus statistics. As a result, any combination of nodes can have edges to any other nodes materialize and be scored to reveal latent relationships between the nodes. This provides numerous benefits: the knowledge graph can be built automatically from a real-world corpus of data, new nodes - along with their combined edges - can be instantly materialized from any arbitrary combination of preexisting nodes (using set operations), and a full model of the semantic relationships between all entities within a domain can be represented and dynamically traversed using a highly compact representation of the graph. Such a system has widespread applications in areas as diverse as knowledge modeling and reasoning, natural language processing, anomaly detection, data cleansing, semantic search, analytics, data classification, root cause analysis, and recommendations systems. The main contribution of this paper is the introduction of a novel system - the Semantic Knowledge Graph - which is able to dynamically discover and score interesting relationships between any arbitrary combination of entities (words, phrases, or extracted concepts) through dynamically materializing nodes and edges from a compact graphical representation built automatically from a corpus of data representative of a knowledge domain. The source code for our Semantic Knowledge Graph implementation is being published along with this paper to facilitate further research and extensions of this work.},
+  booktitle  = {2016 {IEEE} {International} {Conference} on {Data} {Science} and {Advanced} {Analytics} ({DSAA})},
+  author     = {Grainger, Trey and Aljadda, Khalifeh and Korayem, Mohammed and Smith, Andries},
+  month      = oct,
+  year       = {2016},
+  keywords   = {graph theory, Knowledge Graph, Semantics, anomaly detection, Anomaly Detection, auto-generated model, compact graph representation, compact graphical representation, Context, corpus statistics, data classification, data cleansing, data mining, Data models, Graph Compression, indexing, Information Retrieval, inverted index, knowledge modeling, knowledge representation, Learning systems, mining system, natural language processing, Natural Language Processing, Natural languages, Ontologies, Ontology Learning, Pragmatics, real-time relationship traversal, recommendations systems, Relationship Extraction, relationship ranking, root cause analysis, semantic knowledge graph, semantic search, Semantic Search, semantic Web, Text Analytics},
+  pages      = {420--429},
+  file       = {IEEE Xplore Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\TTT5Z28P\\Grainger et al. - 2016 - The Semantic Knowledge Graph A Compact, Auto-Gene.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\fwolf\\Zotero\\storage\\7JDYA2HY\\references.html:text/html}
+}
+
+@inproceedings{grohe_word2vec_2020,
+  address    = {Portland, OR, USA},
+  series     = {{PODS}'20},
+  title      = {word2vec, node2vec, graph2vec, {X2vec}: {Towards} a {Theory} of {Vector} {Embeddings} of {Structured} {Data}},
+  isbn       = {978-1-4503-7108-7},
+  shorttitle = {word2vec, node2vec, graph2vec, {X2vec}},
+  url        = {https://doi.org/10.1145/3375395.3387641},
+  doi        = {10.1145/3375395.3387641},
+  abstract   = {Vector representations of graphs and relational structures, whether hand-crafted feature vectors or learned representations, enable us to apply standard data analysis and machine learning techniques to the structures. A wide range of methods for generating such embeddings have been studied in the machine learning and knowledge representation literature. However, vector embeddings have received relatively little attention from a theoretical point of view. Starting with a survey of embedding techniques that have been used in practice, in this paper we propose two theoretical approaches that we see as central for understanding the foundations of vector embeddings. We draw connections between the various approaches and suggest directions for future research.},
+  urldate    = {2020-07-02},
+  booktitle  = {Proceedings of the 39th {ACM} {SIGMOD}-{SIGACT}-{SIGAI} {Symposium} on {Principles} of {Database} {Systems}},
+  publisher  = {Association for Computing Machinery},
+  author     = {Grohe, Martin},
+  month      = jun,
+  year       = {2020},
+  keywords   = {graph kernel, graph neural net, homomorphism, representation learning, vector embedding, weisfeiler leman},
+  pages      = {1--16},
+  file       = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\9SVAMCGX\\Grohe - 2020 - word2vec, node2vec, graph2vec, X2vec Towards a Th.pdf:application/pdf}
+}
+
+@incollection{groth_rdf2vec_2016,
+  address    = {Cham},
+  title      = {{RDF2Vec}: {RDF} {Graph} {Embeddings} for {Data} {Mining}},
+  volume     = {9981},
+  isbn       = {978-3-319-46522-7 978-3-319-46523-4},
+  shorttitle = {{RDF2Vec}},
+  url        = {http://link.springer.com/10.1007/978-3-319-46523-4_30},
+  abstract   = {Linked Open Data has been recognized as a valuable source for background information in data mining. However, most data mining tools require features in propositional form, i.e., a vector of nominal or numerical features associated with an instance, while Linked Open Data sources are graphs by nature. In this paper, we present RDF2Vec, an approach that uses language modeling approaches for unsupervised feature extraction from sequences of words, and adapts them to RDF graphs. We generate sequences by leveraging local information from graph substructures, harvested by Weisfeiler-Lehman Subtree RDF Graph Kernels and graph walks, and learn latent numerical representations of entities in RDF graphs. Our evaluation shows that such vector representations outperform existing techniques for the propositionalization of RDF graphs on a variety of diﬀerent predictive machine learning tasks, and that feature vector representations of general knowledge graphs such as DBpedia and Wikidata can be easily reused for diﬀerent tasks.},
+  language   = {en},
+  urldate    = {2020-05-01},
+  booktitle  = {The {Semantic} {Web} – {ISWC} 2016},
+  publisher  = {Springer International Publishing},
+  author     = {Ristoski, Petar and Paulheim, Heiko},
+  editor     = {Groth, Paul and Simperl, Elena and Gray, Alasdair and Sabou, Marta and Krötzsch, Markus and Lecue, Freddy and Flöck, Fabian and Gil, Yolanda},
+  year       = {2016},
+  doi        = {10.1007/978-3-319-46523-4_30},
+  note       = {Series Title: Lecture Notes in Computer Science},
+  pages      = {498--514},
+  file       = {Ristoski and Paulheim - 2016 - RDF2Vec RDF Graph Embeddings for Data Mining.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\SNHAH8XG\\Ristoski and Paulheim - 2016 - RDF2Vec RDF Graph Embeddings for Data Mining.pdf:application/pdf}
+}
+
+@inproceedings{grover_node2vec_2016,
+  address    = {San Francisco, California, USA},
+  series     = {{KDD} '16},
+  title      = {node2vec: {Scalable} {Feature} {Learning} for {Networks}},
+  isbn       = {978-1-4503-4232-2},
+  shorttitle = {node2vec},
+  url        = {https://doi.org/10.1145/2939672.2939754},
+  doi        = {10.1145/2939672.2939754},
+  abstract   = {Prediction tasks over nodes and edges in networks require careful effort in engineering features used by learning algorithms. Recent research in the broader field of representation learning has led to significant progress in automating prediction by learning the features themselves. However, present feature learning approaches are not expressive enough to capture the diversity of connectivity patterns observed in networks. Here we propose node2vec, an algorithmic framework for learning continuous feature representations for nodes in networks. In node2vec, we learn a mapping of nodes to a low-dimensional space of features that maximizes the likelihood of preserving network neighborhoods of nodes. We define a flexible notion of a node's network neighborhood and design a biased random walk procedure, which efficiently explores diverse neighborhoods. Our algorithm generalizes prior work which is based on rigid notions of network neighborhoods, and we argue that the added flexibility in exploring neighborhoods is the key to learning richer representations. We demonstrate the efficacy of node2vec over existing state-of-the-art techniques on multi-label classification and link prediction in several real-world networks from diverse domains. Taken together, our work represents a new way for efficiently learning state-of-the-art task-independent representations in complex networks.},
+  urldate    = {2020-04-08},
+  booktitle  = {Proceedings of the 22nd {ACM} {SIGKDD} {International} {Conference} on {Knowledge} {Discovery} and {Data} {Mining}},
+  publisher  = {Association for Computing Machinery},
+  author     = {Grover, Aditya and Leskovec, Jure},
+  month      = aug,
+  year       = {2016},
+  keywords   = {feature learning, graph representations, information networks, node embeddings},
+  pages      = {855--864},
+  file       = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\X8MYYMZP\\Grover and Leskovec - 2016 - node2vec Scalable Feature Learning for Networks.pdf:application/pdf}
+}
+
+@article{ha_world_2018,
+  title    = {World {Models}},
+  url      = {http://arxiv.org/abs/1803.10122},
+  doi      = {10.5281/zenodo.1207631},
+  abstract = {We explore building generative neural network models of popular reinforcement learning environments. Our world model can be trained quickly in an unsupervised manner to learn a compressed spatial and temporal representation of the environment. By using features extracted from the world model as inputs to an agent, we can train a very compact and simple policy that can solve the required task. We can even train our agent entirely inside of its own hallucinated dream generated by its world model, and transfer this policy back into the actual environment. An interactive version of this paper is available at https://worldmodels.github.io/},
+  urldate  = {2020-05-29},
+  journal  = {arXiv:1803.10122 [cs, stat]},
+  author   = {Ha, David and Schmidhuber, Jürgen},
+  month    = mar,
+  year     = {2018},
+  note     = {arXiv: 1803.10122},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\B7CZPHR8\\Ha and Schmidhuber - 2018 - World Models.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\8NFQRCTL\\1803.html:text/html}
+}
+
+@article{ha_world_2018-1,
+  title    = {World {Models}},
+  url      = {http://arxiv.org/abs/1803.10122},
+  doi      = {10.5281/zenodo.1207631},
+  abstract = {We explore building generative neural network models of popular reinforcement learning environments. Our world model can be trained quickly in an unsupervised manner to learn a compressed spatial and temporal representation of the environment. By using features extracted from the world model as inputs to an agent, we can train a very compact and simple policy that can solve the required task. We can even train our agent entirely inside of its own hallucinated dream generated by its world model, and transfer this policy back into the actual environment. An interactive version of this paper is available at https://worldmodels.github.io/},
+  urldate  = {2020-06-03},
+  journal  = {arXiv:1803.10122 [cs, stat]},
+  author   = {Ha, David and Schmidhuber, Jürgen},
+  month    = mar,
+  year     = {2018},
+  note     = {arXiv: 1803.10122},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\FJ8YWP9Q\\Ha and Schmidhuber - 2018 - World Models.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\VDYQV4VK\\1803.html:text/html}
+}
+
+@article{hamilton_embedding_2019,
+  title    = {Embedding {Logical} {Queries} on {Knowledge} {Graphs}},
+  url      = {http://arxiv.org/abs/1806.01445},
+  abstract = {Learning low-dimensional embeddings of knowledge graphs is a powerful approach used to predict unobserved or missing edges between entities. However, an open challenge in this area is developing techniques that can go beyond simple edge prediction and handle more complex logical queries, which might involve multiple unobserved edges, entities, and variables. For instance, given an incomplete biological knowledge graph, we might want to predict "em what drugs are likely to target proteins involved with both diseases X and Y?" -- a query that requires reasoning about all possible proteins that \{{\textbackslash}em might\} interact with diseases X and Y. Here we introduce a framework to efficiently make predictions about conjunctive logical queries -- a flexible but tractable subset of first-order logic -- on incomplete knowledge graphs. In our approach, we embed graph nodes in a low-dimensional space and represent logical operators as learned geometric operations (e.g., translation, rotation) in this embedding space. By performing logical operations within a low-dimensional embedding space, our approach achieves a time complexity that is linear in the number of query variables, compared to the exponential complexity required by a naive enumeration-based approach. We demonstrate the utility of this framework in two application studies on real-world datasets with millions of relations: predicting logical relationships in a network of drug-gene-disease interactions and in a graph-based representation of social interactions derived from a popular web forum.},
+  urldate  = {2020-05-15},
+  journal  = {arXiv:1806.01445 [cs, stat]},
+  author   = {Hamilton, William L. and Bajaj, Payal and Zitnik, Marinka and Jurafsky, Dan and Leskovec, Jure},
+  month    = oct,
+  year     = {2019},
+  note     = {arXiv: 1806.01445},
+  keywords = {Computer Science - Machine Learning, Computer Science - Social and Information Networks, Statistics - Machine Learning},
+  annote   = {Comment: Published in NeurIPS 2018},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\C5SVDFI8\\Hamilton et al. - 2019 - Embedding Logical Queries on Knowledge Graphs.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\B2MFL572\\1806.html:text/html}
+}
+
+@inproceedings{heinerman_evolution_2015,
+  title     = {Evolution, {Individual} {Learning}, and {Social} {Learning} in a {Swarm} of {Real} {Robots}},
+  doi       = {10.1109/SSCI.2015.152},
+  abstract  = {We investigate a novel adaptive system based on evolution, individual learning, and social learning in a swarm of physical Thymio II robots. The system is based on distinguishing inheritable and learnable features in the robots and defining appropriate operators for both categories. In this study we choose to make the sensory layout of the robots inheritable, thus evolvable, and the robot controllers learnable. We run tests with a basic system that employs only evolution and individual learning and compare this with an extended system where robots can disseminate their learned controllers. Results show that social learning increases the learning speed and leads to better controllers.},
+  booktitle = {2015 {IEEE} {Symposium} {Series} on {Computational} {Intelligence}},
+  author    = {Heinerman, Jacqueline and Rango, Massimiliano and Eiben, A.E.},
+  month     = dec,
+  year      = {2015},
+  note      = {ISSN: null},
+  keywords  = {adaptive system, Bioinformatics, Collision avoidance, evolutionary computation, Genomics, individual learning, Layout, learning (artificial intelligence), mobile robots, multi-robot systems, physical Thymio II robots, robot controllers, Robot sensing systems, sensory layout, social learning, swarm},
+  pages     = {1055--1062},
+  file      = {IEEE Xplore Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\3ADCLDVQ\\Heinerman et al. - 2015 - Evolution, Individual Learning, and Social Learnin.pdf:application/pdf}
+}
+
+@article{heinerman_importance_2019,
+  title    = {Importance of {Parameter} {Settings} on the {Benefits} of {Robot}-to-{Robot} {Learning} in {Evolutionary} {Robotics}},
+  volume   = {6},
+  issn     = {2296-9144},
+  url      = {https://www.frontiersin.org/articles/10.3389/frobt.2019.00010/full},
+  doi      = {10.3389/frobt.2019.00010},
+  abstract = {Robot-to-robot learning, a specific case of social learning in robotics, enables multiple robots to share learned skills while completing a task. The literature offers various statements of its benefits. Robots using this type of social learning can reach a higher performance, an increased learning speed, or both, compared to robots using individual learning only. No general explanation has been advanced for the difference in observations, which make the results highly dependent on the particular system and parameter setting. In this paper, we perform a detailed analysis into the effects of robot-to-robot learning. As a result, we show that this type of social learning can reduce the sensitivity of the learning process to the choice of parameters in two ways. First, robot-to-robot learning can reduce the number of bad performing individuals in the population. Second, robot-to-robot learning can increase the chance of having a successful run, where success is defined as the presence of a high performing individual. Additionally, we show that robot-to-robot learning results in an increased learning speed for almost all parameter settings. Our results indicate that robot-to-robot learning is a powerful mechanism which leads to benefits in both performance and learning speed.},
+  language = {English},
+  urldate  = {2019-12-30},
+  journal  = {Frontiers in Robotics and AI},
+  author   = {Heinerman, Jacqueline and Haasdijk, Evert and Eiben, A. E.},
+  year     = {2019},
+  keywords = {evolutionary algorithm, Evolutionary Robotics, parameter tuning, Robot-to-robot learning, Social learning},
+  file     = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\DLW2RUA4\\Heinerman et al. - 2019 - Importance of Parameter Settings on the Benefits o.pdf:application/pdf}
+}
+
+@article{hoffmann_knowledge-based_nodate,
+  title    = {Knowledge-{Based} {Weak} {Supervision} for {Information} {Extraction} of {Overlapping} {Relations}},
+  abstract = {Information extraction (IE) holds the promise of generating a large-scale knowledge base from the Web’s natural language text. Knowledge-based weak supervision, using structured data to heuristically label a training corpus, works towards this goal by enabling the automated learning of a potentially unbounded number of relation extractors. Recently, researchers have developed multiinstance learning algorithms to combat the noisy training data that can come from heuristic labeling, but their models assume relations are disjoint — for example they cannot extract the pair Founded(Jobs, Apple) and CEO-of(Jobs, Apple).},
+  language = {en},
+  author   = {Hoffmann, Raphael and Zhang, Congle and Ling, Xiao and Zettlemoyer, Luke and Weld, Daniel S},
+  pages    = {10},
+  file     = {Hoffmann et al. - Knowledge-Based Weak Supervision for Information E.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\ALLA8SGR\\Hoffmann et al. - Knowledge-Based Weak Supervision for Information E.pdf:application/pdf}
+}
+
+@article{hoffmann_knowledge-based_nodate-1,
+  title    = {Knowledge-{Based} {Weak} {Supervision} for {Information} {Extraction} of {Overlapping} {Relations}},
+  abstract = {Information extraction (IE) holds the promise of generating a large-scale knowledge base from the Web’s natural language text. Knowledge-based weak supervision, using structured data to heuristically label a training corpus, works towards this goal by enabling the automated learning of a potentially unbounded number of relation extractors. Recently, researchers have developed multiinstance learning algorithms to combat the noisy training data that can come from heuristic labeling, but their models assume relations are disjoint — for example they cannot extract the pair Founded(Jobs, Apple) and CEO-of(Jobs, Apple).},
+  language = {en},
+  author   = {Hoffmann, Raphael and Zhang, Congle and Ling, Xiao and Zettlemoyer, Luke and Weld, Daniel S},
+  pages    = {10},
+  file     = {Hoffmann et al. - Knowledge-Based Weak Supervision for Information E.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\42J4XVVK\\Hoffmann et al. - Knowledge-Based Weak Supervision for Information E.pdf:application/pdf}
+}
+
+@inproceedings{jin_unsupervised_2019,
+  address   = {Florence, Italy},
+  title     = {Unsupervised {Learning} of {PCFGs} with {Normalizing} {Flow}},
+  url       = {https://www.aclweb.org/anthology/P19-1234},
+  doi       = {10.18653/v1/P19-1234},
+  abstract  = {Unsupervised PCFG inducers hypothesize sets of compact context-free rules as explanations for sentences. PCFG induction not only provides tools for low-resource languages, but also plays an important role in modeling language acquisition (Bannard et al., 2009; Abend et al. 2017). However, current PCFG induction models, using word tokens as input, are unable to incorporate semantics and morphology into induction, and may encounter issues of sparse vocabulary when facing morphologically rich languages. This paper describes a neural PCFG inducer which employs context embeddings (Peters et al., 2018) in a normalizing flow model (Dinh et al., 2015) to extend PCFG induction to use semantic and morphological information. Linguistically motivated sparsity and categorical distance constraints are imposed on the inducer as regularization. Experiments show that the PCFG induction model with normalizing flow produces grammars with state-of-the-art accuracy on a variety of different languages. Ablation further shows a positive effect of normalizing flow, context embeddings and proposed regularizers.},
+  urldate   = {2020-05-05},
+  booktitle = {Proceedings of the 57th {Annual} {Meeting} of the {Association} for {Computational} {Linguistics}},
+  publisher = {Association for Computational Linguistics},
+  author    = {Jin, Lifeng and Doshi-Velez, Finale and Miller, Timothy and Schwartz, Lane and Schuler, William},
+  month     = jul,
+  year      = {2019},
+  pages     = {2442--2452},
+  file      = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\IYM2VFG9\\Jin et al. - 2019 - Unsupervised Learning of PCFGs with Normalizing Fl.pdf:application/pdf}
+}
+
+@article{joulin_fasttext.zip:_2016,
+  title      = {{FastText}.zip: {Compressing} text classification models},
+  shorttitle = {{FastText}.zip},
+  url        = {http://arxiv.org/abs/1612.03651},
+  abstract   = {We consider the problem of producing compact architectures for text classification, such that the full model fits in a limited amount of memory. After considering different solutions inspired by the hashing literature, we propose a method built upon product quantization to store word embeddings. While the original technique leads to a loss in accuracy, we adapt this method to circumvent quantization artefacts. Our experiments carried out on several benchmarks show that our approach typically requires two orders of magnitude less memory than fastText while being only slightly inferior with respect to accuracy. As a result, it outperforms the state of the art by a good margin in terms of the compromise between memory usage and accuracy.},
+  urldate    = {2019-12-23},
+  journal    = {arXiv:1612.03651 [cs]},
+  author     = {Joulin, Armand and Grave, Edouard and Bojanowski, Piotr and Douze, Matthijs and Jégou, Hérve and Mikolov, Tomas},
+  month      = dec,
+  year       = {2016},
+  note       = {arXiv: 1612.03651},
+  keywords   = {Computer Science - Computation and Language, Computer Science - Machine Learning},
+  annote     = {Comment: Submitted to ICLR 2017},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\JSHEYQQ9\\Joulin et al. - 2016 - FastText.zip Compressing text classification mode.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\P67INB7F\\1612.html:text/html}
+}
+
+@inproceedings{karim_drug-drug_2019,
+  title     = {Drug-drug interaction prediction based on knowledge graph embeddings and convolutional-{LSTM} network},
+  url       = {https://research.vu.nl/en/publications/drug-drug-interaction-prediction-based-on-knowledge-graph-embeddi},
+  doi       = {10.1145/3307339.3342161},
+  language  = {English},
+  urldate   = {2020-05-01},
+  booktitle = {{ACM}-{BCB} 2019 - {Proceedings} of the 10th {ACM} {International} {Conference} on {Bioinformatics}, {Computational} {Biology} and {Health} {Informatics}},
+  publisher = {Association for Computing Machinery, Inc},
+  author    = {Karim, Md Rezaul and Cochez, Michael and Jares, Joao Bosco and Uddin, Mamtaz and Beyan, Oya and Decker, Stefan},
+  month     = sep,
+  year      = {2019},
+  pages     = {113--123},
+  file      = {Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\TBI6IG9Z\\drug-drug-interaction-prediction-based-on-knowledge-graph-embeddi.html:text/html}
+}
+
+@article{kertkeidkachorn_automatic_2018,
+  title    = {An {Automatic} {Knowledge} {Graph} {Creation} {Framework} from {Natural} {Language} {Text}},
+  volume   = {E101.D},
+  issn     = {0916-8532, 1745-1361},
+  url      = {https://www.jstage.jst.go.jp/article/transinf/E101.D/1/E101.D_2017SWP0006/_article},
+  doi      = {10.1587/transinf.2017SWP0006},
+  abstract = {Knowledge graphs (KG) play a crucial role in many modern applications. However, constructing a KG from natural language text is challenging due to the complex structure of the text. Recently, many approaches have been proposed to transform natural language text to triples to obtain KGs. Such approaches have not yet provided eﬃcient results for mapping extracted elements of triples, especially the predicate, to their equivalent elements in a KG. Predicate mapping is essential because it can reduce the heterogeneity of the data and increase the searchability over a KG. In this article, we propose T2KG, an automatic KG creation framework for natural language text, to more eﬀectively map natural language text to predicates. In our framework, a hybrid combination of a rule-based approach and a similarity-based approach is presented for mapping a predicate to its corresponding predicate in a KG. Based on experimental results, the hybrid approach can identify more similar predicate pairs than a baseline method in the predicate mapping task. An experiment on KG creation is also conducted to investigate the performance of the T2KG. The experimental results show that the T2KG also outperforms the baseline in KG creation. Although KG creation is conducted in open domains, in which prior knowledge is not provided, the T2KG still achieves an F1 score of approximately 50\% when generating triples in the KG creation task. In addition, an empirical study on knowledge population using various text sources is conducted, and the results indicate the T2KG could be used to obtain knowledge that is not currently available from DBpedia.},
+  language = {en},
+  number   = {1},
+  urldate  = {2020-04-06},
+  journal  = {IEICE Transactions on Information and Systems},
+  author   = {Kertkeidkachorn, Natthawut and Ichise, Ryutaro},
+  year     = {2018},
+  pages    = {90--98},
+  file     = {Kertkeidkachorn and Ichise - 2018 - An Automatic Knowledge Graph Creation Framework fr.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\96LRXMRC\\Kertkeidkachorn and Ichise - 2018 - An Automatic Knowledge Graph Creation Framework fr.pdf:application/pdf}
+}
+
+@article{kertkeidkachorn_automatic_2018-1,
+  title    = {An {Automatic} {Knowledge} {Graph} {Creation} {Framework} from {Natural} {Language} {Text}},
+  volume   = {E101-D},
+  issn     = {1745-1361, 0916-8532},
+  url      = {https://search.ieice.org/bin/summary.php?id=e101-d_1_90&category=D&year=2018&lang=E&abst=},
+  abstract = {Knowledge graphs (KG) play a crucial role in many modern applications. However, constructing a KG from natural language text is challenging due to the complex structure of the text. Recently, many approaches have been proposed to transform natural language text to triples to obtain KGs. Such approaches have not yet provided efficient results for mapping extracted elements of triples, especially the predicate, to their equivalent elements in a KG. Predicate mapping is essential because it can reduce the heterogeneity of the data and increase the searchability over a KG. In this article, we propose T2KG, an automatic KG creation framework for natural language text, to more effectively map natural language text to predicates. In our framework, a hybrid combination of a rule-based approach and a similarity-based approach is presented for mapping a predicate to its corresponding predicate in a KG. Based on experimental results, the hybrid approach can identify more similar predicate pairs than a baseline method in the predicate mapping task. An experiment on KG creation is also conducted to investigate the performance of the T2KG. The experimental results show that the T2KG also outperforms the baseline in KG creation. Although KG creation is conducted in open domains, in which prior knowledge is not provided, the T2KG still achieves an F1 score of approximately 50\% when generating triples in the KG creation task. In addition, an empirical study on knowledge population using various text sources is conducted, and the results indicate the T2KG could be used to obtain knowledge that is not currently available from DBpedia.},
+  number   = {1},
+  urldate  = {2020-04-06},
+  journal  = {IEICE TRANSACTIONS on Information and Systems},
+  author   = {Kertkeidkachorn, Natthawut and Ichise, Ryutaro},
+  month    = jan,
+  year     = {2018},
+  note     = {Publisher: The Institute of Electronics, Information and Communication Engineers},
+  pages    = {90--98},
+  file     = {Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\VTTW8LL4\\summary.html:text/html}
+}
+
+@article{kertkeidkachorn_automatic_2018-2,
+  title    = {An {Automatic} {Knowledge} {Graph} {Creation} {Framework} from {Natural} {Language} {Text}},
+  volume   = {E101.D},
+  issn     = {0916-8532, 1745-1361},
+  url      = {https://www.jstage.jst.go.jp/article/transinf/E101.D/1/E101.D_2017SWP0006/_article},
+  doi      = {10.1587/transinf.2017SWP0006},
+  abstract = {Knowledge graphs (KG) play a crucial role in many modern applications. However, constructing a KG from natural language text is challenging due to the complex structure of the text. Recently, many approaches have been proposed to transform natural language text to triples to obtain KGs. Such approaches have not yet provided eﬃcient results for mapping extracted elements of triples, especially the predicate, to their equivalent elements in a KG. Predicate mapping is essential because it can reduce the heterogeneity of the data and increase the searchability over a KG. In this article, we propose T2KG, an automatic KG creation framework for natural language text, to more eﬀectively map natural language text to predicates. In our framework, a hybrid combination of a rule-based approach and a similarity-based approach is presented for mapping a predicate to its corresponding predicate in a KG. Based on experimental results, the hybrid approach can identify more similar predicate pairs than a baseline method in the predicate mapping task. An experiment on KG creation is also conducted to investigate the performance of the T2KG. The experimental results show that the T2KG also outperforms the baseline in KG creation. Although KG creation is conducted in open domains, in which prior knowledge is not provided, the T2KG still achieves an F1 score of approximately 50\% when generating triples in the KG creation task. In addition, an empirical study on knowledge population using various text sources is conducted, and the results indicate the T2KG could be used to obtain knowledge that is not currently available from DBpedia.},
+  language = {en},
+  number   = {1},
+  urldate  = {2020-04-06},
+  journal  = {IEICE Transactions on Information and Systems},
+  author   = {Kertkeidkachorn, Natthawut and Ichise, Ryutaro},
+  year     = {2018},
+  pages    = {90--98},
+  file     = {Kertkeidkachorn and Ichise - 2018 - An Automatic Knowledge Graph Creation Framework fr.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\WP9AAHMA\\Kertkeidkachorn and Ichise - 2018 - An Automatic Knowledge Graph Creation Framework fr.pdf:application/pdf}
+}
+
+@article{kertkeidkachorn_gtranse_2020,
+  title      = {{GTransE}: {Generalizing} {Translation}-{Based} {Model} on {Uncertain} {Knowledge} {Graph} {Embedding}},
+  volume     = {1128 AISC},
+  shorttitle = {{GTransE}},
+  doi        = {10.1007/978-3-030-39878-1_16},
+  abstract   = {This is an extension from a selected paper from JSAI2019. Knowledge graphs are useful for many AI applications. Many recent studies have been focused on learning numerical representations of a knowledge graph in a low-dimensional vector space. Learning representations benefits the deep learning framework for encoding real-world knowledge. However, most of the studies do not consider uncertain knowledge graphs. Uncertain knowledge graphs, e.g., NELL, are valuable because they can express the likelihood of triples. In this study, we proposed a novel loss function for translation-based models, GTransE, to deal with uncertainty on knowledge graphs. Experimental results show that GTransE can robustly learn representations on uncertain knowledge graphs. © 2020, Springer Nature Switzerland AG.},
+  journal    = {Advances in Intelligent Systems and Computing},
+  author     = {Kertkeidkachorn, N. and Liu, X. and Ichise, R.},
+  year       = {2020},
+  keywords   = {Knowledge graph, Knowledge representation, Uncertainty},
+  pages      = {170--178},
+  file       = {SCOPUS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\Q2M9X3E4\\display.html:text/html;Kertkeidkachorn et al. - 2020 - GTransE Generalizing Translation-Based Model on U.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\JXC44RB7\\Kertkeidkachorn et al. - 2020 - GTransE Generalizing Translation-Based Model on U.pdf:application/pdf}
+}
+
+@inproceedings{kertkeidkachorn_t2kg_2018,
+  title      = {{T2KG}: {A} demonstration of knowledge graph population from text and its challenges},
+  volume     = {2293},
+  shorttitle = {{T2KG}},
+  abstract   = {Knowledge Graphs play an important role in many AI applications as prior knowledge. In recent years, there are many existing Knowledge Graphs such as DBpedia, Freebase, YAGO. Nevertheless, massive amounts of knowledge are being produced every day. Consequently, Knowledge Graphs become more obsolete over time. It is therefore necessary to populate new knowledge into Knowledge Graphs in order to keep them useable. In this study, we present our end-to-end system for populating knowledge graph from natural language text, namely T2KG. Also, we demonstrate use-cases, achievements, challenges, and lessons learned of the system in practice. © 2018 CEUR-WS. All Rights Reserved.},
+  author     = {Kertkeidkachorn, N. and Ichise, R.},
+  year       = {2018},
+  pages      = {110--113},
+  file       = {Kertkeidkachorn and Ichise - T2KG  A Demonstration of Knowledge Graph Populati.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\VMMCIQF4\\Kertkeidkachorn and Ichise - T2KG  A Demonstration of Knowledge Graph Populati.pdf:application/pdf;SCOPUS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\SJUD6MD3\\display.html:text/html}
+}
+
+@article{kertkeidkachorn_t2kg_nodate,
+  title    = {{T2KG} : {A} {Demonstration} of {Knowledge} {Graph} {Population} from {Text} and {Its} {Challenges}},
+  abstract = {Knowledge Graphs play an important role in many AI applications as prior knowledge. In recent years, there are many existing Knowledge Graphs such as DBpedia, Freebase, YAGO. Nevertheless, massive amounts of knowledge are being produced every day. Consequently, Knowledge Graphs become more obsolete over time. It is therefore necessary to populate new knowledge into Knowledge Graphs in order to keep them useable. In this study, we present our end-to-end system for populating knowledge graph from natural language text, namely T2KG. Also, we demonstrate use-cases, achievements, challenges, and lessons learned of the system in practice.},
+  language = {en},
+  author   = {Kertkeidkachorn, Natthawut and Ichise, Ryutaro},
+  pages    = {4}
+}
+
+@article{khosla_supervised_2020,
+  title    = {Supervised {Contrastive} {Learning}},
+  url      = {http://arxiv.org/abs/2004.11362},
+  abstract = {Cross entropy is the most widely used loss function for supervised training of image classification models. In this paper, we propose a novel training methodology that consistently outperforms cross entropy on supervised learning tasks across different architectures and data augmentations. We modify the batch contrastive loss, which has recently been shown to be very effective at learning powerful representations in the self-supervised setting. We are thus able to leverage label information more effectively than cross entropy. Clusters of points belonging to the same class are pulled together in embedding space, while simultaneously pushing apart clusters of samples from different classes. In addition to this, we leverage key ingredients such as large batch sizes and normalized embeddings, which have been shown to benefit self-supervised learning. On both ResNet-50 and ResNet-200, we outperform cross entropy by over 1\%, setting a new state of the art number of 78.8\% among methods that use AutoAugment data augmentation. The loss also shows clear benefits for robustness to natural corruptions on standard benchmarks on both calibration and accuracy. Compared to cross entropy, our supervised contrastive loss is more stable to hyperparameter settings such as optimizers or data augmentations.},
+  urldate  = {2020-05-20},
+  journal  = {arXiv:2004.11362 [cs, stat]},
+  author   = {Khosla, Prannay and Teterwak, Piotr and Wang, Chen and Sarna, Aaron and Tian, Yonglong and Isola, Phillip and Maschinot, Aaron and Liu, Ce and Krishnan, Dilip},
+  month    = apr,
+  year     = {2020},
+  note     = {arXiv: 2004.11362},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Computer Vision and Pattern Recognition},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\E47R2CHS\\Khosla et al. - 2020 - Supervised Contrastive Learning.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\F2YP3NXV\\2004.html:text/html}
+}
+
+@article{kilgarriff_review_2000,
+  title        = {Review of {WordNet}: {An} {Electronic} {Lexical} {Database}},
+  volume       = {76},
+  issn         = {0097-8507},
+  shorttitle   = {Review of {WordNet}},
+  url          = {https://www.jstor.org/stable/417141},
+  doi          = {10.2307/417141},
+  number       = {3},
+  urldate      = {2020-04-07},
+  journal      = {Language},
+  author       = {Kilgarriff, Adam},
+  collaborator = {Fellbaum, Christiane},
+  year         = {2000},
+  note         = {Publisher: Linguistic Society of America},
+  pages        = {706--708},
+  file         = {Submitted Version:C\:\\Users\\fwolf\\Zotero\\storage\\2C2FSA9P\\Kilgarriff - 2000 - Review of WordNet An Electronic Lexical Database.pdf:application/pdf}
+}
+
+@article{kingma_auto-encoding_2014,
+  title    = {Auto-{Encoding} {Variational} {Bayes}},
+  url      = {http://arxiv.org/abs/1312.6114},
+  abstract = {How can we perform efficient inference and learning in directed probabilistic models, in the presence of continuous latent variables with intractable posterior distributions, and large datasets? We introduce a stochastic variational inference and learning algorithm that scales to large datasets and, under some mild differentiability conditions, even works in the intractable case. Our contributions is two-fold. First, we show that a reparameterization of the variational lower bound yields a lower bound estimator that can be straightforwardly optimized using standard stochastic gradient methods. Second, we show that for i.i.d. datasets with continuous latent variables per datapoint, posterior inference can be made especially efficient by fitting an approximate inference model (also called a recognition model) to the intractable posterior using the proposed lower bound estimator. Theoretical advantages are reflected in experimental results.},
+  urldate  = {2020-06-11},
+  journal  = {arXiv:1312.6114 [cs, stat]},
+  author   = {Kingma, Diederik P. and Welling, Max},
+  month    = may,
+  year     = {2014},
+  note     = {arXiv: 1312.6114},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\UEUZ952T\\Kingma and Welling - 2014 - Auto-Encoding Variational Bayes.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\AFXN9E5M\\1312.html:text/html}
+}
+
+@article{kingma_introduction_2019,
+  title    = {An {Introduction} to {Variational} {Autoencoders}},
+  volume   = {12},
+  issn     = {1935-8237, 1935-8245},
+  url      = {https://www.nowpublishers.com/article/Details/MAL-056},
+  doi      = {10.1561/2200000056},
+  abstract = {An Introduction to Variational Autoencoders},
+  language = {English},
+  number   = {4},
+  urldate  = {2020-05-07},
+  journal  = {Foundations and Trends® in Machine Learning},
+  author   = {Kingma, Diederik P. and Welling, Max},
+  month    = nov,
+  year     = {2019},
+  note     = {Publisher: Now Publishers, Inc.},
+  pages    = {307--392},
+  file     = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\8I69DBEQ\\Kingma and Welling - 2019 - An Introduction to Variational Autoencoders.pdf:application/pdf;Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\K2AB4SFQ\\MAL-056.html:text/html}
+}
+
+@incollection{kingma_semi-supervised_2014,
+  title     = {Semi-supervised {Learning} with {Deep} {Generative} {Models}},
+  url       = {http://papers.nips.cc/paper/5352-semi-supervised-learning-with-deep-generative-models.pdf},
+  urldate   = {2020-05-08},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 27},
+  publisher = {Curran Associates, Inc.},
+  author    = {Kingma, Durk P and Mohamed, Shakir and Jimenez Rezende, Danilo and Welling, Max},
+  editor    = {Ghahramani, Z. and Welling, M. and Cortes, C. and Lawrence, N. D. and Weinberger, K. Q.},
+  year      = {2014},
+  pages     = {3581--3589},
+  file      = {NIPS Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\76WXX2ME\\Kingma et al. - 2014 - Semi-supervised Learning with Deep Generative Mode.pdf:application/pdf;NIPS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\5E9M3HFL\\5352-semi-supervised-learning-with-deep-generative-models.html:text/html}
+}
+
+@article{kipf_contrastive_2020,
+  title    = {Contrastive {Learning} of {Structured} {World} {Models}},
+  url      = {http://arxiv.org/abs/1911.12247},
+  abstract = {A structured understanding of our world in terms of objects, relations, and hierarchies is an important component of human cognition. Learning such a structured world model from raw sensory data remains a challenge. As a step towards this goal, we introduce Contrastively-trained Structured World Models (C-SWMs). C-SWMs utilize a contrastive approach for representation learning in environments with compositional structure. We structure each state embedding as a set of object representations and their relations, modeled by a graph neural network. This allows objects to be discovered from raw pixel observations without direct supervision as part of the learning process. We evaluate C-SWMs on compositional environments involving multiple interacting objects that can be manipulated independently by an agent, simple Atari games, and a multi-object physics simulation. Our experiments demonstrate that C-SWMs can overcome limitations of models based on pixel reconstruction and outperform typical representatives of this model class in highly structured environments, while learning interpretable object-based representations.},
+  urldate  = {2020-05-12},
+  journal  = {arXiv:1911.12247 [cs, stat]},
+  author   = {Kipf, Thomas and van der Pol, Elise and Welling, Max},
+  month    = jan,
+  year     = {2020},
+  note     = {arXiv: 1911.12247},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Artificial Intelligence},
+  annote   = {Comment: ICLR 2020},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\BHFDDRAP\\Kipf et al. - 2020 - Contrastive Learning of Structured World Models.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\FC4KPU6T\\1911.html:text/html}
+}
+
+@article{kipf_semi-supervised_2017,
+  title    = {Semi-{Supervised} {Classification} with {Graph} {Convolutional} {Networks}},
+  url      = {http://arxiv.org/abs/1609.02907},
+  abstract = {We present a scalable approach for semi-supervised learning on graph-structured data that is based on an efﬁcient variant of convolutional neural networks which operate directly on graphs. We motivate the choice of our convolutional architecture via a localized ﬁrst-order approximation of spectral graph convolutions. Our model scales linearly in the number of graph edges and learns hidden layer representations that encode both local graph structure and features of nodes. In a number of experiments on citation networks and on a knowledge graph dataset we demonstrate that our approach outperforms related methods by a signiﬁcant margin.},
+  language = {en},
+  urldate  = {2020-06-15},
+  journal  = {arXiv:1609.02907 [cs, stat]},
+  author   = {Kipf, Thomas N. and Welling, Max},
+  month    = feb,
+  year     = {2017},
+  note     = {arXiv: 1609.02907},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  annote   = {Comment: Published as a conference paper at ICLR 2017},
+  file     = {Kipf and Welling - 2017 - Semi-Supervised Classification with Graph Convolut.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\QLRREG7I\\Kipf and Welling - 2017 - Semi-Supervised Classification with Graph Convolut.pdf:application/pdf}
+}
+
+@article{kipf_variational_2016,
+  title    = {Variational {Graph} {Auto}-{Encoders}},
+  url      = {http://arxiv.org/abs/1611.07308},
+  abstract = {We introduce the variational graph auto-encoder (VGAE), a framework for unsupervised learning on graph-structured data based on the variational auto-encoder (VAE). This model makes use of latent variables and is capable of learning interpretable latent representations for undirected graphs. We demonstrate this model using a graph convolutional network (GCN) encoder and a simple inner product decoder. Our model achieves competitive results on a link prediction task in citation networks. In contrast to most existing models for unsupervised learning on graph-structured data and link prediction, our model can naturally incorporate node features, which significantly improves predictive performance on a number of benchmark datasets.},
+  urldate  = {2020-07-06},
+  journal  = {arXiv:1611.07308 [cs, stat]},
+  author   = {Kipf, Thomas N. and Welling, Max},
+  month    = nov,
+  year     = {2016},
+  note     = {arXiv: 1611.07308},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  annote   = {Comment: Bayesian Deep Learning Workshop (NIPS 2016)},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\GJDZUEIW\\Kipf and Welling - 2016 - Variational Graph Auto-Encoders.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\DETZF848\\1611.html:text/html}
+}
+
+@article{lerer_pytorch-biggraph_nodate,
+  title    = {{PyTorch}-{BigGraph}: {A} {Large}-scale {Graph} {Embedding} {System}},
+  abstract = {Graph embedding methods produce unsupervised node features from graphs that can then be used for a variety of machine learning tasks. Modern graphs, particularly in industrial applications, contain billions of nodes and trillions of edges, which exceeds the capability of existing embedding systems. We present PyTorch-BigGraph (PBG), an embedding system that incorporates several modiﬁcations to traditional multi-relation embedding systems that allow it to scale to graphs with billions of nodes and trillions of edges. PBG uses graph partitioning to train arbitrarily large embeddings on either a single machine or in a distributed environment. We demonstrate comparable performance with existing embedding systems on common benchmarks, while allowing for scaling to arbitrarily large graphs and parallelization on multiple machines. We train and evaluate embeddings on several large social network graphs as well as the full Freebase dataset, which contains over 100 million nodes and 2 billion edges.},
+  language = {en},
+  author   = {Lerer, Adam and Wu, Ledell and Shen, Jiajun and Lacroix, Timothee and Wehrstedt, Luca and Bose, Abhijit and Peysakhovich, Alex},
+  pages    = {12},
+  file     = {Lerer et al. - PyTorch-BigGraph A Large-scale Graph Embedding Sy.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\3K2HXJB3\\Lerer et al. - PyTorch-BigGraph A Large-scale Graph Embedding Sy.pdf:application/pdf}
+}
+
+@article{li_deep_2017,
+  title    = {Deep {Recurrent} {Generative} {Decoder} for {Abstractive} {Text} {Summarization}},
+  url      = {http://arxiv.org/abs/1708.00625},
+  abstract = {We propose a new framework for abstractive text summarization based on a sequence-to-sequence oriented encoder-decoder model equipped with a deep recurrent generative decoder (DRGN). Latent structure information implied in the target summaries is learned based on a recurrent latent random model for improving the summarization quality. Neural variational inference is employed to address the intractable posterior inference for the recurrent latent variables. Abstractive summaries are generated based on both the generative latent variables and the discriminative deterministic states. Extensive experiments on some benchmark datasets in different languages show that DRGN achieves improvements over the state-of-the-art methods.},
+  urldate  = {2020-05-29},
+  journal  = {arXiv:1708.00625 [cs]},
+  author   = {Li, Piji and Lam, Wai and Bing, Lidong and Wang, Zihao},
+  month    = aug,
+  year     = {2017},
+  note     = {arXiv: 1708.00625},
+  keywords = {Computer Science - Computation and Language, Computer Science - Artificial Intelligence},
+  annote   = {Comment: 10 pages, EMNLP 2017},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\HQQKHRPQ\\Li et al. - 2017 - Deep Recurrent Generative Decoder for Abstractive .pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\2WD4PP8J\\1708.html:text/html}
+}
+
+@article{li_learning_2018,
+  title    = {Learning {Deep} {Generative} {Models} of {Graphs}},
+  url      = {http://arxiv.org/abs/1803.03324},
+  abstract = {Graphs are fundamental data structures which concisely capture the relational structure in many important real-world domains, such as knowledge graphs, physical and social interactions, language, and chemistry. Here we introduce a powerful new approach for learning generative models over graphs, which can capture both their structure and attributes. Our approach uses graph neural networks to express probabilistic dependencies among a graph's nodes and edges, and can, in principle, learn distributions over any arbitrary graph. In a series of experiments our results show that once trained, our models can generate good quality samples of both synthetic graphs as well as real molecular graphs, both unconditionally and conditioned on data. Compared to baselines that do not use graph-structured representations, our models often perform far better. We also explore key challenges of learning generative models of graphs, such as how to handle symmetries and ordering of elements during the graph generation process, and offer possible solutions. Our work is the first and most general approach for learning generative models over arbitrary graphs, and opens new directions for moving away from restrictions of vector- and sequence-like knowledge representations, toward more expressive and flexible relational data structures.},
+  urldate  = {2020-05-15},
+  journal  = {arXiv:1803.03324 [cs, stat]},
+  author   = {Li, Yujia and Vinyals, Oriol and Dyer, Chris and Pascanu, Razvan and Battaglia, Peter},
+  month    = mar,
+  year     = {2018},
+  note     = {arXiv: 1803.03324},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  annote   = {Comment: 21 pages},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\XMMLTCHX\\Li et al. - 2018 - Learning Deep Generative Models of Graphs.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\33WJ4V6J\\1803.html:text/html}
+}
+
+@article{liu_graph_2019,
+  title    = {Graph {Normalizing} {Flows}},
+  url      = {http://arxiv.org/abs/1905.13177},
+  abstract = {We introduce graph normalizing flows: a new, reversible graph neural network model for prediction and generation. On supervised tasks, graph normalizing flows perform similarly to message passing neural networks, but at a significantly reduced memory footprint, allowing them to scale to larger graphs. In the unsupervised case, we combine graph normalizing flows with a novel graph auto-encoder to create a generative model of graph structures. Our model is permutation-invariant, generating entire graphs with a single feed-forward pass, and achieves competitive results with the state-of-the art auto-regressive models, while being better suited to parallel computing architectures.},
+  urldate  = {2020-05-19},
+  journal  = {arXiv:1905.13177 [cs, stat]},
+  author   = {Liu, Jenny and Kumar, Aviral and Ba, Jimmy and Kiros, Jamie and Swersky, Kevin},
+  month    = may,
+  year     = {2019},
+  note     = {arXiv: 1905.13177},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\NMCULX3N\\Liu et al. - 2019 - Graph Normalizing Flows.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\93RKDT75\\1905.html:text/html}
+}
+
+@article{liu_heterogeneous_2017,
+  title      = {Heterogeneous {Supervision} for {Relation} {Extraction}: {A} {Representation} {Learning} {Approach}},
+  shorttitle = {Heterogeneous {Supervision} for {Relation} {Extraction}},
+  url        = {http://arxiv.org/abs/1707.00166},
+  abstract   = {Relation extraction is a fundamental task in information extraction. Most existing methods have heavy reliance on annotations labeled by human experts, which are costly and time-consuming. To overcome this drawback, we propose a novel framework, REHession, to conduct relation extractor learning using annotations from heterogeneous information source, e.g., knowledge base and domain heuristics. These annotations, referred as heterogeneous supervision, often conflict with each other, which brings a new challenge to the original relation extraction task: how to infer the true label from noisy labels for a given instance. Identifying context information as the backbone of both relation extraction and true label discovery, we adopt embedding techniques to learn the distributed representations of context, which bridges all components with mutual enhancement in an iterative fashion. Extensive experimental results demonstrate the superiority of REHession over the state-of-the-art.},
+  urldate    = {2020-05-19},
+  journal    = {arXiv:1707.00166 [cs]},
+  author     = {Liu, Liyuan and Ren, Xiang and Zhu, Qi and Zhi, Shi and Gui, Huan and Ji, Heng and Han, Jiawei},
+  month      = aug,
+  year       = {2017},
+  note       = {arXiv: 1707.00166},
+  keywords   = {Computer Science - Computation and Language},
+  annote     = {Comment: EMNLP 2017},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\5TTKSZBF\\Liu et al. - 2017 - Heterogeneous Supervision for Relation Extraction.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\5NDXCBSY\\1707.html:text/html}
+}
+
+@article{liu_seq2rdf_2018,
+  title      = {{Seq2RDF}: {An} end-to-end application for deriving {Triples} from {Natural} {Language} {Text}},
+  shorttitle = {{Seq2RDF}},
+  url        = {http://arxiv.org/abs/1807.01763},
+  abstract   = {We present an end-to-end approach that takes unstructured textual input and generates structured output compliant with a given vocabulary. Inspired by recent successes in neural machine translation, we treat the triples within a given knowledge graph as an independent graph language and propose an encoder-decoder framework with an attention mechanism that leverages knowledge graph embeddings. Our model learns the mapping from natural language text to triple representation in the form of subject-predicate-object using the selected knowledge graph vocabulary. Experiments on three different data sets show that we achieve competitive F1-Measures over the baselines using our simple yet effective approach. A demo video is included.},
+  urldate    = {2020-05-13},
+  journal    = {arXiv:1807.01763 [cs]},
+  author     = {Liu, Yue and Zhang, Tongtao and Liang, Zhicheng and Ji, Heng and McGuinness, Deborah L.},
+  month      = aug,
+  year       = {2018},
+  note       = {arXiv: 1807.01763
+version: 3},
+  keywords   = {Computer Science - Computation and Language, Computer Science - Artificial Intelligence},
+  annote     = {Comment: Proceedings of the 17th International Semantic Web Conference P\&D},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\4TKEQWEE\\Liu et al. - 2018 - Seq2RDF An end-to-end application for deriving Tr.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\ZNCH29E5\\1807.html:text/html}
+}
+
+@incollection{lowe_putting_2019,
+  title      = {Putting {An} {End} to {End}-to-{End}: {Gradient}-{Isolated} {Learning} of {Representations}},
+  shorttitle = {Putting {An} {End} to {End}-to-{End}},
+  url        = {http://papers.nips.cc/paper/8568-putting-an-end-to-end-to-end-gradient-isolated-learning-of-representations.pdf},
+  urldate    = {2020-05-19},
+  booktitle  = {Advances in {Neural} {Information} {Processing} {Systems} 32},
+  publisher  = {Curran Associates, Inc.},
+  author     = {Löwe, Sindy and O{\textbackslash}textquotesingle Connor, Peter and Veeling, Bastiaan},
+  editor     = {Wallach, H. and Larochelle, H. and Beygelzimer, A. and Alché-Buc, F. d{\textbackslash}textquotesingle and Fox, E. and Garnett, R.},
+  year       = {2019},
+  pages      = {3039--3051},
+  file       = {NIPS Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\53ZH8XRL\\Löwe et al. - 2019 - Putting An End to End-to-End Gradient-Isolated Le.pdf:application/pdf;NIPS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\2N5LG2XC\\8568-putting-an-end-to-end-to-end-gradient-isolated-learning-of-representations.html:text/html}
+}
+
+@article{maheshwari_dyngan_nodate,
+  title    = {{DynGAN}: {Generative} {Adversarial} {Networks} for {Dynamic} {Network} {Embedding}},
+  abstract = {Embedding large graphs in a low-dimensional space has proven useful in various applications. However, there is a limited focus on real-world networks that are dynamic in nature and continuously evolving with time. In this paper, we propose a novel adversarial algorithm to learn representation of dynamic networks. We leverage generative adversarial networks and recurrent networks to capture temporal and structural information. We conduct extensive experiments on the task of graph reconstruction, link prediction and graph prediction. Experimental results demonstrate consistent, stable, and better results against state-of-the-art methods in many cases.},
+  language = {en},
+  author   = {Maheshwari, Ayush and Goyal, Ayush and Hanawal, Manjesh Kumar and Ramakrishnan, Ganesh},
+  pages    = {8},
+  file     = {Maheshwari et al. - DynGAN Generative Adversarial Networks for Dynami.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\IHKF7KLI\\Maheshwari et al. - DynGAN Generative Adversarial Networks for Dynami.pdf:application/pdf}
+}
+
+@inproceedings{mehta_scalable_2019,
+  title    = {Scalable knowledge graph construction over text using deep learning based predicate mapping},
+  doi      = {10.1145/3308560.3317708},
+  abstract = {Automatic extraction of information from text and its transformation into a structured format is an important goal in both Semantic Web Research and computational linguistics. Knowledge Graphs (KG) serve as an intuitive way to provide structure to unstructured text. A fact in a KG is expressed in the form of a triple which captures entities and their interrelationships (predicates). Multiple triples extracted from text can be semantically identical but they may have a vocabulary gap which could lead to an explosion in the number of redundant triples. Hence, to get rid of this vocabulary gap, there is a need to map triples to a homogeneous namespace. In this work, we present an end-to-end KG construction system, which identifies and extracts entities and relationships from text and maps them to the homogenous DBpedia namespace. For Predicate Mapping, we propose a Deep Learning architecture to model semantic similarity. This mapping step is computation heavy, owing to the large number of triples in DBpedia. We identify and prune unnecessary comparisons to make this step scalable. Our experiments show that the proposed approach is able to construct a richer KG at a significantly lower computation cost with respect to previous work. © 2019 IW3C2 (International World Wide Web Conference Committee), published under Creative Commons CC-BY 4.0 License.},
+  author   = {Mehta, A. and Singhal, A. and Karlapalem, K.},
+  year     = {2019},
+  keywords = {Deep Learning, Knowledge Graph, Predicate Mapping, Scalability, Sentence Simplification},
+  pages    = {705--713},
+  annote   = {Cited By :1},
+  file     = {SCOPUS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\64T8MVY3\\display.html:text/html}
+}
+
+@inproceedings{mehta_scalable_2019-1,
+  address   = {San Francisco, USA},
+  title     = {Scalable {Knowledge} {Graph} {Construction} over {Text} using {Deep} {Learning} based {Predicate} {Mapping}},
+  isbn      = {978-1-4503-6675-5},
+  url       = {http://dl.acm.org/citation.cfm?doid=3308560.3317708},
+  doi       = {10.1145/3308560.3317708},
+  abstract  = {Automatic extraction of information from text and its transformation into a structured format is an important goal in both Semantic Web Research and computational linguistics. Knowledge Graphs (KG) serve as an intuitive way to provide structure to unstructured text. A fact in a KG is expressed in the form of a triple which captures entities and their interrelationships (predicates). Multiple triples extracted from text can be semantically identical but they may have a vocabulary gap which could lead to an explosion in the number of redundant triples. Hence, to get rid of this vocabulary gap, there is a need to map triples to a homogeneous namespace. In this work, we present an end-to-end KG construction system, which identifies and extracts entities and relationships from text and maps them to the homogenous DBpedia namespace. For Predicate Mapping, we propose a Deep Learning architecture to model semantic similarity. This mapping step is computation heavy, owing to the large number of triples in DBpedia. We identify and prune unnecessary comparisons to make this step scalable. Our experiments show that the proposed approach is able to construct a richer KG at a significantly lower computation cost with respect to previous work.},
+  language  = {en},
+  urldate   = {2020-05-08},
+  booktitle = {Companion {Proceedings} of {The} 2019 {World} {Wide} {Web} {Conference} on   - {WWW} '19},
+  publisher = {ACM Press},
+  author    = {Mehta, Aman and Singhal, Aashay and Karlapalem, Kamalakar},
+  year      = {2019},
+  pages     = {705--713},
+  file      = {Mehta et al. - 2019 - Scalable Knowledge Graph Construction over Text us.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\2C2BMH3S\\Mehta et al. - 2019 - Scalable Knowledge Graph Construction over Text us.pdf:application/pdf}
+}
+
+@inproceedings{mehta_scalable_2019-2,
+  address   = {San Francisco, USA},
+  series    = {{WWW} '19},
+  title     = {Scalable {Knowledge} {Graph} {Construction} over {Text} using {Deep} {Learning} based {Predicate} {Mapping}},
+  isbn      = {978-1-4503-6675-5},
+  url       = {https://doi.org/10.1145/3308560.3317708},
+  doi       = {10.1145/3308560.3317708},
+  abstract  = {Automatic extraction of information from text and its transformation into a structured format is an important goal in both Semantic Web Research and computational linguistics. Knowledge Graphs (KG) serve as an intuitive way to provide structure to unstructured text. A fact in a KG is expressed in the form of a triple which captures entities and their interrelationships (predicates). Multiple triples extracted from text can be semantically identical but they may have a vocabulary gap which could lead to an explosion in the number of redundant triples. Hence, to get rid of this vocabulary gap, there is a need to map triples to a homogeneous namespace. In this work, we present an end-to-end KG construction system, which identifies and extracts entities and relationships from text and maps them to the homogenous DBpedia namespace. For Predicate Mapping, we propose a Deep Learning architecture to model semantic similarity. This mapping step is computation heavy, owing to the large number of triples in DBpedia. We identify and prune unnecessary comparisons to make this step scalable. Our experiments show that the proposed approach is able to construct a richer KG at a significantly lower computation cost with respect to previous work.},
+  urldate   = {2020-05-08},
+  booktitle = {Companion {Proceedings} of {The} 2019 {World} {Wide} {Web} {Conference}},
+  publisher = {Association for Computing Machinery},
+  author    = {Mehta, Aman and Singhal, Aashay and Karlapalem, Kamalakar},
+  month     = may,
+  year      = {2019},
+  keywords  = {Deep Learning, Knowledge Graph, Predicate Mapping, Scalability, Sentence Simplification},
+  pages     = {705--713},
+  file      = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\9SGG27RC\\Mehta et al. - 2019 - Scalable Knowledge Graph Construction over Text us.pdf:application/pdf}
+}
+
+@article{mikolov_efficient_2013,
+  title    = {Efficient {Estimation} of {Word} {Representations} in {Vector} {Space}},
+  url      = {http://arxiv.org/abs/1301.3781},
+  abstract = {We propose two novel model architectures for computing continuous vector representations of words from very large data sets. The quality of these representations is measured in a word similarity task, and the results are compared to the previously best performing techniques based on different types of neural networks. We observe large improvements in accuracy at much lower computational cost, i.e. it takes less than a day to learn high quality word vectors from a 1.6 billion words data set. Furthermore, we show that these vectors provide state-of-the-art performance on our test set for measuring syntactic and semantic word similarities.},
+  urldate  = {2020-05-20},
+  journal  = {arXiv:1301.3781 [cs]},
+  author   = {Mikolov, Tomas and Chen, Kai and Corrado, Greg and Dean, Jeffrey},
+  month    = sep,
+  year     = {2013},
+  note     = {arXiv: 1301.3781},
+  keywords = {Computer Science - Computation and Language},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\QWTV5MNU\\Mikolov et al. - 2013 - Efficient Estimation of Word Representations in Ve.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\LRDRQ5RN\\1301.html:text/html}
+}
+
+@inproceedings{mintz_distant_2009,
+  address   = {Suntec, Singapore},
+  title     = {Distant supervision for relation extraction without labeled data},
+  volume    = {2},
+  isbn      = {978-1-932432-46-6},
+  url       = {http://portal.acm.org/citation.cfm?doid=1690219.1690287},
+  doi       = {10.3115/1690219.1690287},
+  abstract  = {Modern models of relation extraction for tasks like ACE are based on supervised learning of relations from small hand-labeled corpora. We investigate an alternative paradigm that does not require labeled corpora, avoiding the domain dependence of ACEstyle algorithms, and allowing the use of corpora of any size. Our experiments use Freebase, a large semantic database of several thousand relations, to provide distant supervision. For each pair of entities that appears in some Freebase relation, we ﬁnd all sentences containing those entities in a large unlabeled corpus and extract textual features to train a relation classiﬁer. Our algorithm combines the advantages of supervised IE (combining 400,000 noisy pattern features in a probabilistic classiﬁer) and unsupervised IE (extracting large numbers of relations from large corpora of any domain). Our model is able to extract 10,000 instances of 102 relations at a precision of 67.6\%. We also analyze feature performance, showing that syntactic parse features are particularly helpful for relations that are ambiguous or lexically distant in their expression.},
+  language  = {en},
+  urldate   = {2020-06-03},
+  booktitle = {Proceedings of the {Joint} {Conference} of the 47th {Annual} {Meeting} of the {ACL} and the 4th {International} {Joint} {Conference} on {Natural} {Language} {Processing} of the {AFNLP}: {Volume} 2 - {ACL}-{IJCNLP} '09},
+  publisher = {Association for Computational Linguistics},
+  author    = {Mintz, Mike and Bills, Steven and Snow, Rion and Jurafsky, Dan},
+  year      = {2009},
+  pages     = {1003},
+  file      = {Mintz et al. - 2009 - Distant supervision for relation extraction withou.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\H3PG4PMH\\Mintz et al. - 2009 - Distant supervision for relation extraction withou.pdf:application/pdf}
+}
+
+@article{mueller_siamese_nodate,
+  title    = {Siamese {Recurrent} {Architectures} for {Learning} {Sentence} {Similarity}},
+  abstract = {We present a siamese adaptation of the Long Short-Term Memory (LSTM) network for labeled data comprised of pairs of variable-length sequences. Our model is applied to assess semantic similarity between sentences, where we exceed state of the art, outperforming carefully handcrafted features and recently proposed neural network systems of greater complexity. For these applications, we provide wordembedding vectors supplemented with synonymic information to the LSTMs, which use a ﬁxed size vector to encode the underlying meaning expressed in a sentence (irrespective of the particular wording/syntax). By restricting subsequent operations to rely on a simple Manhattan metric, we compel the sentence representations learned by our model to form a highly structured space whose geometry reﬂects complex semantic relationships. Our results are the latest in a line of ﬁndings that showcase LSTMs as powerful language models capable of tasks requiring intricate understanding.},
+  language = {en},
+  author   = {Mueller, Jonas and Thyagarajan, Aditya},
+  pages    = {7},
+  file     = {Mueller and Thyagarajan - Siamese Recurrent Architectures for Learning Sente.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\YWWKGZET\\Mueller and Thyagarajan - Siamese Recurrent Architectures for Learning Sente.pdf:application/pdf}
+}
+
+@article{niu_elementary_2012,
+  title      = {Elementary: {Large}-{Scale} {Knowledge}-{Base} {Construction} via {Machine} {Learning} and {Statistical} {Inference}},
+  volume     = {8},
+  issn       = {1552-6283, 1552-6291},
+  shorttitle = {Elementary},
+  url        = {http://services.igi-global.com/resolvedoi/resolve.aspx?doi=10.4018/jswis.2012070103},
+  doi        = {10.4018/jswis.2012070103},
+  abstract   = {Researchers have approached knowledge-base construction (KBC) with a wide range of data resources and techniques. The authors present Elementary, a prototype KBC system that is able to combine diverse resources and different KBC techniques via machine learning and statistical inference to construct knowledge bases. Using Elementary, they have implemented a solution to the TAC-KBP challenge with quality comparable to the state of the art, as well as an end-to-end online demonstration that automatically and continuously enriches Wikipedia with structured data by reading millions of webpages on a daily basis. The authors describe several challenges and their solutions in designing, implementing, and deploying Elementary. In particular, the authors first describe the conceptual framework and architecture of Elementary to integrate different data resources and KBC techniques in a principled manner. They then discuss how they address scalability challenges to enable Web-scale deployment. The authors empirically show that this decomposition-based inference approach achieves higher performance than prior inference approaches. To validate the effectiveness of Elementary’s approach to KBC, they experimentally show that its ability to incorporate diverse signals has positive impacts on KBC quality.},
+  language   = {en},
+  number     = {3},
+  urldate    = {2020-06-12},
+  journal    = {International Journal on Semantic Web and Information Systems},
+  author     = {Niu, Feng and Zhang, Ce and Ré, Christopher and Shavlik, Jude},
+  month      = jul,
+  year       = {2012},
+  pages      = {42--73},
+  file       = {Niu et al. - 2012 - Elementary Large-Scale Knowledge-Base Constructio.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\UDCRH2LW\\Niu et al. - 2012 - Elementary Large-Scale Knowledge-Base Constructio.pdf:application/pdf}
+}
+
+@misc{noauthor_development_nodate,
+  title    = {Development of a benchmark corpus to support the automatic extraction of drug-related adverse effects from medical case reports {\textbar} {Elsevier} {Enhanced} {Reader}},
+  url      = {https://reader.elsevier.com/reader/sd/pii/S1532046412000615?token=6A75D5479FA426C1BEC8349744108671443493D14BD185EB4C839978CE1BAF3ABAE5D54AA2B86199D7B846094C6EB759},
+  language = {en},
+  urldate  = {2020-05-13},
+  doi      = {10.1016/j.jbi.2012.04.008},
+  note     = {Library Catalog: reader.elsevier.com},
+  file     = {Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\KYUZ474C\\S1532046412000615.html:text/html;Full Text:C\:\\Users\\fwolf\\Zotero\\storage\\CW8EEC97\\Development of a benchmark corpus to support the a.pdf:application/pdf}
+}
+
+@misc{noauthor_facebookresearchnle_2020,
+  title     = {facebookresearch/nle},
+  url       = {https://github.com/facebookresearch/nle},
+  abstract  = {The NetHack Learning Environment. Contribute to facebookresearch/nle development by creating an account on GitHub.},
+  urldate   = {2020-06-12},
+  publisher = {Facebook Research},
+  month     = jun,
+  year      = {2020},
+  note      = {original-date: 2020-03-06T00:43:11Z}
+}
+
+@misc{noauthor_scripties_nodate,
+  title    = {Scripties - {Bibliotheek} - {Universiteit} van {Amsterdam}},
+  url      = {https://scripties.uba.uva.nl/},
+  abstract = {Scripties van studenten van de Universiteit van Amsterdam.},
+  language = {en},
+  urldate  = {2020-05-10},
+  note     = {Library Catalog: scripties.uba.uva.nl},
+  file     = {Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\AVJKKVWN\\search.html:text/html}
+}
+
+@inproceedings{noauthor_struc2vec_nodate,
+  title = {struc2vec},
+  url   = {https://arxiv.org/pdf/1704.03165.pdf}
+}
+
+@misc{noauthor_unsupervised_nodate,
+  title    = {Unsupervised identification and recognition of situations for high-dimensional sensori-motor streams {\textbar} {Elsevier} {Enhanced} {Reader}},
+  url      = {https://reader.elsevier.com/reader/sd/pii/S0925231217309840?token=FA834DAEFF1933B4D5FC4F184CF41CDFB96C90399B57F8F9B3E29C5D738EDBFE655A91B4654AFD5BC5241CFC3188B930},
+  language = {en},
+  urldate  = {2019-12-30},
+  doi      = {10.1016/j.neucom.2017.02.090},
+  file     = {Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\9VVGVM4H\\S0925231217309840.html:text/html}
+}
+
+@article{oliehoek_beyond_2019,
+  title    = {Beyond {Local} {Nash} {Equilibria} for {Adversarial} {Networks}},
+  volume   = {1021},
+  url      = {http://arxiv.org/abs/1806.07268},
+  doi      = {10.1007/978-3-030-31978-6_7},
+  abstract = {Save for some special cases, current training methods for Generative Adversarial Networks (GANs) are at best guaranteed to converge to a `local Nash equilibrium` (LNE). Such LNEs, however, can be arbitrarily far from an actual Nash equilibrium (NE), which implies that there are no guarantees on the quality of the found generator or classifier. This paper proposes to model GANs explicitly as finite games in mixed strategies, thereby ensuring that every LNE is an NE. With this formulation, we propose a solution method that is proven to monotonically converge to a resource-bounded Nash equilibrium (RB-NE): by increasing computational resources we can find better solutions. We empirically demonstrate that our method is less prone to typical GAN problems such as mode collapse, and produces solutions that are less exploitable than those produced by GANs and MGANs, and closely resemble theoretical predictions about NEs.},
+  urldate  = {2020-05-15},
+  journal  = {arXiv:1806.07268 [cs, stat]},
+  author   = {Oliehoek, Frans A. and Savani, Rahul and Gallego, Jose and van der Pol, Elise and Groß, Roderich},
+  year     = {2019},
+  note     = {arXiv: 1806.07268},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Computer Science and Game Theory},
+  pages    = {73--89},
+  annote   = {Comment: Supersedes arXiv:1712.00679; v2 includes Fictitious GAN in the related work and refers to Danskin (1981)},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\MABMIDYL\\Oliehoek et al. - 2019 - Beyond Local Nash Equilibria for Adversarial Netwo.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\LJ5QTUNG\\1806.html:text/html}
+}
+
+@article{papamakarios_masked_2018,
+  title    = {Masked {Autoregressive} {Flow} for {Density} {Estimation}},
+  url      = {http://arxiv.org/abs/1705.07057},
+  abstract = {Autoregressive models are among the best performing neural density estimators. We describe an approach for increasing the flexibility of an autoregressive model, based on modelling the random numbers that the model uses internally when generating data. By constructing a stack of autoregressive models, each modelling the random numbers of the next model in the stack, we obtain a type of normalizing flow suitable for density estimation, which we call Masked Autoregressive Flow. This type of flow is closely related to Inverse Autoregressive Flow and is a generalization of Real NVP. Masked Autoregressive Flow achieves state-of-the-art performance in a range of general-purpose density estimation tasks.},
+  urldate  = {2020-06-02},
+  journal  = {arXiv:1705.07057 [cs, stat]},
+  author   = {Papamakarios, George and Pavlakou, Theo and Murray, Iain},
+  month    = jun,
+  year     = {2018},
+  note     = {arXiv: 1705.07057},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  annote   = {Comment: section 4.3 is corrected since the previous version},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\DJQVF7KG\\Papamakarios et al. - 2018 - Masked Autoregressive Flow for Density Estimation.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\L4GU3VPP\\1705.html:text/html}
+}
+
+@article{parikh_decomposable_2016,
+  title    = {A {Decomposable} {Attention} {Model} for {Natural} {Language} {Inference}},
+  url      = {http://arxiv.org/abs/1606.01933},
+  abstract = {We propose a simple neural architecture for natural language inference. Our approach uses attention to decompose the problem into subproblems that can be solved separately, thus making it trivially parallelizable. On the Stanford Natural Language Inference (SNLI) dataset, we obtain state-of-the-art results with almost an order of magnitude fewer parameters than previous work and without relying on any word-order information. Adding intra-sentence attention that takes a minimum amount of order into account yields further improvements.},
+  urldate  = {2020-06-02},
+  journal  = {arXiv:1606.01933 [cs]},
+  author   = {Parikh, Ankur P. and Täckström, Oscar and Das, Dipanjan and Uszkoreit, Jakob},
+  month    = sep,
+  year     = {2016},
+  note     = {arXiv: 1606.01933},
+  keywords = {Computer Science - Computation and Language},
+  annote   = {Comment: 7 pages, 1 figure, Proceeedings of EMNLP 2016},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\YV9XM365\\Parikh et al. - 2016 - A Decomposable Attention Model for Natural Languag.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\FA3KESHR\\1606.html:text/html}
+}
+
+@inproceedings{perozzi_deepwalk_2014,
+  address    = {New York, New York, USA},
+  series     = {{KDD} '14},
+  title      = {{DeepWalk}: online learning of social representations},
+  isbn       = {978-1-4503-2956-9},
+  shorttitle = {{DeepWalk}},
+  url        = {https://doi.org/10.1145/2623330.2623732},
+  doi        = {10.1145/2623330.2623732},
+  abstract   = {We present DeepWalk, a novel approach for learning latent representations of vertices in a network. These latent representations encode social relations in a continuous vector space, which is easily exploited by statistical models. DeepWalk generalizes recent advancements in language modeling and unsupervised feature learning (or deep learning) from sequences of words to graphs. DeepWalk uses local information obtained from truncated random walks to learn latent representations by treating walks as the equivalent of sentences. We demonstrate DeepWalk's latent representations on several multi-label network classification tasks for social networks such as BlogCatalog, Flickr, and YouTube. Our results show that DeepWalk outperforms challenging baselines which are allowed a global view of the network, especially in the presence of missing information. DeepWalk's representations can provide F1 scores up to 10\% higher than competing methods when labeled data is sparse. In some experiments, DeepWalk's representations are able to outperform all baseline methods while using 60\% less training data. DeepWalk is also scalable. It is an online learning algorithm which builds useful incremental results, and is trivially parallelizable. These qualities make it suitable for a broad class of real world applications such as network classification, and anomaly detection.},
+  urldate    = {2020-04-08},
+  booktitle  = {Proceedings of the 20th {ACM} {SIGKDD} international conference on {Knowledge} discovery and data mining},
+  publisher  = {Association for Computing Machinery},
+  author     = {Perozzi, Bryan and Al-Rfou, Rami and Skiena, Steven},
+  month      = aug,
+  year       = {2014},
+  keywords   = {deep learning, latent representations, learning with partial labels, network classification, online learning, social networks},
+  pages      = {701--710},
+  file       = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\PS3DVJIA\\Perozzi et al. - 2014 - DeepWalk online learning of social representation.pdf:application/pdf}
+}
+
+@article{poon_unsupervised_nodate,
+  title    = {Unsupervised {Ontology} {Induction} from {Text}},
+  abstract = {Extracting knowledge from unstructured text is a long-standing goal of NLP. Although learning approaches to many of its subtasks have been developed (e.g., parsing, taxonomy induction, information extraction), all end-to-end solutions to date require heavy supervision and/or manual engineering, limiting their scope and scalability. We present OntoUSP, a system that induces and populates a probabilistic ontology using only dependency-parsed text as input. OntoUSP builds on the USP unsupervised semantic parser by jointly forming ISA and IS-PART hierarchies of lambda-form clusters. The ISA hierarchy allows more general knowledge to be learned, and the use of smoothing for parameter estimation. We evaluate OntoUSP by using it to extract a knowledge base from biomedical abstracts and answer questions. OntoUSP improves on the recall of USP by 47\% and greatly outperforms previous state-of-the-art approaches.},
+  language = {en},
+  author   = {Poon, Hoifung and Domingos, Pedro},
+  pages    = {10},
+  file     = {Poon and Domingos - Unsupervised Ontology Induction from Text.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\3QU956C3\\Poon and Domingos - Unsupervised Ontology Induction from Text.pdf:application/pdf}
+}
+
+@article{poon_unsupervised_nodate-1,
+  title    = {Unsupervised {Ontology} {Induction} from {Text}},
+  abstract = {Extracting knowledge from unstructured text is a long-standing goal of NLP. Although learning approaches to many of its subtasks have been developed (e.g., parsing, taxonomy induction, information extraction), all end-to-end solutions to date require heavy supervision and/or manual engineering, limiting their scope and scalability. We present OntoUSP, a system that induces and populates a probabilistic ontology using only dependency-parsed text as input. OntoUSP builds on the USP unsupervised semantic parser by jointly forming ISA and IS-PART hierarchies of lambda-form clusters. The ISA hierarchy allows more general knowledge to be learned, and the use of smoothing for parameter estimation. We evaluate OntoUSP by using it to extract a knowledge base from biomedical abstracts and answer questions. OntoUSP improves on the recall of USP by 47\% and greatly outperforms previous state-of-the-art approaches.},
+  language = {en},
+  author   = {Poon, Hoifung and Domingos, Pedro},
+  pages    = {10},
+  file     = {Poon and Domingos - Unsupervised Ontology Induction from Text.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\A6FJWQCN\\Poon and Domingos - Unsupervised Ontology Induction from Text.pdf:application/pdf}
+}
+
+@inproceedings{ratner_snorkel_2018,
+  address    = {Houston, TX, USA},
+  title      = {Snorkel {MeTaL}: {Weak} {Supervision} for {Multi}-{Task} {Learning}},
+  isbn       = {978-1-4503-5828-6},
+  shorttitle = {Snorkel {MeTaL}},
+  url        = {http://dl.acm.org/citation.cfm?doid=3209889.3209898},
+  doi        = {10.1145/3209889.3209898},
+  abstract   = {Many real-world machine learning problems are challenging to tackle for two reasons: (i) they involve multiple sub-tasks at different levels of granularity; and (ii) they require large volumes of labeled training data. We propose Snorkel MeTaL, an end-toend system for multi-task learning that leverages weak supervision provided at multiple levels of granularity by domain expert users. In MeTaL, a user specifies a problem consisting of multiple, hierarchically-related sub-tasks—for example, classifying a document at multiple levels of granularity—and then provides labeling functions for each sub-task as weak supervision. MeTaL learns a re-weighted model of these labeling functions, and uses the combined signal to train a hierarchical multi-task network which is automatically compiled from the structure of the sub-tasks. Using MeTaL on a radiology report triage task and a fine-grained news classification task, we achieve average gains of 11.2 accuracy points over a baseline supervised approach and 9.5 accuracy points over the predictions of the user-provided labeling functions.},
+  language   = {en},
+  urldate    = {2019-12-27},
+  booktitle  = {Proceedings of the {Second} {Workshop} on {Data} {Management} for {End}-{To}-{End} {Machine} {Learning} - {DEEM}'18},
+  publisher  = {ACM Press},
+  author     = {Ratner, Alex and Hancock, Braden and Dunnmon, Jared and Goldman, Roger and Ré, Christopher},
+  year       = {2018},
+  pages      = {1--4},
+  file       = {Ratner et al. - 2018 - Snorkel MeTaL Weak Supervision for Multi-Task Lea.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\DFCMGMK7\\Ratner et al. - 2018 - Snorkel MeTaL Weak Supervision for Multi-Task Lea.pdf:application/pdf}
+}
+
+@inproceedings{ren_afet_2016,
+  address    = {Austin, Texas},
+  title      = {{AFET}: {Automatic} {Fine}-{Grained} {Entity} {Typing} by {Hierarchical} {Partial}-{Label} {Embedding}},
+  shorttitle = {{AFET}},
+  url        = {https://www.aclweb.org/anthology/D16-1144},
+  doi        = {10.18653/v1/D16-1144},
+  urldate    = {2020-05-13},
+  booktitle  = {Proceedings of the 2016 {Conference} on {Empirical} {Methods} in {Natural} {Language} {Processing}},
+  publisher  = {Association for Computational Linguistics},
+  author     = {Ren, Xiang and He, Wenqi and Qu, Meng and Huang, Lifu and Ji, Heng and Han, Jiawei},
+  month      = nov,
+  year       = {2016},
+  pages      = {1369--1378},
+  file       = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\KVN8XTEB\\Ren et al. - 2016 - AFET Automatic Fine-Grained Entity Typing by Hier.pdf:application/pdf}
+}
+
+@article{ren_cotype_2017,
+  title      = {{CoType}: {Joint} {Extraction} of {Typed} {Entities} and {Relations} with {Knowledge} {Bases}},
+  shorttitle = {{CoType}},
+  url        = {http://arxiv.org/abs/1610.08763},
+  abstract   = {Extracting entities and relations for types of interest from text is important for understanding massive text corpora. Traditionally, systems of entity relation extraction have relied on human-annotated corpora for training and adopted an incremental pipeline. Such systems require additional human expertise to be ported to a new domain, and are vulnerable to errors cascading down the pipeline. In this paper, we investigate joint extraction of typed entities and relations with labeled data heuristically obtained from knowledge bases (i.e., distant supervision). As our algorithm for type labeling via distant supervision is context-agnostic, noisy training data poses unique challenges for the task. We propose a novel domain-independent framework, called CoType, that runs a data-driven text segmentation algorithm to extract entity mentions, and jointly embeds entity mentions, relation mentions, text features and type labels into two low-dimensional spaces (for entity and relation mentions respectively), where, in each space, objects whose types are close will also have similar representations. CoType, then using these learned embeddings, estimates the types of test (unlinkable) mentions. We formulate a joint optimization problem to learn embeddings from text corpora and knowledge bases, adopting a novel partial-label loss function for noisy labeled data and introducing an object "translation" function to capture the cross-constraints of entities and relations on each other. Experiments on three public datasets demonstrate the effectiveness of CoType across different domains (e.g., news, biomedical), with an average of 25\% improvement in F1 score compared to the next best method.},
+  urldate    = {2020-05-13},
+  journal    = {arXiv:1610.08763 [cs]},
+  author     = {Ren, Xiang and Wu, Zeqiu and He, Wenqi and Qu, Meng and Voss, Clare R. and Ji, Heng and Abdelzaher, Tarek F. and Han, Jiawei},
+  month      = jun,
+  year       = {2017},
+  note       = {arXiv: 1610.08763},
+  keywords   = {Computer Science - Computation and Language, Computer Science - Machine Learning},
+  annote     = {Comment: WWW 2017},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\I3XPIJM5\\Ren et al. - 2017 - CoType Joint Extraction of Typed Entities and Rel.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\ZPPNIPMZ\\1610.html:text/html}
+}
+
+@article{ren_cotype_2017-1,
+  title      = {{CoType}: {Joint} {Extraction} of {Typed} {Entities} and {Relations} with {Knowledge} {Bases}},
+  shorttitle = {{CoType}},
+  url        = {http://arxiv.org/abs/1610.08763},
+  abstract   = {Extracting entities and relations for types of interest from text is important for understanding massive text corpora. Traditionally, systems of entity relation extraction have relied on human-annotated corpora for training and adopted an incremental pipeline. Such systems require additional human expertise to be ported to a new domain, and are vulnerable to errors cascading down the pipeline. In this paper, we investigate joint extraction of typed entities and relations with labeled data heuristically obtained from knowledge bases (i.e., distant supervision). As our algorithm for type labeling via distant supervision is context-agnostic, noisy training data poses unique challenges for the task. We propose a novel domain-independent framework, called CoType, that runs a data-driven text segmentation algorithm to extract entity mentions, and jointly embeds entity mentions, relation mentions, text features and type labels into two low-dimensional spaces (for entity and relation mentions respectively), where, in each space, objects whose types are close will also have similar representations. CoType, then using these learned embeddings, estimates the types of test (unlinkable) mentions. We formulate a joint optimization problem to learn embeddings from text corpora and knowledge bases, adopting a novel partial-label loss function for noisy labeled data and introducing an object "translation" function to capture the cross-constraints of entities and relations on each other. Experiments on three public datasets demonstrate the effectiveness of CoType across different domains (e.g., news, biomedical), with an average of 25\% improvement in F1 score compared to the next best method.},
+  urldate    = {2020-05-19},
+  journal    = {arXiv:1610.08763 [cs]},
+  author     = {Ren, Xiang and Wu, Zeqiu and He, Wenqi and Qu, Meng and Voss, Clare R. and Ji, Heng and Abdelzaher, Tarek F. and Han, Jiawei},
+  month      = jun,
+  year       = {2017},
+  note       = {arXiv: 1610.08763},
+  keywords   = {Computer Science - Computation and Language, Computer Science - Machine Learning},
+  annote     = {Comment: WWW 2017},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\WKAU2QSD\\Ren et al. - 2017 - CoType Joint Extraction of Typed Entities and Rel.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\PDIGLJAP\\1610.html:text/html}
+}
+
+@article{rezende_variational_2016,
+  title    = {Variational {Inference} with {Normalizing} {Flows}},
+  url      = {http://arxiv.org/abs/1505.05770},
+  abstract = {The choice of approximate posterior distribution is one of the core problems in variational inference. Most applications of variational inference employ simple families of posterior approximations in order to allow for efficient inference, focusing on mean-field or other simple structured approximations. This restriction has a significant impact on the quality of inferences made using variational methods. We introduce a new approach for specifying flexible, arbitrarily complex and scalable approximate posterior distributions. Our approximations are distributions constructed through a normalizing flow, whereby a simple initial density is transformed into a more complex one by applying a sequence of invertible transformations until a desired level of complexity is attained. We use this view of normalizing flows to develop categories of finite and infinitesimal flows and provide a unified view of approaches for constructing rich posterior approximations. We demonstrate that the theoretical advantages of having posteriors that better match the true posterior, combined with the scalability of amortized variational approaches, provides a clear improvement in performance and applicability of variational inference.},
+  urldate  = {2020-05-05},
+  journal  = {arXiv:1505.05770 [cs, stat]},
+  author   = {Rezende, Danilo Jimenez and Mohamed, Shakir},
+  month    = jun,
+  year     = {2016},
+  note     = {arXiv: 1505.05770},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Artificial Intelligence, Statistics - Computation, Statistics - Methodology},
+  annote   = {Comment: Proceedings of the 32nd International Conference on Machine Learning},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\ZYV38DAF\\Rezende and Mohamed - 2016 - Variational Inference with Normalizing Flows.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\RK8HUUL2\\1505.html:text/html}
+}
+
+@article{ribeiro_beyond_2020,
+  title      = {Beyond {Accuracy}: {Behavioral} {Testing} of {NLP} models with {CheckList}},
+  shorttitle = {Beyond {Accuracy}},
+  url        = {http://arxiv.org/abs/2005.04118},
+  abstract   = {Although measuring held-out accuracy has been the primary approach to evaluate generalization, it often overestimates the performance of NLP models, while alternative approaches for evaluating models either focus on individual tasks or on specific behaviors. Inspired by principles of behavioral testing in software engineering, we introduce CheckList, a task-agnostic methodology for testing NLP models. CheckList includes a matrix of general linguistic capabilities and test types that facilitate comprehensive test ideation, as well as a software tool to generate a large and diverse number of test cases quickly. We illustrate the utility of CheckList with tests for three tasks, identifying critical failures in both commercial and state-of-art models. In a user study, a team responsible for a commercial sentiment analysis model found new and actionable bugs in an extensively tested model. In another user study, NLP practitioners with CheckList created twice as many tests, and found almost three times as many bugs as users without it.},
+  urldate    = {2020-06-12},
+  journal    = {arXiv:2005.04118 [cs]},
+  author     = {Ribeiro, Marco Tulio and Wu, Tongshuang and Guestrin, Carlos and Singh, Sameer},
+  month      = may,
+  year       = {2020},
+  note       = {arXiv: 2005.04118},
+  keywords   = {Computer Science - Computation and Language, Computer Science - Machine Learning},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\9N6QDTIG\\Ribeiro et al. - 2020 - Beyond Accuracy Behavioral Testing of NLP models .pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\KXLLIHJY\\2005.html:text/html}
+}
+
+@article{rossi_deep_2020,
+  title    = {Deep {Inductive} {Graph} {Representation} {Learning}},
+  volume   = {32},
+  issn     = {1558-2191},
+  doi      = {10.1109/TKDE.2018.2878247},
+  abstract = {This paper presents a general inductive graph representation learning framework called \${\textbackslash}textDeepGL\$DeepGL for learning deep node and edge features that generalize across-networks. In particular, \${\textbackslash}textDeepGL\$DeepGL begins by deriving a set of base features from the graph (e.g., graphlet features) and automatically learns a multi-layered hierarchical graph representation where each successive layer leverages the output from the previous layer to learn features of a higher-order. Contrary to previous work, \${\textbackslash}textDeepGL\$DeepGL learns relational functions (each representing a feature) that naturally generalize across-networks and are therefore useful for graph-based transfer learning tasks. Moreover, \${\textbackslash}textDeepGL\$DeepGL naturally supports attributed graphs, learns interpretable inductive graph representations, and is space-efficient (by learning sparse feature vectors). In addition, \${\textbackslash}textDeepGL\$DeepGL is expressive, flexible with many interchangeable components, efficient with a time complexity of \${\textbackslash}mathcal O({\textbar}E{\textbar})\$O({\textbar}E{\textbar}), and scalable for large networks via an efficient parallel implementation. Compared with recent methods, \${\textbackslash}textDeepGL\$DeepGL is (1) effective for across-network transfer learning tasks and large (attributed) graphs, (2) space-efficient requiring up to 6x less memory, (3) fast with up to 106x speedup in runtime performance, and (4) accurate with an average improvement in AUC of 20 percent or more on many learning tasks and across a wide variety of networks.},
+  number   = {3},
+  journal  = {IEEE Transactions on Knowledge and Data Engineering},
+  author   = {Rossi, Ryan A. and Zhou, Rong and Ahmed, Nesreen K.},
+  month    = mar,
+  year     = {2020},
+  note     = {Conference Name: IEEE Transactions on Knowledge and Data Engineering},
+  keywords = {learning (artificial intelligence), attributed graphs, deep inductive graph representation learning, DeepGL, Electronic mail, graph based transfer learning tasks, Graph representation learning, graph theory, graph-based feature learning, graphlet features, higher-order structures, inductive representation learning, interpretable inductive graph representations, multilayered hierarchical graph representation, Natural language processing, Orbits, relational function learning, Runtime, sparse feature vectors, Task analysis, transfer learning},
+  pages    = {438--452},
+  file     = {IEEE Xplore Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\NRM7T4Q6\\Rossi et al. - 2020 - Deep Inductive Graph Representation Learning.pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\fwolf\\Zotero\\storage\\E2I4CVZ7\\8519335.html:text/html}
+}
+
+@inproceedings{ruffinelli_you_2019,
+  title    = {You {CAN} {Teach} an {Old} {Dog} {New} {Tricks}! {On} {Training} {Knowledge} {Graph} {Embeddings}},
+  url      = {https://openreview.net/forum?id=BkxSmlBFvr},
+  abstract = {Knowledge graph embedding (KGE) models learn algebraic representations of the entities and relations in a knowledge graph. A vast number of KGE techniques for multi-relational link prediction have...},
+  urldate  = {2020-05-14},
+  author   = {Ruffinelli, Daniel and Broscheit, Samuel and Gemulla, Rainer},
+  month    = sep,
+  year     = {2019},
+  file     = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\3WHRBAZ5\\Ruffinelli et al. - 2019 - You CAN Teach an Old Dog New Tricks! On Training K.pdf:application/pdf;Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\D8NQRFDJ\\forum.html:text/html}
+}
+
+@article{salha_keep_nodate,
+  title    = {Keep {It} {Simple}: {Graph} {Autoencoders} {Without} {Graph} {Convolutional} {Networks}},
+  abstract = {Graph autoencoders (AE) and variational autoencoders (VAE) recently emerged as powerful node embedding methods, with promising performances on challenging tasks such as link prediction and node clustering. Graph AE, VAE and most of their extensions rely on graph convolutional networks (GCN) to learn vector space representations of nodes. In this paper, we propose to replace the GCN encoder by a simple linear model w.r.t. the adjacency matrix of the graph. For the two aforementioned tasks, we empirically show that this approach consistently reaches competitive performances w.r.t. GCN-based models for numerous real-world graphs, including the widely used Cora, Citeseer and Pubmed citation networks that became the de facto benchmark datasets for evaluating graph AE and VAE. This result questions the relevance of repeatedly using these three datasets to compare complex graph AE and VAE models. It also emphasizes the effectiveness of simple node encoding schemes for many real-world applications.},
+  language = {en},
+  author   = {Salha, Guillaume and Hennequin, Romain and Vazirgiannis, Michalis},
+  pages    = {8},
+  file     = {Salha et al. - Keep It Simple Graph Autoencoders Without Graph C.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\AVFBTWG6\\Salha et al. - Keep It Simple Graph Autoencoders Without Graph C.pdf:application/pdf}
+}
+
+@article{sanborn_node2motif_nodate,
+  title    = {{NODE2MOTIF}: {Hierarchical} {Invariant} {Embeddings} of {Structured} {Graphs} {Using} the {Bispectrum}},
+  abstract = {We present an unsupervised algorithm for embedding graphs into a hierarchy of continuous features that separate local isomorphism classes. The approach incorporates group representation theory and the bispectrum, a third-order polyspectrum that is a complete invariant for small graphs, although any graph invariant can be used in the method. As a direct application, we compute a structural distance metric between organic molecules from the QM9 dataset.},
+  language = {en},
+  author   = {Sanborn, Sophia and Mehta, Ram and Shutty, Noah and Hillar, Christopher},
+  pages    = {5},
+  file     = {Sanborn et al. - NODE2MOTIF Hierarchical Invariant Embeddings of S.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\2JL4CELR\\Sanborn et al. - NODE2MOTIF Hierarchical Invariant Embeddings of S.pdf:application/pdf}
+}
+
+@incollection{santoro_simple_2017,
+  title     = {A simple neural network module for relational reasoning},
+  url       = {http://papers.nips.cc/paper/7082-a-simple-neural-network-module-for-relational-reasoning.pdf},
+  urldate   = {2020-05-15},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 30},
+  publisher = {Curran Associates, Inc.},
+  author    = {Santoro, Adam and Raposo, David and Barrett, David G and Malinowski, Mateusz and Pascanu, Razvan and Battaglia, Peter and Lillicrap, Timothy},
+  editor    = {Guyon, I. and Luxburg, U. V. and Bengio, S. and Wallach, H. and Fergus, R. and Vishwanathan, S. and Garnett, R.},
+  year      = {2017},
+  pages     = {4967--4976},
+  file      = {NIPS Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\EPBX9R65\\Santoro et al. - 2017 - A simple neural network module for relational reas.pdf:application/pdf;NIPS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\FX29XKQ6\\7082-a-simple-neural-network-module-for-relational-reasoning.html:text/html}
+}
+
+@article{serafini_logic_2016,
+  title      = {Logic {Tensor} {Networks}: {Deep} {Learning} and {Logical} {Reasoning} from {Data} and {Knowledge}},
+  shorttitle = {Logic {Tensor} {Networks}},
+  url        = {http://arxiv.org/abs/1606.04422},
+  abstract   = {We propose Logic Tensor Networks: a uniform framework for integrating automatic learning and reasoning. A logic formalism called Real Logic is defined on a first-order language whereby formulas have truth-value in the interval [0,1] and semantics defined concretely on the domain of real numbers. Logical constants are interpreted as feature vectors of real numbers. Real Logic promotes a well-founded integration of deductive reasoning on a knowledge-base and efficient data-driven relational machine learning. We show how Real Logic can be implemented in deep Tensor Neural Networks with the use of Google's tensorflow primitives. The paper concludes with experiments applying Logic Tensor Networks on a simple but representative example of knowledge completion.},
+  urldate    = {2020-04-17},
+  journal    = {arXiv:1606.04422 [cs]},
+  author     = {Serafini, Luciano and Garcez, Artur d'Avila},
+  month      = jul,
+  year       = {2016},
+  note       = {arXiv: 1606.04422},
+  keywords   = {Computer Science - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Logic in Computer Science, Computer Science - Neural and Evolutionary Computing},
+  annote     = {Comment: 12 pages, 2 figs, 1 table, 27 references},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\52JYXFJI\\Serafini and Garcez - 2016 - Logic Tensor Networks Deep Learning and Logical R.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\UB6KLTXA\\1606.html:text/html}
+}
+
+@article{shazeer_swivel_2016,
+  title      = {Swivel: {Improving} {Embeddings} by {Noticing} {What}'s {Missing}},
+  shorttitle = {Swivel},
+  url        = {http://arxiv.org/abs/1602.02215},
+  abstract   = {We present Submatrix-wise Vector Embedding Learner (Swivel), a method for generating low-dimensional feature embeddings from a feature co-occurrence matrix. Swivel performs approximate factorization of the point-wise mutual information matrix via stochastic gradient descent. It uses a piecewise loss with special handling for unobserved co-occurrences, and thus makes use of all the information in the matrix. While this requires computation proportional to the size of the entire matrix, we make use of vectorized multiplication to process thousands of rows and columns at once to compute millions of predicted values. Furthermore, we partition the matrix into shards in order to parallelize the computation across many nodes. This approach results in more accurate embeddings than can be achieved with methods that consider only observed co-occurrences, and can scale to much larger corpora than can be handled with sampling methods.},
+  urldate    = {2020-05-04},
+  journal    = {arXiv:1602.02215 [cs]},
+  author     = {Shazeer, Noam and Doherty, Ryan and Evans, Colin and Waterson, Chris},
+  month      = feb,
+  year       = {2016},
+  note       = {arXiv: 1602.02215},
+  keywords   = {Computer Science - Computation and Language},
+  annote     = {Comment: 9 pages, 4 figures},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\D2WWGN24\\Shazeer et al. - 2016 - Swivel Improving Embeddings by Noticing What's Mi.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\8IXFYWWP\\1602.html:text/html}
+}
+
+@article{shin_incremental_nodate,
+  title    = {Incremental {Knowledge} {Base} {Construction} {Using} {DeepDive}},
+  abstract = {Populating a database with unstructured information is a long-standing problem in industry and research that encompasses problems of extraction, cleaning, and integration. Recent names used for this problem include dealing with dark data and knowledge base construction (KBC). In this work, we describe DeepDive, a system that combines database and machine learning ideas to help develop KBC systems, and we present techniques to make the KBC process more eﬃcient. We observe that the KBC process is iterative, and we develop techniques to incrementally produce inference results for KBC systems. We propose two methods for incremental inference, based respectively on sampling and variational techniques. We also study the tradeoﬀ space of these methods and develop a simple rule-based optimizer. DeepDive includes all of these contributions, and we evaluate DeepDive on ﬁve KBC systems, showing that it can speed up KBC inference tasks by up to two orders of magnitude with negligible impact on quality.},
+  language = {en},
+  author   = {Shin, Jaeho and Wu, Sen and Wang, Feiran and Sa, Christopher De and Zhang, Ce and Ré, Christopher},
+  pages    = {12},
+  file     = {Shin et al. - Incremental Knowledge Base Construction Using Deep.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\26AWXM7T\\Shin et al. - Incremental Knowledge Base Construction Using Deep.pdf:application/pdf}
+}
+
+@article{simonovsky_graphvae_2018,
+  title      = {{GraphVAE}: {Towards} {Generation} of {Small} {Graphs} {Using} {Variational} {Autoencoders}},
+  shorttitle = {{GraphVAE}},
+  url        = {http://arxiv.org/abs/1802.03480},
+  abstract   = {Deep learning on graphs has become a popular research topic with many applications. However, past work has concentrated on learning graph embedding tasks, which is in contrast with advances in generative models for images and text. Is it possible to transfer this progress to the domain of graphs? We propose to sidestep hurdles associated with linearization of such discrete structures by having a decoder output a probabilistic fully-connected graph of a predefined maximum size directly at once. Our method is formulated as a variational autoencoder. We evaluate on the challenging task of molecule generation.},
+  urldate    = {2020-05-28},
+  journal    = {arXiv:1802.03480 [cs]},
+  author     = {Simonovsky, Martin and Komodakis, Nikos},
+  month      = feb,
+  year       = {2018},
+  note       = {arXiv: 1802.03480},
+  keywords   = {Computer Science - Machine Learning, Computer Science - Computer Vision and Pattern Recognition, Computer Science - Neural and Evolutionary Computing},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\8PZDD7HR\\Simonovsky and Komodakis - 2018 - GraphVAE Towards Generation of Small Graphs Using.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\WTNH5MJE\\1802.html:text/html}
+}
+
+@incollection{socher_reasoning_2013,
+  title     = {Reasoning {With} {Neural} {Tensor} {Networks} for {Knowledge} {Base} {Completion}},
+  url       = {http://papers.nips.cc/paper/5028-reasoning-with-neural-tensor-networks-for-knowledge-base-completion.pdf},
+  urldate   = {2020-04-20},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 26},
+  publisher = {Curran Associates, Inc.},
+  author    = {Socher, Richard and Chen, Danqi and Manning, Christopher D and Ng, Andrew},
+  editor    = {Burges, C. J. C. and Bottou, L. and Welling, M. and Ghahramani, Z. and Weinberger, K. Q.},
+  year      = {2013},
+  pages     = {926--934},
+  file      = {NIPS Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\WINTUXFA\\Socher et al. - 2013 - Reasoning With Neural Tensor Networks for Knowledg.pdf:application/pdf;NIPS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\CRWB7IY5\\5028-reasoning-with-neural-tensor-networks-for-knowledge-base-completion.html:text/html}
+}
+
+@article{stoehr_disentangling_nodate,
+  title    = {Disentangling {Interpretable} {Generative} {Parameters} of {Random} and {Real}-{World} {Graphs}},
+  abstract = {While a wide range of interpretable generative procedures for graphs exist, matching observed graph topologies with such procedures and choices for its parameters remains an open problem. Devising generative models that closely reproduce realworld graphs requires domain knowledge and time-consuming simulation. While existing deep learning approaches rely on less manual modelling, they offer little interpretability. This work approaches graph generation (decoding) as the inverse of graph compression (encoding). We show that in a disentanglement-focused deep autoencoding framework, speciﬁcally β-Variational Autoencoders (β-VAE), choices of generative procedures and their parameters arise naturally in the latent space. Our model is capable of learning disentangled, interpretable latent variables that represent the generative parameters of procedurally generated random graphs and real-world graphs. The degree of disentanglement is quantitatively measured using the Mutual Information Gap (MIG). When training our β-VAE model on ER random graphs, its latent variables have a near one-to-one mapping to the ER random graph parameters n and p. We deploy the model to analyse the correlation between graph topology and node attributes measuring their mutual dependence without handpicking topological properties. To allow experimenting with the code, we provide an interactive notebook1.},
+  language = {en},
+  author   = {Stoehr, Niklas and Yilmaz, Emine and Brockschmidt, Marc and Stuehmer, Jan},
+  pages    = {8},
+  file     = {Stoehr et al. - Disentangling Interpretable Generative Parameters .pdf:C\:\\Users\\fwolf\\Zotero\\storage\\7GN5VNV2\\Stoehr et al. - Disentangling Interpretable Generative Parameters .pdf:application/pdf}
+}
+
+@article{su_f-vaes_2018,
+  title      = {f-{VAEs}: {Improve} {VAEs} with {Conditional} {Flows}},
+  shorttitle = {f-{VAEs}},
+  url        = {http://arxiv.org/abs/1809.05861},
+  abstract   = {In this paper, we integrate VAEs and flow-based generative models successfully and get f-VAEs. Compared with VAEs, f-VAEs generate more vivid images, solved the blurred-image problem of VAEs. Compared with flow-based models such as Glow, f-VAE is more lightweight and converges faster, achieving the same performance under smaller-size architecture.},
+  urldate    = {2020-06-12},
+  journal    = {arXiv:1809.05861 [cs, stat]},
+  author     = {Su, Jianlin and Wu, Guang},
+  month      = sep,
+  year       = {2018},
+  note       = {arXiv: 1809.05861},
+  keywords   = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Computer Vision and Pattern Recognition},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\UC2Q6CVN\\Su and Wu - 2018 - f-VAEs Improve VAEs with Conditional Flows.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\NDG8TGJZ\\1809.html:text/html}
+}
+
+@article{su_graph_nodate,
+  title    = {Graph {Generation} with {Variational} {Recurrent} {Neural} {Network}},
+  abstract = {Generating graph structures is a challenging problem due to the diverse representations and complex dependencies among nodes. In this paper, we introduce Graph Variational Recurrent Neural Network (GraphVRNN), a probabilistic autoregressive model for graph generation. Through modeling the latent variables of graph data, GraphVRNN can capture the joint distributions of graph structures and the underlying node attributes. We conduct experiments on the proposed GraphVRNN in both graph structure learning and attribute generation tasks. The evaluation results show that the variational component allows our network to model complicated distributions, as well as generate plausible structures and node attributes.},
+  language = {en},
+  author   = {Su, Shih-Yang and Hajimirsadeghi, Hossein and Mori, Greg},
+  pages    = {8},
+  file     = {Su et al. - Graph Generation with Variational Recurrent Neural.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\4YPY3CGP\\Su et al. - Graph Generation with Variational Recurrent Neural.pdf:application/pdf}
+}
+
+@inproceedings{svetlik_automatic_2017,
+  title     = {Automatic {Curriculum} {Graph} {Generation} for {Reinforcement} {Learning} {Agents}},
+  copyright = {Authors who publish a paper in this conference agree to the following terms:   Author(s) agree to transfer their copyrights in their article/paper to the Association for the Advancement of Artificial Intelligence (AAAI), in order to deal with future requests for reprints, translations, anthologies, reproductions, excerpts, and other publications. This grant will include, without limitation, the entire copyright in the article/paper in all countries of the world, including all renewals, extensions, and reversions thereof, whether such rights current exist or hereafter come into effect, and also the exclusive right to create electronic versions of the article/paper, to the extent that such right is not subsumed under copyright.  The author(s) warrants that they are the sole author and owner of the copyright in the above article/paper, except for those portions shown to be in quotations; that the article/paper is original throughout; and that the undersigned right to make the grants set forth above is complete and unencumbered.  The author(s) agree that if anyone brings any claim or action alleging facts that, if true, constitute a breach of any of the foregoing warranties, the author(s) will hold harmless and indemnify AAAI, their grantees, their licensees, and their distributors against any liability, whether under judgment, decree, or compromise, and any legal fees and expenses arising out of that claim or actions, and the undersigned will cooperate fully in any defense AAAI may make to such claim or action. Moreover, the undersigned agrees to cooperate in any claim or other action seeking to protect or enforce any right the undersigned has granted to AAAI in the article/paper. If any such claim or action fails because of facts that constitute a breach of any of the foregoing warranties, the undersigned agrees to reimburse whomever brings such claim or action for expenses and attorneys’ fees incurred therein.  Author(s) retain all proprietary rights other than copyright (such as patent rights).  Author(s) may make personal reuse of all or portions of the above article/paper in other works of their own authorship.  Author(s) may reproduce, or have reproduced, their article/paper for the author’s personal use, or for company use provided that AAAI copyright and the source are indicated, and that the copies are not used in a way that implies AAAI endorsement of a product or service of an employer, and that the copies per se are not offered for sale. The foregoing right shall not permit the posting of the article/paper in electronic or digital form on any computer network, except by the author or the author’s employer, and then only on the author’s or the employer’s own web page or ftp site. Such web page or ftp site, in addition to the aforementioned requirements of this Paragraph, must provide an electronic reference or link back to the AAAI electronic server, and shall not post other AAAI copyrighted materials not of the author’s or the employer’s creation (including tables of contents with links to other papers) without AAAI’s written permission.  Author(s) may make limited distribution of all or portions of their article/paper prior to publication.  In the case of work performed under U.S. Government contract, AAAI grants the U.S. Government royalty-free permission to reproduce all or portions of the above article/paper, and to authorize others to do so, for U.S. Government purposes.  In the event the above article/paper is not accepted and published by AAAI, or is withdrawn by the author(s) before acceptance by AAAI, this agreement becomes null and void.},
+  url       = {https://www.aaai.org/ocs/index.php/AAAI/AAAI17/paper/view/14961},
+  abstract  = {In recent years, research has shown that transfer learning methods can be leveraged to construct curricula that sequence a series of simpler tasks such that performance on a final target task is improved. A major limitation of existing approaches is that such curricula are handcrafted by humans that are typically domain experts. To address this limitation, we introduce a method to generate a curriculum based on task descriptors and a novel metric of transfer potential. Our method automatically generates a  curriculum as a directed acyclic graph (as opposed to a linear sequence as done in existing work). Experiments in both discrete and continuous domains show that our method produces curricula that improve the agent's learning performance when compared to the baseline condition of learning on the target task from scratch.},
+  language  = {en},
+  urldate   = {2020-03-27},
+  booktitle = {Thirty-{First} {AAAI} {Conference} on {Artificial} {Intelligence}},
+  author    = {Svetlik, Maxwell and Leonetti, Matteo and Sinapov, Jivko and Shah, Rishi and Walker, Nick and Stone, Peter},
+  month     = feb,
+  year      = {2017},
+  file      = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\HNTXER68\\Svetlik et al. - 2017 - Automatic Curriculum Graph Generation for Reinforc.pdf:application/pdf;Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\WRTKNPRX\\14961.html:text/html}
+}
+
+@article{tiao_variational_nodate,
+  title    = {Variational {Graph} {Convolutional} {Networks}},
+  abstract = {We propose a Bayesian approach to graph convolutional networks (GCNs) where the graph parameters are considered as random variables. We develop an inference algorithm to estimate the posterior over these parameters and use it to incorporate prior information that is not naturally considered by standard GCNs. The key to our approach is to deﬁne a smooth posterior parameterization over the adjacency matrix characterizing the graph, which we estimate via stochastic variational inference. Our experiments show that we can outperform standard GCN methods in the task of semi-supervised classiﬁcation in noisy-graph regimes.},
+  language = {en},
+  author   = {Tiao, Louis and Elinas, Pantelis and Nguyen, Harrison and Bonilla, Edwin V},
+  pages    = {11},
+  file     = {Tiao et al. - Variational Graph Convolutional Networks.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\RRQTSTYG\\Tiao et al. - Variational Graph Convolutional Networks.pdf:application/pdf}
+}
+
+@article{trotzek_utilizing_2020,
+  title    = {Utilizing {Neural} {Networks} and {Linguistic} {Metadata} for {Early} {Detection} of {Depression} {Indications} in {Text} {Sequences}},
+  volume   = {32},
+  issn     = {1558-2191},
+  doi      = {10.1109/TKDE.2018.2885515},
+  abstract = {Depression is ranked as the largest contributor to global disability and is also a major reason for suicide. Still, many individuals suffering from forms of depression are not treated for various reasons. Previous studies have shown that depression also has an effect on language usage and that many depressed individuals use social media platforms or the internet in general to get information or discuss their problems. This paper addresses the early detection of depression using machine learning models based on messages on a social platform. In particular, a convolutional neural network based on different word embeddings is evaluated and compared to a classification based on user-level linguistic metadata. An ensemble of both approaches is shown to achieve state-of-the-art results in a current early detection task. Furthermore, the currently popular ERDE score as metric for early detection systems is examined in detail and its drawbacks in the context of shared tasks are illustrated. A slightly modified metric is proposed and compared to the original score. Finally, a new word embedding was trained on a large corpus of the same domain as the described task and is evaluated as well.},
+  number   = {3},
+  journal  = {IEEE Transactions on Knowledge and Data Engineering},
+  author   = {Trotzek, Marcel and Koitka, Sven and Friedrich, Christoph M.},
+  month    = mar,
+  year     = {2020},
+  note     = {Conference Name: IEEE Transactions on Knowledge and Data Engineering},
+  keywords = {learning (artificial intelligence), Natural language processing, Task analysis, behavioural sciences computing, convolutional neural nets, convolutional neural network, depressed individuals, Depression, depression indication detection, early detection, early detection systems, early detection task, ERDE score, Europe, Internet, linguistic metadata, Linguistics, Machine learning, machine learning models, meta data, Metadata, shared tasks, social media platforms, Social network services, social networking (online), text sequences, user-level linguistic metadata, word embeddings},
+  pages    = {588--601},
+  file     = {IEEE Xplore Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\DJUBBMLG\\Trotzek et al. - 2020 - Utilizing Neural Networks and Linguistic Metadata .pdf:application/pdf;IEEE Xplore Abstract Record:C\:\\Users\\fwolf\\Zotero\\storage\\GFBJYSYW\\8580405.html:text/html}
+}
+
+@article{van_krieken_integrated_nodate,
+  title    = {Integrated {Learning} and {Reasoning} using {Gradient} {Descent}},
+  language = {en},
+  author   = {van Krieken, Emile},
+  pages    = {85},
+  file     = {f106624807.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\Q74UGEP2\\van Krieken - Integrated Learning and Reasoning using Gradient D.pdf:application/pdf}
+}
+
+@article{vaswani_attention_2017,
+  title    = {Attention {Is} {All} {You} {Need}},
+  url      = {http://arxiv.org/abs/1706.03762},
+  abstract = {The dominant sequence transduction models are based on complex recurrent or convolutional neural networks in an encoder-decoder configuration. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.},
+  urldate  = {2020-05-14},
+  journal  = {arXiv:1706.03762 [cs]},
+  author   = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, Lukasz and Polosukhin, Illia},
+  month    = dec,
+  year     = {2017},
+  note     = {arXiv: 1706.03762},
+  keywords = {Computer Science - Computation and Language, Computer Science - Machine Learning},
+  annote   = {Comment: 15 pages, 5 figures},
+  file     = {arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\5D42JIKF\\1706.html:text/html;Full Text:C\:\\Users\\fwolf\\Zotero\\storage\\6RWA3BAT\\Vaswani et al. - 2017 - Attention Is All You Need.pdf:application/pdf}
+}
+
+@article{wang_submassive_nodate,
+  title    = {{SUBMASSIVE}: {Resolving} {Subclass} {Cycles} in {Very} {Large} {Knowledge} {Graphs}},
+  abstract = {Large knowledge graphs capture information of a large number of entities and their relations. Among the many relations they capture, class subsumption assertions are usually present and expressed using the rdfs:subClassOf construct. From our examination, publicly available knowledge graphs contain many potentially erroneous cyclic subclass relations, a problem that can be exacerbated when diﬀerent knowledge graphs are integrated as Linked Open Data. This paper presents an automatic approach for resolving such cycles at scale using automated reasoning by encoding the problem of cycle-resolving to a MAXSAT solver. The approach is tested on the LOD-a-lot dataset, and compared against a semi-automatic version of our algorithm. We show how the number of removed triples is a trade-oﬀ against the eﬃciency of the algorithm. The code and the resulting cycle-free class hierarchy of the LOD-a-lot are published at www.submassive.cc.},
+  language = {en},
+  author   = {Wang, Shuai and Bloem, Peter and Raad, Joe and van Harmelen, Frank},
+  pages    = {10},
+  file     = {Wang et al. - SUBMASSIVE Resolving Subclass Cycles in Very Larg.pdf:C\:\\Users\\fwolf\\Zotero\\storage\\7RUKLRUJ\\Wang et al. - SUBMASSIVE Resolving Subclass Cycles in Very Larg.pdf:application/pdf}
+}
+
+@article{wei_eda_2019,
+  title      = {{EDA}: {Easy} {Data} {Augmentation} {Techniques} for {Boosting} {Performance} on {Text} {Classification} {Tasks}},
+  shorttitle = {{EDA}},
+  url        = {http://arxiv.org/abs/1901.11196},
+  abstract   = {We present EDA: easy data augmentation techniques for boosting performance on text classification tasks. EDA consists of four simple but powerful operations: synonym replacement, random insertion, random swap, and random deletion. On five text classification tasks, we show that EDA improves performance for both convolutional and recurrent neural networks. EDA demonstrates particularly strong results for smaller datasets; on average, across five datasets, training with EDA while using only 50\% of the available training set achieved the same accuracy as normal training with all available data. We also performed extensive ablation studies and suggest parameters for practical use.},
+  urldate    = {2020-02-19},
+  journal    = {arXiv:1901.11196 [cs]},
+  author     = {Wei, Jason and Zou, Kai},
+  month      = aug,
+  year       = {2019},
+  note       = {arXiv: 1901.11196},
+  keywords   = {Computer Science - Computation and Language},
+  annote     = {Comment: EMNLP-IJCNLP 2019 short paper},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\Z7CGKHNG\\Wei and Zou - 2019 - EDA Easy Data Augmentation Techniques for Boostin.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\6827NNJE\\1901.html:text/html}
+}
+
+@article{wilcke_end--end_2020,
+  title    = {End-to-{End} {Entity} {Classification} on {Multimodal} {Knowledge} {Graphs}},
+  url      = {http://arxiv.org/abs/2003.12383},
+  abstract = {End-to-end multimodal learning on knowledge graphs has been left largely unaddressed. Instead, most end-to-end models such as message passing networks learn solely from the relational information encoded in graphs' structure: raw values, or literals, are either omitted completely or are stripped from their values and treated as regular nodes. In either case we lose potentially relevant information which could have otherwise been exploited by our learning methods. To avoid this, we must treat literals and non-literals as separate cases. We must also address each modality separately and accordingly: numbers, texts, images, geometries, et cetera. We propose a multimodal message passing network which not only learns end-to-end from the structure of graphs, but also from their possibly divers set of multimodal node features. Our model uses dedicated (neural) encoders to naturally learn embeddings for node features belonging to five different types of modalities, including images and geometries, which are projected into a joint representation space together with their relational information. We demonstrate our model on a node classification task, and evaluate the effect that each modality has on the overall performance. Our result supports our hypothesis that including information from multiple modalities can help our models obtain a better overall performance.},
+  urldate  = {2020-04-15},
+  journal  = {arXiv:2003.12383 [cs]},
+  author   = {Wilcke, W. X. and Bloem, P. and de Boer, V. and Veer, R. H. van t and van Harmelen, F. A. H.},
+  month    = mar,
+  year     = {2020},
+  note     = {arXiv: 2003.12383},
+  keywords = {Computer Science - Computation and Language, Computer Science - Machine Learning, Computer Science - Artificial Intelligence, Computer Science - Computer Vision and Pattern Recognition},
+  annote   = {Comment: Submitted to the 17th International Conference on Principles of Knowledge Representation and Reasoning (2020)},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\DGIQXPX7\\Wilcke et al. - 2020 - End-to-End Entity Classification on Multimodal Kno.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\DAZZK22X\\2003.html:text/html}
+}
+
+@article{wilcke_knowledge_2017,
+  title    = {The knowledge graph as the default data model for learning on heterogeneous knowledge},
+  volume   = {1},
+  issn     = {2451-8484},
+  url      = {https://research.vu.nl/en/publications/the-knowledge-graph-as-the-default-data-model-for-machine-learnin},
+  doi      = {10.3233/DS-170007},
+  language = {English},
+  number   = {1-2},
+  urldate  = {2020-05-01},
+  journal  = {Data Science},
+  author   = {Wilcke, Xander and Bloem, Peter and Boer, Victor De},
+  month    = dec,
+  year     = {2017},
+  note     = {Publisher: IOS Press},
+  pages    = {39--57},
+  file     = {Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\GDBR87DG\\the-knowledge-graph-as-the-default-data-model-for-machine-learnin.html:text/html;Full Text:C\:\\Users\\fwolf\\Zotero\\storage\\WXXSCZZ7\\Wilcke et al. - 2017 - The knowledge graph as the default data model for .pdf:application/pdf}
+}
+
+@inproceedings{wilcke_knowledge_2018,
+  title    = {The {Knowledge} {Graph} for {End}-to-{End} {Learning} on {Heterogeneous} {Knowledge}},
+  url      = {https://research.vu.nl/en/publications/the-knowledge-graph-for-end-to-end-learning-on-heterogeneous-know-2},
+  language = {English},
+  urldate  = {2020-05-01},
+  author   = {Wilcke, W. X. and Bloem, P. and Boer, Viktor de},
+  month    = mar,
+  year     = {2018},
+  file     = {Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\W9K67T7R\\Wilcke et al. - 2018 - The Knowledge Graph for End-to-End Learning on Het.pdf:application/pdf;Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\XMFFDMBU\\the-knowledge-graph-for-end-to-end-learning-on-heterogeneous-know-2.html:text/html}
+}
+
+@article{yang_embedding_2015,
+  title    = {Embedding {Entities} and {Relations} for {Learning} and {Inference} in {Knowledge} {Bases}},
+  url      = {http://arxiv.org/abs/1412.6575},
+  abstract = {We consider learning representations of entities and relations in KBs using the neural-embedding approach. We show that most existing models, including NTN (Socher et al., 2013) and TransE (Bordes et al., 2013b), can be generalized under a unified learning framework, where entities are low-dimensional vectors learned from a neural network and relations are bilinear and/or linear mapping functions. Under this framework, we compare a variety of embedding models on the link prediction task. We show that a simple bilinear formulation achieves new state-of-the-art results for the task (achieving a top-10 accuracy of 73.2\% vs. 54.7\% by TransE on Freebase). Furthermore, we introduce a novel approach that utilizes the learned relation embeddings to mine logical rules such as "BornInCity(a,b) and CityInCountry(b,c) ={\textgreater} Nationality(a,c)". We find that embeddings learned from the bilinear objective are particularly good at capturing relational semantics and that the composition of relations is characterized by matrix multiplication. More interestingly, we demonstrate that our embedding-based rule extraction approach successfully outperforms a state-of-the-art confidence-based rule mining approach in mining Horn rules that involve compositional reasoning.},
+  urldate  = {2020-06-18},
+  journal  = {arXiv:1412.6575 [cs]},
+  author   = {Yang, Bishan and Yih, Wen-tau and He, Xiaodong and Gao, Jianfeng and Deng, Li},
+  month    = aug,
+  year     = {2015},
+  note     = {arXiv: 1412.6575},
+  keywords = {Computer Science - Computation and Language},
+  annote   = {Comment: 12 pages, 4 figures},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\69LHKH8D\\Yang et al. - 2015 - Embedding Entities and Relations for Learning and .pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\KPKP4469\\1412.html:text/html}
+}
+
+@article{yang_feedback_2020,
+  title    = {Feedback {Recurrent} {AutoEncoder}},
+  url      = {http://arxiv.org/abs/1911.04018},
+  abstract = {In this work, we propose a new recurrent autoencoder architecture, termed Feedback Recurrent AutoEncoder (FRAE), for online compression of sequential data with temporal dependency. The recurrent structure of FRAE is designed to efficiently extract the redundancy along the time dimension and allows a compact discrete representation of the data to be learned. We demonstrate its effectiveness in speech spectrogram compression. Specifically, we show that the FRAE, paired with a powerful neural vocoder, can produce high-quality speech waveforms at a low, fixed bitrate. We further show that by adding a learned prior for the latent space and using an entropy coder, we can achieve an even lower variable bitrate.},
+  urldate  = {2020-05-07},
+  journal  = {arXiv:1911.04018 [cs, eess, stat]},
+  author   = {Yang, Yang and Sautière, Guillaume and Ryu, J. Jon and Cohen, Taco S.},
+  month    = feb,
+  year     = {2020},
+  note     = {arXiv: 1911.04018},
+  keywords = {Computer Science - Machine Learning, Statistics - Machine Learning, Computer Science - Sound, Electrical Engineering and Systems Science - Audio and Speech Processing},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\8X92ZTZG\\Yang et al. - 2020 - Feedback Recurrent AutoEncoder.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\UJVMX3D7\\1911.html:text/html}
+}
+
+@incollection{you_graph_2018,
+  title     = {Graph {Convolutional} {Policy} {Network} for {Goal}-{Directed} {Molecular} {Graph} {Generation}},
+  url       = {http://papers.nips.cc/paper/7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.pdf},
+  urldate   = {2020-03-27},
+  booktitle = {Advances in {Neural} {Information} {Processing} {Systems} 31},
+  publisher = {Curran Associates, Inc.},
+  author    = {You, Jiaxuan and Liu, Bowen and Ying, Zhitao and Pande, Vijay and Leskovec, Jure},
+  editor    = {Bengio, S. and Wallach, H. and Larochelle, H. and Grauman, K. and Cesa-Bianchi, N. and Garnett, R.},
+  year      = {2018},
+  pages     = {6410--6421},
+  file      = {NIPS Full Text PDF:C\:\\Users\\fwolf\\Zotero\\storage\\GPW9RRLY\\You et al. - 2018 - Graph Convolutional Policy Network for Goal-Direct.pdf:application/pdf;NIPS Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\IU79DNYN\\7877-graph-convolutional-policy-network-for-goal-directed-molecular-graph-generation.html:text/html}
+}
+
+@article{zelinka_building_nodate,
+  title    = {Building {Dynamic} {Knowledge} {Graphs} from {Text}-based {Games}},
+  abstract = {We are interested in learning how to update Knowledge Graphs (KG) from text. In this preliminary work, we propose a novel Sequence-to-Sequence (Seq2Seq) architecture to generate elementary KG operations. Furthermore, we introduce a new dataset for KG extraction built upon text-based game transitions (over 300k data points). We conduct experiments and discuss the results.},
+  language = {en},
+  author   = {Zelinka, Mikuláš and Yuan, Xingdi and Côté, Marc-Alexandre and Laroche, Romain and Trischler, Adam},
+  pages    = {6},
+  file     = {Zelinka et al. - Building Dynamic Knowledge Graphs from Text-based .pdf:C\:\\Users\\fwolf\\Zotero\\storage\\D8ZWAF8E\\Zelinka et al. - Building Dynamic Knowledge Graphs from Text-based .pdf:application/pdf}
+}
+
+@article{zeng_graphsaint_2020,
+  title      = {{GraphSAINT}: {Graph} {Sampling} {Based} {Inductive} {Learning} {Method}},
+  shorttitle = {{GraphSAINT}},
+  url        = {http://arxiv.org/abs/1907.04931},
+  abstract   = {Graph Convolutional Networks (GCNs) are powerful models for learning representations of attributed graphs. To scale GCNs to large graphs, state-of-the-art methods use various layer sampling techniques to alleviate the "neighbor explosion" problem during minibatch training. We propose GraphSAINT, a graph sampling based inductive learning method that improves training efficiency and accuracy in a fundamentally different way. By changing perspective, GraphSAINT constructs minibatches by sampling the training graph, rather than the nodes or edges across GCN layers. Each iteration, a complete GCN is built from the properly sampled subgraph. Thus, we ensure fixed number of well-connected nodes in all layers. We further propose normalization technique to eliminate bias, and sampling algorithms for variance reduction. Importantly, we can decouple the sampling from the forward and backward propagation, and extend GraphSAINT with many architecture variants (e.g., graph attention, jumping connection). GraphSAINT demonstrates superior performance in both accuracy and training time on five large graphs, and achieves new state-of-the-art F1 scores for PPI (0.995) and Reddit (0.970).},
+  urldate    = {2020-05-12},
+  journal    = {arXiv:1907.04931 [cs, stat]},
+  author     = {Zeng, Hanqing and Zhou, Hongkuan and Srivastava, Ajitesh and Kannan, Rajgopal and Prasanna, Viktor},
+  month      = feb,
+  year       = {2020},
+  note       = {arXiv: 1907.04931},
+  keywords   = {Computer Science - Machine Learning, Statistics - Machine Learning},
+  annote     = {Comment: Published at ICLR 2020; Code release: github.com/GraphSAINT/GraphSAINT},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\L57CNF3H\\Zeng et al. - 2020 - GraphSAINT Graph Sampling Based Inductive Learnin.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\EEQ92H4T\\1907.html:text/html}
+}
+
+@article{zhang_deep_2020,
+  title      = {Deep {Learning} on {Graphs}: {A} {Survey}},
+  shorttitle = {Deep {Learning} on {Graphs}},
+  url        = {http://arxiv.org/abs/1812.04202},
+  abstract   = {Deep learning has been shown to be successful in a number of domains, ranging from acoustics, images, to natural language processing. However, applying deep learning to the ubiquitous graph data is non-trivial because of the unique characteristics of graphs. Recently, substantial research efforts have been devoted to applying deep learning methods to graphs, resulting in beneficial advances in graph analysis techniques. In this survey, we comprehensively review the different types of deep learning methods on graphs. We divide the existing methods into five categories based on their model architectures and training strategies: graph recurrent neural networks, graph convolutional networks, graph autoencoders, graph reinforcement learning, and graph adversarial methods. We then provide a comprehensive overview of these methods in a systematic manner mainly by following their development history. We also analyze the differences and compositions of different methods. Finally, we briefly outline the applications in which they have been used and discuss potential future research directions.},
+  urldate    = {2020-03-27},
+  journal    = {arXiv:1812.04202 [cs, stat]},
+  author     = {Zhang, Ziwei and Cui, Peng and Zhu, Wenwu},
+  month      = mar,
+  year       = {2020},
+  note       = {arXiv: 1812.04202},
+  keywords   = {Computer Science - Machine Learning, Computer Science - Social and Information Networks, Statistics - Machine Learning},
+  annote     = {Comment: Accepted by Transactions on Knowledge and Data Engineering. 24 pages, 11 figures},
+  file       = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\WQ3NVAPL\\Zhang et al. - 2020 - Deep Learning on Graphs A Survey.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\UVTXS9Z7\\1812.html:text/html}
+}
+
+@article{zhang_semantics-aware_2020,
+  title    = {Semantics-aware {BERT} for {Language} {Understanding}},
+  url      = {http://arxiv.org/abs/1909.02209},
+  abstract = {The latest work on language representations carefully integrates contextualized features into language model training, which enables a series of success especially in various machine reading comprehension and natural language inference tasks. However, the existing language representation models including ELMo, GPT and BERT only exploit plain context-sensitive features such as character or word embeddings. They rarely consider incorporating structured semantic information which can provide rich semantics for language representation. To promote natural language understanding, we propose to incorporate explicit contextual semantics from pre-trained semantic role labeling, and introduce an improved language representation model, Semantics-aware BERT (SemBERT), which is capable of explicitly absorbing contextual semantics over a BERT backbone. SemBERT keeps the convenient usability of its BERT precursor in a light fine-tuning way without substantial task-specific modifications. Compared with BERT, semantics-aware BERT is as simple in concept but more powerful. It obtains new state-of-the-art or substantially improves results on ten reading comprehension and language inference tasks.},
+  urldate  = {2020-06-02},
+  journal  = {arXiv:1909.02209 [cs]},
+  author   = {Zhang, Zhuosheng and Wu, Yuwei and Zhao, Hai and Li, Zuchao and Zhang, Shuailiang and Zhou, Xi and Zhou, Xiang},
+  month    = feb,
+  year     = {2020},
+  note     = {arXiv: 1909.02209},
+  keywords = {Computer Science - Computation and Language},
+  annote   = {Comment: Thirty-Fourth AAAI Conference on Artificial Intelligence (AAAI-2020)},
+  file     = {arXiv Fulltext PDF:C\:\\Users\\fwolf\\Zotero\\storage\\IQXQTJSF\\Zhang et al. - 2020 - Semantics-aware BERT for Language Understanding.pdf:application/pdf;arXiv.org Snapshot:C\:\\Users\\fwolf\\Zotero\\storage\\F4EHJ8LP\\1909.html:text/html}
+}
+
+@inproceedings{zhuang_dual_2018,
+  address   = {Lyon, France},
+  series    = {{WWW} '18},
+  title     = {Dual {Graph} {Convolutional} {Networks} for {Graph}-{Based} {Semi}-{Supervised} {Classification}},
+  isbn      = {978-1-4503-5639-8},
+  url       = {https://doi.org/10.1145/3178876.3186116},
+  doi       = {10.1145/3178876.3186116},
+  abstract  = {The problem of extracting meaningful data through graph analysis spans a range of different fields, such as the internet, social networks, biological networks, and many others. The importance of being able to effectively mine and learn from such data continues to grow as more and more structured data become available. In this paper, we present a simple and scalable semi-supervised learning method for graph-structured data in which only a very small portion of the training data are labeled. To sufficiently embed the graph knowledge, our method performs graph convolution from different views of the raw data. In particular, a dual graph convolutional neural network method is devised to jointly consider the two essential assumptions of semi-supervised learning: (1) local consistency and (2) global consistency. Accordingly, two convolutional neural networks are devised to embed the local-consistency-based and global-consistency-based knowledge, respectively. Given the different data transformations from the two networks, we then introduce an unsupervised temporal loss function for the ensemble. In experiments using both unsupervised and supervised loss functions, our method outperforms state-of-the-art techniques on different datasets.},
+  urldate   = {2020-03-27},
+  booktitle = {Proceedings of the 2018 {World} {Wide} {Web} {Conference}},
+  publisher = {International World Wide Web Conferences Steering Committee},
+  author    = {Zhuang, Chenyi and Ma, Qiang},
+  month     = apr,
+  year      = {2018},
+  keywords  = {adjacency matrix, graph convolutional networks, graph diffusion, pointwise mutual information, semi-supervised learning},
+  pages     = {499--508},
+  file      = {Submitted Version:C\:\\Users\\fwolf\\Zotero\\storage\\2YVUNFFD\\Zhuang and Ma - 2018 - Dual Graph Convolutional Networks for Graph-Based .pdf:application/pdf}
+}

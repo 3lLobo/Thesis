@@ -1,6 +1,6 @@
 In this section we will go over related work and relevant background information for our model and experiments. The depth of the explanation is adopted to the expected prior knowledge of the reader. The reader is supposed to know the basics of machine learning and deep learning, including probability theory and basic knowledge on neural networks and their different architectures. Basic principles such as forward pass, backpropagation and convolutions are expected to be understood. Further the use and functionality of deep learning modules such as the model, the optimizer and the terms target and prediction should be known. This also includes being familiar with the training and testing pipeline of a model in deep learning.
 
-Should all these boxes be checked, then we can expect to get a deeper understanding of the magic behind the VAE and its differences to a normal autoencoder. After that we will present how convolutional layers can be used on graphs. Of course where there is a layer there is a model, thus we are presenting the graph convolutional network (GCN). Closing the circle we show how we can adopt the VAE to graph convolutions. Wrapping things up, we present the state of the art algorithms for graph matching, which will be util to allow permutation invariance when matching prediction and target.  
+Should all these boxes be checked, then we can expect to get a deeper understanding of the magic behind the VAE and its differences to a normal autoencoder. After that we will present how convolutional layers can be used on graphs. Of course where there is a layer there is a model, thus we are presenting the graph convolutional network (GCN). Closing the circle we show how we can adopt the VAE to graph convolutions. Wrapping things up, we present the state of the art algorithms for graph matching, which will be util to allow permutation invariance when matching prediction and target \cite{paulheim_knowledge_2016}.  
 
 
 \subsection{Knowledge Graph}
@@ -13,40 +13,39 @@ Knowledge graph has become a popular key phrase. Yet, the term is so broad, that
 
 % What is a KG
 A KG is a database and as all other databases it is used to store data. The main difference to tabular databases is that KGs store data in a relational fashion. A standard KG structure, introduced by the semantic-web community, is the Resource
-Description Framework (RDF). 
-A set of triples of the form
+Description Framework (RDF). It is a so called schema-based approach, meaning that every entity has a unique identifier and all possible relations are stored in a vocabulary. The opposite schema-free approach is used in OpenIE models for information extraction. Here any type of triple can be extracted, eg.  \text{(Michelangelo,  painted,    Sixtine Chapel)}. Where as a triple in RDF format from the Freebase KG has the form
 \begin{equation}
-    (Michelangelo,  painted,    Sixtine Chapel)
+    (/m/02mjmr, /people/person/born-in, /m/03gh4)
 \end{equation}
-\begin{equation}
+%  
+\begin*{equation}
     (s, r,  o)
 \end{equation}
  
- with:
+with:
 \begin{itemize}
-    \item Subject $s:   Michelangelo$ 
-    \item Relation/Predicate $r:    painted$
-    \item Object $o:     Sixtine Chapel$
+    \item Subject $s:   /m/02mjmr$ Barack Obama
+    \item Relation/Predicate $r:    /people/person/born-in$
+    \item Object $o:     /m/03gh4$ Hawaii
 \end{itemize}
+
 
 For all triples $s$ and $o$ are part of a set of so called entities, while $r$ is part of a set of relations. This is enough to define a basic KG.
 
-% Hirarchy, entities, classes
-More sophisticated KGs can include type hierarchies and tyoe constrains. Classes group entities of the same type together, based on common criteria, e.g all names of people can be grouped in the class 'person'.
-Hierarchies define the inheriting structure of classes and subclasses. Picking up our previous example, 'child' would be a subclass of 'person' and inherit its properties. At the same time the class of an entity can be key to a relation with tpye constrain, since some relations can only be used in conjunction with entities fulfilling the constraining type criteria.
+% Hierarchy, entities, classes
+Schema-based KG can include type hierarchies and type constrains. Classes group entities of the same type together, based on common criteria, e.g all names of people can be grouped in the class 'person'.
+Hierarchies define the inheriting structure of classes and subclasses. Picking up our previous example, 'child' would be a subclass of 'person' and inherit its properties. At the same time the class of an entity can be key to a relation with type constrain, since some relations can only be used in conjunction with entities fulfilling the constraining type criteria.
 
-% Othollogy - semantics
-The rules of a KG are defined in its onthology. Here properties of classes, subclasses and constrains for relations
+% Ontology - semantics
+These schema based rules of a KG are defined in its ontology. Here properties of classes, subclasses and constrains for relations and many more are defined. Again we we have to differentiate here between KGs with open-world or closed-world assumption. In a closed-world assumption all constrains must be sufficiently satisfied before a triple is accepted as valid. This leads to a huge ontology and makes it difficult to expand the KG. On the other hand open-world KGs such as Freebase, accept every triple as valid, as long as it does not violate a constrain. This leads inevitably to inconsistencies within the KG, yet it is the preferred approach for large KGs. In context of this thesis we refer to the ontology as semantics of a KG, we research if our model can capture the implied closed-world semantics of an open-world KG \cite{nickel_review_2016}.
 
 % Sparse and dense representation
-A major difference in Kg's is the representation. RDF KGs are represented as numeric triples, with the numerics inidices linking to the right entry in the entity and relation set. This is called dense representation and beneits from fast computation due to an optimized use of memory.
+Lastly, we point out one major difference between KGs, namely their representation. RDF KGs are represented as set of triples, consisting of a unique combination of numeric indices. Each index linking to the corresponding entry in the entity and relation vocabulary. This is called dense representation and benefits from fast computation due to an optimized use of memory.
 
-In contrary the dense representation of a triple is a binary square matrix, with ones indicating a link between two entities, also called the adjacency matrix.
-node atributes 
-edge atributes
+In contrary the dense representation of a triple is the sparse representation. Here a binary square matrix also called the adjacency matrix, indicated a link between two entities. To identify the node, each node in the adjacency matrix has a one-hot encoded entity-vocabulary vector. All one-hot encoded vectors are concatenated to a node attribute matrix.
+In simple cases, like citation networks this is a sufficient representation. In the case of Freebase, we need an additional edge-attribute matrix, which indicates the relation  of each link. The main benefits of this method are the representation of subsets of triples, also subgraphs, with more than one relation and the computational possibility to perform graph convolutions. 
 
 % Usecases of KG
-
 
 % Knowledge graphs have very different formats. The datasets we will be sorting with are in rdf format.
 % This format can include an defined onthology or not.
@@ -180,15 +179,16 @@ Permutation invariance refers to the invariance of a permutation of an object. A
 OR: An example is in object detection in images. An object can have geometrical permutations such as translation, scale or rotation, none the less the model should be able to detect and classify it. In that case, the model is not limited by permutations and  is there fore permutation invariant.
 In our case the object is a graph and the nodes can take different positions in the adjacency matrix. To detect similarities between graphs we apply graph matching.
 
-\subsubsection{Graph matching algorithms}
+\subsubsection{Max-Pool Graph matching algorithm}
 These are three of the state of the art graph matching algorithms.
 
-\begin{itemize}
-    \item Wasserstein
-    \item Maxpooling
-    \item one more
-\end{itemize}
+% \begin{itemize}
+%     \item Wasserstein
+%     \item Maxpooling
+%     \item one more
+% \end{itemize}
 
+Can be used for graphs with different number of nodes.
 % present different ones or only max-pooling?
 There are various graph matching algorithms. The one we will implement is the max-pooling (Finding Matches in a Haystack: A Max-Pooling Strategy for Graph Matching in the Presence of Outliers). 
 
@@ -227,5 +227,24 @@ A note to the node features, these stay softmaxed and one-hot encoded since we w
 
 
 \subsection{Ranger Optimizer}
-A optimizer, which manged to improve results upon state of the art models. It combines rectified adam, lookahead and gradient centralization.
-HOW ABOUT A CITATION
+
+Finalizing this chapter, we introduce the novel optimizer Ranger. A optimizer, which placed itself on the top of 12 FastAI leaderboards.Ranger combines Rectified Adam (RAdam), lookahead and optionally gradient centralization. let us shortly look into the different components.
+
+%  REadam
+RAdam is based on the very popular adam optimizer. It improves the learning by dynamically rectifying Adam's adaptive momentum. It does this by reducing the variance of the momentum, which is especially large at the beginning of the training. Thus, leading to a more stable and accelerated start \cite{liu_variance_2020}.
+
+The Lookahead optimizer proposes an approach where, a second optimizer 'looks ahead' on a set of parallel trained weights. while the computation and memory cost are negligible, it learning improves and the variance of the main optimizer is reduced \cite{zhang_lookahead_2019}.
+
+The last and most novel optimization technique, Gradient Centralization, acts directly on the gradient by normalizing it to a zero mean. Especially on Deep Neural Networks, this helps regularizing the gradient and boosts learning. This method can be added to existing optimizers and can be seen as constrain of the loss function \cite{yong_gradient_2020}.
+
+Concluding we can say that Ranger is a state of the art deep learning optimizer with accelerating and stabilizing properties, incorporating three different optimization methods, which synergize with each other. Considering that generative models are especially unstable during training, we see Ranger as a good fit for this research.
+
+
+
+
+
+
+
+
+
+LookAhead was inspired by recent advances in the understanding of loss surfaces of deep neural networks, and provides a breakthrough in robust and stable exploration during the entirety of training.
