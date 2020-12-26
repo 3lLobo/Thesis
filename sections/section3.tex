@@ -143,7 +143,7 @@ or nixx
 % One shot: creating adjacency and feature matrix at once.
 
 % the model we are going to use for challenging KG datasets
-Now we have all the building bocks for a Graph VAE. The encode can either be a MLP, a GCNN or an RGCN. The same holds for the decoder with the addition that model architecture needs to be inverted. An verison of a Graph VAE presented in \cite{simonovsky_graphvae_2018}. This model combines both the previous methods. The input graph undergoes relational graph convolutions before it is flattened and projected into latent space. After applying the reparametrization trick, a simple MLP decoder is used to regenerate the graph. In addition the model concatenates the input with a target vector $y$, which represents ???. The same vector is concatenated with the latent tensor. ***Elborate why they do that***.
+Now we have all the building bocks for a Graph VAE. The encode can either be a MLP, a GCNN or an RGCN. The same holds for the decoder with the addition that model architecture needs to be inverted. An version of a Graph VAE presented in \cite{simonovsky_graphvae_2018}. This model combines both the previous methods. The input graph undergoes relational graph convolutions before it is flattened and projected into latent space. After applying the reparametrization trick, a simple MLP decoder is used to regenerate the graph. In addition the model concatenates the input with a target vector $y$, which represents ???. The same vector is concatenated with the latent tensor. ***Elborate why they do that***.
 
 % Reverse MLP
 
@@ -159,9 +159,9 @@ Graphs can be generated recursively or in an one-shot approach. This paper uses 
 % One shot: MNIST vs recursive on graphs: Belli
 The concept of the VAE has been used to generate data for various usecases. When using the VAE as generator, by sampling from the approximated posterior distribution $q_{\phi}\left(\mathbf{z}$, we can reconstruct the data in a singular run or recursive manner.
 
-The one shot method is the used in the popular example of the VAE generator on the MNIST daataset [cite], as well as on [the faces dataset]. each sample is independent from each other.
+The one shot method is the used in the popular example of the VAE generator on the MNIST dataset [cite], as well as on [the faces dataset]. each sample is independent from each other.
 
-Recursive methods take part of the generated datapoint as input for the next datapoint, thus continuously generating the sample. This has been appied to [voice] and to reproduce videogame environments \cite{ha_world_2018}. In \cite{belli_image-conditioned_2019} variation of the GraphVAE has been used to recursively construct a vector roadmap, which has been presented in [link].
+Recursive methods take part of the generated datapoint as input for the next datapoint, thus continuously generating the sample. This has been applied to [voice] and to reproduce videogame environments \cite{ha_world_2018}. In \cite{belli_image-conditioned_2019} variation of the GraphVAE has been used to recursively construct a vector roadmap, which has been presented in [link].
 
 For this thesis, we will use the one-shot method, predicting each datapoint independent from each other. The predictions will sparse graph representation with $n$ nodes. A single triple being $n=2$ and a subgraph representation $2<n<100$. [TODO]
 
@@ -175,12 +175,18 @@ Intro to graph matching on sparse graphs.
 % The position or rotation of a graph can vary. 
 % Use graph matching to detect similarities between graphs
 
-Permutation invariance refers to the invariance of a permutation of an object. An visual example is the the image generation of numbers. If the loss function of the model would not be permutation invariant, the generated image could show a perfect replica of the input number but due to positional permutation the loss function would penalize the model. 
-OR: An example is in object detection in images. An object can have geometrical permutations such as translation, scale or rotation, none the less the model should be able to detect and classify it. In that case, the model is not limited by permutations and  is there fore permutation invariant.
-In our case the object is a graph and the nodes can take different positions in the adjacency matrix. To detect similarities between graphs we apply graph matching.
+Permutation invariance refers to the invariance of a permutation of an object. An visual example is the the image generation of numbers. If the loss function of the model would not be permutation invariant, the generated image could show a perfect replica of the input number but being translated by one pixel the loss function would penalize the model. Geometrical permutations can be translation, scale or rotation around any axis. 
+
+In the context of sparse graphs the most common, and relevant permutation for this thesis, is be the position of a link in the adjacency matrix. By altering its position with help of a permutation matrix, the link will connect different nodes. When matching graphs with more than two nodes, we can partially match the graphs by permuting only a subgraph instead of the full graph. This way also graphs of different sizes, can be matched. 
+
+A model is permutation invariant, when it includes a function to detect and match such permutations between target and prediction. 
+
+
+% OR: An example is in object detection in images. An object can have geometrical permutations such as translation, scale or rotation, none the less the model should be able to detect and classify it. In that case, the model is not limited by permutations and  is there fore permutation invariant.
+% In our case the object is a graph and the nodes can take different positions in the adjacency matrix. To detect similarities between graphs we apply graph matching.
 
 \subsubsection{Max-Pool Graph matching algorithm}
-These are three of the state of the art graph matching algorithms.
+% These are three of the state of the art graph matching algorithms.
 
 % \begin{itemize}
 %     \item Wasserstein
@@ -188,14 +194,40 @@ These are three of the state of the art graph matching algorithms.
 %     \item one more
 % \end{itemize}
 
-Can be used for graphs with different number of nodes.
-% present different ones or only max-pooling?
-There are various graph matching algorithms. The one we will implement is the max-pooling (Finding Matches in a Haystack: A Max-Pooling Strategy for Graph Matching in the Presence of Outliers). 
+While there are numerous graph matching algorithms, we will focus on the max-pool algorithm, which can be effectively implement and used in the VAE setting. First presented in \cite{cho_finding_2014} in the context of computer vision and successfully trained to match graphs from feature points in an image. It uses a max-pooling graph matching approach, which is resilient to deformations and highly tolerant to outliers. The output is a reliable cost matrix. Notable is, that also graphs with different number of nodes can be matched.
+
 
 % Max-pooling algorithm comes here !!!
-The max-pooling graph matching algorithm returns a symmetric affinity matrix for all nodes
+Let us introduce a new representation of a discrete target graph $G=(A, E, F)$ and a continuous predicted graph $\widetilde{G}=(\widetilde{A}, \widetilde{E}, \widetilde{F})$. The $A, E, F$ are store the discrete data for the adjacency, for node attributes and the node attribute matrix of form $A \in\{0,1\}^{n \times n^{\prime}}$ with $n$ being the number of nodes in the target graph. $E\in\{0,1\}^{n \times n^{\prime} \time d_e}$ is the edge attribute matrix and a node attribute tensor of the shape $F\in\{0,1\}^{n \times d_n}$ with $d_e$ and $d_n$ being the size of the entity and relation dictionary. For the predicted graph with $k$ nodes, the adjacency matrix is $\widetilde{A} \in[0,1]^{k \times k}$, the edge attribute matrix is $\widetilde{E} \in \mathbb{R}^{k \times k \times d_{e}}$ and the node attribute matrix is $\widetilde{F} \in \mathbb{R}^{k \times d_{n}}$.
 
-The resulting similarity matrix gives us $X*$ which is continuous and therefore useless. To transform is to a discrete $X$ we use the hungarian algorithm (GPU-accelerated Hungarian algorithms for the Linear
+
+GIven these graphs the algorithm aims to find the affinity matrix $S:(i, j) \times(a, b) \rightarrow \mathbb{R}^{+}$ where $i, j \in G$ and $a, b \in \widetilde{{G}$. The affinity matrix expresses the similarity of all nodepairs between the two graphs and is calculated 
+
+\begin{equation}
+    \begin{array}{l}
+        S((i, j),(a, b)) = \left(E_{i, j, \cdot}^{T}, \widetilde{E}_{a, b, \cdot}\right) A_{i, j} \widetilde{A}_{a, b} \widetilde{A}_{a, a} \widetilde{A}_{b, b}[i \neq j \wedge a \neq b] + \left(F_{i, \cdot}^{T} \widetilde{F}_{a, \cdot}\right) \widetilde{A}_{a, a}[i=j \wedge a=b]
+    \end{array}
+\end{equation}
+
+where the square brackets define Iverson brackets \cite{simonovsky_graphvae_2018}.
+
+
+The next step is to find the similarity matrix $X^* \in[0,1]^{k \times n}$. Therefore we iterate a fist-order optimization framework and get the update rule
+
+\begin{equation}
+    \mathbf{x}_{t+1} \leftarrow \frac{1}{\left\|\mathbf{S} \mathbf{x}_{t}\right\|_{2}} \mathbf{S} \mathbf{x}_{t}.
+\end{equation}
+
+To calculate $$\text { Sx }$$ we find the best candidate $x_{i,a}$ from the possible pairs in the affinity matrix. Heuristically taking the argmax over all neighboring nodepair affinities yields the best result. Other options are sum-pooling or average-pooling, which do not discard potentially irrelevant information. Thus we get can pariwise calculate
+
+\begin{equation}
+    \mathbf{Sx}_{i a}=\mathbf{x}_{i a} \mathbf{S}_{i a ; i a}+\sum_{j \in \mathcal{N}_{i}} \max _{b \in \mathcal{N}_{a}} \mathbf{x}_{j b} \mathbf{S}_{i a ; j b}.
+\end{equation}
+
+
+The max-pooling graph matching algorithm returns a symmetric affinity matrix for all nodesV
+
+The resulting similarity matrix gives us $X*$ which is continuous and therefore useless for precise graph matching. To transform is to a discrete $X$ we use the hungarian algorithm (GPU-accelerated Hungarian algorithms for the Linear
 Assignment Problem)
 
 \textbf{Hungarian algorithm}\\
