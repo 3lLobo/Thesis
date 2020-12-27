@@ -198,7 +198,7 @@ While there are numerous graph matching algorithms, we will focus on the max-poo
 
 
 % Max-pooling algorithm comes here !!!
-Let us introduce a new representation of a discrete target graph $G=(A, E, F)$ and a continuous predicted graph $\widetilde{G}=(\widetilde{A}, \widetilde{E}, \widetilde{F})$. The $A, E, F$ are store the discrete data for the adjacency, for node attributes and the node attribute matrix of form $A \in\{0,1\}^{n \times n^{\prime}}$ with $n$ being the number of nodes in the target graph. $E\in\{0,1\}^{n \times n^{\prime} \time d_e}$ is the edge attribute matrix and a node attribute tensor of the shape $F\in\{0,1\}^{n \times d_n}$ with $d_e$ and $d_n$ being the size of the entity and relation dictionary. For the predicted graph with $k$ nodes, the adjacency matrix is $\widetilde{A} \in[0,1]^{k \times k}$, the edge attribute matrix is $\widetilde{E} \in \mathbb{R}^{k \times k \times d_{e}}$ and the node attribute matrix is $\widetilde{F} \in \mathbb{R}^{k \times d_{n}}$.
+Let us introduce a new sparse representation for a sampled subgraph, where the discrete target graph is $G=(A, E, F)$ and the continuous predicted graph $\widetilde{G}=(\widetilde{A}, \widetilde{E}, \widetilde{F})$. The $A, E, F$ are store the discrete data for the adjacency, for node attributes and the node attribute matrix of form $A \in\{0,1\}^{n \times n^{\prime}}$ with $n$ being the number of nodes in the target graph. $E\in\{0,1\}^{n \times n^{\prime} \time d_e}$ is the edge attribute matrix and a node attribute tensor of the shape $F\in\{0,1\}^{n \times d_n}$ with $d_e$ and $d_n$ being the size of the entity and relation dictionary. For the predicted graph with $k$ nodes, the adjacency matrix is $\widetilde{A} \in[0,1]^{k \times k}$, the edge attribute matrix is $\widetilde{E} \in \mathbb{R}^{k \times k \times d_{e}}$ and the node attribute matrix is $\widetilde{F} \in \mathbb{R}^{k \times d_{n}}$.
 
 
 GIven these graphs the algorithm aims to find the affinity matrix $S:(i, j) \times(a, b) \rightarrow \mathbb{R}^{+}$ where $i, j \in G$ and $a, b \in \widetilde{{G}$. The affinity matrix expresses the similarity of all nodepairs between the two graphs and is calculated 
@@ -218,28 +218,59 @@ The next step is to find the similarity matrix $X^* \in[0,1]^{k \times n}$. Ther
     \mathbf{x}_{t+1} \leftarrow \frac{1}{\left\|\mathbf{S} \mathbf{x}_{t}\right\|_{2}} \mathbf{S} \mathbf{x}_{t}.
 \end{equation}
 
-To calculate $$\text { Sx }$$ we find the best candidate $x_{i,a}$ from the possible pairs in the affinity matrix. Heuristically taking the argmax over all neighboring nodepair affinities yields the best result. Other options are sum-pooling or average-pooling, which do not discard potentially irrelevant information. Thus we get can pariwise calculate
+To calculate $\text { Sx }$ we find the best candidate $x_{i,a}$ from the possible pairs in the affinity matrix. Heuristically taking the argmax over all neighboring nodepair affinities yields the best result. Other options are sum-pooling or average-pooling, which do not discard potentially irrelevant information. Thus we get can pairwise calculate
 
 \begin{equation}
     \mathbf{Sx}_{i a}=\mathbf{x}_{i a} \mathbf{S}_{i a ; i a}+\sum_{j \in \mathcal{N}_{i}} \max _{b \in \mathcal{N}_{a}} \mathbf{x}_{j b} \mathbf{S}_{i a ; j b}.
 \end{equation}
 
+Depending on the matrix size, the number of iterations are adjusted. The resulting similarity matrix $X*$ yields a normalized probability of matching nodepairs. In order to get a discrete translation matrix, we need to find the optimal match for each node.
 
-The max-pooling graph matching algorithm returns a symmetric affinity matrix for all nodesV
 
-The resulting similarity matrix gives us $X*$ which is continuous and therefore useless for precise graph matching. To transform is to a discrete $X$ we use the hungarian algorithm (GPU-accelerated Hungarian algorithms for the Linear
-Assignment Problem)
 
-\textbf{Hungarian algorithm}\\
-The hungarian algorithm is used to find the shortest path within a matrix. This could be the most efficient work-distribution in a cost matrix. Or \dots \\
-It consists of four steps of which the last two are repeated until convergence. This algorithm is not scalable. The Munks algorithm (reference) tackles this problem by?? and is scalable.
+\subsubsection{Hungarian algorithm}
 
-second option: \leavevmode
-Compare only graph structure. 
-NX algorithms: Greedy, Shortest path \dots
+%  Find shortest path
+Picking up on the nodepair probabilities $X^*$ of last chapter, we reformulate it as a linear assignment problem. Here comes into play an optimization algorithm, the so called hungarian algorithm. It original objective is to optimally assign $n$ resources to $n$ tasks. The cost of assigning task $i \in \mathbb{R}^n$ to $j \in \mathbb{R}^n$ is stored in $x_{ij}$ of the quadratic cost matrix $x \in \mathbb{R}^{n \times n$. By assuming tasks and resources are simple nodes and taking $C=1-X^*$ we get the cost matrix $C$ for the optimal translation. This algorithm is has a complexity of $O\left(n^{4}\right)$, thus is not applicable to complete KGs but only to subgraphs with limited number of nodes per graph \cite{date_gpu-accelerated_2016}.
+
+The core of the hungarian algorithm consist of four main steps, initial reduction, optimality check, augmented search and update. The now presented algorithm is a slight alternative of the original algorithm and improves the complexity of the update step from $O\left(n^{2}\right)$ to $O\left(n\right)$ and thus, reduces the total complexity to $O\left(n^{3}\right)$. It takes as input a bipartie graph $G=(V, U, E)$ and the cost matrix $C \in \mathbb{R}^{n \times n}$ where $V \in \mathbb{R}^n$ and $U \in \mathbb{R}^n$ are sets of nodes and $E \in \mathbb{R}^{n \time \n}$ the set of edges between the nodes. The algorithm's output is a discrete matching matrix $M$. To avoid two irrelevant pages of pseudocode, the steps of the algorithm are presented in a short summary \cite{mills2007dynamic}.
+
+\begin{enumerate}
+    \item Initialization: \\
+    \begin{enumerate}
+        \item Initialize empty matching matrix $M_{0}=\emptyset$.
+        \item Assign $\alpha_i$ and $\beta_i$ as follows:
+        \begin{align*}
+            \forall v_{i} &\in V, \quad &&\alpha_{i}=0 \\
+            \forall u_{i} &\in U, \quad &&\beta_{j}=\min _{i}\left(c_{i j}\right)
+        \end{align*}
+        \end{enumerate}
+    \item Loop $n$ times over the different stages:
+    \begin{enumerate}
+        \item Each unmatched node in $V$ is a root node for an Hungarian tree with when completed results in an augmentation path.
+        \item Expand the Hungarian trees in the equality subgraph. Store the indices $i$ of $v_i$ encountered in the Hungarian tree in the set $I*$ and similar for $j$ in $u_j$ and the set $J^*$. If an augmentation path is found, skip the next step.
+        \item Update $\alpha$ and $\beta$ to add new edges to the quality subgraph and redo the previous step.
+        \begin{align*}
+            \theta&=\frac{1}{2} \min _{i \in I^{*}, j \notin J^{*}}\left(c_{i j}-\alpha_{i}-\beta_{j}\right) \\
+            \alpha_{i} &\leftarrow\left\{\begin{array}{ll}
+            \alpha_{i}+\theta & i \in I^{*} \\
+            \alpha_{i}-\theta & i \notin I^{*}
+            \end{array}\right \\
+            \beta_{j} &\leftarrow\left\{\begin{array}{ll}
+            \beta_{j}-\theta & j \in J^{*} \\
+            \beta_{j}+\theta & j \notin J^{*}
+            \end{array}\right.
+        \end{align*}
+        \item Augment $M_{k-1}$ by flipping the unmatched with the matched edges on the selected augmentation path. Thus $M_k$ is given by $\left(M_{k-1}-P\right) \cup\left(P-M_{k-1}\right)$ and $P$ is the set of edges of the current augmentation path.
+    \end{enumerate}
+    \item Output $M_n$ of the last and $n^{th}$ stage.
+\end{enumerate}
+
+
+
 \\
 \subsubsection{Graph Matching Loss}
-The loss is discribed in \cite{simonovsky_graphvae_2018} as.
+The loss is described in \cite{simonovsky_graphvae_2018} as.
 % \begin{align*}
 %     -\log p(G \mid \mathbf{z}) &=-\lambda_{A} \log p\left(A^{\prime} \mid \mathbf{z}\right)-\lambda_{F} \log p(F \mid \mathbf{z})-\\
 %     &-\lambda_{E} \log p(E \mid \mathbf{z})
