@@ -51,6 +51,16 @@ Only matmul and dot. keep dimension of S with shape (bs,n,n,k,k)
 When maxpooling, flatten Xs (n,k) for batch dot multiplication. This way (i think) we sum over all j nad b neighbors instead of taking the max.  
 
 
+
+In contrast to his implementation we assume, that a node or edge can have none, one or multiple attributes. Therefore our attributes are also not sigmoided and do not sum up to one. This leads o the modification of term logF and logE where we do not matrix multiply over the attribute vector but take the BCE as over the rest of the points.
+KG can have multiple or no attributes vs molecular graphs can be one hot encoded.
+
+Okay, further we need to treat the $log_pE$ and $log_pF$ just like $log_pA$ and subtract the inverse. Otherwise the model learn to predict very high values only. 
+
+A note to the node features, these stay softmaxed and one-hot encoded since we will use them as node labels.
+
+
+
 Hungarian algorithm for discrimination of X \\
 \\
 The hungarian algorithm as presented in section 2 return the shortest path in a matrix. We use this shortest path as bast match between the two graphs. The node paris identified as optimal are masked as $1$ and the rest of the matrix as $0$. This way we discretizice $X\star$ to $X$. 
