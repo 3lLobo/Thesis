@@ -28,11 +28,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.2.3}Graph convolutions}{6}{subsubsection.3.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.4}RGCN}{7}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.4}Graph VAE}{7}{subsubsection.3.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.5}Graph VAE}{7}{subsubsection.3.2.5}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.6}One Shot vs. Recursive}{7}{subsubsection.3.2.6}%
+\contentsline {subsubsection}{\numberline {3.2.5}One Shot vs. Recursive}{8}{subsubsection.3.2.5}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3}Graph Matching}{8}{subsection.3.3}%
 \defcounter {refsection}{0}\relax 
@@ -42,25 +40,19 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.3.3}Hungarian algorithm}{9}{subsubsection.3.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.4}Graph Matching Loss}{10}{subsubsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.4}Graph Matching VAE Loss}{10}{subsubsection.3.3.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.4}Ranger Optimizer}{10}{subsection.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Methods}{10}{section.4}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Knowledge graph representation}{10}{subsection.4.1}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Graph VAE}{11}{subsection.4.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3}Loss function}{11}{subsection.4.3}%
+\contentsline {section}{\numberline {4}Methods}{11}{section.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5}Experiments \& Results}{11}{section.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Datasets and Training}{12}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.1}Datasets and Training}{11}{subsection.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2}Link Prediction}{12}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.2}Link Prediction}{11}{subsection.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Sanity Checks}{12}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.3}Sanity Checks}{11}{subsection.5.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.4}Interpolate Latent Space}{12}{subsection.5.4}%
 \defcounter {refsection}{0}\relax 
@@ -68,14 +60,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.6}Syntax coherence}{12}{subsection.5.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Discussion \& Future Work}{13}{section.6}%
+\contentsline {section}{\numberline {6}Discussion \& Future Work}{12}{section.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1}Discuss Aspect 1}{13}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.1}Discuss Aspect 1}{12}{subsection.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2}Future Work}{13}{subsection.6.2}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3}Use Normalizing Flows}{13}{subsection.6.3}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4}Recurrent VAE}{13}{subsection.6.4}%
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.5}Graph matching}{14}{subsection.6.5}%
+\contentsline {subsection}{\numberline {6.2}Future Work}{12}{subsection.6.2}%
