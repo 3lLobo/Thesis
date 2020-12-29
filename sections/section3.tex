@@ -14,13 +14,13 @@ Knowledge graph has become a popular key phrase. Yet, the term is so broad, that
 % What is a KG
 A KG is a database and as all other databases it is used to store data. The main difference to tabular databases is that KGs store data in a relational fashion. A standard KG structure, introduced by the semantic-web community, is the Resource
 Description Framework (RDF). It is a so called schema-based approach, meaning that every entity has a unique identifier and all possible relations are stored in a vocabulary. The opposite schema-free approach is used in OpenIE models for information extraction. Here any type of triple can be extracted, eg.  \text{(Michelangelo,  painted,    Sixtine Chapel)}. Where as a triple in RDF format from Freebase, one of the largest open-source KGs, has the form
-\begin{equation}
+\begin{equation*}
     (/m/02mjmr, /people/person/born-in, /m/03gh4)
-\end{equation}
+\end{equation*}
 %  
-\begin*{equation}
+\begin{equation*}
     (s, r,  o)
-\end{equation}
+\end{equation*}
  
 with:
 \begin{itemize}
@@ -68,7 +68,7 @@ The main contribution of the VAE is the so called reparameterization trick. When
     \centering
     \includegraphics[width=0.75\textwidth]{data/images/repaTrick.png}
     \label{fig:simonGVAE}
-    \caption{Representation of the VAE as bayesian network, with solid lines denoting the generator $p_{\boldsymbol{\theta}}(z)p_{\boldsymbol{\theta}}(\mathbf{x} \mid z)$ and the dashed lines the posterior aproximation $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ \cite{kingma_auto-encoding_2014}.}
+    \caption{Representation of the VAE as bayesian network, with solid lines denoting the generator $p_{\boldsymbol{\theta}}(z)p_{\boldsymbol{\theta}}(\mathbf{x} \mid z)$ and the dashed lines the posterior approximation $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ \cite{kingma_auto-encoding_2014}.}
     \label{fig:varinference}
 \end{figure}
 
@@ -108,12 +108,12 @@ for $j=1, \ldots, M$ and $k=1, \ldots, K$, with $M$ being the total number of hi
 % Application
 Since the sigmoid function returns a probability distribution for all classes, the MLP can have the function of a classifier. Instead of the initial sigmoid function, it was found to also produce good results for multi label classification transforming the output with a softmax function instead. Images or higher dimensional tensors can be processed by flattening them to a one dimensional tensor. This makes the MLP a flexible and easy to implement model \cite{bishop_pattern_2006}.
 
-\\
-\subsubsection{Graph convolutions}\\
+
+\subsubsection{Graph convolutions}
 
 % TODO pretty write this
 %  Intro on convolutions
-Convolutional neural nets (CNN) have the advantage to be invariant to permutations of the input. Convolutional layers exploit the property of datapoints which are close to each other and thus, have a higher correlation. CNNs have shown great results in the field of images classification and object detection. Neighboring pixel contain information about each other, thus by detecting local features, the model can then merged those to high-level features, e.g a face in an image \cite{bishop2006pattern}. Similar conditions hold for graphs. Neighboring nodes contain information about each other and can used to infer local features. 
+Convolutional neural nets (CNN) have the advantage to be invariant to permutations of the input. Convolutional layers exploit the property of datapoints which are close to each other and thus, have a higher correlation. CNNs have shown great results in the field of images classification and object detection. Neighboring pixel contain information about each other, thus by detecting local features, the model can then merged those to high-level features, e.g a face in an image \cite{bishop_pattern_2006}. Similar conditions hold for graphs. Neighboring nodes contain information about each other and can used to infer local features. 
 
 % How do Graph convs work???
 Let us shortly go over the definition and math behind graph convolutions. Different approaches have been published on this topic, here we will present the graph convolution network (GCN) of \cite{kipf_semi-supervised_2017}.
@@ -176,7 +176,7 @@ For the decoder $p_{\theta}(\mathbf{x} \mid \mathcal{G})$ the latent representat
 
 \subsubsection{One Shot vs. Recursive}
 % One shot: MNIST vs recursive on graphs: Belli
-The concept of the VAE has been used to generate data for various usecases. When using the VAE as generator, by sampling from the approximated posterior distribution $q_{\phi}\left(\mathbf{z}$, we can reconstruct the data in a singular run or recursive manner.
+The concept of the VAE has been used to generate data for various usecases. When using the VAE as generator, by sampling from the approximated posterior distribution $q_{\phi}\left(\mathbf{z}\right)$, we can reconstruct the data in a singular run or recursive manner.
 
 The one shot method is the used in the popular example of the VAE generator on the MNIST dataset \cite{kingma_auto-encoding_2014}. each sample is independent from each other.
 
@@ -186,6 +186,7 @@ For this thesis, we will use the one-shot method, predicting each datapoint inde
 % [TODO]
 
 \subsection{Graph Matching}
+\label{ssec:graphmatch}
 % Intro to graph matching on sparse graphs.
 In this subsection we will explain the term permutation invariance and present an algorithm to find the optimal permutation in order to match two graphs. We then derive the loss term of the graph VAE \ref{ssec:GVAE} applying the optimal matching matrix to the models prediction.
 
@@ -218,10 +219,10 @@ While there are numerous graph matching algorithms, we will focus on the max-poo
 
 
 % Max-pooling algorithm comes here !!!
-Let us introduce a new sparse representation for a sampled subgraph, where the discrete target graph is $G=(A, E, F)$ and the continuous predicted graph $\widetilde{G}=(\widetilde{A}, \widetilde{E}, \widetilde{F})$. The $A, E, F$ are store the discrete data for the adjacency, for node attributes and the node attribute matrix of form $A \in\{0,1\}^{n \times n^{\prime}}$ with $n$ being the number of nodes in the target graph. $E\in\{0,1\}^{n \times n^{\prime} \time d_e}$ is the edge attribute matrix and a node attribute tensor of the shape $F\in\{0,1\}^{n \times d_n}$ with $d_e$ and $d_n$ being the size of the entity and relation dictionary. For the predicted graph with $k$ nodes, the adjacency matrix is $\widetilde{A} \in[0,1]^{k \times k}$, the edge attribute matrix is $\widetilde{E} \in \mathbb{R}^{k \times k \times d_{e}}$ and the node attribute matrix is $\widetilde{F} \in \mathbb{R}^{k \times d_{n}}$.
+Let us introduce a new sparse representation for a sampled subgraph, where the discrete target graph is $G=(A, E, F)$ and the continuous predicted graph $\widetilde{G}=(\widetilde{A}, \widetilde{E}, \widetilde{F})$. The $A, E, F$ are store the discrete data for the adjacency, for node attributes and the node attribute matrix of form $A \in\{0,1\}^{n \times n^{\prime}}$ with $n$ being the number of nodes in the target graph. $E\in\{0,1\}^{n \times n^{\prime} \times d_e}$ is the edge attribute matrix and a node attribute tensor of the shape $F\in\{0,1\}^{n \times d_n}$ with $d_e$ and $d_n$ being the size of the entity and relation dictionary. For the predicted graph with $k$ nodes, the adjacency matrix is $\widetilde{A} \in[0,1]^{k \times k}$, the edge attribute matrix is $\widetilde{E} \in \mathbb{R}^{k \times k \times d_{e}}$ and the node attribute matrix is $\widetilde{F} \in \mathbb{R}^{k \times d_{n}}$.
 
 
-Given these graphs the algorithm aims to find the affinity matrix $S:(i, j) \times(a, b) \rightarrow \mathbb{R}^{+}$ where $i, j \in G$ and $a, b \in \widetilde{{G}$. The affinity matrix expresses the similarity of all nodepairs between the two graphs and is calculated 
+Given these graphs the algorithm aims to find the affinity matrix $S:(i, j) \times(a, b) \rightarrow \mathbb{R}^{+}$ where $i, j \in G$ and $a, b \in \widetilde{G}$. The affinity matrix expresses the similarity of all nodepairs between the two graphs and is calculated 
 
 \begin{equation}
     \begin{array}{l}
@@ -251,9 +252,9 @@ Depending on the matrix size, the number of iterations are adjusted. The resulti
 \subsubsection{Hungarian algorithm}
 
 %  Find shortest path
-Picking up on the nodepair probabilities $X^*$ of last chapter, we reformulate it as a linear assignment problem. Here comes into play an optimization algorithm, the so called hungarian algorithm. It original objective is to optimally assign $n$ resources to $n$ tasks. The cost of assigning task $i \in \mathbb{R}^n$ to $j \in \mathbb{R}^n$ is stored in $x_{ij}$ of the quadratic cost matrix $x \in \mathbb{R}^{n \times n$. By assuming tasks and resources are simple nodes and taking $C=1-X^*$ we get the cost matrix $C$ for the optimal translation. This algorithm is has a complexity of $O\left(n^{4}\right)$, thus is not applicable to complete KGs but only to subgraphs with limited number of nodes per graph \cite{date_gpu-accelerated_2016}.
+Picking up on the nodepair probabilities $X^*$ of last chapter, we reformulate it as a linear assignment problem. Here comes into play an optimization algorithm, the so called hungarian algorithm. It original objective is to optimally assign $n$ resources to $n$ tasks. The cost of assigning task $i \in \mathbb{R}^n$ to $j \in \mathbb{R}^n$ is stored in $x_{ij}$ of the quadratic cost matrix $x \in \mathbb{R}^{n \times n}$. By assuming tasks and resources are simple nodes and taking $C=1-X^*$ we get the cost matrix $C$ for the optimal translation. This algorithm is has a complexity of $O\left(n^{4}\right)$, thus is not applicable to complete KGs but only to subgraphs with limited number of nodes per graph \cite{date_gpu-accelerated_2016}.
 
-The core of the hungarian algorithm consist of four main steps, initial reduction, optimality check, augmented search and update. The now presented algorithm is a slight alternative of the original algorithm and improves the complexity of the update step from $O\left(n^{2}\right)$ to $O\left(n\right)$ and thus, reduces the total complexity to $O\left(n^{3}\right)$. It takes as input a bipartie graph $G=(V, U, E)$ and the cost matrix $C \in \mathbb{R}^{n \times n}$ where $V \in \mathbb{R}^n$ and $U \in \mathbb{R}^n$ are sets of nodes and $E \in \mathbb{R}^{n \time \n}$ the set of edges between the nodes. The algorithm's output is a discrete matching matrix $M$. To avoid two irrelevant pages of pseudocode, the steps of the algorithm are presented in the following short summary \cite{mills2007dynamic}.
+The core of the hungarian algorithm consist of four main steps, initial reduction, optimality check, augmented search and update. The now presented algorithm is a slight alternative of the original algorithm and improves the complexity of the update step from $O\left(n^{2}\right)$ to $O\left(n\right)$ and thus, reduces the total complexity to $O\left(n^{3}\right)$. It takes as input a bipartie graph $G=(V, U, E)$ and the cost matrix $C \in \mathbb{R}^{n \times n}$ where $V \in \mathbb{R}^n$ and $U \in \mathbb{R}^n$ are sets of nodes and $E \in \mathbb{R}^{n \times n}$ the set of edges between the nodes. The algorithm's output is a discrete matching matrix $M$. To avoid two irrelevant pages of pseudocode, the steps of the algorithm are presented in the following short summary \cite{mills2007dynamic}.
 
 \begin{enumerate}
     \item Initialization: \\
@@ -279,7 +280,7 @@ The core of the hungarian algorithm consist of four main steps, initial reductio
             \beta_{j} &\leftarrow\left\{\begin{array}{ll}
             \beta_{j}-\theta & j \in J^{*} \\
             \beta_{j}+\theta & j \notin J^{*}
-            \end{array}\right.
+            \end{array}
         \end{align*}
         \item Augment $M_{k-1}$ by flipping the unmatched with the matched edges on the selected augmentation path. Thus $M_k$ is given by $\left(M_{k-1}-P\right) \cup\left(P-M_{k-1}\right)$ and $P$ is the set of edges of the current augmentation path.
     \end{enumerate}

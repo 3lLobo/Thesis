@@ -1,22 +1,78 @@
-This section presents previous work which inspired and layed the fundamentals for this thesis.
+This section presents previous work which inspired and layed the fundamentals for this thesis. Relevant papers to three topics related to this thesis will be presented. We will present their method and results in the fields of relational graph convolutions, graph encoders, and embedding based link prediction.
+
+\subsection{Relational Graph Convolutions}
+We define a graph as $G=(V, E)$  with a set of nodes $V$ and a set of edges $E$. The set of edges, with each edge connecting node $x$ and $y$, is defined by $\left\{(x, y) \mid(x, y) \in V^{2} \wedge x \neq y\right\}$ while the constrain $x \neq y$ disallows self-connections or self-loops, which is optional depending on the graphs function. Moreover, nodes and edges can have describing features, which contribute additional information about the nodes and their connection. Using graph convolutions, we make use of these properties holding spectral information about their neighboring nodes and relations. The two main standards of evaluate the performance of a neural network on graphs, are node classification and link prediction. Node classification is a classification problem where the model provides a probability distribution over all classes for each node. During link prediction de model scores a set of one real and corrupted triples and aims to score the highest on the real triple. A more in-depth explanation follows later on in chapter \ref{sec:mthods}.
+
+% Present the relational graph convolution model paper by Kipf and maybe others
+In Thomas Kipf's and Max Welling's first paper on graph convolutions \cite{kipf_semi-supervised_2017} a novel Graph Convolution Network (GCN) for semi-supervised classification is introduced. This method acts directly on the graph structure and shows to be linearly scalable with the number of nodes. While the authors compare different propagation models for the graph convolutions, their propagating rule using a first-order approximation of spectral graph convolutions, outperforms all other implementations. This so called renormalization trick normalized the adjacency matrix and adds it to an identity matrix of same size, what keeps the eigenvalues in a range between $[0,2]$ what again leads to a stable training, avoiding numerical instabilities and vanishing gradients during learning. Additionally the feature information of neighboring nodes is propagates in every layer what shows improvement in comparison to earlier methods, where only label information is aggregated.
+Kipf and Welling perform node classification on the three citation-network datasets, Citeseer, Cora and Pubmed as well as on the KG dataset NELL. In all classification tasks, their results outperform other recently proposed methods in this field and proves computational more efficient than its competition. More details on the implementation of graph convolutions can be found in the next chapter. 
+
+
+% node classification
+% on datasets: citation network Citeseer Cora Pubmed and knowledge graph  NELL
+
+
+% Kipfs second paper 
+In their publication \textit{Modeling Relational Data with Graph Convolutional Networks} Schlichtkrull, Kipf, Bloem, v.d. Berg, Titov and Welling propose a relational graph convolutional network (RGCN) and evaluate it on link prediction on the FB15K-237 and WN18 dataset and node classification on the AIFB, MUTAG, BGS and AM datasets \cite{gangemi_modeling_2018}. While the RGCN with its encoder properties, it is used by it self as node classifier, yet for link prediction it is coupled with a DistMult model acting as decoder which scores triples encoded by the RGCN see \ref{fig:RGCN}. More details on the DistMult can be found in \ref{ssec:embedlp}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.55\textwidth]{data/images/RGCN.png}
+    \label{fig:RGCN}
+    \caption{RGCN pipeline for node classification and link prediction experiments. The first pipeline only uses an encoder to classify the input nodes. The second pipeline additionally uses a decoder to score the input and predict the correct link, Source \cite{gangemi_modeling_2018}.}
+\end{figure}
+
+The RGCN works on graphs stored as dense triples, creating a hidden state for head and tail of each triple. A novel message passing network is layer-wise propagated with the hidden states of the entities. As regularization the authors propose a \textit{basis-} and \textit{blockwise} decomposition. while the first  aims at an effective weight sharing between different relation types, the second  can be seen as a sparsity constraint on the relation type's weight. The model outperforms embedding based model on the link prediction task on the FB15K-237 dataset and scores competitive on the WN18 dataset. In the node classification task, the model sets state of the art results on the datasets AIFB and AM, while scoring competitive on the rest. The authors conclude, that the model has difficulties encoding higher-degree hub nodes on datasets with many entities and low amount of classes.
+
 
 \subsection{Graph VAE}
+% Present different papers with graph VAEs
+We have seen how graph convolutional neural networks can be combined to a encoder-decoder architecture, resulting in a generative model suitable for unsupervised learning. We will present three recent publications with different methods and usecases of a graph generative model, in particular a VAE.
 
-Present different papers with graph VAEs
+% Kipfs VGAE
+In yet another publication of Kipf and Welling introduce the Variational Graph Autoencoder (VGAE), a framework for unsupervised learning on graph-structured data \cite{kipf_variational_2016}. This generative model uses a GCN as encoder and a simple inner product module as decoder. Similar to th GCN the VGAE incorporates node features, what significantly improves its performance on link prediction tasks compared to related models. The VGAE uses a two-layer GCN to encode the mean and the logvariance of for the stochastic module to sample the latent space representation. The activation of the inner product of this latent vector yields then the reconstruction of the adjacency matrix. Figure \ref{fig:kipfGVAE} shows how the model learns to represent the underlying data structure by grouping the latent representations of the datapoints according to their class, without these labels being provided to the model during training.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{data/images/KipGVAE.jpg}
+    \label{fig:kipfGVAE}
+    \caption{Colorized vizualization of the latent representation of the VGAE trained on the Core citation network with colors differentiating document classes and gray links indicating citations. This shows that the model implies and featurizes the document classes, without them being provided during training. Source \cite{kipf_variational_2016}}
+\end{figure}
+
+The VGAE with added features outperforms state of the art models in the task of link prediction on the datasets Cora, Citeseer and Pubmed. The authors point out, that a Gaussian prior might be a poor choice combined with the inner-product decoder.
+
+While citation networks represent basic graph structures, there has also been done work on more complex KGs.
+Simonovsky and Komodakis introduce the GraphVAE, a generative model which outputs a probabilistic fully-connected graph of a predefined maximum size
+in a one-shot approach \cite{simonovsky_graphvae_2018}. The model includes a standard graph matching algorithm to align the predicted graph to the ground truth. In contrast to the previously presented publications, the input to this model is a threefold and sparse graph, defined as $G=(A, E, F)$ with $A$ being the adjacency matrix, $E$ the edge attribute matrix and $F$ the node attribute matrix, with $E$ ad $F$ being one-hot encoded. Considering that this method lays the foundation for this thesis, we will adopt this notation for our own methods in \ref{sec:mthods}. Figure \ref{fig:graphvaefull} shows the architecture of the GraphVAE. The encoder is a feed forward network with edge-conditioned graph convolutions. After the convolutions the result is flattened and conditioned on the node labels $y$. A simple neural network then encodes the stochastic latent space, as we know it from previous works. The decoder is again conditioned on the node labels $y$ and in form of a fully-connected neural network reconstructs the graph prediction. The threefold decoder output is matched with the target using graph matching algorithm, which we will discuss further in \ref{ssec:graphmatch}. The best matching permutation is then used for the reconstruction loss term of the GraphVAE. Notable is, that the size of the target and prediction graph do not necessarily have to match. While this approach seems promising, the maximum graph size is limited to a node count of $~100$ by computational memory requirements.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{data/images/GraphVAEfull.png}
+    \label{fig:graphvaefull}
+    \caption{Model architecture of the GraphVAE. The target graph with $n$ nodes is encoded and conditioned on the node labels $y$. The KL divergence ensures a Gaussian prior to the decoder, which reconstructs the latent representation to a graph with $k$ nodes. Target and prediction graphs are matched and permuted before the reconstruction loss. To sample, the argmax is taken directly from the prediction. Source \cite{simonovsky_graphvae_2018}.}
+\end{figure}
+
+The model is trained on the QM9 dataset, containing the graph structure of 134k organic molecules with experiments on latent space dimension in the range of $[20,80]$. On the free generation task, about $50\%$ of the generated molecules are chemically valid and thereof remarkably $60\%$ are not included in the trainings dataset. When testing the model for robustness, it showed little disturbance when adding Gaussian noise to the input graph $G$. The authors conclude that the problem of generating graphs
+from a continuous embedding was addressed successfully and that the GraphVAE performs better on small molecules, thus worse on larger graphs.
+
 
 \begin{itemize}
     \item Belli recurrent VAE
     \item GraphVAE paper
-    \item some more
+    \item Variational Graph Auto-Encoders
 \end{itemize}
 
+
+% Kipf VGAE
+model architecture: gCN variational sampling + decoder
+
+incorporates node features
+outperforms other models on citation networks
 The model architecture presented in the GraphVAE paper is the starting point of our model.
 
-\subsection{RGCN}
-
-Present the relational graph convolution model paper by Kipf and maybe others
 
 \subsection{Embedding Based Link Prediction}
+\label{ssec:embedlp}
 
 Present RASCAL and one or two more.
 
