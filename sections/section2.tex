@@ -56,29 +56,43 @@ The model is trained on the QM9 dataset, containing the graph structure of 134k 
 from a continuous embedding was addressed successfully and that the GraphVAE performs better on small molecules, thus worse on larger graphs.
 
 
-\begin{itemize}
-    \item Belli recurrent VAE
-    \item GraphVAE paper
-    \item Variational Graph Auto-Encoders
-\end{itemize}
+In a little sidestep, we present the idea of supervised graph generation in an autoregressive fashion by Belli and Kipf and their publication \textit{Image-Conditioned Graph Generation for Road Network Extraction} \cite{belli_image-conditioned_2019}. While we will focus on the generative model, their contribution ranges wider, namely the introduction of the graph-based roadmap dataset \textit{Toulouse Road Network} and the task specific distance metric \textit{StreetMover}. The authors propose the Generative Graph Transformer (GGT) a deep autoregressive model that makes use of attention mechanisms on images, to tackle the challenging task of road network extraction from image data. The GGT has a encoder-decoder architecture, with a CNN as encoder, taking the grayscale image as input signal and predicting a conditioning vector. The decoder is a self-attentive transformer, which takes as input the encoded condition vector and a hidden representation of the adjacency matrix $A$ and feature vector $X$ of the previous step. The adjacency matrix here indicates the links between steps and the features are normalized coordinates. A multi-head operator outputs the hidden representation of $A$ and $X$ which finally are decoded by a MLP to the graph representation. For the fist step, a empty hidden representation is fed into the decoder. The model terminates the recurrent graph generation by predicting a end-of-sequence token, which signalizes the end of the graph. During learning, the generated graphs are matched to the target graphs using the \textit{StreetMover} metric, based on the Sinkhorn distance. The authors attribute \textit{StreetMover} as a scalable, efficient and permutation-invariant metric for graph comparison. The successful results of the experiments performed, show that this novel approach is suitable for the task of road network extraction and could yield similar success in graph generation task of different fields.
+While this publication does not directly align with the previously presented work, we find it of added value to present alternative approaches on our topic.
 
-
-% Kipf VGAE
-model architecture: gCN variational sampling + decoder
-
-incorporates node features
-outperforms other models on citation networks
-The model architecture presented in the GraphVAE paper is the starting point of our model.
+% \begin{itemize}
+%     \item Belli recurrent VAE
+%     \item GraphVAE paper
+%     \item Variational Graph Auto-Encoders
+% \end{itemize}
 
 
 \subsection{Embedding Based Link Prediction}
 \label{ssec:embedlp}
+Finalizing this chapter, we will look at embedding based methods on KGs. These approach was inspired by the success of word-embeddings in the field of NLP. Compared to the previously presented research, embedding models have a much simpler architecture and can be trained computationally very efficiently on large graphs. Embedding based models can only operate on simple triples, meaning a KG is represented as set of triples with indices pointing to the unique entity and relation in the graph. In disregard of their simplicity, they achieve great results on relational prediction tasks such as link prediction. In particular, this means to rank a correct triple the highest between a set of corrupted triples. In order to generate corrupt triples, each triple from the test set is modified by replacing the head or tail with all remaining entities occurring in the KG. Link prediction will be explained in more detail in \ref{sec:mthods}. 
 
-Present RASCAL and one or two more.
 
-\Graph Embeddings\\
-TransE represents entities in in low-dimensional embedding. The relationships between entities are represented by the vector between two entities \cite{bordes_translating_2013}.
-(How are different relation between the same entities represented?)
+Already in 2013 Bordes et al. introduced in their paper \textit{Translating Embeddings for Modeling Multi-relational Data} the low-dimensional embedding model TransE \cite{bordes_translating_2013}. The core idea of this model is that relations can be represented as translations in the embedding space. Entities are encoded to a low-dimension embedding space and the relation is represented as vector between the head and tail entity. The assumption is, that correct triples have a shorter relational vector than corrupted triples, thus, are closer together in embedding space. The loss function for learning of the model takes a set of corrupted triples for every triples in the training set and subtracts the translation vector of the corrupted triple in embedding space from the translation vector of the correct triple with added margin. To minimize the loss, the model has to place entities of correct triples closer together in embedding space. We think of a triple as $(s,r,o)$ and the bold notation its embedded representation, $d()$ the distance measure, $\gamma$ the positive margin and $S$ and $S^{\prime}$ as sets of correct and corrupt triples, the loss function of TransE is 
 
-OntoUSP\\
-This method learns a hierarchical structure to better represent the relations between entities in embedding space.
+\begin{equation}
+    \mathcal{L}=\sum_{S} \sum_{S^{\prime}} \left[\gamma+d(\boldsymbol{s}+\boldsymbol{r}, \boldsymbol{o})-d\left(\boldsymbol{s}^{\prime}+\boldsymbol{r}, \boldsymbol{o}^{\prime}\right)\right]
+\end{equation}
+
+The model is trained on the two KGs Freebase and Wordnet, which will also be the source for the datasets used in this thesis. TransE's link prediction results on both head and tail outperformed other competing methods of the time, such as RESCAL \cite{nickel_three-way_nodate}.
+
+In 2015, Yang et al. proposed a similar, yet better performing KG embedding method \cite{yang_embedding_2015}. Their model DistMult captures relational semantics by matrix multiplication of the embedded entity representation and uses a bilinear learning objective. The main difference o TransE is the bilinear scoring function $d_{r}^{b}()$, with bilinear meaning the score invariance of swapping head and tail entity. For the embedding space representation of subject and object $\boldsymbol{s}$ and $\boldsymbol{o}$ and a diagonal matrix $\mathbf{M}_{r} \in \mathbb{R}^{n \times n}$ as embedding of $r$, the scoring function is
+
+\begin{equation}
+    d_{r}^{b}\left(\boldsymbol{s}, \boldsymbol{o}\right)=\boldsymbol{s}^{T} \mathbf{M}_{r} \boldsymbol{o}
+\end{equation}
+
+The publication goes on to explore the options of embedding based rule extraction from KGs. Concluding, the authors state that that embeddings learned from the bilinear objective not only outperform the state of the art in link prediction but can also capture compositional semantics of relations and extract Horn rules using compositional reasoning.
+
+
+In a more recent publication by Ruffinelli et al. outdated KG embedding models such as TransE and DistMult are re-trained with state of the art techniques in deep learning. The authors start by pointing out the similarities and differences of most models. While all methods share the same embedding approach, they differ in their scoring function and their original hyperparameter search. The authors perform a quasi-random hyperparameter search on the five models RESCAL, TransE, DistMult, ComplEx and ConvE using the two datasets FB15K-237 and WN18. For evaluation the MRR and Hits@10 are used.Since these metrics nad datasets will be used later on our research, those metrics are explained in \ref{sec:mthods}. The tuned models report a up to $24\%$ higher MRR score, compared to their first reported performance. The authors conclude that simple KG embedding methods can show strong performance when trained with state-of-the-art techniques and score competitive to or even outperformed more recent architectures. The improved model configurations were found by exploring relatively few random samples from a large hyperparameter space. 
+
+% Graph Embeddings\\
+% TransE represents entities in in low-dimensional embedding. The relationships between entities are represented by the vector between two entities \cite{bordes_translating_2013}.
+% (How are different relation between the same entities represented?)
+
+% OntoUSP\\
+% This method learns a hierarchical structure to better represent the relations between entities in embedding space.

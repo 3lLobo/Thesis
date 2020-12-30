@@ -33,19 +33,52 @@ These metrics allow a fair comparison on a dataset between models, regardless of
 % triplets do not belong to the data set. In the following, we report mean ranks and hits@10 according
 % to both settings: the original (possibly flawed) one is termed raw, while w
 
-\subsection{Sanity Checks}
-Check if adj matrix adheres to edge attribute matrix.
+\subsubsection{RGVAE hyperparameter tuning}
+
+RGVAE:
+hidden dimensions
+latent dimensions
+beta
+
+
+RGCVAE
+
+\subsubsection{RGVAE lp}
+Different models
+Report:
+loss converges
+MRR stays almost zero
+
+With vs. w/o graph matching
+
+
+\subsubsection{DistMult lp}
+To find out why our model fails to perform lp we run the original DistMult with optimal parameters from \cite{ruffinelli_you_2019} and a variational DistMult version, which samples from a latent distribution, just like the VAE. Give implementation link.
+
+Answer question:
+We see that the variational part messes everything up.
+
+Graphs:
+MRR + Hits@all + Loss
+
+\subsection{Impact of permutation}
+% Check if adj matrix adheres to edge attribute matrix.
+
+Graph of permutation during training
+loss with vs without 
 
 \subsection{Interpolate Latent Space}
-We tale two random triples and interpolate the latent space of these two triples. The interpolations result in: HERE AN EXAMPLE.
+We take two random triples and interpolate the latent space of these two triples. The interpolations result in: HERE AN EXAMPLE.
 
 Further we go ahead and test what happens if we modify one latent dimension of a triple. HERE AN EXAPMPLE.
+
 Can the model assign logical features to latent dimensions?
 
-\subsection{Subgraph Generation}
-Until now our model trained on only one triple per sparse graph. What will happen if we train it on more than one triples?
 
 \subsection{Syntax coherence}
+
+Check model trained with vs without perm invariance.
+
 Check if generated triples follow basic logic.
 \begin{itemize}
     \item Generate triples by random signals
@@ -54,5 +87,8 @@ Check if generated triples follow basic logic.
 \end{itemize}
 
 Since there is no preset for how to check the semantics of a KG, we will use simple basic logical criteria.
-The generated triples are filtered for the relation 'is capital of', thus the subject enntity should be a city and he object entity member of the class 'country',
+The generated triples are filtered for the relation 'is capital of', thus the subject entity should be a city and he object entity member of the class 'country',
 Hope this gives good results.
+
+\subsection{Subgraph Generation}
+Until now our model trained on only one triple per sparse graph. What will happen if we train it on more than one triples?

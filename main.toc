@@ -16,52 +16,58 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3}Embedding Based Link Prediction}{6}{subsection.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Background}{6}{section.3}%
+\contentsline {section}{\numberline {3}Background}{7}{section.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}Knowledge Graph}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.1}Knowledge Graph}{7}{subsection.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Graph VAE – one shot method}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.2}Graph VAE – one shot method}{8}{subsection.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.1}VAE}{7}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.1}VAE}{8}{subsubsection.3.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.2}MLP}{8}{subsubsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2}MLP}{9}{subsubsection.3.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.3}Graph convolutions}{9}{subsubsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.3}Graph convolutions}{10}{subsubsection.3.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.2.4}Graph VAE}{9}{subsubsection.3.2.4}%
+\contentsline {subsubsection}{\numberline {3.2.4}Graph VAE}{10}{subsubsection.3.2.4}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.2.5}One Shot vs. Recursive}{10}{subsubsection.3.2.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3}Graph Matching}{10}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.3}Graph Matching}{11}{subsection.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.1}Permutation Invariance}{10}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.1}Permutation Invariance}{11}{subsubsection.3.3.1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{\numberline {3.3.2}Max-Pool Graph matching algorithm}{11}{subsubsection.3.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.3}Hungarian algorithm}{11}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.3}Hungarian algorithm}{12}{subsubsection.3.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.4}Graph Matching VAE Loss}{12}{subsubsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.4}Graph Matching VAE Loss}{13}{subsubsection.3.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4}Ranger Optimizer}{13}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.4}Ranger Optimizer}{14}{subsection.3.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Methods}{13}{section.4}%
+\contentsline {section}{\numberline {4}Methods}{14}{section.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Experiments \& Results}{13}{section.5}%
+\contentsline {section}{\numberline {5}Experiments \& Results}{14}{section.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1}Datasets and Training}{13}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.1}Datasets and Training}{14}{subsection.5.1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.2}Link Prediction}{14}{subsection.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3}Sanity Checks}{14}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.2.1}RGVAE hyperparameter tuning}{15}{subsubsection.5.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.4}Interpolate Latent Space}{14}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.2.2}RGVAE lp}{15}{subsubsection.5.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.5}Subgraph Generation}{14}{subsection.5.5}%
+\contentsline {subsubsection}{\numberline {5.2.3}DistMult lp}{15}{subsubsection.5.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.6}Syntax coherence}{14}{subsection.5.6}%
+\contentsline {subsection}{\numberline {5.3}Impact of permutation}{15}{subsection.5.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Discussion \& Future Work}{14}{section.6}%
+\contentsline {subsection}{\numberline {5.4}Interpolate Latent Space}{15}{subsection.5.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1}Discuss Aspect 1}{15}{subsection.6.1}%
+\contentsline {subsection}{\numberline {5.5}Syntax coherence}{15}{subsection.5.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2}Future Work}{15}{subsection.6.2}%
+\contentsline {subsection}{\numberline {5.6}Subgraph Generation}{16}{subsection.5.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Discussion \& Future Work}{16}{section.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.1}Discuss Aspect 1}{16}{subsection.6.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.2}Future Work}{16}{subsection.6.2}%
