@@ -7,6 +7,17 @@ For this sake of meaningful results, we chose to use the earlier presented, two 
 
 Training models on each dataset for 333 epochs, without early stopping.
 
+\subsubsection{Fb15k-237}
+This dataset is a subset of the FreeBase KG (cite).[Explain Free Base] The original Fb15k had redundant triples, creating ambiguity during training. In the updated version, Fb15k-237, these triples were removed what led to a more robust dataset, which is commonly used as benchmark for several NLP tasks.
+
+% or/and
+A subset from on of the first and largest KGs, called FreeBase. In the first version of this dataset, it was possible to infer most of the test triples by inverting triples in the trainset, Thus the latest $237$ version filtered these triples out.
+The dataset contains $14,951$ entities and $1,345$ different relations.
+
+\subsubsection{WN18rr}
+Based on the wordnet KG.
+
+
 \subsection{Link Prediction}
 % The task of link prediction, tests, if the model can recognize the relation between two entities. In order to do so, we hide the second entity of a triple and let our model to predict it.
 
@@ -32,6 +43,19 @@ These metrics allow a fair comparison on a dataset between models, regardless of
 % the training, validation or test set (except the test triplet of interest). This ensures that all corrupted
 % triplets do not belong to the data set. In the following, we report mean ranks and hits@10 according
 % to both settings: the original (possibly flawed) one is termed raw, while w
+
+
+We use negative elbo as scoring function. Since elbo is aimed to be reduced and LP scores are higher better.
+
+We try with and without permutation
+
+We try the model as encoder only
+
+We use 1/3 of the test set only, randomly drawn. Run 3 times?
+Final models only 60 epochs
+
+Link prediction with control model:
+Distmult vs Var Distmult
 
 \subsubsection{RGVAE hyperparameter tuning}
 

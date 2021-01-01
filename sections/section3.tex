@@ -89,6 +89,7 @@ While we use a discrete input space, the output space is a continuous probabilit
 
 
 \subsubsection{MLP}
+\label{ssec:mlp}
 % History introduction
 The Multi-Layer Perceptron (MLP) is the vanilla basemodel of all neural networks.
 % Invented by who when
@@ -110,6 +111,7 @@ Since the sigmoid function returns a probability distribution for all classes, t
 
 
 \subsubsection{Graph convolutions}
+\label{ssec:gcn}
 
 % TODO pretty write this
 %  Intro on convolutions
@@ -117,7 +119,7 @@ Convolutional neural nets (CNN) have the advantage to be invariant to permutatio
 
 % How do Graph convs work???
 Let us shortly go over the definition and math behind graph convolutions. Different approaches have been published on this topic, here we will present the graph convolution network (GCN) of \cite{kipf_semi-supervised_2017}.
-We consider $f(X,A)$ a GCN with an undirected graph input $\mathcal{G}=(\mathcal{V}, \mathcal{E})$, where $v_{i} \in \mathcal{V}$ is a set of $N$ nodes and  $\left(v_{i}, v_{i}\right) \in \mathcal{E}$ the set of edges. The input is a sparse graph representation, with $X$ being a node feature matrix and $A \in \mathbb{R}^{N \times N}$ being the adjacency matrix, defining the position of edges between nodes. In the initial case, where self-connections are not considered, the adjacency's diagonal has to be one resulting in $\vec{A}=A+I_{N}$. The graph forward pass through the convolutional layer $l$ is then defined as
+We consider $f(X,A)$ a GCN with an undirected graph input ${G}=(\mathcal{V}, \mathcal{E})$, where $v_{i} \in \mathcal{V}$ is a set of $N$ nodes and  $\left(v_{i}, v_{i}\right) \in \mathcal{E}$ the set of edges. The input is a sparse graph representation, with $X$ being a node feature matrix and $A \in \mathbb{R}^{N \times N}$ being the adjacency matrix, defining the position of edges between nodes. In the initial case, where self-connections are not considered, the adjacency's diagonal has to be one resulting in $\vec{A}=A+I_{N}$. The graph forward pass through the convolutional layer $l$ is then defined as
 
 % equation
 \begin{equation}
@@ -126,7 +128,7 @@ We consider $f(X,A)$ a GCN with an undirected graph input $\mathcal{G}=(\mathcal
 
 Here $\tilde{D}_{i i}=\sum_{j} \tilde{A}_{i j}$ acts as normalizing constant. $W^{(l)}$ is the layer-specific weight matrix and contains the learnable parameters. $H$ returns then the hidden representation of the input graph.
 
-The GCN was first introduced as node classifier, meaning it returns a probability distribution over all classes for each node in the input graph $\mathcal{V}$. Assuming that we preprocess $\vec{A}$ as $\hat{A}=\tilde{D}^{-\frac{1}{2}} \vec{A} \tilde{D}^{-\frac{1}{2}}$, the equation for a two-layer GCN for $z$ classes is
+The GCN was first introduced as node classifier, meaning it returns a probability distribution over all classes for each node in the input graph. Assuming that we preprocess $\vec{A}$ as $\hat{A}=\tilde{D}^{-\frac{1}{2}} \vec{A} \tilde{D}^{-\frac{1}{2}}$, the equation for a two-layer GCN for $z$ classes is
 
 \begin{equation}
     Z=f(X, A)=\operatorname{softmax}\left(\hat{A} \operatorname{ReLU}\left(\hat{A} X W^{(0)}\right) W^{(1)}\right).
@@ -150,16 +152,16 @@ The GCN was first introduced as node classifier, meaning it returns a probabilit
 % the model we are going to use for challenging KG datasets
 Now we have understood all the principles needed for a Graph VAE. While there are many variations, not only in architecture but also in graph representation, namely sparse or dense, we will focus here on the graph VAE presented in \cite{simonovsky_graphvae_2018}. A sparse graph model with graph convolutions.
 
-The encoder $q_{\phi}(\mathbf{z} \mid \mathcal{G})$ takes a graph $\mathcal{G}$ as input, on which graph convolutions are applied. After the convolutions the hidden representation is flattened and concatenated with the node label vector $y$. A simple MLP encodes the mean and logvariance of the latentsapce distribution. Using the reparametrization trick we sample the latent representation.
+The encoder $q_{\phi}(\mathbf{z} \mid {G})$ takes a graph ${G}$ as input, on which graph convolutions are applied. After the convolutions the hidden representation is flattened and concatenated with the node label vector $y$. A simple MLP encodes the mean and logvariance of the latentsapce distribution. Using the reparametrization trick we sample the latent representation.
 
-For the decoder $p_{\theta}(\mathbf{x} \mid \mathcal{G})$ the latent representation is again concatenated with the node labels. The decoder architecture for this model is a reverse MLP, which outputs a flat prediction of $\mathcal{G}$, which is split and reshaped in to the sparse matrix representation.
+For the decoder $p_{\theta}(\mathbf{x} \mid {G})$ the latent representation is again concatenated with the node labels. The decoder architecture for this model is a reverse MLP, which outputs a flat prediction of ${G}$, which is split and reshaped in to the sparse matrix representation.
 
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.75\textwidth]{data/images/SimonovskyGraphVAE.png}
     \label{fig:simonGVAE}
-    \caption{Illustration of the GraphVAE architecture as presented in \cite{simonovsky_graphvae_2018}. The decoder combines graph convolutions and a MLP with concatenated labels $y$. The decoder reconstruct $\mathcal{G}$ from the latent representation and the concatenated node labels $y$.}
+    \caption{Illustration of the GraphVAE architecture as presented in \cite{simonovsky_graphvae_2018}. The decoder combines graph convolutions and a MLP with concatenated labels $y$. The decoder reconstruct ${G}$ from the latent representation and the concatenated node labels $y$.}
 \end{figure}
 
 % The encoder can either be a MLP, a GCNN or an RGCN. The same holds for the decoder with the addition that model architecture needs to be inverted. An version of a Graph VAE presented in \cite{simonovsky_graphvae_2018}. This model combines both the previous methods. The input graph undergoes relational graph convolutions before it is flattened and projected into latent space. After applying the reparametrization trick, a simple MLP decoder is used to regenerate the graph. In addition the model concatenates the input with a target vector $y$, which represents ???. The same vector is concatenated with the latent tensor. ***Elborate why they do that***.
@@ -242,7 +244,7 @@ The next step is to find the similarity matrix $X^* \in[0,1]^{k \times n}$. Ther
 To calculate $\text { Sx }$ we find the best candidate $x_{i,a}$ from the possible pairs in the affinity matrix. Heuristically, taking the argmax over all neighboring nodepair affinities yields the best result. Other options are sum-pooling or average-pooling, which do not discard potentially irrelevant information, yet have shown to perform worse. Thus, using the max-pooling approach, we can pairwise calculate
 
 \begin{equation}
-    \mathbf{Sx}_{i a}=\mathbf{x}_{i a} \mathbf{S}_{i a ; i a}+\sum_{j \in \mathcal{N}_{i}} \max _{b \in \mathcal{N}_{a}} \mathbf{x}_{j b} \mathbf{S}_{i a ; j b}.
+    \mathbf{Sx}_{i a}=\mathbf{x}_{i a} \mathbf{S}_{i a ; i a}+\sum_{j \in \mathbb{N}_{i}} \max _{b \in \mathbb{N}_{a}} \mathbf{x}_{j b} \mathbf{S}_{i a ; j b}.
 \end{equation}
 
 Depending on the matrix size, the number of iterations are adjusted. The resulting similarity matrix $X*$ yields a normalized probability of matching nodepairs. In order to get a discrete translation matrix, we need to find the optimal match for each node.
@@ -289,7 +291,6 @@ The core of the hungarian algorithm consist of four main steps, initial reductio
 
 
 
-\\
 \subsubsection{Graph Matching VAE Loss}
 Coming back to our generative model, we now explain how the loss function needs to be adjusted to work with graphs and graph matching, which results in a permutation invariant graph VAE.
 
