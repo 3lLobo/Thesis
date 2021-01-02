@@ -60,27 +60,28 @@ In simple cases, like citation networks this is a sufficient representation. In 
 
 
 
-The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model in form of an autoencoder, consisting of an encoder and a decoder. Its architecture differs from a common autoencoder by having a stochastic module between encoder and decoder. The encoder can be represented as recognition model with the probability $p_{\boldsymbol{\theta}}(\mathbf{z} \mid x)$ with $x$ being the variable we want to inference and $z$ being the latent representation given an observed value of $x$. The encoder parameters are represented by $\theta$. Similarly, we denote the decoder as $p_{\boldsymbol{\theta}}(\mathbf{x} \mid z)$, which given a latent representation $z$ produces a probability distribution for the possible values, corresponding to the input of $x$. This will be the base architecture of all our models in this thesis.
+The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model in form of an autoencoder, consisting of an encoder and a decoder. Its architecture differs from a common autoencoder by having a stochastic module between encoder and decoder. The encoder can be represented as recognition model with the probability $p_{{\theta}}(\mathbf{z} \mid x)$ with $x$ being the variable we want to inference and $z$ being the latent representation given an observed value of $x$. The encoder parameters are represented by $\theta$. Similarly, we denote the decoder as $p_{{\theta}}(\mathbf{x} \mid z)$, which given a latent representation $z$ produces a probability distribution for the possible values, corresponding to the input of $x$. This will be the base architecture of all our models in this thesis.
 
 The main contribution of the VAE is the so called reparameterization trick. When sampling from the latent prior distribution, we get a stochastic module inside our model, which can not be backpropagated and makes learning impossible. By placing the stochastic module outside the model, we can again backpropagate. We use the predicted latent space as mean and variance for a Gaussian normal distribution, from which we then sample $\epsilon$, which acts as external parameter and does not need to be updated.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.75\textwidth]{data/images/repaTrick.png}
-    \label{fig:simonGVAE}
-    \caption{Representation of the VAE as bayesian network, with solid lines denoting the generator $p_{\boldsymbol{\theta}}(z)p_{\boldsymbol{\theta}}(\mathbf{x} \mid z)$ and the dashed lines the posterior approximation $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ \cite{kingma_auto-encoding_2014}.}
+    \caption{Representation of the VAE as bayesian network, with solid lines denoting the generator $p_{{\theta}}(z)p_{{\theta}}(\mathbf{x} \mid z)$ and the dashed lines the posterior approximation $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ \cite{kingma_auto-encoding_2014}.}
     \label{fig:varinference}
 \end{figure}
 
-In \ref{fig:varinference} we see, that the true posterior $p_{\boldsymbol{\theta}}(\mathbf{z} \mid \mathbf{x})$ is intractable. Thus, we make the assumption that the prior to the decoder is Gaussian with an approximately diagonal covariance, which gives us the approximated posterior.
+In \ref{fig:varinference} we see, that the true posterior $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ is intractable. Thus, we make the assumption that the prior to the decoder is Gaussian with an approximately diagonal covariance, which gives us the approximated posterior.
 
 \begin{equation}
     \log q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)=\log \mathcal{N}\left(\mathbf{z} ; \boldsymbol{\mu}^{(i)}, \boldsymbol{\sigma}^{2(i)} \mathbf{I}\right)
 \end{equation}
     
 Now variational inference can be performed, which allows both $\theta$ the generative and $\phi$ the variational parameters to be learned jointly. Using the Monte Carlo estimation of $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ we get the so called estimated lower bound (ELBO):
+
 \begin{equation}
-    y_{k}(\mathbf{x}, \mathbf{w})=\sigma\left(\sum_{j=0}^{M} w_{k j}^{(2)} h\left(\sum_{i=0}^{D} w_{j i}^{(1)} x_{i}\right)\right)
+    \mathcal{L}\left({\theta}, {\phi} ; \mathbf{x}^{(i)}\right)=-D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{{\theta}}(\mathbf{z})\right)+\mathbb{E}_{q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)}\left[\log p_{{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}\right)\right]
+    \label{eq3:elbo}
 \end{equation}
 
 We denote the first term the regularization term, as it forces the model into using a Gaussian normal prior. The second term represents the reconstruction loss, matching the prediction with the target.
@@ -97,10 +98,10 @@ Its properties as universal approximator has been discovered and widely studied 
 
 % Functionality
 % In its basic structure it takes a one dimensional input, fully-connected hidden layer, activation function and finally output layer with normalized predictions.
-The mathematical definition of the MLP is rather simple. It takes linear input vector of the form $x_1,...,x_D$ which is multiplied by the weight matrix $\mathbf{w^{(1)}}$ and then transformed using a non-linear activation function $h(\dot)$. Due to its simple derivative, mostly the rectified linear unit (ReLU) function is used. This results in the hidden layer, consisting of hidden units. The hidden units get multiplied with the second weight matrix, denoted $\mathbf{w^{(2)}}$ and finally transformed by a sigmoid function $\sigma(\dot)$, which produces the output.Grouping all weight and bias parameter together we get the following equation for the MLP:
+The mathematical definition of the MLP is rather simple. It takes linear input vector of the form $x_1,...,x_D$ which is multiplied by the weight matrix $\mathbf{w^{(1)}}$ and then transformed using a non-linear activation function $h(\dot)$. Due to its simple derivative, mostly the rectified linear unit (ReLU) function is used. This results in the hidden layer, consisting of hidden units. The hidden units get multiplied with the second weight matrix, denoted $\mathbf{w^{(2)}}$ and finally transformed by a sigmoid function $\sigma(\dot)$, which produces the output. Grouping weight and bias parameter together we get the following equation for the MLP
 
 \begin{equation}
-    y_{k}(\mathbf{x}, \mathbf{w})=\sigma\left(\sum_{j=1}^{M} w_{k j}^{(2)} h\left(\sum_{i=1}^{D} w_{j i}^{(1)} x_{i}+w_{j 0}^{(1)}\right)+w_{k 0}^{(2)}\right)
+    y_{k}(\mathbf{x}, \mathbf{w})=\sigma\left(\sum_{j=0}^{M} w_{k j}^{(2)} h\left(\sum_{i=0}^{D} w_{j i}^{(1)} x_{i}\right)\right)
 \end{equation}
 
 for $j=1, \ldots, M$ and $k=1, \ldots, K$, with $M$ being the total number of hidden units and $K$ of the output.
@@ -230,6 +231,7 @@ Given these graphs the algorithm aims to find the affinity matrix $S:(i, j) \tim
     \begin{array}{l}
         S((i, j),(a, b)) = \left(E_{i, j, \cdot}^{T}, \widetilde{E}_{a, b, \cdot}\right) A_{i, j} \widetilde{A}_{a, b} \widetilde{A}_{a, a} \widetilde{A}_{b, b}[i \neq j \wedge a \neq b] + \left(F_{i, \cdot}^{T} \widetilde{F}_{a, \cdot}\right) \widetilde{A}_{a, a}[i=j \wedge a=b]
     \end{array}
+\label{eq3:s}
 \end{equation}
 
 where the square brackets define Iverson brackets \cite{simonovsky_graphvae_2018}.
@@ -252,6 +254,7 @@ Depending on the matrix size, the number of iterations are adjusted. The resulti
 
 
 \subsubsection{Hungarian algorithm}
+\label{ssec3:hung}
 
 %  Find shortest path
 Picking up on the nodepair probabilities $X^*$ of last chapter, we reformulate it as a linear assignment problem. Here comes into play an optimization algorithm, the so called hungarian algorithm. It original objective is to optimally assign $n$ resources to $n$ tasks. The cost of assigning task $i \in \mathbb{R}^n$ to $j \in \mathbb{R}^n$ is stored in $x_{ij}$ of the quadratic cost matrix $x \in \mathbb{R}^{n \times n}$. By assuming tasks and resources are simple nodes and taking $C=1-X^*$ we get the cost matrix $C$ for the optimal translation. This algorithm is has a complexity of $O\left(n^{4}\right)$, thus is not applicable to complete KGs but only to subgraphs with limited number of nodes per graph \cite{date_gpu-accelerated_2016}.
@@ -292,6 +295,7 @@ The core of the hungarian algorithm consist of four main steps, initial reductio
 
 
 \subsubsection{Graph Matching VAE Loss}
+\label{ssec3:GVAEloss}
 Coming back to our generative model, we now explain how the loss function needs to be adjusted to work with graphs and graph matching, which results in a permutation invariant graph VAE.
 
 The normal VAE maximizes the evidence lower-bound or, in a practical implementation, minimizes the upper-bound on negative log-likelihood. Using the notation of \ref{ssection:VAE} the graph VAE loss is
@@ -313,17 +317,22 @@ The loss function $\mathcal{L}$ is a combination of reconstruction term and regu
 The predicted output of the decoder is split in three parts and while $\tilde{A}$ is activated through sigmoid, $\tilde{E}$ and $\tilde{F}$ are activated via edge- and nodewise softmax. The graph matching permutation for $A$ is applied to the target $A^{\prime}=X A X^{T}$ and for $E$ and $F$ on the prediction, $\widetilde{F}^{\prime}=X^{T} \widetilde{F}$ and $\widetilde{E}_{\cdot, \cdot, l}^{\prime}=X^{T} \widetilde{E}_{\cdot, \cdot, l} X$, $l$ being the one-hot encoded edge attribute vector which is permuted. These permuted subgraphs are then used to calculate the maximum log-likelihood estimate \cite{simonovsky_graphvae_2018}
 
 \begin{equation}
+    \label{eq3:GAVElossA}
     \begin{split}
         \log p\left(A^{\prime} \mid \mathbf{z}\right) = &1 / k \sum_{a} A_{a, a}^{\prime} \log \widetilde{A}_{a, a}+\left(1-A_{a, a}^{\prime}\right) \log \left(1-\widetilde{A}_{a, a}\right)+ \\ & +1 / k(k-1) \sum_{a \neq b} A_{a, b}^{\prime} \log \widetilde{A}_{a, b}+\left(1-A_{a, b}^{\prime}\right) \log \left(1-\widetilde{A}_{a, b}\right)
     \end{split}
 \end{equation}
 
 \begin{align}
+    \label{eq3:GAVElossEF}
         \log p(F \mid \mathbf{z}) &=1 / n \sum_{i} \log F_{i, \cdot}^{T} \widetilde{F}_{i,}^{\prime} \\
         \log p(E \mid \mathbf{z}) &=1 /\left(\|A\|_{1}-n\right) \sum_{i \neq j} \log E_{i, j,}^{T}, \widetilde{E}_{i, j, \cdot}^{\prime}
 \end{align}
 
+Note that $k$ can be equal $n$ is target and prediction graphs have the same number of nodes. The normalizing constant $1 / k(k-1)$ takes into account the no self-loops restriction, thus an edge-less diagonal. In the case of self loops this constant would be $1 / k*K$. Similar $1 /\left(\|A\|_{1}-n\right)$ for $\log p(E \mid \mathbf{z})$ where $-n$ accounts for the edge-less diagonal and in case of self-loops would be discarded leaving us with $1 /\left(\|A\|_{1}\right)$.
+
 \subsection{Ranger Optimizer}
+\label{sec3:ranger}
 
 Finalizing this chapter, we introduce the novel deep learning optimizer Ranger. An optimizer, which in 2020 placed itself on the top of 12 FastAI leaderboards. Ranger combines Rectified Adam (RAdam), lookahead and optionally gradient centralization. let us shortly look into the different components.
 

@@ -1,4 +1,4 @@
-This section describes the methods used in the experiments of this thesis. We will begin with data formatting and preprocessing, then the presentation the model, mainly the encoder and decoder and their variations. Moving on we explain our implementation of graph matching the loss function of the model and its evaluation metrics. To end of this chapter we describe the link prediction pipeline which is the main experiment to evaluate our model. All experiments are aimed to be fully reproducible and the model meant to be used in future work, thus the code is openly available on Github \footnote{\url{https://github.com/INDElab/rgvae}}.
+This section describes the methods used in the experiments of this thesis. We will begin with data formatting and preprocessing, then the presentation the model, mainly the encoder and decoder and their variations. Moving on we explain our implementation of graph matching the loss function of the model and its evaluation metrics. To end of this chapter we describe the link prediction pipeline which is the main experiment to evaluate our model. Our implementation is written in Python using PyTorch, a high-performace deep-learning library \cite{pytorch}. All experiments are aimed to be fully reproducible and the model meant to be used in future work, thus the code is openly available on Github \footnote{\url{https://github.com/INDElab/rgvae}}.
 
 \subsection{Knowledge graph data}
 All our presented methods will operate on KG data. While data from other graph domains is possible, this work focuses solely on datasets in triple format. We will explain the sparse graph representation, which is the input format for our model and how to preprocess the original KG triples to match that format.
@@ -107,7 +107,7 @@ For our RGVAE decoder, we use the same minimal approach as in \cite{simonovsky_g
 To sample from the generated graph we apply the Sigmoid activation function to the logits of the first matrix and use the normalized output as weights for binomial distributions, from which we can sample the discrete $\tilde{A}$. For $\tilde{E}$ and $\tilde{F}$ we take the argmax on the last dimension of both matrices, Each node and edge can have only one attribute, referring to its index in $\mathcal{E}$ and $\mathcal{V}$, thus only the highest predicted value is relevant. The generated sample is a discrete graph $\tilde{G}(\tilde{A},\tilde{E},\tilde{F})$.
 
 
-\subsubsection{Model Limitations}
+\subsubsection{Limitations}
 
 The main limitation of the RGVAE is the parabolic increase of model parameters with the increase of nodes per input graph $\mathcal{O}(n^2)$. The number of parameters to train is directly linked with the GPU memory requirements. Even more computationally expensive is the use of permutation invariant graph matching, with a complexity of $\mathcal{O}(n^3)$. Thus, we propose this model only for generating small graphs with $n<30$.
 
@@ -137,78 +137,170 @@ The main limitation of the RGVAE is the parabolic increase of model parameters w
 
 \subsection{RGVAE learning}
 % Lay out pipeline.
-GPU requirements.
-LISA
-Nvidia titan RX 25GB 60h
-Experiment log wndb.ai [cite]
-optimizer ranger github repo link
+
+In this section we will present our implementation of how to fit the model to the data. We follow best practices of academical research as much as possible. Learning a model on data is a mostly standardized procedure, which includes training and evaluation per epoch. During training, the model forward passes the data, computes the loss, then does a backwards pass and updates its parameters. During evaluation, it is presented a split of the dataset unseen during training. Only the forward pass is done and the loss tracked during evaluation. Up to here the RGVAE does not differ from the vanilla VAE training. Special is the graph matching function which is applied to the predicted graph and the loss function which takes into account the optimal permutation. Thus, we will look deeper into graph matching and derive RGVAE loss.
+The trainig and all experimnets are performed on the GPU cluster LISA on a single node. The GPU equipped on this node is a Nvidia titan RX 25GB. To log our experiments results, we use \textit{Weights & Biases}, a cloud-based experiment tracking tool \cite{wandb}.
+
+
+
+% GPU requirements.
+% LISA
+% Nvidia titan RX 25GB 60h
+% Experiment log wndb.ai [cite]
+% optimizer ranger github repo link
 
 \subsubsection{Max pooling graph matching}
 
-%  explain the code
-% batch implementation
-% loop implementation to check
-Summing over the neighbors means summing over the whole column
-Normalize matrix with Frobenius Norm
+While the pseudocode presented in \cite{cho_finding_2014} is simple and straight forward, it proves complicated to implement this in algorithms for batches and thus, without looping over the indices. Yet, our batch implementation solves these challenges and is compared more efficient than the direct implementation, which we use for validating our results. Given the target graph $G$ and the predicted graph $\tilde{G}$, the algorithm can be divided in three steps, calculating the five dimensional affinity matrix (the first being the batch dimension), max-pool matching the soft (continuous) similarity matrix $X^*$ and discretizing $X^*$ to our final permutation matrix $X$.
 
-Batch version:
-Only matmul and dot. keep dimension of S with shape (bs,n,n,k,k)
-When maxpooling, flatten Xs (n,k) for batch dot multiplication. This way (i think) we sum over all j nad b neighbors instead of taking the max.  
+% Affinity
+We use equation \ref{eq3:s} for the first step but instead of adding the two terms to a single output, we return $S$ twofold as $S_r$, five dimensional holding the information of edge affinity and $S_e$, three dimansional with the affinity information of the nodes. In a preprocessing step we zero out the diagonal of $A$, $\tilde{A}$ and for $E$ and $\tilde{E}$ the diagonal of the second and third dimension, to compilie with the constrain $[i \neq j \wedge a \neq b]$ of the first term. For the second term we only take into account the diagonal of $\tilde{A}$ to compile with the constrain $[i=j \wedge a=b]$. Pseudocode \ref{alg4:s} shows the implementation, here \textit{diag()} stands for a vector with only the diagonal entries. For the dot product of $E$ and $\tilde{E}$ over the last dimension we implement our own version of \texttt{torch.matmul()} to cope with higher dimensions. The operator $\odot$ denotes element-wise matrix multiplication.
+
+
+
+\begin{algorithm}
+    \caption{Batch implementation for the affinity between two graphs }
+    \hspace*{\algorithmicindent} \textbf{Input:} $G(A,E,F$ and $\tilde{G}(\tilde{A},\tilde{E},\tilde{F})$
+    \begin{algorithmic}[1]
+        % \Input{$G(A,E,F$ and $\tilde{G}(\tilde{A},\tilde{E},\tilde{F})$}
+        \Statex \textbf{First term:} $[i \neq j \wedge a \neq b]$
+        \State $E_{term1} = E^T  \tilde{E}$ \Comment{Dot product over the last dimension}
+        \State $A_{term1} = A$.unsqueeze(-1)$^T (\tilde{A} \odot (\tilde{A}  \tilde{A}^T))$.unsqueeze(-1) \Comment{Dot product over the last (empty) dimension}
+        \State $S_r = E_{term1} \odot A_{term1}$
+        \Statex \textbf{Second term:} $[i=j \wedge a=b]$
+        \State $A_{term2} =$ ones\_like(diag($\tilde{A}$))$^T $ diag($\tilde{A}$)
+        \State $F_{term2} = F^T  \tilde{F}$ \Comment{Dot product over the last dimension}
+        \State $S_e = F_{term2} \odot A_{term2}$
+        \State \textbf{return} $(S_r, S_e)$
+    \end{algorithmic}
+    \label{alg4:s}
+\end{algorithm}
+
+
+% Max-pool loop
+The next step is the graph matching algorithm is the max-pool loop presented in \cite{cho_finding_2014}. We initialize the similarity matrix as ones $X^* \in 1^{bs\times n \times n}$ with $bs$ denoting the batch size. For a certain number of iterations, Cho proposes $40$ but the number should be adjusted to the number of nodes in the graph, we multiply $X^*$ with a reduced version of $S$ and use its Frobenius norm as normalizer. The algorithm \ref{alg4:maxpool} shows our implementation for batches.
+
+
+\begin{algorithm}
+    \caption{Max-pool graph matching for batches}
+    \hspace*{\algorithmicindent} \textbf{Input:} $(S_r, S_e)$
+    \begin{algorithmic}[1]
+        \State Init $X^* \in 1^{bs\times n \times n}$
+        \For{$iteration=1,2,\dots$}
+            \State $S_{max} =$ sum(max($S_r \odot X^*$.unsqueeze($[1,1]$))) \Comment{Sum and max over the last dimension. Unsqueeze two times on the second dimension}
+            \State $X^* = X^* \odot S_e + S_{max}$
+            \State $X^* = X^* /$ frobnorm($X^*$)
+        \EndFor
+        \State \textbf{return} $X^*$
+    \end{algorithmic}
+    \label{alg4:maxpool}
+\end{algorithm}
+
+
+To the best of our knowledge, this is the first time this algorithm is implemented in batch style. Thus, we would like to believe that laying out the implementation in detail will contribute to the academic value of this thesis.  
+
+% Hungarian
+The last step in the graph matching pipeline is the discretization of $X^*$. We chose the Hungarian algorithm as presented in \ref{ssec3:hung}. To our disapointment and resulting in a bottleneck, no batch nor tensor implantation of the named algorithm has been published so far. Thus, we convert $X^*$ to \texttt{numpy.array()} format and make use of the \textit{Scipy} package \cite{2020SciPy-NMeth}. First we create the cost matrix $X_{cost} = 1 - X^*$ and then, iterating over the batch size, use \texttt{scipy.optimize.linear\_sum\_assignment} which returns the optimal assignment matrix. This is our final permutation matrix $X$, indicating the best match between target and prediction. If no permutation is needed, $X$ is the identity matrix of $A$.
+
+
+% %  explain the code
+% % batch implementation
+% % loop implementation to check
+% Summing over the neighbors means summing over the whole column
+% Normalize matrix with Frobenius Norm
+
+% Batch version:
+% Only matmul and dot. keep dimension of S with shape (bs,n,n,k,k)
+% When maxpooling, flatten Xs (n,k) for batch dot multiplication. This way (i think) we sum over all j nad b neighbors instead of taking the max.  
 
 \subsubsection{Loss function}
+\label{ssec4:loss}
 
-% If loss function should be permutation invariant we need to do some kind of graph matching.\\
-% Different options for graph matching.\\
-% Maxpooling-algorithm:\\
-% Assumptions\\
-% Node to edge affinity equals 0\\
+The RGVAE uses the ELBO loss from equation \ref{eq3:elbo}, consisting of two terms, the regularization loss and the reconstruction loss. we will present our implementation of both loss terms with graph matching and an alternative loss without graph matching for comparative evaluation of our results 
 
-% Self-loops are possible, adjacency matrix can be zero or one.\\
+%  reconstruction ref to loss
+%  point out challenges, log, nan
+We implement $\log p\left(A^{\prime} \mid \mathbf{z}\right)$ from equation \ref{eq3:GAVElossA} with the second normalizing constant as $1 / k*K$ since we allow self-loops. The permutation matrix $X$ is applied to to the target adjacency, resulting in $A^{\prime}$. For $\log p\left(E^{\prime} \mid \mathbf{z}\right)$ and $\log p\left(F \mid \mathbf{z}\right)$ the permutation is applied to the prediction, what in the case of $E^\prime$ requires our own implementation of matrix multiplication of $d>2$ . Taking into account self-loops we change the normalization constant of $\log p\left(E^{\prime} \mid \mathbf{z}\right)$ to $1 /\left(\|A\|_{1}\right)$. It is left to mention that when implementing $\sum_{i \neq j} \log E_{i, j,}^{T}, \widetilde{E}_{i, j, \cdot}^{\prime}$ in matrix multiplication style, we have to account for the zero values before taking the logarithm. We implement \texttt{torch.sum(torch.sum(torch.log(no\_zero($E$ * $\hat{E}$)),-1)-1)} with \texttt{no\_zero()} being a function which replaces $0$ values with $1$. This implementation of the loss function can be backpropageted with exception of the graph matching part, where the \texttt{numpy} implementation of the hungarian algorithm prevents backpropagation.
 
-
-In contrast to his implementation we assume, that a node or edge can have none, one or multiple attributes. Therefore our attributes are also not sigmoided and do not sum up to one. This leads o the modification of term logF and logE where we do not matrix multiply over the attribute vector but take the BCE as over the rest of the points.
-KG can have multiple or no attributes vs molecular graphs can be one hot encoded.
-
-Okay, further we need to treat the $log_pE$ and $log_pF$ just like $log_pA$ and subtract the inverse. Otherwise the model learn to predict very high values only. 
-
-A note to the node features, these stay softmaxed and one-hot encoded since we will use them as node labels.
-
-beta VAE
-
-Hungarian algorithm for discrimination of X
+% regularization loss + beta
+The regularization loss is given by the KL divergence between the approximated posterior $\log q_{\phi}\left(\mathbf{z} \mid \mathbf{x}\right)$ and the Gaussian prior $p(\mathbf{z})$. The only modification we make to the original loss, is adding a $\beta$ parameter which in values $100<\beta <500$ has shown great results in factorizing the latent space \cite{higgins}. By setting $\beta=1$ we return to the original loss function. This hyperparameter will be explored in the experiments.
 
 
-The hungarian algorithm as presented in section 2 return the shortest path in a matrix. We use this shortest path as bast match between the two graphs. The node paris identified as optimal are masked as $1$ and the rest of the matrix as $0$. This way we discretizice $X\star$ to $X$. 
+% present loss function w/o graph matching 
+Alternativly and as ground truth we implement the VAE loss \ref{eq3:elbo} for graphs without graph matching. The reconstruction loss of the adjacency, we use calculate the binary cross entropy ($BCE$) and categorical cross entropy ($CE$) for rhe attribute matrices. The regularization loss is similar to the above presented and also includes the hyperparameter $\beta$. The ELBO then is \ref{eg4:normalELBO} with $\sigma()$ indicating Sigmoid activation.
 
+\begin{equation}
+    \label{eg4:normalELBO}
+    \mathcal{L}(\phi,\theta:G) = BCE(A,\sigma(\tilde{A})) + CC(E,\tilde{E}) + CC(F,\tilde{F}) - D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid G\right) \| p_{{\theta}}(\mathbf{z})\right)
+\end{equation}
+
+We train the model on the negative ELBO. Further we use \textit{Ranger} presented in \ref{sec3:ranger} as optimizer combining three learning optimization methods. Out of the various optimization parameters, we achived good performance with the default values and  only adjusted the learning rate and the number of lookahead steps. Missing a publication to cite, we refer to the source code \textit{Ranger} \footnote{\url{https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer}}
+
+
+% optimizer ranger github repo link
 
 \subsection{Link prediction and Metrics}
+% LP as main experiment and proof of concept. 
+Our main experiment will be link prediction. This will be a proof of concept rather than an attempt to set the state of the art. The results will let us draw conclusions on the impact and function of different parameters.
+Besides the final link prediction experiment, we will let the model perform link prediction on a randomly drawn small subset of the testset during trainig. This gives us a broader view on the models performance, which otherwise would only evaluated by the ELBO loss.  
 
+% describe LP as in paper OLD DOG
+Link prediction on multi-relational KGs is the task of predicting unobserved triples, based in the information accurired during traiing. To evaluate a model on this task, the most common method is entity ranking in the form of triple completion of unseen triples from the testset. Given a KG $G(\mathcal{E},\mathcal{V})$ we want our model find the right entity out of $\mathcal{E}$ which completes the unseen triple $(s,r,?)$ or $(?,r,o)$ for heads or tail prediciton. Thus, the model scores the triple for all possible combination with the entities from $\mathcal{E}$. The rank of the true triple, in descending order, defines the performance of the model \cite{ruffinelli_you_2019}.
+
+In the preprocessing step we created a dictionary with all occurring combinations for all possible triples with missing head or tail. This dictionaries we use to filter out real triples from the scoring. Unfiltered scores are referred to as \textit{raw scores}. Per link prediction run, the model has to score the number of triples in the test set times the $d_e$ the number of entities in $\mathcal{E}$ times two for head and tail, which mostly results in a number much larger than the size of the actual dataset.
+
+Finally, the metrics for link prediction are the mean reciprocal rank (MRR) of the score for the true triple and the average HITS@$k$ with $k \in [1,3,10]$. We denote $\mathcal{K}_{test}$ the unseen test set and $\left|\mathcal{K}_{\text {test }}\right|$ the number of triples in the test set. The operator $\operatorname{rank()}$ returns the in descending order the by the model scored position of the true triple. Head prediction of a triple given relation and object is denoted $(s|r,o)$ and likewise $(o|s,r)$ for tail prediction. The Iverson brackets $[\operatorname{rank}(s \mid r, o) \leq k]$ return $1$ if the scored rank is equal or lower than $k$, else $o$. 
+% describe MRR, Hits at n
+
+
+\begin{equation}
+    \begin{aligned}
+    \operatorname{MRR} &=\frac{1}{2\left|\mathcal{K}_{\text {test }}\right|} \sum_{(s, r, o) \in \mathcal{K}_{\text {lest }}}\left(\frac{1}{\operatorname{rank}(s \mid r, o)}+\frac{1}{\operatorname{rank}(o \mid s, r)}\right) \\
+    \text { Hits@ } k &=\frac{1}{2\left|\mathcal{K}_{\text {test }}\right|} \sum_{(s, r, o) \in \mathcal{k}_{\text {lest }}}(\mathbb{1}[\operatorname{rank}(s \mid r, o) \leq k]+\mathbb{1}[\operatorname{rank}(o \mid s, r) \leq k])
+    \end{aligned}
+\label{eq4:MRR}
+\end{equation}
+% mention we use MRR during training on subset
+
+
+% Link prediction to make a proof of concept, not achieve SOTA.\\
 
 % First:
-% Link prediction to make a proof of concept, not achieve SOTA.\\
 % Node classifier by only using encoder.\\
 % latent space interpolation to find analogies to smile vector in the latent space of a face VAEs.\\
 % Identify if VAE learns semantics. OWL, onthology datasetbatch_size, required.\\
 % Wasserstein distance???
 % Link prediction?
-% blabl
 
 
-\begin{itemize}
-    \item Load Dataset
-    \item Convert to sparse in batches
-    \item forward pass through VAE
-    \item MPGM loss
-    \item Backward pass
-    \item test on val set
-    \item calculate MRR on subset of val set
-    \item draw graphs
-\end{itemize}
+% \begin{itemize}
+%     \item Load Dataset
+%     \item Convert to sparse in batches
+%     \item forward pass through VAE
+%     \item MPGM loss
+%     \item Backward pass
+%     \item test on val set
+%     \item calculate MRR on subset of val set
+%     \item draw graphs
+% \end{itemize}
 
 
 \subsection{Variational DistMult}
 
-Control model
-reparametrization trick in middle
-still same scoring function
+% why do we implement it, which variation
+In the context of link prediction, we implement control model for better interpretability of our results. From the wide range of embedding based models, DistMult reports both good results as well as an efficient architecture. Its bilinear property aligns with the permutation invariance of the RGVAE. additional to the original model we implement a variational version to isolate the effect of variational inference on multi-relational link prediction.
+
+% architecture link to embed
+The DistMult encoder has a linear embedding layer for both sets of entities and relations. The embedded or latent representation is passed through the bilinear scoring function, which is equation \ref{eq2:distmult}. During training the model scores the triples in the training set among a number of corrupted triples. Loss function and optimizer are tunable hyperparameter. Table REF shows the optimal hyperparameter settings by Ruffellini at al. for the FB15k-237 dataset.
+
+TODO table
+
+% option to train with elbo or just scores
+The model implementation is adopted from Peter Bloem's work \footnote{\url{https://github.com/pbloem/embed}}. Additionally a variational module is implemented, which uses the embedding vector representation as mean and logvariance for a latent distribution from where the latant representation is sampled using the reparametrization trick. When this method is not selected, the stochastic coeficient $\epsilon$ is set to $1$ rather than a random sample from the standard normal distribution. Lastly we implement the ELBO loss, which adds a regularization term, including $\beta$ parameters to the BCE loss, thus we can only use the variational DistMult (VDistMult) in combination with BCE loss. The scoring function of the VDistMult stays identical to the original.
+
+% optimal parameters
+
+% Control model
+% reparametrization trick in middle
+% still same scoring function
 

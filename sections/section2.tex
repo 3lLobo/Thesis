@@ -82,6 +82,7 @@ The model is trained on the two KGs Freebase and Wordnet, which will also be the
 In 2015, Yang et al. proposed a similar, yet better performing KG embedding method \cite{yang_embedding_2015}. Their model DistMult captures relational semantics by matrix multiplication of the embedded entity representation and uses a bilinear learning objective. The main difference o TransE is the bilinear scoring function $d_{r}^{b}()$, with bilinear meaning the score invariance of swapping head and tail entity. For the embedding space representation of subject and object $\boldsymbol{s}$ and $\boldsymbol{o}$ and a diagonal matrix $\mathbf{M}_{r} \in \mathbb{R}^{n \times n}$ as embedding of $r$, the scoring function is
 
 \begin{equation}
+    \label{eq2:distmult}
     d_{r}^{b}\left(\boldsymbol{s}, \boldsymbol{o}\right)=\boldsymbol{s}^{T} \mathbf{M}_{r} \boldsymbol{o}
 \end{equation}
 
