@@ -165,10 +165,10 @@ We use equation \ref{eq3:s} for the first step but instead of adding the two ter
         % \Input{$G(A,E,F$ and $\tilde{G}(\tilde{A},\tilde{E},\tilde{F})$}
         \Statex \textbf{First term:} $[i \neq j \wedge a \neq b]$
         \State $E_{term1} = E^T  \tilde{E}$ \Comment{Dot product over the last dimension}
-        \State $A_{term1} = A$.unsqueeze(-1)$^T (\tilde{A} \odot (\tilde{A}  \tilde{A}^T))$.unsqueeze(-1) \Comment{Dot product over the last (empty) dimension}
+        \State $A_{term1} = A\operatorname{.unsqueeze}(-1)^T (\tilde{A} \odot (\tilde{A}  \tilde{A}^T))\operatorname{.unsqueeze}(-1)$ \Comment{Dot product over the last (empty) dimension}
         \State $S_r = E_{term1} \odot A_{term1}$
         \Statex \textbf{Second term:} $[i=j \wedge a=b]$
-        \State $A_{term2} =$ ones\_like(diag($\tilde{A}$))$^T $ diag($\tilde{A}$)
+        \State $A_{term2} = \operatorname{ones\_like}(\operatorname{diag}(\tilde{A}))^T \operatorname{diag}(\tilde{A})$
         \State $F_{term2} = F^T  \tilde{F}$ \Comment{Dot product over the last dimension}
         \State $S_e = F_{term2} \odot A_{term2}$
         \State \textbf{return} $(S_r, S_e)$
@@ -187,9 +187,9 @@ The next step is the graph matching algorithm is the max-pool loop presented in 
     \begin{algorithmic}[1]
         \State Init $X^* \in 1^{bs\times n \times n}$
         \For{$iteration=1,2,\dots$}
-            \State $S_{max} =$ sum(max($S_r \odot X^*$.unsqueeze($[1,1]$))) \Comment{Sum and max over the last dimension. Unsqueeze two times on the second dimension}
+            \State $S_{max} = \operatorname{sum}(\operatorname{max}(S_r \odot X^*\operatorname{.unsqueeze}([1,1])))$ \Comment{Sum and max over the last dimension. Unsqueeze two times on the second dimension}
             \State $X^* = X^* \odot S_e + S_{max}$
-            \State $X^* = X^* /$ frobnorm($X^*$)
+            \State $X^* = X^* / \operatorname{frobenius\_norm}(X^*$)
         \EndFor
         \State \textbf{return} $X^*$
     \end{algorithmic}
@@ -216,7 +216,7 @@ The last step in the graph matching pipeline is the discretization of $X^*$. We 
 \subsubsection{Loss function}
 \label{ssec4:loss}
 
-The RGVAE uses the ELBO loss from equation \ref{eq3:elbo}, consisting of two terms, the regularization loss and the reconstruction loss. we will present our implementation of both loss terms with graph matching and an alternative loss without graph matching for comparative evaluation of our results 
+The RGVAE uses the ELBO loss from equation \ref{eq3:elbo}, consisting of two terms, the regularization loss and the reconstruction loss. We will present our implementation of both loss terms with graph matching and an alternative loss without graph matching for comparative evaluation of our results 
 
 %  reconstruction ref to loss
 %  point out challenges, log, nan
@@ -241,7 +241,7 @@ We train the model on the negative ELBO. Further we use \textit{Ranger} presente
 
 \subsection{Link prediction and Metrics}
 % LP as main experiment and proof of concept. 
-Our main experiment will be link prediction. This will be a proof of concept rather than an attempt to set the state of the art. The results will let us draw conclusions on the impact and function of different parameters.
+Our main experiment will be link prediction. It is intended as proof of concept rather than an attempt to set the state of the art. The results will let us draw conclusions on the impact and function of different parameters.
 Besides the final link prediction experiment, we will let the model perform link prediction on a randomly drawn small subset of the testset during trainig. This gives us a broader view on the models performance, which otherwise would only evaluated by the ELBO loss.  
 
 % describe LP as in paper OLD DOG
@@ -293,7 +293,7 @@ In the context of link prediction, we implement control model for better interpr
 % architecture link to embed
 The DistMult encoder has a linear embedding layer for both sets of entities and relations. The embedded or latent representation is passed through the bilinear scoring function, which is equation \ref{eq2:distmult}. During training the model scores the triples in the training set among a number of corrupted triples. Loss function and optimizer are tunable hyperparameter. Table REF shows the optimal hyperparameter settings by Ruffellini at al. for the FB15k-237 dataset.
 
-TODO table
+TODO DistMult parameter table
 
 % option to train with elbo or just scores
 The model implementation is adopted from Peter Bloem's work \footnote{\url{https://github.com/pbloem/embed}}. Additionally a variational module is implemented, which uses the embedding vector representation as mean and logvariance for a latent distribution from where the latant representation is sampled using the reparametrization trick. When this method is not selected, the stochastic coeficient $\epsilon$ is set to $1$ rather than a random sample from the standard normal distribution. Lastly we implement the ELBO loss, which adds a regularization term, including $\beta$ parameters to the BCE loss, thus we can only use the variational DistMult (VDistMult) in combination with BCE loss. The scoring function of the VDistMult stays identical to the original.
