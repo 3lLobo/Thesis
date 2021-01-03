@@ -1,10 +1,15 @@
 .vscode
 
 # Latex auxiliary files
-# *.log
-# *.aux
-# *.dvi
-# *.out
-# *.bbl
-# *.blg
-# *.xml
+*.log
+*.aux
+*.dvi
+*.out
+*.bbl
+*.blg
+*.xml
+*.lot
+*.toc
+*-blx.bib
+
+graphs/data/
