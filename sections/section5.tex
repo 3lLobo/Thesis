@@ -14,6 +14,9 @@ For this sake of comparison with state of the art results, we chose the two most
 
 \printinunitsof{in}\prntlen{\textwidth}
 
+Entity types
+
+triple topics
 
 This dataset is a subset of the FreeBase KG (cite).[Explain Free Base] The original Fb15k had redundant triples, creating ambiguity during training. In the updated version, Fb15k-237, these triples were removed what led to a more robust dataset, which is commonly used as benchmark for several NLP tasks.
 
@@ -36,95 +39,134 @@ Empirically we set the learning rate to $3e-5$ and the batchsize to the maximum 
 % lr empirically and batchszize fixed.
 
 % beta
-We compare the values of $\beta \in [0,1,10,100]$
+For the hyperparameter tuning of $\beta \in [0,1,10,100]$ we chose significant values. With $\beta = 0$ we do not constrain our model on the Gaussian prior, thus the latent distribution can take the form of any distribution. This reduces the influence of the variational module and the model becomes closer to an autoencoder. For $\beta = 1$ we get our base model, and for $\beta \in [10,100]$ the $\beta-$VAE version.
+
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{graphs/plots/beta_wn.png}
-    \label{fig5:betawn}
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{graphs/plots/beta_loss_fb.png}
+      \caption{FB15K-237}
+      \label{fig5:betafb}
+    \end{subfigure}%
+    \begin{subfigure}{.5\textwidth}
+      \centering
+      \includegraphics[width=.9\linewidth]{graphs/plots/beta_loss_wn.png}
+      \caption{WN18RR}
+      \label{fig5:betawn}
+    \end{subfigure}
+    \caption{Validation loss for RGVAE with $\beta \in [0,1,10,100]$ trained on each dataset.}
+    \label{fig5:beta}
+\end{figure}
+
+
+Figure \ref{fig5:beta} shows the validation ELBO for the different $\beta$ values and for both datasets. We notice two interesting outcomes.  
+
+\begin{enumerate}
+    \item For $\beta = 0$ converges further than the rest.
+    \item The remaining values behave quase identical with $\beta = 100$ performing slightly better. 
+\end{enumerate}
+
+Since setting $\beta = 0$ would undermine our hypothesis of evaluating variational model, we chose $\beta = 100$ as default for the following experiments. This also compares with the $\beta$ values proposed by Higgins in \cite{higgins_beta-vae_2016} to achive a factorization of the latent space.
+
+Especially on the FB15k-237 dataset the $\beta = 0$ configuration converges to a much lower ELBO. Thus, we have the trained models perform link-prediction on a $1\%$ subset of the validation set. The barplot \ref{fig5:betafbmrr} indicates an inverse correlation between the ELBO and the MRR score. 
+
+\begin{figure}[H]
+    \centering
+      \includegraphics[width=.45\textwidth]{graphs/plots/beta_mrr_fb.png}
+      \caption{MRR scores for different $\beta$ values on the dataset FB15k-237.}
+      \label{fig5:betafbmrr}
 \end{figure}
 
 % d_z
+Experiments on the impact of $d_z$ on the ELBO show little improvement for $10<d_z<100$ and from $100<d_z<1000$ insignificant to no improvement. Thus, we chose $d_z=100$ as default for our experiments.
+TABLE IN APPENDIX  
+
 
 % d_h did not influcence
-
-RGVAE:
-hidden dimensions
-latent dimensions
-beta
-
-
-RGCVAE
+Lastly, we evaluate the models hidden dimensions $d_h$ and its influence on the ELBO and the (subset)MRR. We compare between $d_h\in [256, 512, 1024, 2048]$, while the lowest configuration performs slightly worse on the ELBO, there is no significant difference the remaining three configurations. Considering the models parameter count we chose the $d_h=512$ as default.
 
 
 \subsection{Link Prediction}
-% The task of link prediction, tests, if the model can recognize the relation between two entities. In order to do so, we hide the second entity of a triple and let our model to predict it.
-
-% We used link prediction as evaluation protocol and for comparison state of the art models. For each triple in the dataset, we remove the tail and combine it with all possible entities in our dataset. EVen though this is called 'triple-corruption', also correct triples can be generated, which could appear in the trainset. These have bo the filtered out before evaluation. Link prediction on unfiltered test data is termed 'raw'. Our model then computes the ELBO loss for all corrupted triples, which are sorted and stored in ascending order. The same procedure is repeated the triple's head in place of the tail.
 
 
-% The metrics used to evaluate the predictions, is the mean reciprocal rank (MRR) and hits at 1,3 and 10.
-% The MRR ??? explain what the MRR is.
+ We now get to the main experiment of this thesis. The results of this experiment will reveal if the RGVAE architecture is suitable for link prediction and in first palace, if it is able to grasp the underlying KG semantics at least significantly better than random by differentiating between real and corrupted triples. At this point we bring in the convolutional variation of our model, which we will denote as RGCVAE. The experiments reveal if the convolutional architecture holds an advantage compared to the simple MLP baseline. Further a randomly initiated and untrained RGVAE is used as control model.
+ 
+ Due to its sparse graph computation, the RGVAE takes about 7 day to evaluate link prediction on the full testset and even 3 days when prediction tasks run parallel on a node of $4$ Nvidia Titan RX 25GB GPUs. Since the exemplar link prediction during experimenting with different hyperparameter already gave us an idea of the mediocre performance of our model, we chose to spare computation time and power by running link prediction on a randomly drawn one-third of the complete test set. Each run is repeated three times using a different random seed.
 
-% Hits at 1 indicates what percentage of the triples in the test set have been ranked the highest compared to their corruptions. Similar, hits at 3 and 10, give a percentage of triples ranked in the top 3 and top 10.
-% These metrics allow a fair comparison on a dataset between models, regardless of the ranking method of each model.
+The results are visualized in figure \ref{fig5:lp_final}. We chose a visualization over a table, to emphasize our observations, and for the mentioned limitation of the testset, which makes these results not suitable for academic valid comparisons. Note that the figures are scales and to a range $[0,10]$ while all metrics have a maximum of $1$.
 
+Comparing a MRR of $0.08$ to the DistMult score or $0.4$ our model does not perform competitive on link prediction tasks.
+Better than random?? I hope so.
 
+Graph convolutions do not yield and advantage over the basemodel. In fact, the RGCVAE scores even slightly worse. 
 
-% Evaluation protocol For evaluation, we use the same ranking procedure as in [3]. For each test
-% triplet, the head is removed and replaced by each of the entities of the dictionary in turn. Dissimilarities (or energies) of those corrupted triplets are first computed by the models and then sorted by
-% ascending order; the rank of the correct entity is finally stored. This whole procedure is repeated
-% while removing the tail instead of the head. We report the mean of those predicted ranks and the
-% hits@10, i.e. the proportion of correct entities ranked in the top 10.
-% These metrics are indicative but can be flawed when some corrupted triplets end up being valid
-% ones, from the training set for instance. In this case, those may be ranked above the test triplet, but
-% this should not be counted as an error because both triplets are true. To avoid such a misleading
-% behavior, we propose to remove from the list of corrupted triplets all the triplets that appear either in
-% the training, validation or test set (except the test triplet of interest). This ensures that all corrupted
-% triplets do not belong to the data set. In the following, we report mean ranks and hits@10 according
-% to both settings: the original (possibly flawed) one is termed raw, while w
+%  FOR Conclusion: this might be because of the implementation of stacking the matrices.
+The model scores about three times better on the FB15k-237 dataset than on WN18RR. FB15k-237 is a richer dataset with more triples and and a more balanced ratio of entities to relations. WN18RR operates on only 18 relations, what makes the relation most crucial when completing a triple. The architecture of the RGVAE is puts twice the emphasis entities, described by the adjacency and the node feature matrices, while the relation is only represented by the overly sparse edge attribute matrix. Thus, we could conclude that our model learns to predict based on the hidden types and topics of the entities. All possible conclusions for this are discussed in \ref{sec:discus}. Relvant for this section is, that we chose the FB15k-237 dataset to investigate further, how well the RGVAE's grasps the underlying entity types and triple topics.   
+
+%  REASON: fb has more relations, is a more complete KG. wn only 12 relations and more entities. Model emphasizes entities (adj and node features), relations may be less relevant, wn is more about the relation (same/ not the same). This indicates that our model grasps the hidden types and topics of the FB entities.
 
 
+ \begin{figure}[H]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \left
+    \includegraphics[height=.5\textwidth, keepaspectratio]{graphs/plots/lp_fb.png}
+    \caption{FB15K-237}
+    \label{fig5:lpfb}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \right
+    \includegraphics[height=.5\textwidth]{graphs/plots/lp_wn_wol.png}
+    \caption{WN18RR}
+    \label{fig5:lpwn}
+  \end{subfigure}
+  \caption{Link prediction results in MRR, Hits@1, Hits@3 and Hits@10 for RGVAE and RGCVAE trained on the full trainset of each dataset.}
+  \label{fig5:lp_final}
+\end{figure}
+
+TODO add random!!!
+
+% Compare with vs without convolution 
 % We use negative elbo as scoring function. Since elbo is aimed to be reduced and LP scores are higher better.
 
-We try with and without permutation
+% We try with and without permutation
 
-We try the model as encoder only
+% We try the model as encoder only NO
 
-We use 1/3 of the test set only, randomly drawn. Run 3 times?
-Final models only 60 epochs
-
-
-
-Different models
-Report:
-loss converges
-MRR stays almost zero
-
-With vs. w/o graph matching
+% We use 1/3 of the test set only, randomly drawn. Run 3 times?
+% Final models only 60 epochs
 
 
 \subsubsection{DistMult lp}
-To find out why our model fails to perform lp we run the original DistMult with optimal parameters from \cite{ruffinelli_you_2019} and a variational DistMult version, which samples from a latent distribution, just like the VAE. Give implementation link.
+
+In order to explain the poor performance of the RGVAE on the task of link prediction, either the models architecture or the variational inference is to blame. Since the RGVAE with relaxed latent space, meaning less variance, indicated higher scorings than the Gaussian prior version, we examine the two variables by means of embedding models. The DistMult model with optimized parameter serves as control model, while we compare it to the VDistmult \ref{ssec4:vdistm} learning the full ELBO versus learning only on the reconstruction loss.
+
+
 
 Answer question:Link prediction with control model:
-Distmult vs Var Distmult
+Distmult vs Var Distmult vs relaxed VDistmult
 
 We see that the variational part messes everything up.
 
-Graphs:
+Table:
 MRR + Hits@all + Loss
 
 \subsection{Impact of permutation}
 % Check if adj matrix adheres to edge attribute matrix.
 
-Graph of permutation during training
+Permutation starts at 1$100\5$ at the beginning of training and converges then to $60\%$.
+
+Model without predicts adj node always in the upper right just as the target. Model with predicts much more variations of adjacency.
+
+Graph of permutation during training.
 loss with vs without 
 
 \subsection{Interpolate Latent Space}
 We take two random triples and interpolate the latent space of these two triples. The interpolations result in: HERE AN EXAMPLE.
 
-Further we go ahead and test what happens if we modify one latent dimension of a triple. HERE AN EXAPMPLE.
+Further we go ahead and test what happens if we modify one latent dimension at a time with $d_z = 10$ of a triple. TABLE: (s,r,o), x_axis dims, y_axis steps. $95\%$ Gaussian confidence 
 
 Can the model assign logical features to latent dimensions?
 
@@ -136,14 +178,15 @@ Check model trained with vs without perm invariance.
 Check if generated triples follow basic logic.
 \begin{itemize}
     \item Generate triples by random signals
-    \item Filter these triples on a certain relation
-    \item Check if the entities are part of the linked class
+    \item Filter these triples on type fixed relation
+    \item Check if the entity is of this type.
 \end{itemize}
 
 Since there is no preset for how to check the semantics of a KG, we will use simple basic logical criteria.
-The generated triples are filtered for the relation 'is capital of', thus the subject entity should be a city and he object entity member of the class 'country',
+The generated triples are filtered for the relation 'is capital of', thus the subject entity should be of type 'city' and the object entity of type 'country' and both adhere follow the topic 'location',
 Hope this gives good results.
 
 
 \subsection{Subgraph Generation}
+
 Until now our model trained on only one triple per sparse graph. What will happen if we train it on more than one triples?
