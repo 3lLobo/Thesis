@@ -56,7 +56,7 @@ The RGVAE is initialized with a set of hyperparameter, which define the input sh
     $n_e$   &\multicolumn{1}{c|}{-}   & Total number of entities\\
     $n_r$   &\multicolumn{1}{c|}{-} & Total number of relations\\
     $d_z$ &\multicolumn{1}{c|}{$100$}   & Latent space dimension\\
-    $d_h$ &\multicolumn{1}{c|}{$1024$}   & Hidden dimension\\
+    $d_h$ &\multicolumn{1}{c|}{$512$}   & Hidden dimension\\
     $dropout$ &\multicolumn{1}{c|}{$0.2$}   & Dropout\\
     $\beta$ & \multicolumn{1}{c|}{$1$}  & $\beta$ value for regularization  \\
     $perminv$ & \multicolumn{1}{c|}{\textbf{True}}  & Permutation invariant loss function  \\
@@ -64,8 +64,8 @@ The RGVAE is initialized with a set of hyperparameter, which define the input sh
     $encoder$ & \multicolumn{1}{c|}{\textbf{MLP}}  & Learning w/ gradient clipping  \\
     \hline
     \end{tabular}
-\label{tab:RGVAE}
-\caption{The inital hyperparameter of the RGVAE with default value and description.}
+    \caption{The inital hyperparameter of the RGVAE with default value and description.}
+    \label{tab:RGVAE}
 \end{table}
 
 
@@ -83,8 +83,8 @@ The RGVAE is initialized with a set of hyperparameter, which define the input sh
 The prove-of-concept encoder is a MLP as described in \ref{ssec:mlp}, which takes the flattened concatenated threefold graph $x=G(A,E,F)$ as batch input. We use the initial parameters to calculate the input
 
 \begin{equation}
-\label{eq4:inputdim}
     d_{input} = n*n + n*n*n_r + n*n_e
+    \label{eq4:inputdim}
 \end{equation}
 
 The main encoder architecture is a 3 layer fully connected network, with both layers using ReLU as as activation function. The choice for two hidden layers is based on the huge difference between $d_{input}$ and $d_z$. The first layer has a dimension of $2*d_h$ and the option to use dropout, which by default is set to $0.2$. The second (hidden) layer has the dimension $d_h$ which is by default set to $1024$. After the second ReLU activation, the encoder linearly transforms the hidden state to an output vector of $2 \times d_z$. This vector is split and makes the mean and log-variance of size $d_z$ for the reparametrization trick. Sampling $\epsilon$ from an autonomous module, we get the latent representation $z$ of $x$,  the final output of the encoder.
@@ -230,8 +230,8 @@ The regularization loss is given by the KL divergence between the approximated p
 Alternativly and as ground truth we implement the VAE loss \ref{eq3:elbo} for graphs without graph matching. The reconstruction loss of the adjacency, we use calculate the binary cross entropy ($BCE$) and categorical cross entropy ($CE$) for rhe attribute matrices. The regularization loss is similar to the above presented and also includes the hyperparameter $\beta$. The ELBO then is \ref{eg4:normalELBO} with $\sigma()$ indicating Sigmoid activation.
 
 \begin{equation}
-    \label{eg4:normalELBO}
     \mathcal{L}(\phi,\theta:G) = BCE(A,\sigma(\tilde{A})) + CC(E,\tilde{E}) + CC(F,\tilde{F}) - D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid G\right) \| p_{{\theta}}(\mathbf{z})\right)
+    \label{eg4:normalELBO}
 \end{equation}
 
 We train the model on the negative ELBO. Further we use \textit{Ranger} presented in \ref{sec3:ranger} as optimizer combining three learning optimization methods. Out of the various optimization parameters, we achived good performance with the default values and  only adjusted the learning rate and the number of lookahead steps. Missing a publication to cite, we refer to the source code \textit{Ranger} \footnote{\url{https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer}}
@@ -286,6 +286,7 @@ Finally, the metrics for link prediction are the mean reciprocal rank (MRR) of t
 
 
 \subsection{Variational DistMult}
+\label{ssec4:vdistm}
 
 % why do we implement it, which variation
 In the context of link prediction, we implement control model for better interpretability of our results. From the wide range of embedding based models, DistMult reports both good results as well as an efficient architecture. Its bilinear property aligns with the permutation invariance of the RGVAE. additional to the original model we implement a variational version to isolate the effect of variational inference on multi-relational link prediction.

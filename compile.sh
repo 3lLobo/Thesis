@@ -1,4 +1,6 @@
-pdflatex main.tex
+#!/bin/bash
+
+pdflatex -interaction nonstopmode main.tex
 bibtex main
-pdflatex main.tex
-pdflatex main.tex
+pdflatex -interaction nonstopmode main.tex
+pdflatex -interaction nonstopmode main.tex

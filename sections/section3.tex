@@ -80,7 +80,7 @@ In \ref{fig:varinference} we see, that the true posterior $p_{{\theta}}(\mathbf{
 Now variational inference can be performed, which allows both $\theta$ the generative and $\phi$ the variational parameters to be learned jointly. Using the Monte Carlo estimation of $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ we get the so called estimated lower bound (ELBO):
 
 \begin{equation}
-    \mathcal{L}\left({\theta}, {\phi} ; \mathbf{x}^{(i)}\right)=-D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{{\theta}}(\mathbf{z})\right)+\mathbb{E}_{q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)}\left[\log p_{{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}\right)\right]
+    % \mathcal{L}\left({\theta}, {\phi} ; \mathbf{x}^{(i)}\right)=-D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{{\theta}}(\mathbf{z})\right)+\mathbb{E}_{q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)}\left[\log p_{{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}\right)\right]
     \label{eq3:elbo}
 \end{equation}
 
@@ -161,8 +161,8 @@ For the decoder $p_{\theta}(\mathbf{x} \mid {G})$ the latent representation is a
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.75\textwidth]{data/images/SimonovskyGraphVAE.png}
-    \label{fig:simonGVAE}
     \caption{Illustration of the GraphVAE architecture as presented in \cite{simonovsky_graphvae_2018}. The decoder combines graph convolutions and a MLP with concatenated labels $y$. The decoder reconstruct ${G}$ from the latent representation and the concatenated node labels $y$.}
+    \label{fig:simonGVAE}
 \end{figure}
 
 % The encoder can either be a MLP, a GCNN or an RGCN. The same holds for the decoder with the addition that model architecture needs to be inverted. An version of a Graph VAE presented in \cite{simonovsky_graphvae_2018}. This model combines both the previous methods. The input graph undergoes relational graph convolutions before it is flattened and projected into latent space. After applying the reparametrization trick, a simple MLP decoder is used to regenerate the graph. In addition the model concatenates the input with a target vector $y$, which represents ???. The same vector is concatenated with the latent tensor. ***Elborate why they do that***.
@@ -285,7 +285,7 @@ The core of the hungarian algorithm consist of four main steps, initial reductio
             \beta_{j} &\leftarrow\left\{\begin{array}{ll}
             \beta_{j}-\theta & j \in J^{*} \\
             \beta_{j}+\theta & j \notin J^{*}
-            \end{array}
+            \end{array}\right \\
         \end{align*}
         \item Augment $M_{k-1}$ by flipping the unmatched with the matched edges on the selected augmentation path. Thus $M_k$ is given by $\left(M_{k-1}-P\right) \cup\left(P-M_{k-1}\right)$ and $P$ is the set of edges of the current augmentation path.
     \end{enumerate}
@@ -317,16 +317,16 @@ The loss function $\mathcal{L}$ is a combination of reconstruction term and regu
 The predicted output of the decoder is split in three parts and while $\tilde{A}$ is activated through sigmoid, $\tilde{E}$ and $\tilde{F}$ are activated via edge- and nodewise softmax. The graph matching permutation for $A$ is applied to the target $A^{\prime}=X A X^{T}$ and for $E$ and $F$ on the prediction, $\widetilde{F}^{\prime}=X^{T} \widetilde{F}$ and $\widetilde{E}_{\cdot, \cdot, l}^{\prime}=X^{T} \widetilde{E}_{\cdot, \cdot, l} X$, $l$ being the one-hot encoded edge attribute vector which is permuted. These permuted subgraphs are then used to calculate the maximum log-likelihood estimate \cite{simonovsky_graphvae_2018}
 
 \begin{equation}
-    \label{eq3:GAVElossA}
     \begin{split}
         \log p\left(A^{\prime} \mid \mathbf{z}\right) = &1 / k \sum_{a} A_{a, a}^{\prime} \log \widetilde{A}_{a, a}+\left(1-A_{a, a}^{\prime}\right) \log \left(1-\widetilde{A}_{a, a}\right)+ \\ & +1 / k(k-1) \sum_{a \neq b} A_{a, b}^{\prime} \log \widetilde{A}_{a, b}+\left(1-A_{a, b}^{\prime}\right) \log \left(1-\widetilde{A}_{a, b}\right)
     \end{split}
+    \label{eq3:GAVElossA}
 \end{equation}
 
 \begin{align}
+    \log p(F \mid \mathbf{z}) &=1 / n \sum_{i} \log F_{i, \cdot}^{T} \widetilde{F}_{i,}^{\prime} \\
+    \log p(E \mid \mathbf{z}) &=1 /\left(\|A\|_{1}-n\right) \sum_{i \neq j} \log E_{i, j,}^{T}, \widetilde{E}_{i, j, \cdot}^{\prime}
     \label{eq3:GAVElossEF}
-        \log p(F \mid \mathbf{z}) &=1 / n \sum_{i} \log F_{i, \cdot}^{T} \widetilde{F}_{i,}^{\prime} \\
-        \log p(E \mid \mathbf{z}) &=1 /\left(\|A\|_{1}-n\right) \sum_{i \neq j} \log E_{i, j,}^{T}, \widetilde{E}_{i, j, \cdot}^{\prime}
 \end{align}
 
 Note that $k$ can be equal $n$ is target and prediction graphs have the same number of nodes. The normalizing constant $1 / k(k-1)$ takes into account the no self-loops restriction, thus an edge-less diagonal. In the case of self loops this constant would be $1 / k*K$. Similar $1 /\left(\|A\|_{1}-n\right)$ for $\log p(E \mid \mathbf{z})$ where $-n$ accounts for the edge-less diagonal and in case of self-loops would be discarded leaving us with $1 /\left(\|A\|_{1}\right)$.
