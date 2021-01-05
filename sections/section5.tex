@@ -6,29 +6,38 @@ This section presents the experiments and results aimed at evaluating our propos
 
 
 \subsection{Data}
+\label{ssec5:data}
 For this sake of comparison with state of the art results, we chose the two most popular dataset used in this field of KG link prediction, FB15k237 and WN18rr.
 
 % Training models on each dataset for 333 epochs, without early stopping.
 
 \textbf{Fb15k-237}
 
+textwidth for figures:
 \printinunitsof{in}\prntlen{\textwidth}
+
+linewidth for figures:
+\printinunitsof{in}\prntlen{\linewidth}
 
 Entity types
 
 triple topics
 
-This dataset is a subset of the FreeBase KG (cite).[Explain Free Base] The original Fb15k had redundant triples, creating ambiguity during training. In the updated version, Fb15k-237, these triples were removed what led to a more robust dataset, which is commonly used as benchmark for several NLP tasks.
+% This dataset is a subset of the FreeBase KG (cite).[Explain Free Base] The original Fb15k had redundant triples, creating ambiguity during training. In the updated version, Fb15k-237, these triples were removed what led to a more robust dataset, which is commonly used as benchmark for several NLP tasks.
 
-% or/and
-A subset from one of the first and largest KGs, called FreeBase. In the first version of this dataset, it was possible to infer most of the test triples by inverting triples in the trainset, Thus the latest $237$ version filtered these triples out.
-The dataset contains $14,951$ entities and $1,345$ different relations.
+% % or/and
+% A subset from one of the first and largest KGs, called FreeBase. In the first version of this dataset, it was possible to infer most of the test triples by inverting triples in the trainset, Thus the latest $237$ version filtered these triples out.
+% The dataset contains $14,951$ entities and $1,345$ different relations.
 
 \textbf{WN18rr}
 
 Based on the wordnet KG.
 
-% Table comparing numbers
+Only $18$ different relations
+
+triples are synsets (synonym, hypernym)
+
+TODO Table comparing numbers
 
 \subsection{Hyperparameter Tuning}
 
@@ -79,9 +88,10 @@ Especially on the FB15k-237 dataset the $\beta = 0$ configuration converges to a
       \label{fig5:betafbmrr}
 \end{figure}
 
+Barplot IN APPENDIX  
+
 % d_z
 Experiments on the impact of $d_z$ on the ELBO show little improvement for $10<d_z<100$ and from $100<d_z<1000$ insignificant to no improvement. Thus, we chose $d_z=100$ as default for our experiments.
-TABLE IN APPENDIX  
 
 
 % d_h did not influcence

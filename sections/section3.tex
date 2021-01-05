@@ -1,6 +1,6 @@
-In this section we will go over related work and relevant background information for our model and experiments. The depth of the explanation is adopted to the expected prior knowledge of the reader. The reader is supposed to know the basics of machine learning and deep learning, including probability theory and basic knowledge on neural networks and their different architectures. Basic principles such as forward pass, backpropagation and convolutions are expected to be understood. Further the use and functionality of deep learning modules such as the model, the optimizer and the terms target and prediction should be known. This also includes being familiar with the training and testing pipeline of a model in deep learning.
+In this section we will go over related work and relevant background information for our model and experiments. The depth of the explanation is adopted to the expected prior knowledge of the reader. The reader is supposed to know the basics of machine learning and deep learning, including probability theory and basic knowledge on neural networks and their different architectures. Basic principles such as forward pass, backpropagation and convolutions are expected to be understood. Further the use and functionality of deep learning modules such as the model, the optimizer and the terms target and prediction should be known. This also includes being familiar with the training and testing pipeline of deep learning.
 
-Should all these boxes be checked, then we can expect to get a deeper understanding of the magic behind the VAE and its differences to a normal autoencoder. After that we will present how convolutional layers can be used on graphs. Of course where there is a layer there is a model, thus we are presenting the graph convolutional network (GCN). Closing the circle we show how we can adopt the VAE to graph convolutions. Wrapping things up, we present the state of the art algorithms for graph matching, which will be util to allow permutation invariance when matching prediction and target graph \cite{paulheim_knowledge_2016}.  
+Should all these boxes be checked, then we can expect to get a deeper understanding of the magic behind the VAE and its differences to a normal autoencoder. Once the base is layed, we will anser the question how convolutional layers can be used on graphs. Of course there is no layer whitout a model, thus we will present the graph convolutional network (GCN). Closing the circle we show how we can adopt the VAE to graph convolutions. Wrapping things up, we present the state of the art algorithms for graph matching, which will be util to allow permutation invariance when matching prediction and target graph \cite{paulheim_knowledge_2016}.  
 
 
 \subsection{Knowledge Graph}
@@ -42,7 +42,7 @@ These schema based rules of a KG are defined in its ontology. Here properties of
 Lastly, we point out one major difference between KGs, namely their representation. RDF KGs are represented as set of triples, consisting of a unique combination of numeric indices. Each index linking to the corresponding entry in the entity and relation vocabulary. This is called dense representation and benefits from fast computation due to an optimized use of memory.
 
 In contrary the dense representation of a triple is the sparse representation. Here a binary square matrix also called the adjacency matrix, indicated a link between two entities. To identify the node, each node in the adjacency matrix has a one-hot encoded entity-vocabulary vector. All one-hot encoded vectors are concatenated to a node attribute matrix.
-In simple cases, like citation networks this is a sufficient representation. In the case of Freebase, we need an additional edge-attribute matrix, which indicates the relation  of each link. The main benefits of this method are the representation of subsets of triples, also subgraphs, with more than one relation and the computational possibility to perform graph convolutions. 
+In simple cases, like citation networks this is a sufficient representation. In the case of Freebase, we need an additional edge-attribute matrix, which indicates the relation  of each link. The main benefits of this method are the representation of subsets of triples, also referred to as subgraphs, with more than one relation and the possibility to perform graph convolutions. 
 
 % Usecases of KG
 
@@ -52,7 +52,7 @@ In simple cases, like citation networks this is a sufficient representation. In 
 % when indexing these triples. we get a dense representation of the KG.
 % About sparse KGs
 
-\subsection{Graph VAE – one shot method}
+\subsection{One Shot Graph VAE}
 
 \subsubsection{VAE}
 \label{ssection:VAE}
@@ -80,19 +80,19 @@ In \ref{fig:varinference} we see, that the true posterior $p_{{\theta}}(\mathbf{
 Now variational inference can be performed, which allows both $\theta$ the generative and $\phi$ the variational parameters to be learned jointly. Using the Monte Carlo estimation of $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ we get the so called estimated lower bound (ELBO):
 
 \begin{equation}
-    % \mathcal{L}\left({\theta}, {\phi} ; \mathbf{x}^{(i)}\right)=-D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{{\theta}}(\mathbf{z})\right)+\mathbb{E}_{q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)}\left[\log p_{{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}\right)\right]
+    \mathcal{L}\left({\theta}, {\phi} ; \mathbf{x}^{(i)}\right)=-D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{{\theta}}(\mathbf{z})\right)+\mathbb{E}_{q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)}\left[\log p_{{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}\right)\right]
     \label{eq3:elbo}
 \end{equation}
 
 We denote the first term the regularization term, as it forces the model into using a Gaussian normal prior. The second term represents the reconstruction loss, matching the prediction with the target.
 
-While we use a discrete input space, the output space is a continuous probability. To generate final result, the prediction is used as binomial probability distribution, from which we then sample. Once training  of a VAE is completed, the Decoder can be used on its own to generate new samples by using latent input signals \cite{kingma_auto-encoding_2014}.
+The VAE is a unsupervised learning model where the input space is discrete and the output space a continuous logits. To generate final result, the prediction activated via Sigmoid and used as mean for a binomial probability distribution, from which we then sample. Once training  of a VAE is completed, the Decoder can be used on its own to generate new samples by using latent input signals \cite{kingma_auto-encoding_2014}.
 
 
 \subsubsection{MLP}
 \label{ssec:mlp}
 % History introduction
-The Multi-Layer Perceptron (MLP) is the vanilla basemodel of all neural networks.
+The Multi-Layer Perceptron (MLP) is the mother of all neural networks.
 % Invented by who when
 Its properties as universal approximator has been discovered and widely studied since 1989. The innovation it brought to existing models was the hidden layer between the input and the output.
 
@@ -151,16 +151,19 @@ The GCN was first introduced as node classifier, meaning it returns a probabilit
 % One shot: creating adjacency and feature matrix at once.
 
 % the model we are going to use for challenging KG datasets
-Now we have understood all the principles needed for a Graph VAE. While there are many variations, not only in architecture but also in graph representation, namely sparse or dense, we will focus here on the graph VAE presented in \cite{simonovsky_graphvae_2018}. A sparse graph model with graph convolutions.
+So far we have understood all the principles needed for a Graph VAE. While there are many approaches with big differences regarding the model but also in graph representation, namely sparse or dense, we will focus here on the graph VAE presented in \cite{simonovsky_graphvae_2018}. A sparse graph model with graph convolutions.
 
+TODO rewrite and describe label condition as addition.
+
+Simonovsky's GraphVAE  follows the characterizing encoder decoder architecture.
 The encoder $q_{\phi}(\mathbf{z} \mid {G})$ takes a graph ${G}$ as input, on which graph convolutions are applied. After the convolutions the hidden representation is flattened and concatenated with the node label vector $y$. A simple MLP encodes the mean and logvariance of the latentsapce distribution. Using the reparametrization trick we sample the latent representation.
 
 For the decoder $p_{\theta}(\mathbf{x} \mid {G})$ the latent representation is again concatenated with the node labels. The decoder architecture for this model is a reverse MLP, which outputs a flat prediction of ${G}$, which is split and reshaped in to the sparse matrix representation.
 
+TODO Make Illustration
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.75\textwidth]{data/images/SimonovskyGraphVAE.png}
     \caption{Illustration of the GraphVAE architecture as presented in \cite{simonovsky_graphvae_2018}. The decoder combines graph convolutions and a MLP with concatenated labels $y$. The decoder reconstruct ${G}$ from the latent representation and the concatenated node labels $y$.}
     \label{fig:simonGVAE}
 \end{figure}
@@ -329,7 +332,7 @@ The predicted output of the decoder is split in three parts and while $\tilde{A}
     \label{eq3:GAVElossEF}
 \end{align}
 
-Note that $k$ can be equal $n$ is target and prediction graphs have the same number of nodes. The normalizing constant $1 / k(k-1)$ takes into account the no self-loops restriction, thus an edge-less diagonal. In the case of self loops this constant would be $1 / k*K$. Similar $1 /\left(\|A\|_{1}-n\right)$ for $\log p(E \mid \mathbf{z})$ where $-n$ accounts for the edge-less diagonal and in case of self-loops would be discarded leaving us with $1 /\left(\|A\|_{1}\right)$.
+Note that $k$ can be equal $n$ if target and prediction graphs have the same number of nodes. The normalizing constant $1 / k(k-1)$ takes into account the no self-loops restriction, thus an edge-less diagonal. In the case of self loops this constant would be $1 / k*k$. Similar $1 /\left(\|A\|_{1}-n\right)$ for $\log p(E \mid \mathbf{z})$ where $-n$ accounts for the edge-less diagonal and in case of self-loops would be discarded leaving us with $1 /\left(\|A\|_{1}\right)$.
 
 \subsection{Ranger Optimizer}
 \label{sec3:ranger}

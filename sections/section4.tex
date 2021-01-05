@@ -1,4 +1,4 @@
-This section describes the methods used in the experiments of this thesis. We will begin with data formatting and preprocessing, then the presentation the model, mainly the encoder and decoder and their variations. Moving on we explain our implementation of graph matching the loss function of the model and its evaluation metrics. To end of this chapter we describe the link prediction pipeline which is the main experiment to evaluate our model. Our implementation is written in Python using PyTorch, a high-performace deep-learning library \cite{pytorch}. All experiments are aimed to be fully reproducible and the model meant to be used in future work, thus the code is openly available on Github \footnote{\url{https://github.com/INDElab/rgvae}}.
+This section describes the methods used in the experiments of this thesis. We will begin with data formatting and preprocessing, then the presentation the model, mainly the encoder and decoder and their variations. Moving on we explain our implementation of graph matching the loss function of the model and its evaluation metrics. To end of this chapter we describe the link prediction pipeline which is the main experiment to evaluate our model. Our implementation is written in Python using PyTorch, a high-performace deep-learning library \cite{paszke_pytorch_2019}. All experiments are aimed to be fully reproducible and the model meant to be used in future work, thus the code is openly available on Github \footnote{\url{https://github.com/INDElab/rgvae}}.
 
 \subsection{Knowledge graph data}
 All our presented methods will operate on KG data. While data from other graph domains is possible, this work focuses solely on datasets in triple format. We will explain the sparse graph representation, which is the input format for our model and how to preprocess the original KG triples to match that format.
@@ -10,13 +10,13 @@ All our presented methods will operate on KG data. While data from other graph d
 In this work, we opt for the sparse graph representation $G(A,E,F)$, where $A$ denotes the adjacency matrix, $E$ the edge feature matrix and $F$ the node feature matrix. This allows models architectures as discussed in \ref{ssec:GVAE}. The graph is binary and each matrix is stored in a separate tensor.
 
 % adjacency matrix
-The adjacency matrix $A$ takes the shape $n\times n$ with $n$ being the number of nodes in our graph/subgraph. While most of previous work would only allow edges on the upper triangular adjacency matrix and fill the diagonal with ones, we chose a less constrained representation, which we assume is a better fit for representing KGs. In particular, we allow self-loops, meaning a triple where object and subject are the same entity and our relations are directed and can be inverted. Thus $A$ can have a positive signal at any position $A_{i,j}$  $i,j \in \mathbb{R}^{n \times n}$, indicating a directed edge between node of index $i$ and node of index $j$, while $A_{i,j}$ differs from $A_{j,i}$.
+The adjacency matrix $A$ takes the shape $(n\times n)$ with $n$ being the number of nodes in our graph/subgraph. While most of previous work would only allow edges on the upper triangular adjacency matrix and fill the diagonal with ones, we chose a less constrained representation, which we assume is a better fit for representing KGs. In particular, we allow self-loops, meaning a triple where object and subject are the same entity and our relations are directed and can be inverted. Thus $A$ can have a positive signal at any position $A_{i,j}$  $i,j \in \mathbb{R}^{n \times n}$, indicating a directed edge between node of index $i$ and node of index $j$, while $A_{i,j}$ differs from $A_{j,i}$.
 
 % edge attribute matrix
-The edge attribute matrix $E$ takes the shape $n\times n\times n_e$ with $n_e$ being the number of unique entities in our dataset. For each possible edge in the adjacency matrix we have a one hot encoded vector pointing to the unique relation in the dataset. Stacking these vectors leads to the three dimensional matrix $E$.
+The edge attribute matrix $E$ takes the shape $(n\times n\times n_e)$ with $n_e$ being the number of unique entities in our dataset. For each possible edge in the adjacency matrix we have a one hot encoded vector pointing to the unique relation in the dataset. Stacking these vectors leads to the three dimensional matrix $E$.
 
 % node attribute matrix
-The shape of node attributes matrix $F$ is $n\times n_e$ with $n_e$ being the number of node attributes describing the nodes. Considering that we will split the KG in subgraphs, we use the entity index as node attribute, making it possible to assign every node in a subgraph to the entity in the full KG. Thus, the number of node attributes $n_e$ equals the number unique entities in our dataset. Again the node attributes are one hot encoded vectors, which stacked result in the two dimensional $F$ matrix.
+The shape of node attributes matrix $F$ is $(n\times n_e)$ with $n_e$ being the number of node attributes describing the nodes. Considering that we will split the KG in subgraphs, we use the entity index as node attribute, making it possible to assign every node in a subgraph to the entity in the full KG. Thus, the number of node attributes $n_e$ equals the number unique entities in our dataset. Again the node attributes are one hot encoded vectors, which stacked result in the two dimensional $F$ matrix.
 
 
 \subsubsection{Preprocessing}
@@ -38,8 +38,7 @@ The final step of preprocessing is a function, which takes a batch of numerical 
 % Graph embeddings? unsupervised approach
 
 \subsection{RGVAE}
-The principle of a graph VAE has been explained in \ref{ssec:GVAE}, what also covers the foundation of our model, the Relational Graph VAE (RGVAE). Therefore we will focus on the implementation as well as parameter and hyperparameter choice. Since this work is meant to be a prove of concept rather than aimed at outperforming the state of the art, our model is kept as simple as possible and only as complex as necessary. Our appr
-For the encoder we implemented two variations, a fully connected and a convolutional, while for the decoder we opted for a single fully connected network.
+The principle of a graph VAE has been explained in \ref{ssec:GVAE}, what also covers the foundation of our model, the Relational Graph VAE (RGVAE). Therefore we will focus on the implementation as well as parameter and hyperparameter choice. Since this work is meant to be a prove of concept rather than aimed at outperforming the state of the art, our model is kept as simple as possible and only as complex as necessary. Our approach is module based for both experiment pipeline and model, meaning independence between sequential modules and compatibility with parallel modules. For the encoder we implemented two variations, a fully connected and a convolutional, while for the decoder we opted for a single fully connected network.
 %  just explain the code
 
 \subsubsection{Initialization}
@@ -240,6 +239,7 @@ We train the model on the negative ELBO. Further we use \textit{Ranger} presente
 % optimizer ranger github repo link
 
 \subsection{Link prediction and Metrics}
+\label{ssec4:lpmetrics}
 % LP as main experiment and proof of concept. 
 Our main experiment will be link prediction. It is intended as proof of concept rather than an attempt to set the state of the art. The results will let us draw conclusions on the impact and function of different parameters.
 Besides the final link prediction experiment, we will let the model perform link prediction on a randomly drawn small subset of the testset during trainig. This gives us a broader view on the models performance, which otherwise would only evaluated by the ELBO loss.  
