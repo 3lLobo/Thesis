@@ -176,13 +176,13 @@ Dr Paul \textsc{Groth}\\
 \section*{Abstract}
 We generate Knowledge! \cite{kipf_contrastive_2020}
 
-This thesis applies the genius idea of having a VAE learn latent features of the raw data from KGs. Building on successful models of prior work, a linear, a convolutional and a architecture combining both methods are tested on the two most popular KGs. To best possible train out models on sparse graph representation, we implement a permutation invariant loss function.
-We compare the performance of our models to sate of the art link predictors, as well as link predictors including the variational module.
+This thesis investigates the idea of having a VAE learn latent features of the raw data from KGs. Building on successful approaches of prior work, an embedding based, a fully-connected and a convolutional model are evaluated on the two most popular KGs. The influence of a permutation invariant loss function on the models capability to generalize on sparse subgraphs is analyzed.
+We compare the performance of our models on the task of link prediction to sate of the art scores.
 The results compare ???
-The model $x$ outperfoms the others, indicating that convolutions are [/not] necessary.
-Interpolation of the latent space shows that the model learns features???
-When generating subgraphs with up to $x$ nodes, we see ???
-Finally we filter generated triples for predicates which imply the subject or object to be entity of the class location. $x$ out of these triples adhere to this axiom. Thus we can say that VAE's are to a certain extend able to capture the underlying semantics of a KG.   
+The model $x$ outperforms the others, indicating that convolutions are [/not] necessary.
+Interpolation of the latent space shows that the model learns to featurize latent dimensions???
+When generating subgraphs with up to $n$ nodes, we see ???
+Finally we filter generated triples for type constrained predicates on subject or object. A $x\%$ of the generated triples adhere to this axiom. Thus we can say that VAE's are to a certain extend able to capture the underlying semantics of a KG.   
 
 
 % \section*{Notes}
