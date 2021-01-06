@@ -28,3 +28,4 @@ df.loc[2] = ['Var.wELBO',np.mean(mrr),np.std(mrr),
 # df = df.round(decimals=4)
 print(df.head)
 df.to_csv('data/varDistmult_scores.csv')
+
