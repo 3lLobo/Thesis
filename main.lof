@@ -1,0 +1,17 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces RGCN pipeline for node classification and link prediction experiments. The first pipeline only uses an encoder to classify the input nodes. The second pipeline additionally uses a decoder to score the input and predict the correct link, Source \cite {gangemi_modeling_2018}.\relax }}{5}{figure.caption.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {2}{\ignorespaces Colorized vizualization of the latent representation of the VGAE trained on the Core citation network with colors differentiating document classes and gray links indicating citations. This shows that the model implies and featurizes the document classes, without them being provided during training. Source \cite {kipf_variational_2016}\relax }}{6}{figure.caption.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {3}{\ignorespaces Model architecture of the GraphVAE. The target graph with $n$ nodes is encoded and conditioned on the node labels $y$. The KL divergence ensures a Gaussian prior to the decoder, which reconstructs the latent representation to a graph with $k$ nodes. Target and prediction graphs are matched and permuted before the reconstruction loss. To sample, the argmax is taken directly from the prediction. Source \cite {simonovsky_graphvae_2018}.\relax }}{7}{figure.caption.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {4}{\ignorespaces Representation of the VAE as bayesian network, with solid lines denoting the generator $p_{{\theta }}(z)p_{{\theta }}(\mathbf {x} \mid z)$ and the dashed lines the posterior approximation $q_{\phi }(\mathbf {z} \mid \mathbf {x})$ \cite {kingma_auto-encoding_2014}.\relax }}{10}{figure.caption.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5}{\ignorespaces Validation loss for RGVAE with $\beta \in [0,1,10,100]$ trained on each dataset.\relax }}{22}{figure.caption.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {6}{\ignorespaces MRR scores for different $\beta $ values on the dataset FB15k-237.\relax }}{23}{figure.caption.12}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {7}{\ignorespaces Link prediction results in MRR, Hits@1, Hits@3 and Hits@10 for RGVAE and RGCVAE trained on the full trainset of each dataset.\relax }}{24}{figure.caption.13}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {8}{\ignorespaces (a) Validation loss RGVAE with vs. w/o permutation invariant loss function. (b) Percentage of permuted nodes during training.\relax }}{25}{figure.caption.15}%

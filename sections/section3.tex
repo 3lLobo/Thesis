@@ -14,24 +14,23 @@ Knowledge graph has become a popular key phrase. Yet, the term is so broad, that
 
 % What is a KG
 KGs are a subclass of databases, with its main function being data storage. The main difference to tabular databases is that KGs store data in a relational fashion. A standard KG structure, introduced by the semantic-web community, is the Resource
-Description Framework (RDF). It is a so called schema-based approach, meaning that every entity has a unique identifier and all possible relations are stored in a vocabulary. The opposite schema-free approach is used in OpenIE models for information extraction. Here any type of triple can be extracted, e.g.  \text{(Michelangelo,  painted,    Sixtine Chapel)}. In contrast a triple in RDF format from Freebase, one of the largest open-source KGs, has the form
-\begin{equation*}
-    (/m/02mjmr, /people/person/born-in, /m/03gh4)
-\end{equation*}
-%  
-\begin{equation*}
-    (s, r,  o)
-\end{equation*}
- 
-with:
+Description Framework (RDF). It is a so called schema-based approach, meaning that every entity has a unique identifier and all possible relations are stored in a vocabulary. The opposite schema-free approach is used in OpenIE models for information extraction. Here any type of triple can be extracted, e.g.  \text{(Michelangelo,  painted,    Sixtine Chapel)}. In contrast a triple which we wil denote as $(s,r,o)$ in RDF format from Freebase, one of the largest open-source KGs, has the form
+
+\begin{center}
+    \texttt{[['/m/02mjmr'], ['/people/person/place\_of\_birth'], ['/m/02hrh0\_']]}
+\end{center}
+
+
+
+with the \textit{id2text} translation of Wikidata \cite{WIKIDATA}:
 \begin{itemize}
-    \item Subject $s:   /m/02mjmr$ Barack Obama
-    \item Relation/Predicate $r:    /people/person/born-in$
-    \item Object $o:     /m/03gh4$ Hawaii
+    \item Subject $s$:   \texttt{['/m/02mjmr Barack Obama']}
+    \item Relation/Predicate $r$:    \texttt{[/people/person/born-in]}
+    \item Object $o$:     \texttt{['/m/02hrh0\_ Honolulu']}
 \end{itemize}
 
 
-For all triples $s$ and $o$ are part of a set of so called entities, while $r$ is part of a set of relations. This is enough to define a basic KG.
+For all triples, $s$ and $o$ are part of a set of so called entities, while $r$ is part of a set of relations. This is enough to define a basic KG.
 
 % Hierarchy, entities, classes
 Schema-based KG can include type hierarchies and type constraints. Classes group entities of the same type together, based on common criteria, e.g all names of people can be grouped in the class 'person'. Hierarchies define the inheriting structure of classes and subclasses. Picking up our previous example, 'child' would be a subclass of 'person' and inherit its properties. At the same time the class of an entity can be the key to a relation with type constrain, since some relations can only be used in conjunction with entities fulfilling the constraining type criteria.
@@ -209,7 +208,7 @@ Permutation invariance refers to the invariance of a permutation of an object. A
 
 In the context of sparse graphs the most common, and relevant permutation for this thesis, is the position of a link in the adjacency matrix. By altering its position with help of a permutation matrix, the link will connect different nodes. When matching graphs with more than two nodes, we can partially match the graphs by permuting only a subgraph instead of the full graph. This way also graphs of different sizes, can be matched. 
 
-A model is permutation invariant, when it includes a function to detect and match such permutations between target and prediction. 
+In context of this thesis, a model or a function is called permutation invariant, if it can match any permutation of the original. For the case of matching between prediction and target graph, from all possible permutations of the predictions, the one with highest similarity to the target should be considered. The similarity can be full or partly as its possible that only parts of the graph match or the graphs in size differ.  
 
 
 % OR: An example is in object detection in images. An object can have geometrical permutations such as translation, scale or rotation, none the less the model should be able to detect and classify it. In that case, the model is not limited by permutations and  is there fore permutation invariant.
@@ -235,12 +234,12 @@ Given these graphs the algorithm aims to find the affinity matrix $S:(i, j) \tim
 
 \begin{equation}
     \begin{array}{l}
-        S((i, j),(a, b)) = \left(E_{i, j, \cdot}^{T}, \widetilde{E}_{a, b, \cdot}\right) A_{i, j} \widetilde{A}_{a, b} \widetilde{A}_{a, a} \widetilde{A}_{b, b}[i \neq j \wedge a \neq b] + \left(F_{i, \cdot}^{T} \widetilde{F}_{a, \cdot}\right) \widetilde{A}_{a, a}[i=j \wedge a=b]
+        S((i, j),(a, b)) = \left(E_{i, j, \cdot}^{T}, \widetilde{E}_{a, b, \cdot}\right) A_{i, j} \widetilde{A}_{a, b} \widetilde{A}_{a, a} \widetilde{A}_{b, b}[i \neq j \wedge a \neq b] + \left(F_{i, \cdot}^{T} \widetilde{F}_{a, \cdot}\right) \widetilde{A}_{a, a}[i=j \wedge a=b].
     \end{array}
 \label{eq3:s}
 \end{equation}
 
-where the square brackets define Iverson brackets \cite{simonovsky_graphvae_2018}.
+Here the square brackets define Iverson brackets \cite{simonovsky_graphvae_2018}.
 
 
 The next step is to find the similarity matrix $X^* \in[0,1]^{k \times n}$. Therefore we iterate a first-order optimization framework and get the update rule
@@ -308,7 +307,7 @@ The normal VAE maximizes the evidence lower-bound or, in a practical implementat
 
 \begin{equation}
     \begin{array}{l}
-    \mathcal{L}(\phi, \theta ; G)=\quad=\mathbb{E}_{q_{\phi}(\mathbf{z} \mid G)}\left[-\log p_{\theta}(G \mid \mathbf{z})\right]+\operatorname{KL}\left[q_{\phi}(\mathbf{z} \mid G) \| p(\mathbf{z})\right]
+    \mathcal{L}(\phi, \theta ; G)=\quad=\mathbb{E}_{q_{\phi}(\mathbf{z} \mid G)}\left[-\log p_{\theta}(G \mid \mathbf{z})\right]+\operatorname{KL}\left[q_{\phi}(\mathbf{z} \mid G) \| p(\mathbf{z})\right].
     \end{array}
 \end{equation}
 
@@ -320,7 +319,7 @@ The loss function $\mathcal{L}$ is a combination of reconstruction term and regu
 % Ae, whereas edge- and node-wise softmax is applied to obtain
 % Ee and Fe, respectively. A
 
-The predicted output of the decoder is split in three parts and while $\tilde{A}$ is activated through sigmoid, $\tilde{E}$ and $\tilde{F}$ are activated via edge- and nodewise Softmax. The graph matching permutation for $A$ is applied to the target $A^{\prime}=X A X^{T}$ and for $E$ and $F$ on the prediction, $\widetilde{F}^{\prime}=X^{T} \widetilde{F}$ and $\widetilde{E}_{\cdot, \cdot, l}^{\prime}=X^{T} \widetilde{E}_{\cdot, \cdot, l} X$, $l$ being the one-hot encoded edge attribute vector which is permuted. These permuted subgraphs are then used to calculate the maximum log-likelihood estimate \cite{simonovsky_graphvae_2018}
+The predicted output of the decoder is split in three parts and while $\tilde{A}$ is activated through sigmoid, $\tilde{E}$ and $\tilde{F}$ are activated via edge- and nodewise Softmax. The graph matching permutation for $A$ is applied to the target $A^{\prime}=X A X^{T}$ and for $E$ and $F$ on the prediction, $\widetilde{F}^{\prime}=X^{T} \widetilde{F}$ and $\widetilde{E}_{\cdot, \cdot, l}^{\prime}=X^{T} \widetilde{E}_{\cdot, \cdot, l} X$, $l$ being the one-hot encoded edge attribute vector which is permuted. These permuted subgraphs are then used to calculate the maximum log-likelihood estimate \cite{simonovsky_graphvae_2018}:
 
 \begin{equation}
     \begin{split}

@@ -13,6 +13,14 @@ For this sake of comparison with state of the art results, we chose the two most
 
 \textbf{Fb15k-237}
 
+Present the concept of FreeBase!
+
+Entities have types, types have classes. Show most common types/classes
+
+Highly incoherent, not following the same notation and inconsistent, contradicting triples.
+
+Everybody was allowed to add facts. Maintainance of Freebase is discontinued. 
+
 textwidth for figures:
 \printinunitsof{in}\prntlen{\textwidth}
 
@@ -72,14 +80,14 @@ For the hyperparameter tuning of $\beta \in [0,1,10,100]$ we chose significant v
 
 Figure \ref{fig5:beta} shows the validation ELBO for the different $\beta$ values and for both datasets. We notice two interesting outcomes.  
 
-\begin{enumerate}
+\begin{itemize}
     \item For $\beta = 0$ converges further than the rest.
     \item The remaining values behave quase identical with $\beta = 100$ performing slightly better. 
-\end{enumerate}
+\end{itemize}
 
 Since setting $\beta = 0$ would undermine our hypothesis of evaluating variational model, we chose $\beta = 100$ as default for the following experiments. This also compares with the $\beta$ values proposed by Higgins in \cite{higgins_beta-vae_2016} to achieve a factorization of the latent space.
 
-Especially on the FB15k-237 dataset the $\beta = 0$ configuration converges to a much lower ELBO. Thus, we have the trained models perform link-prediction on a $1\%$ subset of the validation set. The barplot \ref{fig5:betafbmrr} indicates an inverse correlation between the ELBO and the MRR score. 
+Especially on the FB15k-237 dataset the $\beta = 0$ configuration converges to a much lower ELBO. Thus, we have the trained models perform link-prediction on a $1\%$ subset of the validation set. Figure \ref{fig5:betafbmrr} indicates an inverse correlation between the ELBO and the MRR score. 
 
 \begin{figure}[H]
     \centering
@@ -154,11 +162,25 @@ TODO add random!!!
 % Final models only 60 epochs
 
 
-\subsubsection{DistMult}
+\subsubsection{Impact of Variational Inference and Gaussian prior}
 
-In order to explain the poor performance of the RGVAE on the task of link prediction, we investigate th impact of the variational inference. Since the RGVAE with relaxed latent space, meaning less variance, indicated higher scores than the version with Gaussian prior, we examine the two variants by means of embedding models. The original DistMult model with optimized parameter serves as control model, while we compare it to the VDistmult, described in section \ref{ssec4:vdistm}, learning the full ELBO versus learning only on the reconstruction loss. By not including the regularization term in the loss the model is no longer bound to the Gaussian prior, which results in a relaxation of the latent space.
+In order to explain the poor performance of the RGVAE on the task of link prediction, we investigate the impact of the variational inference. Since the RGVAE with relaxed latent space, meaning less variance, indicated higher scores than the version with Gaussian prior, we examine the two variants by means of embedding models. The original DistMult model with optimized parameter serves as control model, while we compare it to the VDistmult, described in section \ref{ssec4:vdistm}, learning the full ELBO versus learning only on the reconstruction loss. By not including the regularization term in the loss the model is no longer bound to the Gaussian prior, which results in a relaxation of the latent space.
 
-We train the three models for $300$ epochs solely on the FB15k-237 dataset and evaluate MRR, Hits@$1$, Hits@$3$ and Hits@$10$. Table \ref{tab5:VarDistM} shows the scores with $\mu \pm \sigma$ of three runs per model. Note that the exponent on $\sigma$ holds for the whole term. We can clearly see that both variational versions of the DistMult perform significantly worse than the original model. Learning on the full elbo or only the reconstruction loss does not seem to influence the scores in this setting. This indicates, that the models performance on link prediction suffers from using variational inference.
+We train the three models for $300$ epochs solely on the FB15k-237 dataset and evaluate MRR, Hits@$1$, Hits@$3$ and Hits@$10$. Table \ref{tab5:VarDistM} shows the mean scores with $\mu \pm \sigma$ of three runs per model. Note that the exponent on $\sigma$ holds for the whole term. We can clearly see that both variational versions of the DistMult perform significantly worse than the original model. Learning on the full elbo or only the reconstruction loss does not seem to influence the scores in this setting. This indicates, that the models performance on link prediction suffers from using variational inference.
+
+In the last row we show the results of the RGVAE with relaxed latent space. This model was trained with $\beta=0$ thus not constraining the latent space on a Gaussian prior. The model outperforms the versions with hyperparameter choice $\beta>0$ and scores the closest to the DistMult model. The impact of $\beta$ shows in the regularization, which we tracked separately. The maximum values of$D_{K L}$ during the experiment are 
+
+\begin{equation}
+  \begin{align}
+    D_{reg} &= \beta \times D_{K L}\left(q_{\phi}\left(\mathbf{z} \mid G\right) \| p_{\theta}(\mathbf{z})\right) \\
+    \max_{\beta = 0} D_{K L} &= 3506 \\
+    \max_{\beta = 100} D_{K L} &= 0.0154
+  \end{align}
+  \label{eq5:KLdifferentBeta}
+\end{equation}
+
+
+While the results of the relaxed RGVAE might seem promising, Distmult is a much simpler and faster link predictor, thus we do not see a justification to keep researching on the RGVAE for this task. Note that due to the high computation cost of the RGVAE we only run the experiment once on the full dataset.
 
 % TODO: Answer question:Link prediction with control model:
 
@@ -174,13 +196,14 @@ We train the three models for $300$ epochs solely on the FB15k-237 dataset and e
       \begin{tabular}{|l|l|l|l|l|}
       \hline
       \rowcolor[HTML]{EFEFEF}
-      \multicolumn{1}{|c}{\textsc{DistMult ver.}} & \multicolumn{1}{c}{\textsc{MRR}} & \multicolumn{1}{c}{\textsc{Hits@$1$}} & \multicolumn{1}{c}{\textsc{Hits@$3$}} & \multicolumn{1}{c|}{\textsc{Hits@$3$}} \\\hline
-      Original     & \multicolumn{1}{c|}{$0.2854\pm 0.0025$} & \multicolumn{1}{c|}{$0.2\pm 0.001$} & \multicolumn{1}{c|}{$0.3149\pm 0.0038$} & \multicolumn{1}{c|}{$0.4512\pm 0.0053$}  \\
-      Variational   & \multicolumn{1}{c|}{$0.5170\pm 0.0197e^{-3}$} & \multicolumn{1}{c|}{$0.2442\pm 0.1994e^{-4}$} & \multicolumn{1}{c|}{$0.8145 \pm 0.3049e^{-4}$} & \multicolumn{1}{c|}{$0.3990\pm 0.05760e^{-3}$} \\
-      Var. w/ ELBO   & \multicolumn{1}{c|}{$0.6397\pm 0.0357e^{-3}$} & \multicolumn{1}{c|}{$0.5700\pm 0.3046e^{-4}$} & \multicolumn{1}{c|}{$0.1547\pm 0.1023e^{-3}$} & \multicolumn{1}{c|}{$0.6351\pm 0.1992e^{-4}$} \\
+      \multicolumn{1}{|c}{\textsc{Model}} & \multicolumn{1}{c}{\textsc{MRR}} & \multicolumn{1}{c}{\textsc{Hits@$1$}} & \multicolumn{1}{c}{\textsc{Hits@$3$}} & \multicolumn{1}{c|}{\textsc{Hits@$3$}} \\\hline
+      DistMult     & \multicolumn{1}{c|}{$0.2854\pm 0.0025$} & \multicolumn{1}{c|}{$0.2\pm 0.001$} & \multicolumn{1}{c|}{$0.3149\pm 0.0038$} & \multicolumn{1}{c|}{$0.4512\pm 0.0053$}  \\
+      VDistMult   & \multicolumn{1}{c|}{$0.517\pm 0.0197e^{-3}$} & \multicolumn{1}{c|}{$0.2442\pm 0.1994e^{-4}$} & \multicolumn{1}{c|}{$0.8145 \pm 0.3049e^{-4}$} & \multicolumn{1}{c|}{$0.399\pm 0.0576e^{-3}$} \\
+      VDistMult w/ ELBO   & \multicolumn{1}{c|}{$0.6397\pm 0.0357e^{-3}$} & \multicolumn{1}{c|}{$0.57\pm 0.3046e^{-4}$} & \multicolumn{1}{c|}{$0.1547\pm 0.1023e^{-3}$} & \multicolumn{1}{c|}{$0.6351\pm 0.1992e^{-4}$} \\
+      RGVAE w/o ELBO   & \multicolumn{1}{c|}{$0.1412$} & \multicolumn{1}{c|}{$0.0981$} & \multicolumn{1}{c|}{$0.1494$} & \multicolumn{1}{c|}{$0.2275$} \\
       \hline
       \end{tabular}
-      \caption{Link prediction scores of DistMult versions on the FB15k-237 dataset.}
+      \caption{Link prediction scores of DistMult and RGVAE versions on the FB15k-237 dataset.}
       \label{tab5:VarDistM}
   \end{table}
 
@@ -188,46 +211,176 @@ We train the three models for $300$ epochs solely on the FB15k-237 dataset and e
 \subsection{Impact of permutation}
 % Check if adj matrix adheres to edge attribute matrix.
 
-TODO
+Furthermore we examine the influence of the permutation invariant loss function described in \ref{ssec4:loss}. During training and subset link prediction no significant difference was observed between the RGVAE with versus without matching target and prediction graph. Yet, two observations draw our attention, namely:
 
-Permutation starts at $100\%$ at the beginning of training and converges to $60\%$.
+\begin{itemize}
+  \item The amount of nodes permuted per batch converges during training from $100$\% to exactly $60$%.
+  \item The RGVAE with permutation invariant loss function learns to predict many variations of adjacency matrix while the standard model predicts similar to the target.
+\end{itemize}
 
-Model without predicts adj node always in the upper right just as the target. Model with predicts much more variations of adjacency.
+The first point indicates that the model learns a set of adjacency matrices, which can be permuted to match the target while optimizations the loss. Note that the generated matrix representation of the triples either has only one edge on the right upper index $A_{0,n}$ or, in the rare case of self-loops in $A_{0,0}$. The number of nodes per graph for these observations is set to $n=2$. Curiosity remains why the model converges to steadily permute $\frac{3}{5}$ of the prediction.
+Secondly, we see that even when converged, the model predicts variations od the adjacency matrix very different to the target. The most common is a single edge on $A_{n,0}$ and on $A_{n,n}$. Less common and with lack of explanation are the predictions of an empty, or multi edge adjacency matrix. In contrast to this and as expected, the RGVAE with the standard loss function learns to solely predict edges on $A_{0.0}$. 
+Finally we will analyze the impact of permutation invariance on the experiment of syntax coherence in section \ref{ssec5:syntax}.
 
-Graph of permutation during training.
-loss with vs without 
+% TODO
+
+% Permutation starts at $100\%$ at the beginning of training and converges to $60\%$.
+
+% Model without predicts adj node always in the upper right just as the target. Model with predicts much more variations of adjacency.
+
+% Graph of permutation during training.
+% loss with vs without 
+
+\begin{figure}
+  \caption{(a) Validation loss RGVAE with vs. w/o permutation invariant loss function. (b) Percentage of permuted nodes during training.}
+  \label{fig5:permInv}
+\end{figure}
 
 \subsection{Interpolate Latent Space}
 
-TODO
+Inspired by the popular results of Higgins, who featurized each latent dimension on a facial features of the FACES dataset \cite{FACES}. The VAE generates faces controling feature such as age, gender and emotions by manipulating single latent dimensions \cite{higgins_beta-vae_2016}.  We run this experiment with the RGVAE on the FB15k-237 dataset, using two different interpolation methods. The latent dimension for this experiment is set to $d_{z}=10$ in order to analyze each dimension separately and the interpolation is linear with a step count of $10$.
 
-We take two random triples and interpolate the latent space of these two triples. The interpolations result in: HERE AN EXAMPLE.
+The first experiment is linear interpolating between two triples. Therefor two valid triples from the train set are encoded into their latent representation. We chose the two semantically related triples triples to analyze if the linear movement in latent space correlates with an obvious semantic feature. 
 
-Further we go ahead and test what happens if we modify one latent dimension at a time with $d_z = 10$ of a triple. TABLE: (s,r,o), x_axis dims, y_axis steps. $95\%$ Gaussian confidence 
+\begin{center}
+  \texttt{[['/m/02mjmr Barack Obama'], ['/people/person/place\_of\_birth'], ['/m/02hrh0\_	Honolulu']]}
+  \texttt{[['/m/058w5 Michelangelo'], ['/people/deceased\_person/place\_of\_death'], ['/m/06c62	Rome']]}
+\end{center}
+
+
+TODO present the results and link to appendix
+
+
+
+For the second experiment we modify each latent dimension isolated in a $95\%$ confidence interval of the Standard Gaussian distribution. Starting with the encoded representation of the Obama triple, we incrementally add $z_{i} += j \times ...$ TODO you have to fix this!!!
+
+
+% Further we go ahead and test what happens if we modify one latent dimension at a time with $d_z = 10$ of a triple. TABLE: (s,r,o), x axis dims, y axis steps. $95\%$ Gaussian confidence 
 
 Can the model assign logical features to latent dimensions?
 
 
 \subsection{Syntax coherence}
+\label{ssec5:syntax}
 
 TODO
 
-Check model trained with vs without perm invariance.
+On closed-world schema-based KGs the approach for testing the validity of a new triple is to add it to the existing KG and run a onthology reasoner on it. A inconsistency in the KG will appear as \texttt{null}-Class, but only if an axiom is violated. This approach works only for fully constrained KGs and is not scalable, since the reasoner recursively checks evey triple for every axiom. Thus, we present an alternative and improvised way to estimate the validity of generated triples.
 
-Check if generated triples follow basic logic.
+The FB15k-237 is a subset from the FreeBase KG \cite{FREEBASE}, thus, even thought they are not part of the dataset, - entities have type properties in their original Freebase representation. 
+Querying the last official Freebase dump, we get the types for each entity in the FB15k-237 dataset, With exception of $8$ entities, which could not be found in the query.
+
+Our approach is to randomly generate triples, from signals randomly drawn from a Standard Gaussian distribution. Then to filter those triples on predicates which contain the type \textit{people}, which is within the top 10 most common Freebase types. We differentiate between base-class types subclass types, both can contain the word \textit{people}. The entity \texttt{['/m/02mjmr Barack Obama']} has between many others the type \texttt{[/people/measured\_person]}. Here the base class is \textit{people} and the subclass \textit{measured\_person}. We could filter directly on subclasses, but we chose to give our model more creative freedom and filter for \textit{people} in the full set of types. Using this choice, the generated triples are scored on logic rather than facts. E.g. any person can hypothetically the a \textit{measured\_person}, understanding this implies semantical reasoning, while differentiating between which person is and is not a \textit{measured\_person} implies contextual knowledge. Thus, we use the base type \textit{people} to validate triples.
+Furthermore the relations are inconsistent in their notation, partly not only having a head type constrain. Thus, we check only the head entity for the key type. 
+
 \begin{itemize}
-    \item Generate triples by random signals
-    \item Filter these triples on type fixed relation
-    \item Check if the entity is of this type.
+  \item From $14541$ entities, $5283$ contain the keyword people, or $36.332$\%.
+  \item From $237$ predicates, $25$ contain the keyword people, or $10.549$\%.
+  \item From $310116$ triples, $47354$ contain the a predicate keyword people, or $15.269$\%.
 \end{itemize}
 
-Since there is no preset for how to check the semantics of a KG, we will use simple basic logical criteria.
-The generated triples are filtered for the relation 'is capital of', thus the subject entity should be of type 'city' and the object entity of type 'country' and both adhere follow the topic 'location',
-Curious if this gives good results.
+Considering these facts, we calculate the marginal probability of guessing a head entity $s$ of type \textit{people}, given a triple which contains the type \textit{people}. Without prior knowledge $p(s_{p})$ and $p(r_{p})$ are conditionally independent. The probability is calculated as:
+
+\begin{equation}
+  p(s_{p} \mid r_{p}) &= p(s_{p}) = 0.3633
+  \label{eq5:randomValid}
+\end{equation}
+
+For this experiment we generate triples until $10e^5$ contain the key type. Those filtered triples are validated on the type of the head entity and compared to the full dataset for novelty. Here we again compare the performance between the RGVAE with the two different encoder architectures. Furthermore the models are trained both with regular and permutation invariant loss function. Lastly, the experiments are repeated for sampling the latent signal from $\mathcal{N}(0,1)$ and for sampling from $\mathcal{N}(0,2)$.  We average the accuracy of three runs of generating a valid triple and of this triple being unseen in the dataset. The results for valid triples are shown in figure \ref{fig5:syntax}. The dotted horizontal line indicates the random probability of generating a valid triple, calculated in equation \ref{eq5:randomValid} and $\sigma^2_1$ and $\sigma^2_2$ denote the variance for the different latent space distributions. 
 
 
-\subsection{Subgraph Generation}
 
-TODO
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=.25\textwidth, keepaspectratio]{graphs/plots/kg_all.png}
+  \caption{Accuracy of generating valid triples.}
+  \label{fig5:syntax}
+\end{figure}
 
-Until now our model trained on only one triple per sparse graph. What will happen if we train it on more than one triples?
+To our disappointment the model does not perform significantly better than random. Neither the choice loss function nor the doubled variance show a correlation with the accuracy. The only configuration standing out is the RGVAE with convolutional encoder, standard loss function and $\sigma^2=2$, scoring $4$\% higher than random. From all valid generated triples $100\pm 0.001$\% are new and unseen in the dataset. Coming back to \texttt{['/m/02mjmr Barack Obama']}, we filter the unseen triples fo the first three appearances of this entity. These are displayed in table \ref{tab5:genTriples} for every variation of the RGVAE and in the same order as in figure \ref{fig5:syntax} 
+
+
+
+\begin{table}[H]
+  \begin{tabular}{|c|}
+  \hline
+  \rowcolor[HTML]{EFEFEF} 
+  \textsc{RGVAE standard} $\sigma_2^2$\\ \hline
+  \texttt{[[Barack Obama]	[/people/person/places\_lived./people/place\_lived/location]	[Casablanca]]}\\
+  \texttt{[[Barack Obama]	[/people/person/place\_of\_birth]	[Sarah Silverman]]}\\
+  \texttt{[[Barack Obama]	[/people/person/place\_of\_birth]	[The League of Extraordinary Gentlemen]]}\\ \hline
+  \rowcolor[HTML]{EFEFEF} 
+  \textsc{RGVAE permuted} $\sigma_2^2$\\ \hline
+  \texttt{[[Barack Obama]	[/people/ethnicity/geographic\_distribution]	[End of Watch]]}\\
+  \texttt{[[Barack Obama]	[/people/profession/specialization\_of]	[Montgomery County]]}\\
+  \texttt{[[Barack Obama]	[/people/cause\_of\_death/people]	[WWE Superstars]]}\\ \hline
+  \rowcolor[HTML]{EFEFEF} 
+  \textsc{RGVAE standard} $\sigma_1^2$\\ \hline
+  \texttt{[[Barack Obama]	[/people/person/place\_of\_birth]	[Academy Award for Best Sound Editing]]}\\
+  \texttt{[[Barack Obama]	[/people/person/places\_lived./people/place\_lived/location]	[Stan Lee]]}\\
+  \texttt{[[Barack Obama]	[/people/person/place\_of\_birth]	[Multiple sclerosis]]}\\ \hline
+  \rowcolor[HTML]{EFEFEF} 
+  \textsc{RGVAE permuted} $\sigma_1^2$\\ \hline
+  \texttt{[[James Brolin]	[/people/person/places\_lived./people/place\_lived/location]	[Barack Obama]]}\\
+  \texttt{[[Barack Obama]	[/people/person/spouse\_s./people/marriage/location]	[D.C. United]]}\\
+  \texttt{[[Jim Sheridan]	[/people/person/religion]	[Barack Obama]]}\\ \hline
+  \rowcolor[HTML]{EFEFEF} 
+  \textsc{cRGVAE standard} $\sigma_2^2$\\ \hline
+  \texttt{}\\
+  \texttt{None}\\
+  \texttt{}\\ \hline
+  \rowcolor[HTML]{EFEFEF} 
+  \textsc{cRGVAE permuted} $\sigma_2^2$\\ \hline
+  \texttt{[[Pinto Colvig]	[/people/deceased\_person/place\_of\_burial]	[Barack Obama]]}\\
+  \texttt{[[Helena Bonham Carter]	[/people/person/gender]	[Barack Obama]]}\\
+  \texttt{[[John Buscema]	[/people/person/spouse\_s./people/marriage/spouse]	[Barack Obama]]}\\ \hline
+  \rowcolor[HTML]{EFEFEF} 
+  \textsc{cRGVAE standard} $\sigma_1^2$\\ \hline
+  \texttt{[[Suhasini Ratnam]	[/people/person/sibling\_s./people/sibling\_relationship]	[Barack Obama]]}\\
+  \texttt{[[Barack Obama]	[/people/person/gender]	[Deva]]}\\
+  \texttt{[[Barack Obama]	[/people/person/sibling\_s./people/sibling\_relationship]	[Niagara Falls]]}\\ \hline
+  \rowcolor[HTML]{EFEFEF} 
+  \textsc{cRGVAE permuted} $\sigma_1^2$\\ \hline
+  \texttt{[[Jonathan Rhys Meyers]	[/people/person/nationality]	[Barack Obama]]}\\
+  \texttt{[[Barack Obama]	[/people/person/sibling\_s./people/sibling\_relationship]	[Motherwell F.C.]]}\\
+  \texttt{[[Pinto Colvig]	[/people/deceased\_person/place\_of\_burial]	[Barack Obama]]}\\ \hline
+  \end{tabular}
+\caption{Generated and unseen knowledge.}
+\label{tab5:genTriples}
+\end{table}
+
+
+The generated triples confirm the accuracy results. With exception of the triple \texttt{[[Barack Obama]	[/people/person/places\_lived./people/place\_lived/location]	[Casablanca]]} all triples violate common sense logic. The RGVAE does not differentiate between the types gender, location, movie, person or medicine. It even goes so far to state that Obama was born in \texttt{[Multiple sclerosis]}. While this might sound funny it also clearly indicates, that our model did not learn the underlying semantics of this real world KG.
+
+While investigating the model and the generated triple set, we notice two outcomes. Neither the augmentation of the variance nor the enabling of the permutation invariance has an impact on either of the model with two encoder versions. The regularization loss converges during training to zero, meaning that the model learns a latent representation of the dataset as  nearly perfect Standard Gaussian distribution. Yet, even when sampling latent signal from the exact same distribution, we notice that each model repeatedly predicts combinations of a small subset of entities and relations, e.g. the RGVAE version which did not predict the Obama entity once in a total of $111583$ valid triples. This also aligns with the interpolation results, where we observed a static relation for the full gridsearch of the latent space. If we look at the gradient and parameter values of the MLP encoder and decoder, we see a much higher variance and gradients for the encoder parameters. The decoder show higher values and variance for a small subset of neighboring parameter, while the remaining parameters converge to a very similar and low value. This indicates that the encoder learns very well to represent each different triple as Standard Gaussian latent representation. The decoder MLP on the opposite seems to to ignore most of this representation by assigning vanishing values to the connected parameters. Intuitively it seems that the decoder learns to interpret the part of the latent representation corresponding to the adjacency matrix and minimizes as well as stabelizes the loss of the edge and node attribute matrix by evenly vanishing their parameters. This leads to the decoder reconstructing edge and node attribute randomly. Further, depending on the state of the parameters when the model finishes learning, the decoder will keep predicting the same subset of entities and relation. If we look at the flattened representation of our input graph, we see that the part representing the adjacency matrix is way shorter and has a tractable mean of $\frac{1}{4}$ while the mean for the edge and node attribute matrices are $\frac{1}{4 \times 1,345}$ and $\frac{1}{14,951}$. The problem of a our decoder partly ignoring the latent input and potential solutions are discussed further in section \ref{sec:discus}. 
+
+
+
+% Problem not so much the latent space but the training of each model. 
+
+% each model predicts a small subset of entities and relations very often.
+
+% Might be because the reconstruction MLP just puts weight on random parameters which then define the prediction without the latent space having much influence. 
+% % Suhasini Mani Ratnam	/people/person/sibling_s./people/sibling_relationship/sibling	Barack Obama
+% % Barack Obama	/people/ethnicity/languages_spoken	Valentine's Day
+
+
+% % \begin{table}[H]
+% %   \centering
+% %   \begin{tabular}{|lllll|}
+% %     \hline
+% %     \rowcolor[HTML]{EFEFEF} \cellcolor[HTML]{EFEFEF} & \multicolumn{2}{c}{\cellcolor[HTML]{EFEFEF}\textsc{p.i. Loss}} & \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}\textsc{standard Loss}} \\ %\cline{2-5} 
+% %     \rowcolor[HTML]{EFEFEF} 
+% %     \multirow{-2}{*}{\cellcolor[HTML]{EFEFEF}\multicolumn{1}{c}{\textsc{Model}} } & \multicolumn{1}{c}{\textsc{Valid}} & \textsc{New} & \multicolumn{1}{c}{\textsc{Valid}} & \textsc{New} \\ 
+% %     \hline
+% %     \multicolumn{1}{|l|}{RGVAE} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{1}& \multicolumn{1}{c|}{1}& \multicolumn{1}{c|}{1}\\ 
+% %     \multicolumn{1}{|l|}{RGCVAE} & \multicolumn{1}{c|}{1}& \multicolumn{1}{c|}{1}& \multicolumn{1}{c|}{1}& \multicolumn{1}{c|}{1}\\ 
+% %     \hline
+% %   \end{tabular}
+% % \end{table}
+
+% \subsection{Subgraph Generation}
+
+% TODO
+
+% Until now our model trained on only one triple per sparse graph. What will happen if we train it on more than one triples?
