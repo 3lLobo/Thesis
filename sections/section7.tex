@@ -27,16 +27,16 @@ Based on the results we can confidently answer our research question with
 \begin{center}
     \textit{No!}
 \end{center}
-Yet, metaphorically, this does not the end of the book, but rather the beginning of a new chapter. In the remaining part of this discussion we analyze the underlying problem of the RGVAE and propose a variety of solutions.
+Yet, metaphorically, this is not the end of the book, but rather the beginning of a new chapter. In the remaining part of this discussion we analyze the underlying problem of the RGVAE and propose a variety of solutions.
 
 
 \subsection{D. decoder collapse}
 \label{ssec7:collapse}
 
 %  what is decoder collapse
-To introduce main part of our conclusion and before answering the research question, we explain a phenomenon observed when training GANs. A GAN is yet another generative model which based on its potential to generate high resolution images, has drawn much attention in recent years. It consists of a generator, which task it is to decode a latent signal to a an image, and a discriminator, which given the fake image and the real data has to distinguish between them. Training of GANs is unstable and one of the major problem which occur is \textit{mode collape}. The generator learns to fool the discriminator by generating only a single mode with high precision such that the discriminator classifies it was real image.
+To introduce main part of our conclusion we explain a phenomenon observed when training GANs. A GAN is yet another generative model which based on its potential to generate high resolution images, has drawn much attention in recent years. It consists of a generator, who's task it is to decode a latent signal to a an image, and a discriminator, which given the fake image and the real data has to distinguish between them. Training of GANs is unstable and one of the major problem which occur is \textit{mode collape}. The generator learns to fool the discriminator by generating only a single mode with high precision such that the discriminator classifies it was real image.
 
-While VAEs can not suffer from mode collapse, because they backpropagate over the predicted distributions of all modes, it has a related phenomenon. \textit{Decoder collapse} occurs when the decoder has enough capacity to choose to not consider the latent signal and instead stores the information to reconstruct the data's distribution partly or solely in its parameters. This means that the generated data is not conditioned on the latent signal anymore. The cause of this problem is found in the regularization term $D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{{\theta}}(\mathbf{z})\right)$, more specifically in the constrain on a standard Gaussian prior. The multidimensional encoding of $d_z>1$ the approximated posterior is a mixture of Gaussians, which can only match the multivariant Normal distribution, in the case of all $\mu_z=0$ and all $\sigma^2_z=1$, what also implies that no information is encoded. Thus, the VAE has to decide if storing information in the latent vector is necessary to model the dataset distribution $p(x)$. If the penalty for altering the multivariant Normal latent distribution outweighs the benefits of the additional information towards the reconstruction loss, the VAE will chose for \textit{decoder collapse}. 
+While VAEs cannot suffer from mode collapse, because they backpropagate over the predicted distributions of all modes, it has a related phenomenon. \textit{Decoder collapse} occurs when the decoder has enough capacity to choose not to consider the latent signal and instead stores the information to reconstruct the data's distribution partly or solely in its parameters. This means that the generated data is not conditioned on the latent signal anymore. The cause of this problem is found in the regularization term $D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}\right) \| p_{{\theta}}(\mathbf{z})\right)$, more specifically in the constrain on a standard Gaussian prior. The multidimensional encoding of $d_z>1$ the approximated posterior is a mixture of Gaussians, which can only match the multivariant Normal distribution, in the case of all $\mathbf{\mu}_z=0$ and $\Sigma^2_z=\mathbb{I}$, what also implies that no information is encoded. Thus, the VAE has to decide if storing information in the latent vector is necessary to model the dataset distribution $p(x)$. If the penalty for altering the latent Normal distribution outweighs the benefits of the additional information towards the reconstruction loss, the VAE will chose for \textit{decoder collapse}. 
 
 %  Cite https://towardsdatascience.com/with-great-power-comes-poor-latent-codes-representation-learning-in-vaes-pt-2-57403690e92b
 
@@ -51,48 +51,49 @@ The last experiment confirms the obvious. The syntax adherence of the different 
 
 
 % For link prediction this means that the reconstruction loss is not helpful at all. 
-Projecting this finding on the link prediction experiment, we question, why the model scored better than random. Possible reasons are for once, that the encoder learned to encode the dataset close to a Normal distribution, but when encountering unseen triples, the mean and variance of the encoding vary. A second reason is, the every triple in the testset is corrupted in all possible combinations, including the less frequent entities. The collapsed decoder subsequently keeps generating frequent triples, thus the reconstruction loss between a less frequent combination of entities and the collapsed prediction will be higher than for a frequent combination. Therefore the model learns score the real triple higher but not for the right reason. The RGVAE with $\beta = 0$ and therefore unconstrained on the Standard Gaussian prior shows the best results between the different model settings. We can assume that the model learns a latent representation for subject and object. Despite this improvement, is it probable that the decoder still collapses on the reconstruction of the relation, which explains the remaining scoring gap to the much simpler DistMult model.
+Projecting this finding on the link prediction experiment, we question, why the model scored better than random. Possible reasons are for once, that the encoder learned to encode the dataset close to a Normal distribution, but when encountering unseen triples, the mean and variance of the encoding vary. A second reason is, the every triple in the testset is corrupted in all possible combinations, including the less frequent entities. The collapsed decoder subsequently keeps generating frequent triples, thus the reconstruction loss between a less frequent combination of entities and the collapsed prediction will be higher than for a frequent combination. Therefore the model learns score the real triple higher but for the wrong reason. The RGVAE with $\beta = 0$ and therefore unconstrained on the Standard Gaussian prior shows the best results between the different model settings. We can assume that the model learns a latent representation for subject and object. Despite this improvement, is it probable that the decoder still collapses on the reconstruction of the relation index, which explains the remaining scoring gap to the much simpler DistMult model.
 
 
 \subsection{VAE surgery}
 \label{ssec7:solutions}
 % Propose solutions: Elbosurgery, adversial(WAE),  recurrent(lossy)
 
-Similar problems in different fileds have been encountered for generative VAE applications. While the author of this thesis whishes to have drawn these parallels earlier, all the proposed solutions imply a significant modification of the VanillaVAE, thus would not align with this work's research question. We present three approaches from different literature which tackle the VAE mode collapse in the filed of image and voice generation.
+Similar problems in different fields have been encountered for generative VAE applications. While the author of this thesis whishes to have drawn these parallels earlier, all the proposed solutions imply a significant modification of the VanillaVAE, thus would not align with this work's research question. We present three approaches from different literature which tackle the VAE mode collapse in the filed of image and voice generation.
 
 %  ELBO surgery
 In a publication of Adobe Research and Google Brain, Hoffman and Johnson propose an elegant modification of the variational evidence lower bound \cite{hoffman2016elbo}. 
+More specifically they change the VanillaVAE's regularization term, where instead of imposing a Standard Gaussian prior on the full latent distribution, the prior is imposed on the mixture of all single latent dimension, giving space for more expressive probability distributions such as truncated Gaussians. 
 
-Change the VanillaVAE's regularization term. Instead of imposing a Standard Gaussian prior on latent dimension, the prior is imposed on the mixture of all latent probability distributions. 
-
-Further, a index-code mutual information term is added, intended to maximize the mutual information between  every index of the observation and $z$.
+Further, a index-code mutual information term is added, intended to maximize the mutual information between every index of the observation and $z$. While the reconstruction term enforces to encode every feature of $x$ in a corresponding latent dimension, the  information term opposes this by maximizing the mutual information between all  $x_i$ and $z_i$. The information term compares compact to the reconstruction loss, yet it is enough to prevent decoder collapse. 
 
 SHOULD WE WIRTE THE NEW LOSS OUT?
 
 
 % Lossy Auto Encoder
-Kingma 
-
-VAE encodes image recurrently, conditioned on previous point, uses both RNN and RCN. KL term is again changed?
+Kingma et al. turn towards a autoregressive solution in their publication \cite{chen_variational_2017}. Their VAE model generates images recursive per pixel, each conditioned on previous point, using both RNN and RCN as decoder. Their solution to the decoder collapse is a normalizing flow, which predicts the encoder posterior $q_{\phi}(z \mid x)$. Besides not suffering from decoder collapse, this model can be set to discard irrelevant information in the data. As downside, the autoregressive nature causes slow image generation.
 
 
 % Wasserstein or AAE
-Two different papers, same principle:
+The last approach we present closes the circle to the introduction of this section. The paper \textit{Wasserstein Auto-Encoders} \cite{tolstikhin_wasserstein_2019} propose a combination between GAN and VAE. A model wich uses the VAE's encoder-decoder architecture but instead of the normal regularization term, the posterior distribution is learned and penalized by its Wasserstein distance tp the data distribution. This is in fact a generalization of the adversarial loss of generator and discriminator. Since our task of generating triples would benefit from a precise prediction, such as GANs achieve on image generation, we question, if employing adversarial loss also on the reconstruction term would yield better generation results in this field than the exact index-wise loss?
 
-Use GAN loss for VAE latent space distribution. Generator produces a distribution and discriminator tys to tell if its fake or true.
+% Two different papers, same principle:
 
-Similar approach with Wasserstein distance as regularization loss. 
+% Use GAN loss for VAE latent space distribution. Generator produces a distribution and discriminator tys to tell if its fake or true.
+
+% Similar approach with Wasserstein distance as regularization loss. 
 
 
-Could we also usefully employ adversarial loss on the reconstruction part of the network (that is: have a discriminator try to tell apart input and reconstruction), to get away from the over-focus on exact detail reconstruction that comes with pixel-wise loss
+% Could we also usefully employ adversarial loss on the reconstruction part of the network (that is: have a discriminator try to tell apart input and reconstruction), to get away from the over-focus on exact detail reconstruction that comes with pixel-wise loss
 
 
 % Remaining: Amortized Inference Regulation and Skip Connections 
-Numerous solutions have been proposed. Worth mentioning:
+Besides these three, numerous other approaches have been proposed. Worth mentioning because of their originality are the idea of adding skip-connections between latent space and the decoder's hidden layer \cite{dieng_avoiding_2019} as well as regularizing the amortized inference \cite{shu_amortized_2019}.  
 
-Regulation of the amortized inference.
+% delta-VAE <--
 
-Skip connections between latent space and hidden layer of the decoder.
+% Regulation of the amortized inference.
+
+% Skip connections between latent space and hidden layer of the decoder.
 
 
 
@@ -100,20 +101,26 @@ Skip connections between latent space and hidden layer of the decoder.
 
 \subsection{Future Work}
 
-There are many avenues to follow for future work.
+There are many avenues to follow for future work. Obviously the first step is to fix the collapsing decoder. The suggested solutions should be compared before making a choice, since none has yet been shown to work on KG VAEs.
 
-Fix the collapsing decoder with one of the presented solutions, starting with the simplest.
+Once the reconstruction of triples proved successful, we should look at the data, and question the representation. The adjacency matrix can be inferred from the edge attribute matrix and thus, is obsolete. Since it does not contain additional information, does the model perform worse without it? Approaching this thought from a different angle, we could leave the adjacency as it is and represent the node and edge indices as continuous number, as it is done for color scales of images. This would greatly reduce the number of parameters, but certainly also imply new challenges. Important in this context is that the adjacency is represented in sparse format since this the experiments on triples is but a proof of concept for larger subgraphs. 
 
-Is the adjacency matrix even necessary? 
+We noticed the model worst flexibility for predicting the relation index. In the interpolation experiment it kept predicting the very same relation for the entire latent space. Also linked is the variance in number of edges, while the number of nodes is constant. Thus, we wonder if a setup of two VAEs, where the first one predicts the adjacency and node attributes and the second recurrent one, while conditioned on the predicted edges of the first VAE, predicts the edge attribute.
 
-Basing on the believe that further research will be fruitful, we recommend:
+Finally and making use of the batch wise implementation of the max-pooling graph matching alorithm presented in this work, we suggest to explore a more efficient and \textit{intelligent} graph matching approach. Would it be possible drasically reduce complexity by training a neural network to predict the optimal permutation matrix based on target and prediction graph?
+% with one of the presented solutions, starting with the simplest.
 
-\begin{itemize}
-    \item Smarter approach for graph matching, let a NN learn the best permutation given the targe and prediction
-    \item Two VAEs, first one-shot only the adjacency, second recurrent edgewise including entity and relation index.
-    \item Disentangle the latent space and condition on text
-    \item NF prior
-\end{itemize}
+% Is the adjacency matrix even necessary? 
 
+% Basing on the believe that further research will be fruitful, we recommend:
+
+% \begin{itemize}
+%     \item Smarter approach for graph matching, let a NN learn the best permutation given the targe and prediction
+%     \item Two VAEs, first one-shot only the adjacency, second recurrent edgewise including entity and relation index.
+%     \item Disentangle the latent space and condition on text
+%     \item NF prior
+% \end{itemize}
+
+We hope to have given enough food for though for everyone willing to continue research in this field and look with excitement towards future findings.
 
 \textbf{Happy New Year!}
