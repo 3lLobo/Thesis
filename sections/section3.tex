@@ -71,16 +71,16 @@ The main contribution of the VAE is the so called reparametrization trick. When 
     \label{fig:varinference}
 \end{figure}
 
-In \ref{fig:varinference} we see, that the true posterior $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ is intractable. Thus, we make the assumption that the prior to the decoder is Gaussian with an approximately diagonal covariance, which gives us the approximated posterior.
+In \ref{fig:varinference} we see, that the true posterior $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ is intractable. Thus, we make the assumption that the prior to the decoder is Gaussian with an approximately diagonal covariance, which gives us the approximated posterior
 
 \begin{equation}
-    \log q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)=\log \mathcal{N}\left(\mathbf{z} ; \boldsymbol{\mu}^{(i)}, \boldsymbol{\sigma}^{2(i)} \mathbf{I}\right)
+    \log q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)=\log \mathcal{N}\left(\mathbf{z} ; \boldsymbol{\mu}^{(i)}, \boldsymbol{\sigma}^{2(i)} \mathbf{I}\right) .
 \end{equation}
     
-Now variational inference can be performed, which allows both $\theta$ the generative and $\phi$ the variational parameters to be learned jointly. Using the Monte Carlo estimation of $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ we get the so called estimated lower bound (ELBO):
+Now variational inference can be performed, which allows both $\theta$ the generative and $\phi$ the variational parameters to be learned jointly. Using the Monte Carlo estimation of $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ we get the so called estimated lower bound (ELBO)
 
 \begin{equation}
-    \mathcal{L}\left({\theta}, {\phi} ; \mathbf{x}^{(i)}\right)=-D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{{\theta}}(\mathbf{z})\right)+\mathbb{E}_{q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)}\left[\log p_{{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}\right)\right]
+    \mathcal{L}\left({\theta}, {\phi} ; \mathbf{x}^{(i)}\right)=-D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{{\theta}}(\mathbf{z})\right)+\mathbb{E}_{q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)}\left[\log p_{{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}\right)\right] .
     \label{eq3:elbo}
 \end{equation}
 

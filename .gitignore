@@ -10,6 +10,7 @@
 *.xml
 *.lot
 *.toc
+*.lof
 *-blx.bib
 
 graphs/data/
