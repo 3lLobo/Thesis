@@ -1,31 +1,67 @@
 
-TODO
+% Here comes a beautiful introduction. %Promise!
 
-Here comes a beautiful introduction. %Promise!
+To begin with, we should clarify the intended ambiguity of this work's title. We are without a doubt the most knowledgeable generation in the history of humanity. While we continuously keep researching and accumulating knowledge, we neither share our knowledge nor apply it for the better of any other species in our Universe. All scientific milestones are from us, for us. 
+
+The rise of Artificial Intelligence (AI) marked a turning point in history. For the first time we invest in sharing knowledge and in creating systems which can take our knowledge to superhuman dimension. While machine learning models might not be considered a specie, they have in fact surpassed human intelligence in certain fields (yes, DeepMind's AlphaGO) \cite{silver_mastering_2017}. This is not only seen as progress but also as danger. The world's richest man, Elon Musk, both build his fortune on AI and respects it as humanity's biggest risk. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=.21\textwidth, keepaspectratio]{data/images/ElonMusk.png}
+    \caption{Elon Musk in a tweet on AI. Source \cite{noauthor_elon_nodate}}
+    \label{fig1:Elon}
+\end{figure}
+
+
+% \begin{figure}[H]
+%     \centering
+%     \includepdf[pages=-,pagecommand={},width=\textwidth]{data/images/Elon75a4.pdf}
+%     \caption{Elon Musk Tweet on AI. Source \cite{twitter}}
+%     \label{fig1:Elon}
+% \end{figure}
+
+
+Closing the circle to the ambiguity of the title and relating to the popular concern, that AI might reach a point where it does not need humans anymore to keep evolving, we ask the crucial question: Can AI generate knowledge? 
 
 
 \subsection{Motivation}
 
-Computer vision reached a point, where semantics, entities and relations can be inferred in an simple image.
-Would it not be fantastic if we be able to apply this to text too?
-Could we possibly learn a model to understand the semantics of a KG?
+Turning away from philosophy, we will now introduce this thesis in scientific context. A key area of AI is representation learning, where the model learns to identify and disentangle causalities and underlying features of the data. Understanding the semantics of the data is specifically useful for unsupervised learning. 
 
 
+% computer vision
+The task of generating data has been widely explored for images. Computer vision has reached a point where a simple image can be semantically segmented, where objects can be detected and classified and even relations between entities inferred \cite{kipf_contrastive_2020}.
 
-% A key goal of representation learning is to identify and disentangle the underlying causal factors of
-% the data, so that it becomes easier to understand the data, to classify it, or to perform other tasks
-% (Bengio et al., 2013). For image data this often means that we are interested in uncovering the
-% “global structure” that captures the content of an image (for example, the identity of objects present
-% in the image) and its “style”, but that we are typically less interested in the local and high frequency
-% sources of variation such as the specific textures or white noise patterns.
+
+% molecular graphs
+Advances in the parallel field of  graph generation have received less attention, yet showed promising results. Data stored as graph has a high density of information and rich semantics, which makes it attractive for variational inference. The recent success of Simonovsky et al. \cite{simonovsky_graphvae_2018} on the generation and completion of molecules represented in graph structure, initially inspired our research. Next to molecules, graphs can be used to store knowledge. While real world Knowledge Graphs (KG) have a far higher complexity than molecule graphs, the proposed generative model, Variational Auto-Encoder (VAE) also has proven its capacity to learn from huge datasets with high variance. Inspired by Simonovsky work and motivated by the vision of generating knowledge, we will explore the possibilities and limitation of KG generation with VAEs.
+
+
 
 \subsection{Expected Contribution}
 
-This thesis is aimed to be a proof of concept, providing insight into the capability of the VAE on generating KG triples and to indicate if further research in this direction would be meaningful.
+The main contributions, which we anticipate for this thesis are firstly the proof of concept that a graph VAE can capture, disentangle and reproduce the underlying semantics of a real world KG. While Simonovsky used small subgraphs with multiple edges, we proof our hypothesis on  generating the smallest possible graph of two nodes, also representable as single triple. The VAE will be tested and evaluated in several experiments, including link prediction, latent space interpolation and accuracy of generating valid triples.
+% Proof of concept KGVAE
+
+
+% draw parallels to molecules and explore the differences
+We will compare our results to related methods in the filed of KGs and investigate the impact of different hyperparameter. The main focus will be on the influence of the graph matching loss function, the encoding through graph convolutions and stochastic inference. Further, we aim to mimic the success of to molecule generation and will, thus, point out similarities and differences to our work.
+
+% Implementation of graph matching in batches
+On a lower level, we hope to contribute with our implementation of the max-pooling graph matching algorithm for tensor batches. While the algorithm has been cited and implemented numerous times, a working implementation, compatible with deep learning tasks, has to the best of our knowledge not yet been published.  
+
+% Method for syntax cohearence of generated triples from real world KG
+Lastly we introduce a high-level method for evaluating the validity of generated data, which compares the type constrain of the generated triple's predicate with its entity types and reports accuracy. This is made possible by expanding the existing dataset FB15K-237 with entity types from its original KG Freebase. While this scoring method is error prone, it does give an insight into the level representational potential of the model and the syntax coherence of the generated triples. Future work can use this evaluation method to track progress and compare to the baseline. 
+
+
+% This thesis is aimed to be a proof of concept, providing insight into the capability of the VAE on generating KG triples and to indicate if further research in this direction would be meaningful.
 
 \subsection{Research Question}
 
-\texttt{Can a VAE learn the underlying semantics of a KG?}
+\begin{center}
+    \texttt{How successful is a VAE in representation learning on real world KG compared to molecule graph data and what is the impact of each major hyperparameter?}
+    \label{sec1:requestion}
+\end{center}
 
 
 Without further ado -
