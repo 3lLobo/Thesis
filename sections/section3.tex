@@ -54,13 +54,18 @@ In simple cases, like citation networks this is a sufficient representation. In 
 
 \subsection{One Shot Graph VAE}
 
+We will now explain the background knowledge on which the main model of this thesis is based. Since the graph VAE is a adaptation of the original VAE, we start by introducing the original version. Furthermore we present each of the different modules, which compose the final model. This includes the different graph encoders as well as sparse graph loss functions.
+
+The notation varies, since we touch upon three different fields. For the VAE and MLP we consider data in vector format, thus a bold variable denotes the full vector and variable with index the value at that index. Graphs are represented in matrices, which are denoted in capital letters. $A$ typically denotes the adjacency matrix, from there on paths split and we have to use different notations for different methods. While $X$ is described as feature matrix, we have to specify further when it comes to Simonovsky's GraphVAE, where $E$ is the edge attribute and $F$ the node attribute matrix. The reason we change from features to attributes, is due to the singularity, also one-hot encoding of attributes per node/edge, in contrast to features which can be numerous per node.
+
+
 \subsubsection{VAE}
 \label{ssection:VAE}
 % The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model consisting of an encoder and a decoder. The architecture of the VAE differs from a common autoencoder by having a stochastic module between encoder and decoder. Instead of directly using the output of the encoder, a distribution of the latent space is predicted from which we sample the input to the decoder. The reparameterization trick allows the model to be differentiable. By placing the sampling module outside the model we get a deterministic model which can be backpropagated.
 
 
 
-The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model in form of an autoencoder, consisting of an encoder and a decoder. Its architecture differs from a common autoencoder by having a stochastic module between encoder and decoder. The encoder can be represented as recognition model with the probability $p_{{\theta}}(\mathbf{z} \mid x)$ with $x$ being the variable we want to inference and $z$ being the latent representation given an observed value of $x$. The encoder parameters are represented by $\theta$. Similarly, we denote the decoder as $p_{{\theta}}(\mathbf{x} \mid z)$, which given a latent representation $z$ produces a probability distribution for the possible values, corresponding to the input of $x$. This will be the base architecture of all our models in this thesis.
+The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model in form of an autoencoder, consisting of an encoder and a decoder. Its architecture differs from a common autoencoder by having a stochastic module between encoder and decoder. The encoder can be represented as recognition model with the probability $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ with $x$ being the variable we want to inference and $z$ being the latent representation given an observed value of $x$. The encoder parameters are represented by $\theta$. Similarly, we denote the decoder as $p_{{\theta}}(\mathbf{x} \mid z)$, which given a latent representation $z$ produces a probability distribution for the possible values, corresponding to the input of $x$. This will be the base architecture of all our models in this thesis.
 
 The main contribution of the VAE is the so called reparametrization trick. When sampling from the latent prior distribution, we get a stochastic module inside our model, which can not be backpropagated and makes learning impossible. By placing the stochastic module outside the model, we can again backpropagate. We use the predicted latent space as mean and variance for a Gaussian normal distribution, from which we then sample $\epsilon$, which acts as external parameter and does not need to be updated.
 
@@ -159,16 +164,16 @@ The encoder $q_{\phi}(\mathbf{z} \mid {G})$ takes a graph ${G}$ as input, on whi
 
 For the decoder $p_{\theta}(\mathbf{x} \mid {G})$ the latent representation is again concatenated with the node labels. The decoder architecture for this model is a MLP with inverted dimensions, which outputs a flat prediction of ${\tilde{G}$, which is split and reshaped in to the sparse matrix representation.
 
-Simonovsky's work was mainly focused on molecule data. To adopt this model for multi-relational KGs and to reduce it to a minimum viable product, we drop the conditioning on the node labels and use the node attributes as pointers towards the corresponding entity in $\mathcal{E}$. By using node attributes as unique pointers, we hide additional information about the entity, such as type and topic from our model. Simplifying further we drop the convolutional layer and directly flatten $G$ as input for the MLP encoder. 
+Simonovsky's work is focused on molecule data. To adopt this model for multi-relational KGs and to reduce it to a minimum viable product, we drop the conditioning on the node labels and use the node attributes as pointers towards the corresponding entity in $\mathcal{E}$. By using node attributes as unique pointers, we hide additional information about the entity, such as type and topic from our model. Simplifying further we drop the convolutional layer and directly flatten $G$ as input for the MLP encoder. 
 
 
 TODO Make Illustration
 
-% \begin{figure}[H]
-%     \centering
-%     \caption{Illustration of the GraphVAE architecture as presented in \cite{simonovsky_graphvae_2018}. The decoder combines graph convolutions and a MLP with concatenated labels $y$. The decoder reconstructs ${G}$ from the latent representation and the concatenated node labels $y$.}
-%     \label{fig3:GVAE}
-% \end{figure}
+\begin{figure}[H]
+    \centering
+    \caption{Architecture of the RGVAE.}
+    \label{fig3:GVAE}
+\end{figure}
 
 % The encoder can either be a MLP, a GCNN or an RGCN. The same holds for the decoder with the addition that model architecture needs to be inverted. An version of a Graph VAE presented in \cite{simonovsky_graphvae_2018}. This model combines both the previous methods. The input graph undergoes relational graph convolutions before it is flattened and projected into latent space. After applying the reparametrization trick, a simple MLP decoder is used to regenerate the graph. In addition the model concatenates the input with a target vector $y$, which represents ???. The same vector is concatenated with the latent tensor. ***Elborate why they do that***.
 

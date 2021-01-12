@@ -1,29 +1,59 @@
 
-TODO compare to molecules - point out differences
+% TODO compare to molecules - point out differences
 
-In this final chapter, we will discuss our results from different experiments, emphasizing the comparison to Simonovsky's work on molecule generation. The fact, that we did not achieve Similarly successful results is obvious, thus we will focus on the analyzing the responsible factors and their cause. Despite the nature of our results we are happy to propose possible solutions. Being of the opinion that questions are often more interesting than answers, we will question the value of these solutions for further research.
+In this final chapter, we will discuss our results from different experiments, emphasizing the comparison to Simonovsky's work on molecule generation. The fact, that we did not achieve Similarly successful results does not hinder us from analyzing the responsible factors and causalities. Despite the nature of our results we are happy to propose possible solutions and while being of the opinion that questions are often more interesting than answers, we will question the value of these solutions for further research.
 
-\subsection{RGVAE Link Prediction & Interpolation}
+\subsection{Experiment Take-away}
 
 % Well well well
+% We did link prediction because it is the most common experiment in this field
 
-Poor results when using ELBO loss.
+%  We see loss converges perfectly 
+The first relevant observation made is the lower ELBO score to which the RGVAE converges when using $\beta=0$, meaning it is only trained on the reconstruction loss.
+We tested the assumption that the model performs better without regularization term. This leads to the assumption that the RGVAE performs better better without prior constrain, yet a fully unconstrained VAE, defies the its purpose when it comes to disentangling the latent space and sampling.
+The tuned RGVAE shows poor results on the task of link prediction, with slightly worse scores for the convolutional encoder. In order to find the isolate the causalities, we experiment further on link prediction with two variational version of DistMult learning on the full ELBO and only on the reconstruction loss. Both models scored equally bad compared to the original model, indicating that DistMult and embedding based link predictors in general are not complex enough for variational inference. Following our prior assumption we added the unconstrained RGVAE to this comparison, which led to significantly higher scored than the all versions of the tuned RGVAE and the variation DistMult. Yet, the scores were not competitive with state of the art link predictors of with much lower parameter count, thus we do not recommend further researching in the direction of VAE as link predictor.
 
-Variational Inference does not add value to embedding based link predictors.
+The graph matching loss function does not seem to have any impact on the link prediction results, yet we cannot draw a conclusion here since since the poor performance is linked to a different causality which might impede the graph matching from adding value. To measure the percentage of permutation we adopt Simonovsky's method of averaging the identity of permutation matrix $X$, which is invariant for permutation equivalent nodes. We see that during training the permutation rate converges to $60$\%.
 
-Relaxation of the latent space allows the RGVAE to score competitively, yet the vast difference in complexity compared to simple embedding based models devalues its useability. 
+Comparison of the two datasets, showed a better performance on the FB15K-237 dataset. While both datasets are real-world KGs, WN18RR is composed of synsets with vast discrepancy between the relation and entity count, resulting in a lower chance of generating a valid triple. Thus, we decided to continue the interpolation and graph generation experiments only on the FB15k-237 dataset. 
+
+For the last two experiments we trained the RGVAE with $d_z=10$ for better disentanglement and analysis of each latent dimension.
+The interpolation experiment between two triples reveals that the RGVAE in all versions fails to reconstruct the start and end triple. We notice an influence of the graph matching loss, namely the model predicting constantly the same relation versus the standard loss, where the model predicts randomly from a subset of triples. Same can be said for the predicted entities, which are drawn from a subset of what seems to be the most frequent occurrences in the dataset. Empirically we can say that the prediction has little prior conditioning on the latent signal.
+
+These last experiment is designed and evaluated in a similar fashion as Simonovsky did to generate valid molecular graphs. We interpolate the full latent space for $-\sigma^2 < z < \sigma$ and $-2\sigma^2 < z < 2\sigma$. Based on our proposed validation criteria, the RGVAE generated the same rate of valid triples as random. We observe further independence between the decoder and the latent signal. This slightly compares with Simonovsky's result where the generated valid triples had a variance of only $10$\%.
+% Interpolation
+%  like molecules
+
+
+% Why does graph matching change that? 
+% Higher dimension of freedom when generating graphs using Graph matching.
+
+% All valid generated triples are unseen in both train and test set. 
+
+% Simonovsky also reports low variance of valid triples 10\%
 
 \subsection{Research Answer}
 
-Higher dimension of freedom when generating graphs using Graph matching.
+% Answer it right!
 
-All valid generated triples are unseen in both train and test set. 
+% How successful is a VAE in representation learning on real world KG compared to molecule graph data and what is the impact of each major hyperparameter?
 
-Problem seems to be the Gaussian prior.
+%  Overall
+To answer the initial research question we will first summarize the influence of the main hyperparameter.
 
-Based on the results we can confidently answer our research question with 
+%  Convolutions
+A convolutional encoder does not seem to contribute to the performance of the RGVAE. This could be caused by the simple implementation of using node and edge attributes both as feature matrix, or be due to the decoder issue, explained in \ref{ssec7:collapse}, that the prediction is independent of the encoding. 
+
+%  graph matching
+Graph matching does have a noticeable impact. The model expresses more creative freedom when predicting the adjacency. Especially for experiments with larger subgraphs we recomend to keep investing in this method.
+
+%  Prior, stochasticity
+Variational inference is part of the VAE and allows disentanglement of the latent space, thus, even considering that the unconstrained model scored better, we recommend keeping the VAE structure. Instead of the full stochastic module, we assume the Standard Gaussian prior to be the reason behind the poor representation and we recommend comparing alternative prior constrains.
+
+Overall we can answer the research question:
+
 \begin{center}
-    \textit{No!}
+    \textit{The RGVAE failed in representation learning of real-world KG due to the Standard Gaussian latent space prior.}
 \end{center}
 
 Yet, metaphorically, this is not the end of the book, but rather the beginning of a new chapter. In the remaining part of this discussion we analyze the underlying problem of the RGVAE and propose a variety of solutions.
@@ -33,7 +63,7 @@ Yet, metaphorically, this is not the end of the book, but rather the beginning o
 \label{ssec7:collapse}
 
 %  what is decoder collapse
-To introduce main part of our conclusion we explain a phenomenon observed when training GANs. A GAN is yet another generative model which based on its potential to generate high resolution images, has drawn much attention in recent years. It consists of a generator, who's task it is to decode a latent signal to a an image, and a discriminator, which given the fake image and the real data has to distinguish between them. Training of GANs is unstable and one of the major problem which occur is \textit{mode collape}. The generator learns to fool the discriminator by generating only a single mode with high precision such that the discriminator classifies it was real image.
+To introduce the main part of our conclusion we explain a phenomenon observed when training GANs. A GAN is yet another generative model which based on its potential to generate high resolution images, has drawn much attention in recent years. It consists of a generator, who's task it is to decode a latent signal to a an image, and a discriminator, which given the fake image and the real data has to distinguish between them. Training of GANs is unstable and one of the major problem which occur is \textit{mode collape}. The generator learns to fool the discriminator by generating only a single mode with high precision such that the discriminator classifies it was real image.
 
 While VAEs cannot suffer from mode collapse, because they backpropagate over the predicted distributions of all modes, it has a related phenomenon. \textit{Decoder collapse} occurs when the decoder has enough capacity to choose not to consider the latent signal and instead stores the information to reconstruct the data's distribution partly or solely in its parameters. This means that the generated data is not conditioned on the latent signal anymore. The cause of this problem is found in the regularization term $D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}\right) \| p_{{\theta}}(\mathbf{z})\right)$, more specifically in the constrain on a standard Gaussian prior. The multidimensional encoding of $d_z>1$ the approximated posterior is a mixture of Gaussians, which can only match the multivariant Normal distribution, in the case of all $\mathbf{\mu}_z=0$ and $\Sigma^2_z=\mathbb{I}$, what also implies that no information is encoded. Thus, the VAE has to decide if storing information in the latent vector is necessary to model the dataset distribution $p(x)$. If the penalty for altering the latent Normal distribution outweighs the benefits of the additional information towards the reconstruction loss, the VAE will chose for \textit{decoder collapse}. 
 

@@ -178,15 +178,18 @@ Dr Paul \textsc{Groth}\\
 \section*{Abstract}
 % We generate Knowledge! \cite{kipf_contrastive_2020}
 
-This thesis investigates the idea of having a VAE learn latent features of the raw data from KGs. Building on successful approaches of prior work, an embedding based, a fully-connected and a convolutional model are evaluated on the two most popular KGs. The influence of a permutation invariant loss function on the models capability to generalize on sparse subgraphs is analyzed.
-We compare the performance of our models on the task of link prediction to sate of the art scores.
-The results compare ???
-The model $x$ outperforms the others, indicating that convolutions are [/not] necessary.
-Interpolation of the latent space shows that the model learns to featurize latent dimensions???
-When generating subgraphs with up to $n$ nodes, we see ???
-Finally we filter generated triples for type constrained predicates on subject or object. A $x\%$ of the generated triples adhere to this axiom. Thus we can say that VAE's are to a certain extend able to capture the underlying semantics of a KG.   
+In this thesis we set a proof of concept for the potential of VAEs on representation learning of real-world KGs. Building on successful approaches in the field of molecular graphs, we experiment and evaluate the capabilities and limitation of our relational graph VAE, RGVAE. The impact of the model features, convolutional encoder and permutation invariant loss function is analyzed to quantize added value. We compare the performance of our models on link prediction to embedding based models the two popular datasets FB15K-237 and WN18RR. To isolate causalities we implement a variational embedding based model and a RGVAE without latent space prior constrain. Neither convolutions nor permutation invariance alter the scoring. The results show that for exception of the RGVAE with relaxed latent space, our model does not qualify as link predictor. Furthermore our model's complexity does not scale to the much simpler embedding based solution.
+Interpolation of the latent space, a VAE specific experiment, proves that our model learns to reconstruct the adjacency but fail to disentangle and assign the right node and edge attributes. The assumption of an uninformative latent representation is confirmed in the last experiment. We present a novel validation method for generated triples from the FB15K-237 dataset, where relation type-constrains are matched with entity constrains. The rate of valid generated triples does not exceed the random threshold, while all generated triples are unseen in both train and test set. An attempt to fix the collapsing decoder via $\delta$-VAE results unsuccessful. Finally we analyze the limitations of our approach compared to molecule generation and propose promising solutions for successful representation learning of multi-relational KGs. 
 
+% This thesis investigates the idea of having a VAE learn latent features of the raw data from KGs. Building on successful approaches of prior work, an embedding based, a fully-connected and a convolutional model are evaluated on the two most popular KGs. The influence of a permutation invariant loss function on the models capability to generalize on sparse subgraphs is analyzed.
+% We compare the performance of our models on the task of link prediction to state of the art scores.
+% The results compare ???
+% The model $x$ outperforms the others, indicating that convolutions are [/not] necessary.
+% Interpolation of the latent space shows that the model learns to featurize latent dimensions???
+% When generating subgraphs with up to $n$ nodes, we see ???
+% Finally we filter generated triples for type constrained predicates on subject or object. A $x\%$ of the generated triples adhere to this axiom. Thus we can say that VAE's are to a certain extend able to capture the underlying semantics of a KG.   
 
+\newpage
 % \section*{Notes}
 % \input{notes}
 

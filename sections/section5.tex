@@ -11,45 +11,40 @@ For this sake of comparison with state of the art results, we chose the two most
 
 % Training models on each dataset for 333 epochs, without early stopping.
 
-\textbf{Fb15k-237}
+\textbf{FB15K-237} is a successor of the FB15K dataset, first introduced by \cite{bordes_translating_2013}, which suffered of major test leakage, meaning that triples from test set could be inferred by inverting triples from the train set. In FB15K-237, introduced in \cite{toutanova_representing_2015} these triples where removed.
+The data was scraped from Freebase, while only the most frequent entities and relations were considered. The huge open-world KG Freebase \cite{bollacker_freebase_2008}, which before its discontinuation had around $1.2$ billion triples and $80$ million entities, was structured by assigning types and classes to entities and type constrains to relations. Thus, a triple can only be formed if the relation constrain matches the entity's type. Freebase was free for everyone to access and expand. This led to inconsistencies,duplicates and highly inconsistent notation, which might have been the reason for its discontinuation. Data dumps of the latest version are still available.
 
-Present the concept of FreeBase!
 
-Entities have types, types have classes. Show most common types/classes
 
-Highly incoherent, not following the same notation and inconsistent, contradicting triples.
 
-Everybody was allowed to add facts. Maintainance of Freebase is discontinued. 
+% textwidth for figures:
+% \printinunitsof{in}\prntlen{\textwidth}
 
-textwidth for figures:
-\printinunitsof{in}\prntlen{\textwidth}
+% linewidth for figures:
+% \printinunitsof{in}\prntlen{\linewidth}
 
-linewidth for figures:
-\printinunitsof{in}\prntlen{\linewidth}
+\textbf{WN18RR}, a dataset of synonyms and hypernyms, is a successor of yet another dataset WN18 introduced by \cite{bordes_translating_2013}. Similar to the the above the original dataset suffered from test leakage, thus, an updated version without reciprocal triples was introduced by \cite{dettmers_convolutional_2018}. This dataset is characterized by its few relations and large corpus of entities. In contrary to FB15K-237, its triples are difficult to be judged on view and the underlying semantics are entity specific, meaning not relying on types and classes.
 
-Entity types
 
-triple topics
 
-% This dataset is a subset of the FreeBase KG (cite).[Explain Free Base] The original Fb15k had redundant triples, creating ambiguity during training. In the updated version, Fb15k-237, these triples were removed what led to a more robust dataset, which is commonly used as benchmark for several NLP tasks.
+\begin{table}[H]
+  \centering
+      \begin{tabular}{|l|l|l|l|}
+      \hline
+      \rowcolor[HTML]{EFEFEF}
+      \multicolumn{1}{|c}{\textsc{Dataset}} & \multicolumn{1}{c}{\textsc{Entities}} & \multicolumn{1}{c}{\textsc{Relations}} & \multicolumn{1}{c|}{\textsc{Triples}}\\\hline
+      FB15K-237     & \multicolumn{1}{c|}{$14,951$} & \multicolumn{1}{c|}{$237$} & \multicolumn{1}{c|}{$310,116$}\\
+      WN18RR   & \multicolumn{1}{c|}{$40,943$} & \multicolumn{1}{c|}{$11$} & \multicolumn{1}{c|}{$93,003$} \\
+      \hline
+      \end{tabular}
+      \caption{Statistics of the FB15k-237 and WN18RR datasets.}
+      \label{tab5:data}
+  \end{table}
 
-% % or/and
-% A subset from one of the first and largest KGs, called FreeBase. In the first version of this dataset, it was possible to infer most of the test triples by inverting triples in the trainset, Thus the latest $237$ version filtered these triples out.
-% The dataset contains $14,951$ entities and $1,345$ different relations.
-
-\textbf{WN18rr}
-
-Based on the wordnet KG.
-
-Only $18$ different relations
-
-triples are synsets (synonym, hypernym)
-
-TODO Table comparing numbers
 
 \subsection{Hyperparameter Tuning}
 
-In this section we run a grid search for the three hyperparameters $\beta$, $d_z$ and $d_h$ for a set of contrastive values. To reduce the computational expenses we train each model for $60$ epochs and  evaluate link prediction on a subset of $50$ triples.
+In this section we run a grid search for the three hyperparameter $\beta$, $d_z$ and $d_h$ for a set of contrastive values. To reduce the computational expenses we train each model for $60$ epochs and  evaluate link prediction on a subset of $50$ triples.
 
 Empirically we set the learning rate to $3e-5$ and the maximum batchsize fitting on the GPU memory. For $d_h$ we did not see any significant changes for higher values, thus we choose a lower number to reduce the total model parameters. The remaining hyperparameter did influence and the optimal setting vary for each dataset, table \ref{tab:RGVAEhyp} shows the results of our hyperparameter tuning.
 
@@ -265,7 +260,7 @@ Can the model assign logical features to latent dimensions?
 
 On closed-world schema-based KGs the approach for testing the validity of a new triple is to add it to the existing KG and run a onthology reasoner on it. A inconsistency in the KG will appear as \texttt{null}-Class, but only if an axiom is violated. This approach works only for fully constrained KGs and is not scalable, since the reasoner recursively checks evey triple for every axiom. Thus, we present an alternative and improvised way to estimate the validity of generated triples.
 
-The FB15k-237 is a subset from the FreeBase KG \cite{FREEBASE}, thus, even thought they are not part of the dataset, - entities have type properties in their original Freebase representation. 
+The FB15k-237 is a subset from the FreeBase KG \cite{bollacker_freebase_2008}, thus, even thought they are not part of the dataset, - entities have type properties in their original Freebase representation. 
 Querying the last official Freebase dump, we get the types for each entity in the FB15k-237 dataset, With exception of $8$ entities, which could not be found in the query.
 
 Our approach is to randomly generate triples, from signals randomly drawn from a Standard Gaussian distribution. Then to filter those triples on predicates which contain the type \textit{people}, which is within the top 10 most common Freebase types. We differentiate between base-class types subclass types, both can contain the word \textit{people}. The entity \texttt{['/m/02mjmr Barack Obama']} has between many others the type \texttt{[/people/measured\_person]}. Here the base class is \textit{people} and the subclass \textit{measured\_person}. We could filter directly on subclasses, but we chose to give our model more creative freedom and filter for \textit{people} in the full set of types. Using this choice, the generated triples are scored on logic rather than facts. E.g. any person can hypothetically the a \textit{measured\_person}, understanding this implies semantical reasoning, while differentiating between which person is and is not a \textit{measured\_person} implies contextual knowledge. Thus, we use the base type \textit{people} to validate triples.
