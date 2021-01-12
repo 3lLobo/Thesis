@@ -144,7 +144,7 @@ The model scores about three times better on the FB15k-237 dataset than on WN18R
   \label{fig5:lp_final}
 \end{figure}
 
-TODO add random!!!
+% TODO add random!!!
 
 % Compare with vs without convolution 
 % We use negative elbo as scoring function. Since elbo is aimed to be reduced and LP scores are higher better.
@@ -217,7 +217,6 @@ The first point indicates that the model learns a set of adjacency matrices, whi
 Secondly, we see that even when converged, the model predicts variations od the adjacency matrix very different to the target. The most common is a single edge on $A_{n,0}$ and on $A_{n,n}$. Less common and with lack of explanation are the predictions of an empty, or multi edge adjacency matrix. In contrast to this and as expected, the RGVAE with the standard loss function learns to solely predict edges on $A_{0.0}$. 
 Finally we will analyze the impact of permutation invariance on the experiment of syntax coherence in section \ref{ssec5:syntax}.
 
-% TODO
 
 % Permutation starts at $100\%$ at the beginning of training and converges to $60\%$.
 
@@ -243,16 +242,16 @@ The first experiment is linear interpolating between two triples. Therefor two v
 \end{center}
 
 
-TODO present the results and link to appendix
+% TODO present the results and link to appendix
 
-Obama triple is not reproduced, not even close.
+% Obama triple is not reproduced, not even close.
 
-For the second experiment we modify each latent dimension isolated in a $95\%$ confidence interval of the Standard Gaussian distribution. Starting with the encoded representation of the Obama triple, we incrementally add $z_{i} += j \times ...$ TODO you have to fix this!!!
+For the second experiment we modify each latent dimension isolated in a $95\%$ confidence interval of the Standard Gaussian distribution. Starting with the encoded representation of the Obama triple, we incrementally add $z_{i} += -1.96 + j \times s$ with $s = \frac{1.96 * 2}{n_s-1}$ for the number of steps $n_s = 10$.
 
-
+Due to the size of the tables representing the interpolations and the low value they add to the presentation of this work, the results of both experiments can be found in the appendix. 
 % Further we go ahead and test what happens if we modify one latent dimension at a time with $d_z = 10$ of a triple. TABLE: (s,r,o), x axis dims, y axis steps. $95\%$ Gaussian confidence 
 
-Can the model assign logical features to latent dimensions?
+% Can the model assign logical features to latent dimensions?
 
 
 \subsection{Syntax coherence}
