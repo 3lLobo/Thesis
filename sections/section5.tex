@@ -167,7 +167,7 @@ In the last row we show the results of the RGVAE with relaxed latent space. This
 
 \begin{equation}
   \begin{align}
-    D_{reg} &= \beta \times D_{K L}\left(q_{\phi}\left(\mathbf{z} \mid G\right) \| p_{\theta}(\mathbf{z})\right) \\
+    D_{reg} &= \beta D_{K L}\left(q_{\phi}\left(\mathbf{z} \mid G\right) \| p_{\theta}(\mathbf{z})\right) \\
     \max_{\beta = 0} D_{K L} &= 3506 \\
     \max_{\beta = 100} D_{K L} &= 0.0154
   \end{align}
@@ -244,11 +244,32 @@ The first experiment is linear interpolating between two triples. Therefor two v
 
 % TODO present the results and link to appendix
 
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|}
+  \hline
+  \rowcolor[HTML]{EFEFEF} 
+  \textsc{RGVAE permutation}\\ \hline
+  \texttt{[[France] [/base/petbreeds/city\_with\_dogs/top\_breeds] [Imperial Japanese Army]]}\\
+  \texttt{[[Cree Summer] [/tv/tv\_program/program\_creator] [David Chase]]}\\
+  \texttt{[[Guitar] [/business/business\_operation/assets] [Paramount Vantage]]}\\
+  \texttt{[[Democratic Party] [/music/genre/artists] [Howard Hawks]]}\\
+  \texttt{[[Roy Haynes] [/people/person/spouse\_s] [The Portrait of a Lady]]}\\
+  \texttt{[[Cleveland Browns] [/film/actor/dubbing\_performances] [David Milch]]}\\
+  \texttt{[[Jay-Z] [/film/special\_film\_performance\_type/film\_performance\_type] [Ashley Tisdale]]}\\
+  \texttt{[[Phoenix Suns] [/film/film/dubbing\_performances] [Lynn]]}\\
+  \texttt{[[James E. Sullivan Award] [/organization/organization/child] [Giant Records]]}\\
+  \texttt{[[Boston United F.C.] [/soccer/football\_player/current\_team] [Kensal Green Cemetery]]}\\  
+  \hline
+  \end{tabular}
+\caption{Latent space interpolation between two triples in $10$ steps.}
+\label{tab5:ipbtw2}
+\end{table}
 % Obama triple is not reproduced, not even close.
 
-For the second experiment we modify each latent dimension isolated in a $95\%$ confidence interval of the Standard Gaussian distribution. Starting with the encoded representation of the Obama triple, we incrementally add $z_{i} += -1.96 + j \times s$ with $s = \frac{1.96 * 2}{n_s-1}$ for the number of steps $n_s = 10$.
+For the second experiment, we interpolate each latent dimension isolated in a $95\%$ confidence interval of the Standard Gaussian distribution. Starting with the encoded representation of the Obama triple, we incrementally add $z_{i} += -1.96 + j \times s$ with $s = \frac{1.96 * 2}{n_s-1}$ for the number of steps $n_s = 10$. Due to the size of the tables representing the interpolations and the low value they add to the presentation of this work, the result of this experiments can be found in the appendix.
 
-Due to the size of the tables representing the interpolations and the low value they add to the presentation of this work, the results of both experiments can be found in the appendix. 
+
 % Further we go ahead and test what happens if we modify one latent dimension at a time with $d_z = 10$ of a triple. TABLE: (s,r,o), x axis dims, y axis steps. $95\%$ Gaussian confidence 
 
 % Can the model assign logical features to latent dimensions?
@@ -352,32 +373,29 @@ all remaining triples violate common sense logic. The RGVAE does not differentia
 While investigating the model and the generated triple set, we notice two outcomes. Neither the augmentation of the variance nor the enabling of the permutation invariance has an impact on either of the model with two encoder versions. The regularization loss converges during training to zero, meaning that the model learns a latent representation of the dataset as  nearly perfect Standard Gaussian distribution. Yet, even when sampling latent signal from the exact same distribution, we notice that each model repeatedly predicts combinations of a small subset of entities and relations, e.g. the RGVAE version which did not predict the Obama entity once in a total of $111583$ valid triples. This also aligns with the interpolation results, where we observed a static relation for the full gridsearch of the latent space. If we look at the gradient and parameter values $\phi$ and$\theta$ of the MLP encoder and decoder, we see a much higher variance and gradients for $\phi$. The decoder shows higher values and variance for a small subset of neighboring parameter, while the remaining parameters converge to a very similar and low value. This indicates that the encoder learns very well to represent each different triple as Standard Gaussian latent representation. The decoder MLP on the opposite seems to to ignore most of this representation by assigning vanishing values to the connected parameters. Intuitively it seems that the decoder learns to interpret the part of the latent representation corresponding to the adjacency matrix and minimizes as well as stabilizes the loss of the edge and node attribute matrix by uniformly distributing their probability. This leads to the decoder reconstructing edge and node attribute randomly. Further, depending on the values of $\theta$ when the model finishes learning, the decoder will keep predicting the same subset of entities and relation independent of the latent signal $z$. If we look at the flattened representation of our input graph, we see that the part representing the adjacency matrix is way shorter and has a tractable mean of $\frac{1}{4}$ while the mean for the edge and node attribute matrices are $\frac{1}{{4 \times 1345}}$ and $\frac{1}{14951}$. The problem of a our decoder partly ignoring the latent input and potential solutions are discussed further in section \ref{ssec7:collapse}. 
 
 
-
-% Problem not so much the latent space but the training of each model. 
-
-% each model predicts a small subset of entities and relations very often.
-
-% Might be because the reconstruction MLP just puts weight on random parameters which then define the prediction without the latent space having much influence. 
-% % Suhasini Mani Ratnam	/people/person/sibling_s./people/sibling_relationship/sibling	Barack Obama
-% % Barack Obama	/people/ethnicity/languages_spoken	Valentine's Day
+\subsubsection{Delta Correction}
+\label{ssec5:delta}
 
 
-% % \begin{table}[H]
-% %   \centering
-% %   \begin{tabular}{|lllll|}
-% %     \hline
-% %     \rowcolor[HTML]{EFEFEF} \cellcolor[HTML]{EFEFEF} & \multicolumn{2}{c}{\cellcolor[HTML]{EFEFEF}\textsc{p.i. Loss}} & \multicolumn{2}{c|}{\cellcolor[HTML]{EFEFEF}\textsc{standard Loss}} \\ %\cline{2-5} 
-% %     \rowcolor[HTML]{EFEFEF} 
-% %     \multirow{-2}{*}{\cellcolor[HTML]{EFEFEF}\multicolumn{1}{c}{\textsc{Model}} } & \multicolumn{1}{c}{\textsc{Valid}} & \textsc{New} & \multicolumn{1}{c}{\textsc{Valid}} & \textsc{New} \\ 
-% %     \hline
-% %     \multicolumn{1}{|l|}{RGVAE} & \multicolumn{1}{c|}{1} & \multicolumn{1}{c|}{1}& \multicolumn{1}{c|}{1}& \multicolumn{1}{c|}{1}\\ 
-% %     \multicolumn{1}{|l|}{RGCVAE} & \multicolumn{1}{c|}{1}& \multicolumn{1}{c|}{1}& \multicolumn{1}{c|}{1}& \multicolumn{1}{c|}{1}\\ 
-% %     \hline
-% %   \end{tabular}
-% % \end{table}
+% Explain quick delta implementation 
 
-% \subsection{Subgraph Generation}
+% Explain new experiments
 
-% TODO
+% show interesting interpolation
 
-% Until now our model trained on only one triple per sparse graph. What will happen if we train it on more than one triples?
+% show parameters if different
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{data/ip/GVAE_p1_delta_encoder.png}
+    \caption{MRR scores for different $\beta$ values on the dataset FB15k-237.}
+    \label{fig5:deltaParams}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{data/ip/GVAE_p1_encoder.png}
+    \caption{MRR scores for different $\beta$ values on the dataset FB15k-237.}
+    \label{fig5:normParams}
+\end{figure}

@@ -1,0 +1,10 @@
+[[University of Ibadan] [/base/schemastaging/person_extra/net_worth./measurement_unit/dated_money_value/currency] [William James]]\\
+[[French Polynesia] [/base/popstra/celebrity/dated./base/popstra/dated/participant] [Nine]]\\
+[[Big Fish] [/influence/influence_node/influenced_by] [Academy Award for Best Sound Editing]]\\
+[[Torquay] [/location/statistical_region/religions./location/religion_percentage/religion] [Netherlands]]\\
+[[The Bronx High School of Science] [/people/person/religion] [United States Dollar]]\\
+[["Oceans Eleven"] [/film/film/country] [Model]]\\
+[[Northern Arizona University] [/people/person/spouse_s./people/marriage/type_of_union] [The Catholic University of America]]\\
+[[Alien] [/film/film/cinematography] [The Treasure of the Sierra Madre]]\\
+[[1998 Winter Olympics] [/film/film/language] [Oingo Boingo]]\\
+[[Cycling] [/people/deceased_person/place_of_death] [Jacob Vargas]]\\

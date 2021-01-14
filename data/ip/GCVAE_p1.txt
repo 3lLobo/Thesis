@@ -1,0 +1,10 @@
+\texttt{[[Evangeline Lilly] [/award/ranked_item/appears_in_ranked_lists./award/ranking/list] [1932 Summer Olympics]]}\\
+\texttt{[[Governor-GB] [/award/ranked_item/appears_in_ranked_lists./award/ranking/list] [Kingdom of France]]}\\
+\texttt{[[Man of Steel] [/award/ranked_item/appears_in_ranked_lists./award/ranking/list] [University of Denver]]}\\
+\texttt{[[France] [/award/ranked_item/appears_in_ranked_lists./award/ranking/list] [Kazoo]]}\\
+\texttt{[[Hilary Haag] [/award/ranked_item/appears_in_ranked_lists./award/ranking/list] [Dangerous Liaisons]]}\\
+\texttt{[[Austin Powers: The Spy Who Shagged Me] [/award/ranked_item/appears_in_ranked_lists./award/ranking/list] [Carlos Santana]]}\\
+\texttt{[[Cedric Gibbons] [/award/ranked_item/appears_in_ranked_lists./award/ranking/list] [Central European Time Zone-US]]}\\
+\texttt{[[Atlantic Ocean] [/award/ranked_item/appears_in_ranked_lists./award/ranking/list] [Sierra Leone]]}\\
+\texttt{[[Anne Hathaway] [/award/ranked_item/appears_in_ranked_lists./award/ranking/list] [Organist]]}\\
+\texttt{[[Herbie Hancock] [/award/ranked_item/appears_in_ranked_lists./award/ranking/list] [The Expendables]]}\\

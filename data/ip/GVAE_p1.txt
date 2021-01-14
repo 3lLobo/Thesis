@@ -1,0 +1,10 @@
+\texttt{[[France] [/base/petbreeds/city\_with\_dogs/top\_breeds./base/petbreeds/dog\_city\_relationship/dog\_breed] [Imperial Japanese Army]]}\\
+\texttt{[[Cree Summer] [/tv/tv\_program/program\_creator] [David Chase]]}\\
+\texttt{[[Guitar] [/business/business\_operation/assets./measurement\_unit/dated\_money\_value/currency] [Paramount Vantage]]}\\
+\texttt{[[Democratic Party] [/music/genre/artists] [Howard Hawks]]}\\
+\texttt{[[Roy Haynes] [/people/person/spouse\_s./people/marriage/location\_of\_ceremony] [The Portrait of a Lady]]}\\
+\texttt{[[Cleveland Browns] [/film/actor/dubbing\_performances./film/dubbing\_performance/language] [David Milch]]}\\
+\texttt{[[Jay-Z] [/film/special\_film\_performance\_type/film\_performance\_type./film/performance/film] [Ashley Tisdale]]}\\
+\texttt{[[Phoenix Suns] [/film/film/dubbing\_performances./film/dubbing\_performance/actor] [Lynn]]}\\
+\texttt{[[James E. Sullivan Award] [/organization/organization/child./organization/organization\_relationship/child] [Giant Records]]}\\
+\texttt{[[Boston United F.C.] [/soccer/football\_player/current\_team./sports/sports\_team\_roster/team] [Kensal Green Cemetery]]}\\

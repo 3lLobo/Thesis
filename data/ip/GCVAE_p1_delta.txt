@@ -1,0 +1,10 @@
+\texttt{[[Somerset] [/film/film/costume\_design\_by] [Cold War]]}\\
+\texttt{[[Basic Instinct 2] [/film/film/costume\_design\_by] [United States of America]]}\\
+\texttt{[[Aaron Sorkin] [/film/film/costume\_design\_by] [Himachal Pradesh]]}\\
+\texttt{[[Canada] [/film/film/costume\_design\_by] [Jerry Belson]]}\\
+\texttt{[[Friz Freleng] [/film/film/costume\_design\_by] [Brno]]}\\
+\texttt{[[Track and field athletics] [/film/film/costume\_design\_by] [The Fifth Element]]}\\
+\texttt{[[Academy Award for Best Director] [/film/film/costume\_design\_by] [Solar System]]}\\
+\texttt{[[Australia] [/film/film/costume\_design\_by] [Ukulele]]}\\
+\texttt{[[George Lucas] [/film/film/costume\_design\_by] [Infernal Affairs II]]}\\
+\texttt{[[California State University] [/film/film/costume\_design\_by] [National Board of Review Award for Best Actress]]}\\

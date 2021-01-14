@@ -1,0 +1,10 @@
+\texttt{[[Jason Robards Jr.] [/soccer/football\_team/current\_roster./soccer/football\_roster\_position/position] [United States Dollar]]}\\
+\texttt{[[Dance music] [/film/film/genre] [Fantasy]]}\\
+\texttt{[[1984 Summer Olympics] [/award/award\_ceremony/awards\_presented./award/award\_honor/award\_winner] [How I Met Your Mother]]}\\
+\texttt{[[Juilliard School] [/film/director/film] [BAFTA Award for Best Actor in a Supporting Role]]}\\
+\texttt{[[The Adventures of Priscilla] [Queen of the Desert] [/people/person/place\_of\_birth] [Judaism-GB]]}\\
+\texttt{[[Metro-Goldwyn-Mayer] [/music/performance\_role/track\_performances./music/track\_contribution/role] [Mandolin]]}\\
+\texttt{[[Loving] [/music/genre/artists] [41st Annual Grammy Awards]]}\\
+\texttt{[[Mighty Aphrodite] [/film/film/distributors./film/film\_film\_distributor\_relationship/film\_distribution\_medium] [Carl Davis]]}\\
+\texttt{[[Archery] [/base/popstra/celebrity/dated./base/popstra/dated/participant] [White]]}\\
+\texttt{[[Marcia Cross] [/film/film/language] [Silver medal]]}\\

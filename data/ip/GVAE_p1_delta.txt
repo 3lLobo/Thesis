@@ -1,0 +1,10 @@
+[[Tony Kushner] [/location/location/adjoin_s./location/adjoining_relationship/adjoins] [Larry Crowne]]\\
+[[Bryan Adams] [/location/location/adjoin_s./location/adjoining_relationship/adjoins] [New Orleans Saints]]\\
+[[Scott Baio-GB] [/location/location/adjoin_s./location/adjoining_relationship/adjoins] [Actor-GB]]\\
+[[Dean Saunders] [/location/location/adjoin_s./location/adjoining_relationship/adjoins] [Punjab] [India]]\\
+[[Santa Barbara] [/location/location/adjoin_s./location/adjoining_relationship/adjoins] [Emily Blunt]]\\
+[[Sprint Corporation] [/location/location/adjoin_s./location/adjoining_relationship/adjoins] [Paul Auster]]\\
+[[Albert Finney] [/location/location/adjoin_s./location/adjoining_relationship/adjoins] [United States Dollar]]\\
+[[Aristotle] [/location/location/adjoin_s./location/adjoining_relationship/adjoins] [Vincent Gallo]]\\
+[[Mick Jagger] [/location/location/adjoin_s./location/adjoining_relationship/adjoins] [United States of America]]\\
+[[Defender] [/location/location/adjoin_s./location/adjoining_relationship/adjoins] [American Dad!]]\\
