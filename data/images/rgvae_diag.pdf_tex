@@ -1,0 +1,84 @@
+%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'rgvae_diag.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{583.86751098bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.58784338)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{rgvae_diag.pdf}}%
+    \put(0.6558851,0.25450577){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}MLP\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{rgvae_diag.pdf}}%
+    \put(0.32190522,0.25450577){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}MLP\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{rgvae_diag.pdf}}%
+    \put(0.4632044,0.14660458){\color[rgb]{0.2745098,0.28627451,0.36470588}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\epsi...\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{rgvae_diag.pdf}}%
+    \put(0.12922452,0.56279489){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Flatten\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{rgvae_diag.pdf}}%
+    \put(0.84214311,0.56279489){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Reshape\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{rgvae_diag.pdf}}%
+    \put(0.4632044,0.35084612){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Reparametrizatio...\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{rgvae_diag.pdf}}%
+    \put(0.50816323,0.3097409){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\mathbf{z}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{rgvae_diag.pdf}}%
+    \put(0.05729039,0.52425875){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}A\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{rgvae_diag.pdf}}%
+    \put(0.05729039,0.19284794){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}E\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{rgvae_diag.pdf}}%
+    \put(0.05729039,0.38295957){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}F\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{rgvae_diag.pdf}}%
+    \put(0.92820715,0.52425875){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\tilde A\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{rgvae_diag.pdf}}%
+    \put(0.92820715,0.38295957){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\tilde F\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{rgvae_diag.pdf}}%
+    \put(0.92820715,0.19284794){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}\tilde E\end{tabular}}}}%
+    \put(0.500456,0.0072322){\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}Viewer does not support full SVG 1.1\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

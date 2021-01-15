@@ -167,10 +167,9 @@ For the decoder $p_{\theta}(\mathbf{x} \mid {G})$ the latent representation is a
 Simonovsky's work is focused on molecule data. To adopt this model for multi-relational KGs and to reduce it to a minimum viable product, we drop the conditioning on the node labels and use the node attributes as pointers towards the corresponding entity in $\mathcal{E}$. By using node attributes as unique pointers, we hide additional information about the entity, such as type and topic from our model. Simplifying further we drop the convolutional layer and directly flatten $G$ as input for the MLP encoder. 
 
 
-TODO Make Illustration
-
 \begin{figure}[H]
     \centering
+    \includegraphics[scale=0.6,page=1]{data/images/rgvae_diag3.pdf}
     \caption{Architecture of the RGVAE.}
     \label{fig3:GVAE}
 \end{figure}
