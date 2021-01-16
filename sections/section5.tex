@@ -91,7 +91,7 @@ Especially on the FB15k-237 dataset the $\beta = 0$ configuration converges to a
       \label{fig5:betafbmrr}
 \end{figure}
 
-Barplot IN APPENDIX  
+% Barplot IN APPENDIX  
 
 % d_z
 Experiments on the impact of $d_z$ on the ELBO show little improvement for $10<d_z<100$ and from $100<d_z<1000$ insignificant to no improvement. Thus, we chose $d_z=100$ as default for our experiments.
@@ -373,7 +373,7 @@ all remaining triples violate common sense logic. The RGVAE does not differentia
 While investigating the model and the generated triple set, we notice two outcomes. Neither the augmentation of the variance nor the enabling of the permutation invariance has an impact on either of the model with two encoder versions. The regularization loss converges during training to zero, meaning that the model learns a latent representation of the dataset as  nearly perfect Standard Gaussian distribution. Yet, even when sampling latent signal from the exact same distribution, we notice that each model repeatedly predicts combinations of a small subset of entities and relations, e.g. the RGVAE version which did not predict the Obama entity once in a total of $111583$ valid triples. This also aligns with the interpolation results, where we observed a static relation for the full gridsearch of the latent space. If we look at the gradient and parameter values $\phi$ and$\theta$ of the MLP encoder and decoder, we see a much higher variance and gradients for $\phi$. The decoder shows higher values and variance for a small subset of neighboring parameter, while the remaining parameters converge to a very similar and low value. This indicates that the encoder learns very well to represent each different triple as Standard Gaussian latent representation. The decoder MLP on the opposite seems to to ignore most of this representation by assigning vanishing values to the connected parameters. Intuitively it seems that the decoder learns to interpret the part of the latent representation corresponding to the adjacency matrix and minimizes as well as stabilizes the loss of the edge and node attribute matrix by uniformly distributing their probability. This leads to the decoder reconstructing edge and node attribute randomly. Further, depending on the values of $\theta$ when the model finishes learning, the decoder repeatedly predicts the same subset of entities and relation independent of the latent signal $z$. If we look at the flattened representation of our input graph, we see that the part representing the adjacency matrix is way shorter and has a tractable mean of $\frac{1}{4}$ while the mean for the edge and node attribute matrices are $\frac{1}{{4 \times 1345}}$ and $\frac{1}{14951}$. The problem of a our decoder partly ignoring the latent input and potential solutions are discussed further in section \ref{ssec7:collapse}. 
 
 
-\subsubsection{Delta Correction}
+\subsection{Delta Correction}
 \label{ssec5:delta}
 
 % Explain quick delta implementation 
