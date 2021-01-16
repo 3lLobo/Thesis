@@ -26,7 +26,7 @@ Closing the circle to the ambiguity of the title and relating to the popular con
 
 \subsection{Motivation}
 
-Turning away from philosophy, we will now introduce this thesis in scientific context. A key area of AI is representation learning, where the model learns to identify and disentangle causalities and underlying features of the data. Understanding the semantics of the data is specifically useful for unsupervised learning. 
+Turning away from philosophy, we introduce this thesis in scientific context. A key area of AI is representation learning, where the model learns to identify and disentangle causalities and underlying features of the data. Understanding the semantics of the data is specifically useful for unsupervised learning. 
 
 
 % computer vision
@@ -34,18 +34,18 @@ The task of generating data has been widely explored for images. Computer vision
 
 
 % molecular graphs
-Advances in the parallel field of  graph generation have received less attention, yet showed promising results. Data stored as graph has a high density of information and rich semantics, which makes it attractive for variational inference. The recent success of Simonovsky et al. \cite{simonovsky_graphvae_2018} on the generation and completion of molecules represented in graph structure, initially inspired our research. Next to molecules, graphs can be used to store knowledge. While real world Knowledge Graphs (KG) have a far higher complexity than molecule graphs, the proposed generative model, Variational Auto-Encoder (VAE) also has proven its capacity to learn from huge datasets with high variance. Inspired by Simonovsky work and motivated by the vision of generating knowledge, we will explore the possibilities and limitation of KG generation with VAEs.
+Advances in the parallel field of  graph generation have received less attention, yet showed promising results. Data stored as graph has a high density of information and rich semantics, which makes it attractive for variational inference. The recent success of Simonovsky et al. \cite{simonovsky_graphvae_2018} on the generation and completion of molecules represented in graph structure, initially inspired our research. Next to molecules, graphs can be used to store knowledge. While real world Knowledge Graphs (KG) have a far higher complexity than molecule graphs, the proposed generative model, Variational Auto-Encoder (VAE) also has proven its capacity to learn from huge datasets with high variance. Inspired by Simonovsky work and motivated by the vision of generating knowledge, we explore the possibilities and limitation of KG generation with VAEs.
 
 
 
 \subsection{Expected Contribution}
 
-The main contributions, which we anticipate for this thesis are firstly the proof of concept that a graph VAE can capture, disentangle and reproduce the underlying semantics of a real world KG. While Simonovsky used small subgraphs with multiple edges, we proof our hypothesis on  generating the smallest possible graph of two nodes, also representable as single triple. The VAE will be tested and evaluated in several experiments, including link prediction, latent space interpolation and accuracy of generating valid triples.
+The main contributions, which we anticipate for this thesis are firstly the proof of concept that a graph VAE can capture, disentangle and reproduce the underlying semantics of a real world KG. While Simonovsky used small subgraphs with multiple edges, we proof our hypothesis on  generating the smallest possible graph of two nodes, also representable as single triple. The VAE is tested and evaluated in several experiments, including link prediction, latent space interpolation and accuracy of generating valid triples.
 % Proof of concept KGVAE
 
 
 % draw parallels to molecules and explore the differences
-We will compare our results to related methods in the filed of KGs and investigate the impact of different hyperparameter. The main focus will be on the influence of the graph matching loss function, the encoding through graph convolutions and stochastic inference. Further, we aim to mimic the success of to molecule generation and will, thus, point out similarities and differences to our work.
+We compare our results to related methods in the filed of KGs and investigate the impact of different hyperparameter. The main focus is be on the influence of the graph matching loss function, the encoding through graph convolutions and stochastic inference. Further, we aim to mimic the success of to molecule generation and will therefore continuously point out similarities and differences to our work.
 
 % Implementation of graph matching in batches
 On a lower level, we hope to contribute with our implementation of the max-pooling graph matching algorithm for tensor batches. While the algorithm has been cited and implemented numerous times, a working implementation, compatible with deep learning tasks, has to the best of our knowledge not yet been published.  

@@ -1,7 +1,7 @@
 
 % In this section we will go over related work and relevant background information for our model and experiments. The depth of the explanation is adopted to the expected prior knowledge of the reader. The reader is supposed to know the basics of machine learning and deep learning, including probability theory and basic knowledge on neural networks and their different architectures. Basic principles such as forward pass, backpropagation and convolutions are expected to be understood. Further the use and functionality of deep learning modules such as the model, the optimizer and the terms target and prediction should be known. This also includes being familiar with the training and testing pipeline of deep learning.
 
-This section derives and explains the techniques, which form the backbone of this research. For fundamental background on machine learning, deep learning or including probability theory we refer the reader to Bishops book \cite{bishop_pattern_2006}. We begin with introducing the VAE and its differences to a normal autoencoder. Building on this base model, we will answer the question how convolutional layers can be used on graphs. On a higher level we present model to this layer, the graph convolutional network (GCN). Closing the circle we show how we can adopt the VAE to graph convolutions. Wrapping things up, we present the state of the art algorithms for graph matching, which will be util to allow permutation invariance when matching prediction and target graph \cite{paulheim_knowledge_2016}.  
+This section derives and explains the techniques, which form the backbone of this research. For fundamental background on machine learning, deep learning or including probability theory we refer the reader to Bishops book \cite{bishop_pattern_2006}. We begin with introducing the VAE and its differences to a normal autoencoder. Building on this base model, we answer the question how convolutional layers can be used on graphs. On a higher level we present model to this layer, the graph convolutional network (GCN). Closing the circle we show how we can adopt the VAE to graph convolutions. Wrapping things up, we present the state of the art algorithms for graph matching, which is util to allow permutation invariance when matching prediction and target graph \cite{paulheim_knowledge_2016}.  
 
 
 \subsection{Knowledge Graph}
@@ -10,11 +10,10 @@ This section derives and explains the techniques, which form the backbone of thi
 % Knowledge Graphs which we will be using
 % We will focus on the generation of KGs.
 % Representation of KG as adjacency, edge feature and node feature matrix
-Knowledge graph has become a popular key phrase. Yet, the term is so broad, that it can have various definitions. In this thesis we are going to focus on KGs in the context of relational machine learning.
+Knowledge graph has become a popular term. Yet, the term is so broad, that it can have various definitions. In this thesis we are going to focus on KGs in the context of relational machine learning.
 
 % What is a KG
-KGs are a subclass of databases, with its main function being data storage. The main difference to tabular databases is that KGs store data in a relational fashion. A standard KG structure, introduced by the semantic-web community, is the Resource
-Description Framework (RDF). It is a so called schema-based approach, meaning that every entity has a unique identifier and all possible relations are stored in a vocabulary. The opposite schema-free approach is used in OpenIE models for information extraction. Here any type of triple can be extracted, e.g.  \text{(Michelangelo,  painted,    Sixtine Chapel)}. In contrast a triple which we wil denote as $(s,r,o)$ in RDF format from Freebase, one of the largest open-source KGs, has the form
+KGs are a subclass of databases, with its main function being data storage. The main difference to tabular databases is that KGs store data in a relational fashion. A standard KG structure, introduced by the semantic-web community, is the Resource Description Framework (RDF). It is a so called schema-based approach, meaning that every entity has a unique identifier and all possible relations are stored in a vocabulary. The opposite schema-free approach is used in OpenIE models, such as AllenNLP \cite{gardner_allennlp_2018}, for information extraction. These models generate triples from text based on NLP parsing techniques which results in an open set of relations and entities. In contrast a schema-based triple which we wil denote as $(s,r,o)$ in RDF format from Freebase, one of the largest open-source KGs, has the form
 
 \begin{center}
     \texttt{[['/m/02mjmr'], ['/people/person/place\_of\_birth'], ['/m/02hrh0\_']]}
@@ -30,7 +29,7 @@ with the \textit{id2text} translation of Wikidata \cite{WIKIDATA}:
 \end{itemize}
 
 
-For all triples, $s$ and $o$ are part of a set of so called entities, while $r$ is part of a set of relations. This is enough to define a basic KG.
+For all triples, $s$ and $o$ are part of a set of so called entities, while $r$ is part of a set of relations. This is sufficient to define a basic KG \cite{nickel_review_2016}.
 
 % Hierarchy, entities, classes
 Schema-based KG can include type hierarchies and type constraints. Classes group entities of the same type together, based on common criteria, e.g all names of people can be grouped in the class 'person'. Hierarchies define the inheriting structure of classes and subclasses. Picking up our previous example, 'child' would be a subclass of 'person' and inherit its properties. At the same time the class of an entity can be the key to a relation with type constrain, since some relations can only be used in conjunction with entities fulfilling the constraining type criteria.
@@ -54,9 +53,7 @@ In simple cases, like citation networks this is a sufficient representation. In 
 
 \subsection{One Shot Graph VAE}
 
-We will now explain the background knowledge on which the main model of this thesis is based. Since the graph VAE is a adaptation of the original VAE, we start by introducing the original version. Furthermore we present each of the different modules, which compose the final model. This includes the different graph encoders as well as sparse graph loss functions.
-
-The notation varies, since we touch upon three different fields. For the VAE and MLP we consider data in vector format, thus a bold variable denotes the full vector and variable with index the value at that index. Graphs are represented in matrices, which are denoted in capital letters. $A$ typically denotes the adjacency matrix, from there on paths split and we have to use different notations for different methods. While $X$ is described as feature matrix, we have to specify further when it comes to Simonovsky's GraphVAE, where $E$ is the edge attribute and $F$ the node attribute matrix. The reason we change from features to attributes, is due to the singularity, also one-hot encoding of attributes per node/edge, in contrast to features which can be numerous per node.
+Since the graph VAE is a adaptation of the original VAE, we start by introducing the original version. Furthermore we present each of the different modules, which compose the final model. This includes the different graph encoders as well as sparse graph loss functions. The notation varies throughout this chapter, since we touch upon three different fields. For the VAE and MLP we consider data in vector format, thus a bold variable denotes the full vector, e.g $\mathbb{x}$ and variable with index the value at that index, eg for index $i$ we denote $x_i$. Graphs are represented in matrices, which are denoted in capital letters. $A$ typically denotes the adjacency matrix, from there on paths split and we have to use different notations for different methods. While $X$ is described as feature matrix, we have to specify further when it comes to Simonovsky's GraphVAE, where $E$ is the edge attribute and $F$ the node attribute matrix. The reason we change from features to attributes, is due to the singularity, also one-hot encoding of attributes per node/edge, in contrast to features which can be numerous per node.
 
 
 \subsubsection{VAE}
@@ -65,7 +62,7 @@ The notation varies, since we touch upon three different fields. For the VAE and
 
 
 
-The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model in form of an autoencoder, consisting of an encoder and a decoder. Its architecture differs from a common autoencoder by having a stochastic module between encoder and decoder. The encoder can be represented as recognition model with the probability $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ with $x$ being the variable we want to inference and $z$ being the latent representation given an observed value of $x$. The encoder parameters are represented by $\theta$. Similarly, we denote the decoder as $p_{{\theta}}(\mathbf{x} \mid z)$, which given a latent representation $z$ produces a probability distribution for the possible values, corresponding to the input of $x$. This will be the base architecture of all our models in this thesis.
+The VAE as first presented by \cite{kingma_auto-encoding_2014} is an unsupervised generative model in form of an autoencoder, consisting of an encoder and a decoder. Its architecture differs from a common autoencoder by having a stochastic module between encoder and decoder. The encoder can be represented as recognition model with the probability $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ with $x$ being the variable we want to inference and $z$ being the latent representation given an observed value of $x$. The encoder parameters are represented by $\theta$. Similarly, we denote the decoder as $p_{{\theta}}(\mathbf{x} \mid z)$, which given a latent representation $z$ produces a probability distribution for the possible values, corresponding to the input of $x$. This is the base architecture of all our models in this thesis.
 
 The main contribution of the VAE is the so called reparametrization trick. When sampling from the latent prior distribution, we get a stochastic module inside our model, which can not be backpropagated and makes learning impossible. By placing the stochastic module outside the model, we can again backpropagate. We use the predicted latent space as mean and variance for a Gaussian normal distribution, from which we then sample $\epsilon$, which acts as external parameter and does not need to be updated.
 
@@ -79,13 +76,13 @@ The main contribution of the VAE is the so called reparametrization trick. When 
 In \ref{fig:varinference} we see, that the true posterior $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ is intractable. Thus, we make the assumption that the prior to the decoder is Gaussian with an approximately diagonal covariance, which gives us the approximated posterior
 
 \begin{equation}
-    \log q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)=\log \mathcal{N}\left(\mathbf{z} ; \boldsymbol{\mu}^{(i)}, \boldsymbol{\sigma}^{2(i)} \mathbf{I}\right) .
+    \log q_{\phi}\left(\mathbf{z} \mid \mathbf{x}\right)=\log \mathcal{N}\left(\mathbf{z} ; \boldsymbol{\mu}}, \boldsymbol{\sigma}^{2} \mathbf{I}\right) .
 \end{equation}
     
 Now variational inference can be performed, which allows both $\theta$ the generative and $\phi$ the variational parameters to be learned jointly. Using the Monte Carlo estimation of $q_{\phi}(\mathbf{z} \mid \mathbf{x})$ we get the so called estimated lower bound (ELBO)
 
 \begin{equation}
-    \mathcal{L}\left({\theta}, {\phi} ; \mathbf{x}^{(i)}\right)=-D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right) \| p_{{\theta}}(\mathbf{z})\right)+\mathbb{E}_{q_{\phi}\left(\mathbf{z} \mid \mathbf{x}^{(i)}\right)}\left[\log p_{{\theta}}\left(\mathbf{x}^{(i)} \mid \mathbf{z}\right)\right] .
+    \mathcal{L}\left({\theta}, {\phi} ; \mathbf{x}\right)=-D_{K L}\left(q_{{\phi}}\left(\mathbf{z} \mid \mathbf{x}\right) \| p_{{\theta}}(\mathbf{z})\right)+\mathbb{E}_{q_{\phi}\left(\mathbf{z} \mid \mathbf{x}\right)}\left[\log p_{{\theta}}\left(\mathbf{x}} \mid \mathbf{z}\right)\right] .
     \label{eq3:elbo}
 \end{equation}
 
@@ -120,10 +117,10 @@ Since the sigmoid function returns a probability distribution for all classes, t
 
 % TODO pretty write this
 %  Intro on convolutions
-Convolutional neural nets (CNN) have the advantage to be invariant to permutations of the input. Convolutional layers exploit the property of datapoints which are close to each other and thus, have a higher correlation. CNNs have shown great results in the field of images classification and object detection. Neighboring pixel contain information about each other, thus by detecting local features, the model can then be merged those to high-level features, e.g a face in an image \cite{bishop_pattern_2006}. Similar conditions hold for graphs. Neighboring nodes contain information about each other and can be used to infer local features. 
+Convolutional neural nets (CNN) have the advantage to be invariant to permutations of the input. Convolutional layers the symmetry of the data, where neighboring datapoints have a higher correlation. CNNs have shown great results in the field of images classification and object detection. Neighboring pixel contain information about each other, thus by detecting local features, the model can then be merged those to high-level features, e.g a face in an image \cite{bishop_pattern_2006}. Similar conditions hold for graphs. Neighboring nodes contain information about each other and can be used to infer local features. 
 
 % How do Graph convs work???
-Let us shortly go over the definition and math behind graph convolutions. Different approaches have been published on this topic, here we will present the graph convolution network (GCN) of \cite{kipf_semi-supervised_2017}.
+Different approaches for graph convolutions have been published, here we present the graph convolution network (GCN) of \cite{kipf_semi-supervised_2017}.
 We consider $f(X,A)$ a GCN with an undirected graph input ${G}=(\mathcal{V}, \mathcal{E})$, where $v_{i} \in \mathcal{V}$ is a set of $N$ nodes and  $\left(v_{i}, v_{i}\right) \in \mathcal{E}$ the set of edges. The input is a sparse graph representation, with $X$ being a node feature matrix and $A \in \mathbb{R}^{N \times N}$ being the adjacency matrix, defining the position of edges between nodes. In the initial case, where self-connections are not considered, the adjacency's diagonal has to be one resulting in $\vec{A}=A+I_{N}$. The graph forward pass through the convolutional layer $l$ is then defined as
 
 % equation
@@ -131,7 +128,7 @@ We consider $f(X,A)$ a GCN with an undirected graph input ${G}=(\mathcal{V}, \ma
     H^{(l+1)}=\sigma\left(\tilde{D}^{-\frac{1}{2}} \tilde{A} \tilde{D}^{-\frac{1}{2}} H^{(l)} W^{(l)}\right).
 \end{equation}
 
-Here $\tilde{D}_{i i}=\sum_{j} \tilde{A}_{i j}$ acts as normalizing constant. $W^{(l)}$ is the layer-specific weight matrix and contains the learnable parameters. $H$ returns then the hidden representation of the input graph.
+Here $\tilde{D}_{i i}=\sum_{j} \tilde{A}_{i j}$ acts as normalizing constant. Normalizing the input data to a common scale allows the model to better tune its parameters. Here we normalize over the number of edges for each node. $W^{(l)}$ is the layer-specific weight matrix and contains the learnable parameters. $H$ returns then the hidden representation of the input graph.
 
 The GCN was first introduced as node classifier, meaning it returns a probability distribution over all classes for each node in the input graph. Assuming that we preprocess $\vec{A}$ as $\hat{A}=\tilde{D}^{-\frac{1}{2}} \vec{A} \tilde{D}^{-\frac{1}{2}}$, the equation for a two-layer GCN for $z$ classes is
 
@@ -155,16 +152,16 @@ The GCN was first introduced as node classifier, meaning it returns a probabilit
 % One shot: creating adjacency and feature matrix at once.
 
 % the model we are going to use for challenging KG datasets
-So far we have understood all the principles needed for a Graph VAE. While there are many approaches with mayor differences in terms of the model and graph representation, e.g sparse or dense, we will focus here on the graph VAE architecture presented in \cite{simonovsky_graphvae_2018}. A sparse graph model with graph convolutions.
+So far we have understood all the principles needed for a Graph VAE. While there are many approaches with mayor differences in terms of the model and graph representation, e.g sparse or dense, we focus on the graph VAE architecture presented in \cite{simonovsky_graphvae_2018}. A sparse graph model with graph convolutions.
 
 % TODO rewrite and describe label condition as addition.
 
 Simonovsky's GraphVAE follows the characterizing encoder decoder architecture.
-The encoder $q_{\phi}(\mathbf{z} \mid {G})$ takes a graph ${G}$ as input, on which graph convolutions are applied. After the convolutions the hidden representation is flattened and concatenated with the node label vector $y$. A simple MLP encodes the mean and logvariance of the latentspace distribution. Using the reparametrization trick we sample the latent representation.
+The encoder $q_{\phi}(\mathbf{z} \mid {G})$ takes a graph ${G}$ as input, on which graph convolutions are applied. After the convolutions the hidden representation is flattened and concatenated with the node label vector $y$. A MLP encodes the mean $\mu$ and logvariance $\sigma^2$ of the latentspace distribution. Using the reparametrization trick we sample the latent representation.
 
 For the decoder $p_{\theta}(\mathbf{x} \mid {G})$ the latent representation is again concatenated with the node labels. The decoder architecture for this model is a MLP with inverted dimensions, which outputs a flat prediction of ${\tilde{G}$, which is split and reshaped in to the sparse matrix representation.
 
-Simonovsky's work is focused on molecule data. To adopt this model for multi-relational KGs and to reduce it to a minimum viable product, we drop the conditioning on the node labels and use the node attributes as pointers towards the corresponding entity in $\mathcal{E}$. By using node attributes as unique pointers, we hide additional information about the entity, such as type and topic from our model. Simplifying further we drop the convolutional layer and directly flatten $G$ as input for the MLP encoder. 
+Simonovsky's work \cite{simonovsky_graphvae_2018 }is focused on molecular data. To adopt this model for multi-relational KGs and to reduce it to a minimum viable product, we drop the conditioning on the node labels and use the node attributes as pointers towards the corresponding entity in $\mathcal{E}$. By using node attributes as unique pointers, we hide additional information about the entity, such as type and topic from our model. Simplifying further we drop the convolutional layer and directly flatten $G$ as input for the MLP encoder. 
 
 
 \begin{figure}[H]
@@ -186,31 +183,30 @@ Simonovsky's work is focused on molecule data. To adopt this model for multi-rel
 % Graphs can be generated recursively or in an one-shot approach. This paper uses the second approach and generates the full graph in one go. ***Cite?***
 % This model will be the starting point for our research.
 
-\subsubsection{One Shot vs. Recursive}
+% \subsubsection{One Shot vs. Recursive}
 % One shot: MNIST vs recursive on graphs: Belli
-The concept of the VAE has been used to generate data for various use cases. When using the VAE as generator, by sampling from the approximated posterior distribution $q_{\phi}\left(\mathbf{z}\right)$, we can reconstruct the data in a singular run or recursive manner.
+The concept of the VAE has evolved in two directions. By sampling from the approximated posterior distribution $q_{\phi}\left(\mathbf{z}\right)$, we use the VAE as generator, which can reconstruct the data either in a single run or in recursive manner.
 
 The one shot method is used in the popular example of the VAE generator on the MNIST dataset \cite{kingma_auto-encoding_2014}. each sample is independent from each other.
 
 Recursive methods take part of the generated datapoint as input for the next datapoint, thus continuously generating the sample. This has been applied to generate audio and to reproduce videogame environments \cite{ha_world_2018}. In \cite{belli_image-conditioned_2019} variation of the GraphVAE has been used to recursively construct a vector roadmap, which has been presented in [link to related work].
 
-For this thesis, we will use the one-shot method, predicting each datapoint independent from each other. The datapoints will be sparse subgraph with $n$ nodes. A single triple being $n=2$ and a subgraph representation $2<n<100$. 
+For this thesis, we use the one-shot method, predicting each datapoint independent from each other. The datapoints are sparse subgraph with $n$ nodes. A single triple being $n=2$ and a subgraph representation $2<n<100$. 
 % [TODO]
 
 \subsection{Graph Matching}
 \label{ssec:graphmatch}
 % Intro to graph matching on sparse graphs.
-In this subsection we will explain the term permutation invariance and present an algorithm to find the optimal permutation in order to match two graphs. We then derive the loss term of the graph VAE \ref{ssec:GVAE} applying the optimal matching matrix to the models prediction.
+In this subsection we explain the term permutation invariance and present an algorithm to find the optimal permutation in order to match two graphs. We then derive the loss term of the graph VAE \ref{ssec:GVAE} applying the optimal matching matrix to the models prediction.
 
 \subsubsection{Permutation Invariance}
 
 % Permutation Invariance
 % The position or rotation of a graph can vary. 
 % Use graph matching to detect similarities between graphs
+A visual example of permutation invariance is the image generation of numbers. If the loss function of the model would not be permutation invariant, the generated image could show a perfect replica of the input number, but being translated by one pixel the loss function would penalize the model. Geometrical permutations can be translation, scale or rotation around any axis. 
 
-Permutation invariance refers to the invariance of a permutation of an object. A visual example is the image generation of numbers. If the loss function of the model would not be permutation invariant, the generated image could show a perfect replica of the input number, but being translated by one pixel the loss function would penalize the model. Geometrical permutations can be translation, scale or rotation around any axis. 
-
-In the context of sparse graphs the most common, and relevant permutation for this thesis, is the position of a link in the adjacency matrix. By altering its position with help of a permutation matrix, the link will connect different nodes. When matching graphs with more than two nodes, we can partially match the graphs by permuting only a subgraph instead of the full graph. This way also graphs of different sizes, can be matched. 
+In the context of sparse graphs the most common, and relevant permutation for this thesis, is the position of a link in the adjacency matrix. By altering its position through matrix-multiplication of the adjacency and the permutation matrix, the original link can change direction or turn into a self-loop. When matching graphs with more than two nodes, permutation can change th nodes which the link connects. Graph matching is gradually, thus it is possible to match graphs only on parts of the graph/subgraph instead of the full graph. This allows graphs of different sizes to be matched. 
 
 In context of this thesis, a model or a function is called permutation invariant, if it can match any permutation of the original. For the case of matching between prediction and target graph, from all possible permutations of the predictions, the one with highest similarity to the target should be considered. The similarity can be full or partly as its possible that only parts of the graph match or the graphs in size differ.  
 
@@ -227,7 +223,7 @@ In context of this thesis, a model or a function is called permutation invariant
 %     \item one more
 % \end{itemize}
 
-While there are numerous graph matching algorithms, we will focus on the max-pool algorithm, which can be effectively implemented and used in the VAE setting. First presented in \cite{cho_finding_2014} in the context of computer vision and successfully trained to match graphs from feature points in an image. It uses a max-pooling graph matching approach, which is resilient to deformations and highly tolerant to outliers. The output is a reliable cost matrix. Notable is, that also graphs with different number of nodes can be matched.
+While there are numerous graph matching algorithms, we focus on the max-pool algorithm, which can be effectively implemented and used in the VAE setting. First presented in \cite{cho_finding_2014} in the context of computer vision and successfully trained to match graphs from feature points in an image. It uses a max-pooling graph matching approach, which is resilient to deformations and highly tolerant to outliers. The output is a reliable cost matrix. Notable is, that also graphs with different number of nodes can be matched.
 
 
 % Max-pooling algorithm comes here !!!
@@ -343,15 +339,10 @@ Note that $k$ can be equal $n$ if target and prediction graphs have the same num
 \subsection{Ranger Optimizer}
 \label{sec3:ranger}
 
-Finalizing this chapter, we introduce the novel deep learning optimizer Ranger. An optimizer, which in 2020 placed itself on the top of 12 FastAI leaderboards. Ranger combines Rectified Adam (RAdam), lookahead and optionally gradient centralization. let us shortly look into the different components.
-
-%  REadam
+Finalizing this chapter, we explain the novel deep learning optimizer Ranger. Ranger combines Rectified Adam (RAdam), lookahead and optionally gradient centralization. let us shortly look into the different components.
 RAdam is based on the popular adam optimizer. It improves the learning by dynamically rectifying Adam's adaptive momentum. This is done by reducing the variance of the momentum, which is especially large at the beginning of the training. Thus, leading to a more stable and accelerated start \cite{liu_variance_2020}.
-
 The Lookahead optimizer was inspired by recent advances in the understanding of loss surfaces of deep neural networks, thus proposes an approach where, a second optimizer 'looks ahead' on a set of parallel trained weights. while the computation and memory cost are negligible, the learning improves and the variance of the main optimizer is reduced \cite{zhang_lookahead_2019}.
-
 The last and most novel optimization technique, Gradient Centralization, acts directly on the gradient by normalizing it to a zero mean. Especially on convolutional neural networks, this helps regularizing the gradient and boosts learning. This method can be added to existing optimizers and can be seen as constrain of the loss function \cite{yong_gradient_2020}.
-
 Concluding we can say that Ranger is a state of the art deep learning optimizer with accelerating and stabilizing properties, incorporating three different optimization methods, which synergize with each other. Considering that generative models are especially unstable during training, we see Ranger as a good fit for this research.
 
 
