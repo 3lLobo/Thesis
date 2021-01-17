@@ -1,0 +1,602 @@
+\section{Interpolation}
+
+\subsubsection{Interpolation between two}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{RGVAE standard}\\ \hline
+    \texttt{[[Jennifer Jason Leigh] [/film/film/release\_date\_s] [William Wyler]]}\\
+    \texttt{[[Keyboard] [/award/award\_category/nominees] [Jessica Biel]]}\\
+    \texttt{[[Die Another Day] [/language/human\_language/countries\_spoken\_in] [Stockholm University]]}\\
+    \texttt{[[Mission: Impossible II] [/education/educational\_institution] [Intel Corporation]]}\\
+    \texttt{[[Techno] [/organization/role/leaders] [Makeup Artist-GB]]}\\
+    \texttt{[[The Pianist] [/soccer/football\_team/current\_roster] [Female]]}\\
+    \texttt{[[Paul Winchell] [/award/award\_nominee] [Buddhism]]}\\
+    \texttt{[[California] [/business/business\_operation/industry] [Marriage]]}\\
+    \texttt{[[PFC Beroe Stara Zagora] [/people/person/profession] [National Society of Film Critics Award]]}\\
+    \texttt{[[Knight and Day] [/award/award\_category/winners\_winner] [Fox Searchlight Pictures]]}\\    
+    \hline
+    \end{tabular}
+\caption{Latent space interpolation between two triples for RGVAE with standard loss.}
+\label{annexA:ipbtw2NoPerm}
+\end{table}
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|}
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$\delta$-RGVAE standard}\\ \hline
+    \texttt{[[Willem Dafoe] [/music/instrument/instrumentalists] [Peritonitis]]}\\
+    \texttt{[[Tuscaloosa] [/influence/influence\_node/influenced\_by] [Alex Rodriguez]]}\\
+    \texttt{[[BAFTA Award for Best Sound] [/people/person/gender] [Fat Possum Records]]}\\
+    \texttt{[["Conan OBrien"] [/film/film/country] [World]]}\\
+    \texttt{[["They Shoot Horses] [Dont They?"] [/base/popstra/location/vacationers] [Buzz Aldrin]]}\\
+    \texttt{[[The Lady] [/award/award\_winning\_work/awards\_won] [Faith Hill]]}\\
+    \texttt{[[Laura] [/film/film/country] [Talking Heads]]}\\
+    \texttt{[[Peter Morgan] [/film/film/release\_date\_s] [John Amos]]}\\
+    \texttt{[[The Butterfly Effect] [/award/award\_nominee] [This Must Be the Place]]}\\
+    \texttt{[[Aliens] [/award/award\_winner/awards\_won] [Isle of Man]]}\\
+    \hline
+    \end{tabular}
+\caption{RGVAE latent space interpolation between two triples with $\delta = 0.6$ and standard loss.}
+\label{annexA:ipbtw2DeltaNoPerm}
+\end{table}
+
+
+\subsubsection{Interpolation per latent dimension}
+\label{annexB:95}
+
+\begin{longtable}{|c|}
+    % \centering
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{RGVAE permute}\\ \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=1$}\\ \hline
+    \texttt{[[Estudiantes Tecos] [/film/film/costume\_design\_by] [Sylvester Stallone]]}\\
+    \texttt{[[The Man with the Golden Gun] [/film/film/costume\_design\_by] [Bill Fagerbakke]]}\\
+    \texttt{[[BAFTA Award for Best Film Music] [/film/film/costume\_design\_by] [Writer-GB]]}\\
+    \texttt{[[The Shipping News] [/film/film/costume\_design\_by] [Teri Garr]]}\\
+    \texttt{[[Robert De Niro] [/film/film/costume\_design\_by] [Cesar Romero]]}\\
+    \texttt{[[Inception] [/film/film/costume\_design\_by] [Hertha BSC Berlin]]}\\
+    \texttt{[[Walter F. Parkes] [/film/film/costume\_design\_by] [Mary Lynn Rajskub]]}\\
+    \texttt{[[Lorraine Bracco] [/film/film/costume\_design\_by] [Electronic keyboard]]}\\
+    \texttt{[[Ben Folds] [/film/film/costume\_design\_by] [1956 Summer Olympics]]}\\
+    \texttt{[[Eurasia] [/film/film/costume\_design\_by] [Video]]}\\ \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=2$}\\ \hline
+    \texttt{[[Piano] [/film/film/costume\_design\_by] [Janes Addiction]]}\\
+    \texttt{[[Razzie Award for Worst Director] [/film/film/costume\_design\_by] [Visual Effects Director]]}\\
+    \texttt{[[Gone Baby Gone] [/film/film/costume\_design\_by] [Josh Sussman]]}\\
+    \texttt{[[Ellen Pompeo] [/film/film/costume\_design\_by] [Joss Whedon]]}\\
+    \texttt{[[Bachelor of Arts] [/film/film/costume\_design\_by] [Chicago]]}\\
+    \texttt{[[News Corporation] [/film/film/costume\_design\_by] [2012 Summer Olympics]]}\\
+    \texttt{[[Ukulele] [/film/film/costume\_design\_by] [85th Academy Awards]]}\\
+    \texttt{[[Columbia Pictures] [/film/film/costume\_design\_by] [The Last Picture Show]]}\\
+    \texttt{[[Catherine Keener] [/film/film/costume\_design\_by] [Gladys Knight]]}\\
+    \texttt{[[Amelia] [/film/film/costume\_design\_by] [Hikaru Utada]]}\\ \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=3$}\\ \hline
+    \texttt{[[Steve Carell] [/film/film/costume\_design\_by] [Australia]]}\\
+    \texttt{[[About a Boy] [/film/film/costume\_design\_by] [United States Dollar]]}\\
+    \texttt{[[Academy Award for Best Cinematography] [/film/film/costume\_design\_by] [Defender]]}\\
+    \texttt{[[Jayma Mays] [/film/film/costume\_design\_by] [Broadcast Film Critics Association Award]]}\\
+    \texttt{[[Arthur C. Clarke] [/film/film/costume\_design\_by] [Comedy-GB]]}\\
+    \texttt{[[1968 Summer Olympics] [/film/film/costume\_design\_by] [Quarterback]]}\\
+    \texttt{[[Tim Rice] [/film/film/costume\_design\_by] [Electric guitar]]}\\
+    \texttt{[[The Faculty] [/film/film/costume\_design\_by] [Linebacker]]}\\
+    \texttt{[[Academy Award for Best Screenplay] [/film/film/costume\_design\_by] [Singer-songwriter-GB]]}\\
+    \texttt{[[Raoul Walsh] [/film/film/costume\_design\_by] [Julianna Margulies]]}\\ \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=4$}\\ \hline
+    \texttt{[[Trumpet] [/film/film/costume\_design\_by] [Argentina]]}\\
+    \texttt{[[Costa Mesa] [/film/film/costume\_design\_by] [51st Annual Grammy Awards-US]]}\\
+    \texttt{[[Amanda Lear] [/education/educational\_degree/people\_with\_this\_degree] [New Jersey]]}\\
+    \texttt{[[Jean-Paul Sartre] [/film/film/costume\_design\_by] [Hong Kong]]}\\
+    \texttt{[[Charles LeMaire] [/film/film/costume\_design\_by] [United States of America]]}\\
+    \texttt{[[13 Assassins] [/film/film/costume\_design\_by] [V for Vendetta]]}\\
+    \texttt{[[Academy Award for Best Original Song] [/film/film/costume\_design\_by] [Million Dollar Baby]]}\\
+    \texttt{[[Alan Parsons] [/film/film/costume\_design\_by] [Mark Kirkland]]}\\
+    \texttt{[[Africa] [/film/film/costume\_design\_by] [General-GB]]}\\
+    \texttt{[[Joanna Lumley] [/film/film/costume\_design\_by] [Melanie Griffith]]}\\ \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=5$}\\ \hline
+    \texttt{[[Brighton Rock] [/film/film/costume\_design\_by] [Brown University]]}\\
+    \texttt{[[Claude Rains] [/film/film/costume\_design\_by] [Dhaka]]}\\
+    \texttt{[[Drums] [/film/film/costume\_design\_by] [Marty Stuart]]}\\
+    \texttt{[[Alameda County] [/film/film/costume\_design\_by] [Striptease]]}\\
+    \texttt{[[Bachelor of Arts] [/film/film/costume\_design\_by] [G-Force]]}\\
+    \texttt{[[Owen Wilson] [/film/film/costume\_design\_by] [University of London]]}\\
+    \texttt{[[Being There] [/film/film/costume\_design\_by] [14th Screen Actors Guild Awards]]}\\
+    \texttt{[[Tim McGraw] [/film/film/costume\_design\_by] [Japanese Language]]}\\
+    \texttt{[[Brandenburg] [/film/film/costume\_design\_by] [Honolulu]]}\\
+    \texttt{[[Rekha] [/film/film/costume\_design\_by] [Defender]]}\\ \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=6$}\\ \hline
+    \texttt{[[Catherine Deneuve] [/film/film/costume\_design\_by] [Robert Ridgely]]}\\
+    \texttt{[[Felix Bastians] [/film/film/costume\_design\_by] [English Language]]}\\
+    \texttt{[[Denzel Washington] [/film/film/costume\_design\_by] [German Democratic Republic]]}\\
+    \texttt{[[Gina Gershon] [/film/film/costume\_design\_by] [Shanghai Greenland F.C.]]}\\
+    \texttt{[[Peter Cook] [/film/film/costume\_design\_by] [Carrie Fisher]]}\\
+    \texttt{[[Jim Taylor] [/film/film/costume\_design\_by] [Romantic comedy]]}\\
+    \texttt{[[Guitar] [/film/film/costume\_design\_by] [Private university]]}\\
+    \texttt{[[Melodica] [/film/film/costume\_design\_by] [Screenwriter]]}\\
+    \texttt{[[Broadcast Film Critics Association Award] [/film/film/costume\_design\_by] [Running back]]}\\
+    \texttt{[[Southern Methodist University] [/film/film/costume\_design\_by] [Mellotron]]}\\ \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=7$}\\ \hline
+    \texttt{[[Grammy Award for Best R\&B Performance] [/film/film/costume\_design\_by] [Tunisia]]}\\
+    \texttt{[[Comedy-GB] [/film/film/costume\_design\_by] [Louisiana State University]]}\\
+    \texttt{[[Yes Man] [/film/film/costume\_design\_by] [Brooklyn]]}\\
+    \texttt{[[Justin Chambers] [/film/film/costume\_design\_by] [David Petraeus]]}\\
+    \texttt{[[Akiva Schaffer] [/film/film/costume\_design\_by] [United States Dollar]]}\\
+    \texttt{[[Masovian Voivodeship] [/film/film/costume\_design\_by] [Germany]]}\\
+    \texttt{[[Kevin Betsy] [/film/film/costume\_design\_by] ["One Flew Over the Cuckoos Nest"]]}\\
+    \texttt{[[Tombstone] [/film/film/costume\_design\_by] [Drum]]}\\
+    \texttt{[[Piranha DD] [/film/film/costume\_design\_by] [United States of America]]}\\
+    \texttt{[[Sire Records] [/film/film/costume\_design\_by] [Primetime Emmy Award]]}\\ \hline
+    \textsc{$i_{d_z}=8$}\\ \hline
+    \texttt{[[Coconut milk] [/film/film/costume\_design\_by] [Goa]]}\\
+    \texttt{[[Academy Award for Best Picture] [/base/eating/practicer\_of\_diet/diet] [A Beautiful Mind]]}\\
+    \texttt{[[Indiana Jones and the Temple of Doom] [/film/film/costume\_design\_by] [Romania]]}\\
+    \texttt{[[Charterhouse School] [/film/film/costume\_design\_by] [Marilyn Manson]]}\\
+    \texttt{[[Verizon Communications] [/film/film/costume\_design\_by] [Japan]]}\\
+    \texttt{[[Mulan] [/film/film/costume\_design\_by] [Sony BMG Music Entertainment]]}\\
+    \texttt{[[Matthew McConaughey] [/film/film/costume\_design\_by] [Chocolat]]}\\
+    \texttt{[[Northwestern University] [/film/film/costume\_design\_by] [United States of America]]}\\
+    \texttt{[[Survivor] [/film/film/costume\_design\_by] [Malibu]]}\\
+    \texttt{[[L.A. Confidential] [/film/film/costume\_design\_by] [Sarah Polley]]}\\ \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=9$}\\ \hline
+    \texttt{[[Scott Pilgrim vs. the World] [/film/film/costume\_design\_by] [Vegetarianism]]}\\
+    \texttt{[[Pina] [/film/film/costume\_design\_by] [Synthesizer]]}\\
+    \texttt{[[Ryerson University] [/film/film/costume\_design\_by] [Oldham Athletic A.F.C.]]}\\
+    \texttt{[[Tony Geiss] [/film/film/costume\_design\_by] [Maine]]}\\
+    \texttt{[[Get Smart] [/film/film/costume\_design\_by] [American Gangster]]}\\
+    \texttt{[[59th Golden Globe Awards] [/film/film/costume\_design\_by] [Marriage]]}\\
+    \texttt{[[Coimbatore district] [/film/film/costume\_design\_by] [Midfielder]]}\\
+    \texttt{[[90th United States Congress] [/film/film/costume\_design\_by] [Male]]}\\
+    \texttt{[[Colin Firth] [/film/film/costume\_design\_by] [Israel]]}\\
+    \texttt{[[Brian Baumgartner] [/film/film/costume\_design\_by] [American Beauty]]}\\ \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=10$}\\ \hline
+    \texttt{[[Charles Laughton] [/film/film/costume\_design\_by] [Bosnia and Herzegovina]]}\\
+    \texttt{[[Academy Award for Best Design] [/film/film/costume\_design\_by] [Oxford United F.C.]]}\\
+    \texttt{[[Winona Ryder] [/location/country/official\_language] [Singapore]]}\\
+    \texttt{[[Grammy Award for Best Album for Children] [/film/film/costume\_design\_by] [Blue-eyed soul]]}\\
+    \texttt{[[Shooting guard] [/film/film/costume\_design\_by] [National Board of Review Award]]}\\
+    \texttt{[[Borat] [/film/film/costume\_design\_by] [The French Connection]]}\\
+    \texttt{[[Oh! What a Lovely War] [/film/film/costume\_design\_by] [Kareena Kapoor]]}\\
+    \texttt{[[Liv Tyler] [/film/film/costume\_design\_by] [Jamie Lynn Sigler]]}\\
+    \texttt{[[John Wayne] [/film/film/costume\_design\_by] [United States Dollar]]}\\
+    \texttt{[[Speed Racer] [/film/film/costume\_design\_by] [Grammy Award for Song of the Year]]}\\
+    \hline
+\caption{Interpolation of each latent dimension for the RGVAE with graph matching.}
+\label{annexA:ipdim95}
+\end{longtable}
+
+
+\begin{longtable}{|c|}
+    % \centering
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{RGVAE standard}\\ \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=1$}\\ \hline
+    \texttt{[[1976 Winter Olympics] [/base/marchmadness/ncaa\_basketball\_tournament/seeds] [Iain Glen]]}\\
+    \texttt{[[Judy Greer] [/film/actor/film] [Arkansas]]}\\
+    \texttt{[[Vincent Pastore] [/film/film/genre] [Vice President-GB]]}\\
+    \texttt{[["Ulysses Gaze"] [/people/person/gender] [ESPN]]}\\
+    \texttt{[[Manchester University] [/award/ranked\_item/appears\_in\_ranked\_lists] [Silver medal]]}\\
+    \texttt{[[Wesleyan University] [/business/job\_title/people\_with\_this\_title] [Lisa Gay Hamilton]]}\\
+    \texttt{[[Iraq] [/music/instrument/family] [Greg Daniels]]}\\
+    \texttt{[[Empire of the Sun] [/people/person/profession] [Catherine Keener]]}\\
+    \texttt{[[Leslie Bricusse] [/award/award\_nominee] [Jane Fonda]]}\\
+    \texttt{[[Forward] [/film/film\_distributor/films\_distributed] [Sandra Bullock]]}\\
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=2$}\\ \hline
+    \texttt{[[Saxophone] [/award/award\_winning\_work/awards\_won] [The Prince of Egypt]]}\\
+    \texttt{[[Rang De Basanti] [/location/location/contains] [1992 Summer Olympics]]}\\
+    \texttt{[[Small Soldiers] [/award/award\_nominee] [New York City]]}\\
+    \texttt{[[Bill Hicks] [/award/award\_nominee] [Paul Williams]]}\\
+    \texttt{[[Hairspray] [/user/jg/default\_domain/olympic\_games/sports] [Michael K. Williams]]}\\
+    \texttt{[[The Aviator] [/film/actor/film] [Goalkeeper]]}\\
+    \texttt{[[Joel Grey] [/award/award\_nominee] [Vladimir Vladimirovich Nabokov]]}\\
+    \texttt{[[Vibraphone] [/film/film\_distributor/films\_distributed] ["Jews harp"]]}\\
+    \texttt{[[Ice Age: Dawn of the Dinosaurs] [/music/group\_member/membership] [Club Atlas]]}\\
+    \texttt{[[Doctor Zhivago] [/film/film/release\_date\_s] [Terror in the Aisles]]}\\
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=3$}\\ \hline
+    \texttt{[[Real Sociedad] [/common/topic/webpage./common/webpage/category] [Palmitic acid]]}\\
+    \texttt{[[Soul music] [/people/person/profession] [Alameda]]}\\
+    \texttt{[[Viggo Mortensen] [/medicine/disease/risk\_factors] [Love Story]]}\\
+    \texttt{[[Finland] [/sports/sports\_position/players] [DVD]]}\\
+    \texttt{[[Crazy Heart] [/tv/tv\_producer/programs\_produced] [Los Angeles]]}\\
+    \texttt{[[Drew Barrymore] [/tv/tv\_writer/tv\_programs] [Road cycling]]}\\
+    \texttt{[[BAFTA Award for Best Screenplay] [/award/award\_nominee] [John Ortiz]]}\\
+    \texttt{[[Mumford] [/film/film/release\_date\_s] [Howard Gordon]]}\\
+    \texttt{[[Grammy Award for Best Musical Album] [/people/person/places\_lived] [Batman Begins]]}\\
+    \texttt{[[Cats \& Dogs] [/sports/sports\_team/colors] [Musician-GB]]}\\
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=4$}\\ \hline
+    \texttt{[[Saint Marys College] [/government/political\_party/politicians\_in\_this\_party] [Joel Coen]]}\\
+    \texttt{[[Eva Longoria] [/people/person/profession] [The Lives of Others]]}\\
+    \texttt{[[United States Congress] [/award/award\_nominee] [Tony Award for Best Actor]]}\\
+    \texttt{[[Midfielder] [/music/instrument/instrumentalists] [Elizabeth]]}\\
+    \texttt{[[Brad Pitt] [/film/actor/film] [South Sudan]]}\\
+    \texttt{[[Django Unchained] [/user/ktrueman/default\_domain/] [France]]}\\
+    \texttt{[[McMaster University] [/music/artist/track\_contributions] [Philippines]]}\\
+    \texttt{[[The Stand] [/people/person/profession] [Curly Howard]]}\\
+    \texttt{[[Jerome Flynn] [/award/award\_nominee] [Piano]]}\\
+    \texttt{[[Brighton Rock] [/location/location/contains] [Forward]]}\\
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=5$}\\ \hline
+    \texttt{[[Jennifer Aniston] [/people/person/place\_of\_birth] [Peru]]}\\
+    \texttt{[[Timothy Busfield] [/film/film/release\_date\_s] [Defender]]}\\
+    \texttt{[[Nirupa Roy] [/food/food/nutrients] [Wake Forest University]]}\\
+    \texttt{[[Kidderminster F.C.] [/award/award\_winning\_work/awards\_won\_winner] [United States Dollar]]}\\
+    \texttt{[[BAFTA Award for Best Actress] [/location/statistical\_region] [Forest Lawn Memorial Park]]}\\
+    \texttt{[[Babylon 5] [/award/award\_nominee\_nominee] [Hong Kong]]}\\
+    \texttt{[[Johann Wolfgang von Goethe] [/film/actor/film] [Sunday Bloody Sunday-GB]]}\\
+    \texttt{[[St. Augustine] [/people/marriage\_union\_type/unions\_of\_this\_type] [Columbia Pictures]]}\\
+    \texttt{[[Brokeback Mountain] [/award/award\_nominee] [Oscar]]}\\
+    \texttt{[[Shanghai Knights] [/film/film/cinematography] [United States Dollar]]}\\
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=6$}\\ \hline
+    \texttt{[[Cape Fear] [/award/award\_nominee] [DVD]]}\\
+    \texttt{[[Busta Rhymes] [/film/film/language] [United States Dollar]]}\\
+    \texttt{[[The Bourne Identity] [/people/person/profession] [Ally Sheedy]]}\\
+    \texttt{[[Taxi Driver] [/people/person/profession] [Ipswich Town F.C.]]}\\
+    \texttt{[[France] [/film/actor/film] [Greensboro]]}\\
+    \texttt{[[The Constant Gardener] [/award/award\_nominee] [Academy Award for Best Screenplay]]}\\
+    \texttt{[[North Atlantic Treaty Organization (NATO)] [/people/person/profession] [Makeup Artist-GB]]}\\
+    \texttt{[[Trey Parker] [/time/event/locations] [University of the West Indies]]}\\
+    \texttt{[[Mockumentary] [/people/deceased\_person/place\_of\_death] [Newport Beach]]}\\
+    \texttt{[[Phillips Academy] [/music/performance\_role/regular\_performances] [Police procedural]]}\\
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=7$}\\ \hline
+    \texttt{[[Gladiator] [/people/person/profession] [Clarinet]]}\\
+    \texttt{[[Jenna Fischer] [/sports/sports\_team\_location/teams] [Spain]]}\\
+    \texttt{[[Israel] [/base/localfood/seasonal\_month/produce\_available] [Yale University]]}\\
+    \texttt{[[Tompkins County] [/organization/organization/place\_founded] [William Shakespeare]]}\\
+    \texttt{[[Bas-Rhin] [/film/film/release\_date\_s] [Actor-GB]]}\\
+    \texttt{[[Virgin Records] [/location/hud\_foreclosure\_area] ["Peoples Action Party"]]}\\
+    \texttt{[[Farida Jalal] [/education/educational\_institution/school\_type] [Primetime Emmy Award]]}\\
+    \texttt{[[Piano] [/award/award\_winning\_work/awards\_won] [Marty Stuart]]}\\
+    \texttt{[[John C. Reilly] [/location/location/contains] [Jim Broadbent]]}\\
+    \texttt{[[Tim Roth] [/film/film/language] [Egypt]]}\\
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=8$}\\ \hline
+    \texttt{[[Ennio Morricone] [/award/award\_winner/awards\_won\_winner] [98th United States Congress]]}\\
+    \texttt{[[Mali Finn] [/base/marchmadness/ncaa\_basketball\_tournament/seeds] [Angie Dickinson]]}\\
+    \texttt{[[David Walliams] [/music/performance\_role/regular\_performances] [Toy Story 3]]}\\
+    \texttt{[[Marriage] [/award/award\_ceremony/awards\_presented] [New York City]]}\\
+    \texttt{[[Philip Yordan] [/soccer/football\_team/current\_roster] [English Language]]}\\
+    \texttt{[[63rd Primetime Emmy Awards] [/film/film/other\_crew] [Stephen Frears]]}\\
+    \texttt{[[Hud] [/film/film/other\_crew] [Potassium]]}\\
+    \texttt{[[Arkansas] [/film/film/featured\_film\_locations] [Special Effects Supervisor]]}\\
+    \texttt{[[Fran Drescher] [/film/film\_distributor/films\_distributed] [Giant]]}\\
+    \texttt{[[Charlotte Gainsbourg] [/travel/travel\_destination/climate] [United Kingdom]]}\\
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=9$}\\ \hline
+    \texttt{[[Bachelor of Business Administration] [/film/director/film] [David Foster]]}\\
+    \texttt{[[Andy Samberg] [/people/person/place\_of\_birth] [Portugal]]}\\
+    \texttt{[[Academy Award for Best Picture] [/film/film/language] [Jessica Biel]]}\\
+    \texttt{[[The Last Emperor] [/education/educational\_institution/school\_type] [Closer]]}\\
+    \texttt{[[Hewlett-Packard] [/award/award\_winner/awards\_won\_winner] [Russia]]}\\
+    \texttt{[[Joan Allen] [/tv/tv\_producer/programs\_produced] [Daytime Emmy Award for Outstanding Host]]}\\
+    \texttt{[[The Royal Tenenbaums] [/olympics/olympic\_sport/athletes] [Mathematics]]}\\
+    \texttt{[[EMI] [/people/person/places\_lived] [Jason Isaacs]]}\\
+    \texttt{[[DePaul University] [/award/award\_category/nominees] [Martie Maguire]]}\\
+    \texttt{[[Managing Director-GB] [/film/actor/film] [Tom Petty and the Heartbreakers]]}\\
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=10$}\\ \hline
+    \texttt{[[Nebraska] [/award/award\_nominee] [2008 Summer Olympics]]}\\
+    \texttt{[[Mike Scully] [/location/location/adjoin\_s] [Hal B. Wallis]]}\\
+    \texttt{[[Frankenweenie] [/sports/sports\_position/players] [University of Cape Town]]}\\
+    \texttt{[[Johnny Green] [/film/film/release\_date\_s] [Bruce Springsteen]]}\\
+    \texttt{[[Jamie Lynn Sigler] [/award/award\_nominee\_nominee] [Maggie Smith]]}\\
+    \texttt{[[Academy Award for Best Actor] [/base/popstra/celebrity/friendship] [Engineer-GB]]}\\
+    \texttt{[[Hope Davis] [/film/film/other\_crew] [London]]}\\
+    \texttt{[[Scotland] [/award/award\_nominee\_nominee] [1920 Summer Olympics]]}\\
+    \texttt{[[Keanu Reeves] [/music/record\_label/artist] [German Language]]}\\
+    \texttt{[[The Perks of Being a Wallflower] [/olympics/olympic\_participating\_country] [United States Dollar]]}\\
+    \hline
+\caption{Interpolation of each latent dimension for the RGVAE with standard loss function.}
+\label{annexA:ipdim95NoPerm}
+\end{longtable}
+
+
+\begin{longtable}{|c|}
+    % \centering
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$\delta$-RGVAE permute}\\ \hline
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=1$}\\ \hline 
+    \texttt{[[Amman] [/user/tsegaran/random/taxonomy\_subject/entry] [Bill Cosby]]}\\
+    \texttt{[[Kristen Stewart] [/people/person/spouse\_s] [United States of America]]}\\
+    \texttt{[[Dean Koontz] [/user/tsegaran/random/taxonomy\_subject/entry] [Fukushima Prefecture]]}\\
+    \texttt{[[Western Front] [/user/tsegaran/random/taxonomy\_subject/entry] [Member of Congress]]}\\
+    \texttt{[[Cyrano de Bergerac] [/user/tsegaran/random/taxonomy\_subject/entry] [Star Wars Episode III]]}\\
+    \texttt{[[Country] [/user/tsegaran/random/taxonomy\_subject/entry] [Lois Smith]]}\\
+    \texttt{[[Imelda Staunton] [/user/tsegaran/random/taxonomy\_subject/entry] [DVD]]}\\
+    \texttt{[[Acid house] [/film/film/other\_crew] [Sienna Miller]]}\\
+    \texttt{[[Underground hip hop] [/user/tsegaran/random/taxonomy\_subject/entry] [Placekicker]]}\\
+    \texttt{[[Indie pop] [/user/tsegaran/random/taxonomy\_subject/entry] [Big Love]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=2$}\\ \hline 
+    \texttt{[[UTV] [/base/localfood/seasonal\_month/produce\_available] [Drama]]}\\
+    \texttt{[[Crewe Alexandra F.C.] [/film/film/other\_crew] [Wheaton]]}\\
+    \texttt{[[Richard Burton] [/user/tsegaran/random/taxonomy\_subject/entry] [Pinellas County]]}\\
+    \texttt{[[Cave of Forgotten Dreams] [/film/film/release\_date\_s] [The Lord of the Rings]]}\\
+    \texttt{[[2008 Summer Olympics] [/time/event/locations] [Chulalongkorn]]}\\
+    \texttt{[[Omarion] [/award/award\_category/disciplines\_or\_subjects] [Taito Corporation]]}\\
+    \texttt{[[Providence County] [/government/politician/government\_positions\_held] [Drama]]}\\
+    \texttt{[[Economist] [/sports/sports\_team/roster] [Tommy Lee Jones]]}\\
+    \texttt{[[Independent Spirit Award for Best Director] [/film/film/written\_by] [Defender]]}\\
+    \texttt{[[California] [/user/tsegaran/random/taxonomy\_subject/entry] [Catholicism]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=3$}\\ \hline 
+    \texttt{[[Dick Powell] [/film/film/release\_date\_s] [Alex Borstein]]}\\
+    \texttt{[[Jeff Richmond] [/film/film/personal\_appearances] [Never Say Never Again]]}\\
+    \texttt{[[The Amazing Spider-Man] [/user/tsegaran/random/taxonomy\_subject/entry] [Animaniacs]]}\\
+    \texttt{[[Heavy metal] [/user/tsegaran/random/taxonomy\_subject/entry] [Mark Ronson]]}\\
+    \texttt{[[Southeast Asia] [/location/hud\_county\_place/county] [Franklin Medal]]}\\
+    \texttt{[[Jon Stewart] [/film/film/country] [Warren Ellis]]}\\
+    \texttt{[[Marv Wolfman] [/location/administrative\_division] [95th United States Congress]]}\\
+    \texttt{[[John Davis] [/sports/sports\_position/players] [Male]]}\\
+    \texttt{[[2009 Tour de France] [/award/award\_nominee] [Cate Blanchett]]}\\
+    \texttt{[[Real Betis] [/film/film/release\_date\_s] [Obesity]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=4$}\\ \hline 
+    \texttt{[[Monaco] [/user/tsegaran/random/taxonomy\_subject/entry] [Ryan Seacrest]]}\\
+    \texttt{[[MADtv] [/organization/endowed\_organization/endowment] [Toby Jones]]}\\
+    \texttt{[[Master of Arts] [/time/event/instance\_of\_recurring\_event] [Conglomerate]]}\\
+    \texttt{[[Tim Robbins] [/user/tsegaran/random/taxonomy\_subject/entry] [Homicide: Life on the Street]]}\\
+    \texttt{[["The Hitchhikers Guide to the Galaxy"] [/film/film/film\_art\_direction\_by] [Lawrence Bender]]}\\
+    \texttt{[[Melvyn Douglas] [/food/food/nutrients] [Kingston University]]}\\
+    \texttt{[[Billings] [/user/tsegaran/random/taxonomy\_subject/entry] [Jon Peters]]}\\
+    \texttt{[[Brandon] [/people/ethnicity/languages\_spoken] [Motorola]]}\\
+    \texttt{[[Tom Stoppard] [/location/statistical\_region] [Kid Rock]]}\\
+    \texttt{[[FC Khimki] [/user/tsegaran/random/taxonomy\_subject/entry] [Richard Sylbert]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=5$}\\ \hline 
+    \texttt{[[Ron Paul] [/user/tsegaran/random/taxonomy\_subject/entry] [The Shubert Organization]]}\\
+    \texttt{[[Merry Christmas] [Mr. Lawrence] [/people/profession/specialization\_of] [United Kingdom]]}\\
+    \texttt{[[St. Mirren F.C.] [/user/tsegaran/random/taxonomy\_subject/entry] [United States Dollar]]}\\
+    \texttt{[[Joe Jackson] [/sports/sports\_team/sport] [Iran national football team]]}\\
+    \texttt{[[Philips] [/user/tsegaran/random/taxonomy\_subject/entry] [47th Annual Grammy Awards]]}\\
+    \texttt{[["Paquito DRivera"] [/film/film\_subject/films] [Forward]]}\\
+    \texttt{[[University of Maine] [/base/popstra/celebrity/breakup] [Sonic Youth]]}\\
+    \texttt{[[Brian Eno] [/influence/influence\_node/peers] [Tim Conway]]}\\
+    \texttt{[[A Room with a View] [/user/tsegaran/random/taxonomy\_subject/entry] [Huntington]]}\\
+    \texttt{[[Nicholas and Alexandra] [/film/film/distributors] [Lionsgate Entertainment]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=6$}\\ \hline 
+    \texttt{[[Farrah Fawcett] [/education/university/international\_tuition] [The Bourne Legacy]]}\\
+    \texttt{[[William Shakespeare] [/base/saturdaynightlive/snl\_cast\_member/seasons] [Drama]]}\\
+    \texttt{[[Serj Tankian] [/film/film/costume\_design\_by] [Ted Levine]]}\\
+    \texttt{[[Amitabh Bachchan] [/location/hud\_foreclosure\_area] [LA Galaxy]]}\\
+    \texttt{[[Taekwondo] [/location/statistical\_region/rent50\_2] [Drum]]}\\
+    \texttt{[[Portugal] [/music/group\_member/membership] [Mountain Time Zone-US]]}\\
+    \texttt{[[Saxony] [/user/tsegaran/random/taxonomy\_subject/entry] [2003 invasion of Iraq]]}\\
+    \texttt{[[Addis Ababa] [/baseball/baseball\_team/team\_stats] [Tony Award for Best Original Score]]}\\
+    \texttt{[[Tijuana] [/user/tsegaran/random/taxonomy\_subject/entry] [Bellevue]]}\\
+    \texttt{[[Bruce Timm] [/people/person/gender] [Brian Grazer]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=7$}\\ \hline 
+    \texttt{[[Charles Mingus] [/film/film/distributors] [University of Chicago Law School]]}\\
+    \texttt{[[Feroz Khan] [/people/person/sibling\_s] [Marvin Hatley]]}\\
+    \texttt{[[Jason Segel] [/film/film/dubbing\_performances] [Psychedelic trance]]}\\
+    \texttt{[[Swimming Upstream] [/celebrities/celebrity/celebrity\_friends] [Avocado]]}\\
+    \texttt{[[Jockey-GB] [/olympics/olympic\_sport/athletes] [Robert Towne]]}\\
+    \texttt{[[Bachelor of Arts] [/organization/organization\_member/member\_of] [Executive Producer]]}\\
+    \texttt{[[Fairfield County] [/user/tsegaran/random/taxonomy\_subject/entry] [Saeed Jaffrey]]}\\
+    \texttt{[[Catherine Keener] [/base/eating/practicer\_of\_diet/diet] [Bicentennial Man]]}\\
+    \texttt{[[Dance-pop] [/location/statistical\_region/places\_exported\_to] [No Doubt]]}\\
+    \texttt{[[Tina Turner] [/military/military\_conflict/combatants] [Clarence Brown]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=8$}\\ \hline 
+    \texttt{[[Heavy metal] [/film/special\_film\_performance\_type/film\_performance\_type] [Black comedy]]}\\
+    \texttt{[[Jackie Cooper] [/user/tsegaran/random/taxonomy\_subject/entry] [Mali]]}\\
+    \texttt{[["The Sorcerers Apprentice"] [/user/tsegaran/random/taxonomy\_subject/entry] [Olympia Dukakis]]}\\
+    \texttt{[[Wim Wenders] [/education/university/fraternities\_and\_sororities] [University of London]]}\\
+    \texttt{[[Punahou School] [/user/tsegaran/random/taxonomy\_subject/entry] [Aldo Nova]]}\\
+    \texttt{[[Rory Cochrane] [/government/government\_office\_category/officeholders] [Samantha Morton]]}\\
+    \texttt{[[Robert Byrd] [/award/award\_winning\_work/awards\_won] [Romantic fantasy]]}\\
+    \texttt{[[Loudoun County] [/baseball/baseball\_team/team\_stats] [Master of Arts]]}\\
+    \texttt{[[Ohio] [/user/tsegaran/random/taxonomy\_subject/entry] [Screen Actors Guild Award]]}\\
+    \texttt{[[Nas] [/film/film/prequel] [MTV Video Music Award for Best Hip-Hop Video]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=9$}\\ \hline 
+    \texttt{[[Naismith Basketball] [/user/tsegaran/random/taxonomy\_subject/entry] [William A. Fraker]]}\\
+    \texttt{[[Alternative rock] [/user/tsegaran/random/taxonomy\_subject/entry] [Atheism]]}\\
+    \texttt{[[Spider-Man 3] [/user/tsegaran/random/taxonomy\_subject/entry] [Visual Effects]]}\\
+    \texttt{[[Wong Jing] [/user/tsegaran/random/taxonomy\_subject/entry] [Artist-GB]]}\\
+    \texttt{[[Blue Note Records] [/user/tsegaran/random/taxonomy\_subject/entry] [Robert Zemeckis]]}\\
+    \texttt{[[African] [Caribbean \& Pacific Group of States] [/music/instrument/family] [The Kite Runner]]}\\
+    \texttt{[[Gastroesophageal reflux disease] [/music/group\_member/membership] [United States Dollar]]}\\
+    \texttt{[[Alou Diarra] [/people/deceased\_person/place\_of\_death] [Goalkeeper]]}\\
+    \texttt{[[Oklahoma!] [/award/award\_nominated\_work] [Iggy Pop]]}\\
+    \texttt{[[Writers Guild of America Award] [/organization/endowed\_organization/endowment] [Joe Cocker]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=10$}\\ \hline 
+    \texttt{[[Academy Award for Best Actor] [/user/tsegaran/random/taxonomy\_subject/entry] [Greece]]}\\
+    \texttt{[[University of Santo Tomas] [/user/tsegaran/random/taxonomy\_subject/entry] [Charleston]]}\\
+    \texttt{[[Asian Development Bank] [/user/tsegaran/random/taxonomy\_subject/entry] [DVD]]}\\
+    \texttt{[[Dead Ringers] [/organization/organization/place\_founded] [Allentown]]}\\
+    \texttt{[[Academy Award for Best Short Film] [/location/administrative\_division] [Forward]]}\\
+    \texttt{[[Anderson] [/base/popstra/celebrity/breakup] [Dancing with the Stars]]}\\
+    \texttt{[[Dance-GB] [/user/tsegaran/random/taxonomy\_subject/entry] [High Noon]]}\\
+    \texttt{[[FC Carl Zeiss Jena] [/music/genre/artists] [Comcast]]}\\
+    \texttt{[[Dundee F.C.] [/government/political\_party/politicians\_in\_this\_party] [Kyushu]]}\\
+    \texttt{[[Joan Collins] [/user/tsegaran/random/taxonomy\_subject/entry] [Olivia de Havilland]]}\\
+    \hline
+    \caption{Interpolation of each latent dimension for the RGVAE with $\delta=0.6$ and graph matching.}
+\label{annexA:ipdim95Delta}
+\end{longtable}
+
+\begin{longtable}{|c|}
+    % \centering
+    \hline
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$\delta$-RGVAE standard}\\ \hline
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=1$}\\ \hline 
+    \texttt{[[Nu metal] [/user/alexander/philosophy/philosopher/interests] [Hans Zimmer]]}\\
+    \texttt{[[American Revolutionary War] [/influence/influence\_node/influenced\_by] [Monsters] [Inc.]]}\\
+    \texttt{[[IFC Films] [/olympics/olympic\_sport/athletes] [Tony Bennett]]}\\
+    \texttt{[[Barbra Streisand] [/music/performance\_role/track\_performances] [Michael Bay]]}\\
+    \texttt{[[Avid Technology] [/people/person/religion] [Jules White]]}\\
+    \texttt{[[Saturn Award for Best Costume] [/soccer/football\_team/current\_roster] [Nicole Kidman]]}\\
+    \texttt{[[Grammy Award for Best Orchestral Performance] [/film/film/release\_date\_s] [Asheville]]}\\
+    \texttt{[[Gameloft] [/people/ethnicity/people] [Hewlett-Packard]]}\\
+    \texttt{[[Satish Kaushik] [/award/award\_category/winners] [Costa Rica]]}\\
+    \texttt{[[Lawrence] [/military/military\_combatant/military\_conflicts] [Charleston]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=2$}\\ \hline 
+    \texttt{[[Jackass: The Movie] [/music/performance\_role/regular\_performances] [Gotha]]}\\
+    \texttt{[[Kingston] [/people/person/place\_of\_birth] [Carol Kane]]}\\
+    \texttt{[[Eminem] [/film/film/release\_date\_s] [Sabrina]]}\\
+    \texttt{[[The Man in the Iron Mask] [/education/educational\_institution/colors] [Oleic acid]]}\\
+    \texttt{[[Beitar Jerusalem F.C.] [/award/award\_winning\_work/awards\_won] [Adolph Green]]}\\
+    \texttt{[[Tony Gaudio] [/olympics/olympic\_sport/athletes] [Band of Brothers]]}\\
+    \texttt{[[Heterosexuality] [/film/film/release\_date\_s] [2012]]}\\
+    \texttt{[[Noam Chomsky] [/people/person/spouse\_s] [San Diego Chargers]]}\\
+    \texttt{[[Mona Marshall] [/film/film/language] [Reno]]}\\
+    \texttt{[[Hyde Park on Hudson] [/organization/organization/headquarters] [The Hurt Locker]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=3$}\\ \hline 
+    \texttt{[[Wallace Beery] [/award/award\_nominee] [MGM Records]]}\\
+    \texttt{[[1936 Summer Olympics] [/base/locations/continents/countries\_within] [Pete Postlethwaite]]}\\
+    \texttt{[[Godzilla] [/common/topic/webpage] [Inkheart]]}\\
+    \texttt{[[Tom Wilkinson] [/film/film/estimated\_budget] [Monroe County]]}\\
+    \texttt{[[Chris Martin] [/location/country/second\_level\_divisions] [The Cassandra Crossing]]}\\
+    \texttt{[[University of Dayton] [/people/person/languages] [2012 British Academy Film Awards]]}\\
+    \texttt{[[Union of South Africa] [/film/film/personal\_appearances] [United Kingdom]]}\\
+    \texttt{[[The Pursuit of Happyness] [/award/award\_winning\_work/awards\_won] [Ken Russell]]}\\
+    \texttt{[[We Have a Pope] [/award/award\_nominee] [Steven Levitan]]}\\
+    \texttt{[[Mindy Kaling] [/organization/organization/child] [Orange County]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=4$}\\ \hline 
+    \texttt{[[Kevin Clash] [/education/educational\_degree/people\_with\_this\_degree] [LGBT]]}\\
+    \texttt{[[Colombo] [/sports/sports\_position/players] [A Mighty Wind]]}\\
+    \texttt{[[Vibraphone] [/government/legislative\_session/members] [Milton Keynes Dons F.C.]]}\\
+    \texttt{[["Ryans Daughter"] [/film/film/language] [Malacca]]}\\
+    \texttt{[[United States Department of the Treasury] [/film/film/release\_date\_s] [Jurassic Park]]}\\
+    \texttt{[[Tomato] [/award/award\_nominee] [2 Fast 2 Furious]]}\\
+    \texttt{[[Harmonica] [/people/person/places\_lived] [Claire Danes]]}\\
+    \texttt{[[T. R. Knight] [/people/person/profession] [Male]]}\\
+    \texttt{[[Rakesh Roshan] [/film/actor/film] [Legal drama]]}\\
+    \texttt{[[Northrop Grumman] [/base/schemastaging/organization\_extra/phone\_number] [Talent show]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=5$}\\ \hline 
+    \texttt{[[John Wood] [/film/film/release\_date\_s] [Changeling]]}\\
+    \texttt{[[Gerry Conway] [/award/award\_ceremony/awards\_presented] [June Carter Cash]]}\\
+    \texttt{[[College of William and Mary] [/music/group\_member/membership] [Northampton Town F.C.]]}\\
+    \texttt{[[Nagesh] [/award/award\_category/winners] [T. Rajendar]]}\\
+    \texttt{[[Bryce Dallas Howard] [/film/actor/film] [Tarzan]]}\\
+    \texttt{[[UPN] [/organization/organization\_founder/organizations\_founded] [Travis Barker]]}\\
+    \texttt{[[The Sum of All Fears] [/award/award\_winner/awards\_won] [Game of Thrones]]}\\
+    \texttt{[[Ghent University] [/people/person/profession] [Khmer language]]}\\
+    \texttt{[[Nine Network] [/people/deceased\_person/place\_of\_death] [Jim Steinman]]}\\
+    \texttt{[[Hip hop music] [/base/marchmadness/ncaa\_basketball\_tournament/seeds] [Erykah Badu]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=6$}\\ \hline 
+    \texttt{[[Mandolin] [/film/film/written\_by] [Atlantic Ocean]]}\\
+    \texttt{[[Johann Wolfgang von Goethe] [/award/award\_category/winners] [Mrs. Parker]]}\\
+    \texttt{[[Alexander Golitzen] [/music/genre/parent\_genre] [Dysentery]]}\\
+    \texttt{[[Universal Motown Records] [/music/performance\_role/regular\_performances] [Psychology]]}\\
+    \texttt{[[Tina Turner] [/sports/sports\_league\_draft/picks] [Bryan Forbes]]}\\
+    \texttt{[[Carter Burwell] [/award/award\_nominee] [University College London]]}\\
+    \texttt{[[Snowboarding] [/base/biblioness/bibs\_location/country] [Howards End]]}\\
+    \texttt{[[Anthony Adverse] [/location/location/contains] [United States Dollar]]}\\
+    \texttt{[[Socialism] [/film/film\_subject/films] [Male]]}\\
+    \texttt{[[Salsa music] [/sports/professional\_sports\_team/draft\_picks] [Led Zeppelin]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=7$}\\ \hline 
+    \texttt{[[Perth Airport] [/education/educational\_degree/people\_with\_this\_degree] [Anna Faris]]}\\
+    \texttt{[[Suhasini Mani Ratnam] [/base/schemastaging/person\_extra/net\_worth] [Farmer-GB]]}\\
+    \texttt{[[Academy Award for Best Visual Effects] [/film/film/written\_by] [The Deer Hunter]]}\\
+    \texttt{[[Kenai Peninsula Borough] [/education/university/domestic\_tuition] [Linebacker]]}\\
+    \texttt{[[Dinner for Schmucks] [/sports/sports\_position/players] [The Shubert Organization]]}\\
+    \texttt{[[Bass guitar] [/sports/sports\_position/players] [Jonathan Demme]]}\\
+    \texttt{[[Chapel Hill] [/music/instrument/instrumentalists] [Hartlepool]]}\\
+    \texttt{[[Stanford University] [/music/record\_label/artist] [Miniseries]]}\\
+    \texttt{[[Spain] [/education/educational\_institution/students] [Nobel Prize in Literature]]}\\
+    \texttt{[[Maurice Gibb] [/award/award\_category/nominees] [Northampton]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=8$}\\ \hline 
+    \texttt{[[Lea Michele] [/film/film/featured\_film\_locations] [Salisbury]]}\\
+    \texttt{[[The Lovely Bones] [/award/award\_winning\_work/awards\_won] [Central European Time Zone-US]]}\\
+    \texttt{[[Pulmonary embolism] [/people/person/spouse\_s] [Adventure Film]]}\\
+    \texttt{[[Curb Your Enthusiasm] [/people/person/gender] [Montpellier HSC]]}\\
+    \texttt{[[Damon Lindelof] [/people/person/spouse\_s] [Jonathan Forte]]}\\
+    \texttt{[[Seattle] [/award/award\_winning\_work/awards\_won] [Entercom]]}\\
+    \texttt{[[Christine Baranski] [/sports/sports\_position/players] [Seeking a Friend]]}\\
+    \texttt{[[Working Girl] [/people/person/spouse\_s] [Imperial Japanese Army]]}\\
+    \texttt{[[Marriage] [/soccer/football\_team/current\_roster] [Accountancy]]}\\
+    \texttt{[[Nevada] [/people/person/spouse\_s] ["2002 NCAA Mens Division I Basketball Tournament"]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=9$}\\ \hline 
+    \texttt{[[John Broome] [/education/educational\_institution/students] [The Spiderwick Chronicles]]}\\
+    \texttt{[[Tom Ruegger] [/location/country/second\_level\_divisions] [58th Primetime Emmy Awards]]}\\
+    \texttt{[[Sepultura] [/award/award\_nominee] [Homicide: Life on the Street]]}\\
+    \texttt{[[The Prize] [/people/person/places\_lived] [Water polo]]}\\
+    \texttt{[[Ellen Pompeo] [/award/award\_winner/awards\_won] [Belarus national football team]]}\\
+    \texttt{[[Bachelor of Arts] [/music/performance\_role/regular\_performances] [1896 Summer Olympics]]}\\
+    \texttt{[[FC Shakhtar Donetsk] [/people/person/place\_of\_birth] [2004 Summer Olympics]]}\\
+    \texttt{[[Margot Kidder] [/film/actor/film] [The Mirror Has Two Faces]]}\\
+    \texttt{[[California Golden Bears football] [/film/film/produced\_by] [Simon Cowell]]}\\
+    \texttt{[[Alternative metal] [/people/person/profession] [New York City]]}\\
+    \hline 
+    \rowcolor[HTML]{EFEFEF} 
+    \textsc{$i_{d_z}=10$}\\ \hline 
+    \texttt{[[Cleopatra Records] [/sports/pro\_athlete/teams] [Soprano]]}\\
+    \texttt{[[Tara Reid] [/business/job\_title/people\_with\_this\_title] [Newspaper]]}\\
+    \texttt{[[Resident Evil] [/education/educational\_degree/people\_with\_this\_degree] [Shine]]}\\
+    \texttt{[[Battle of Britain] [/film/film/genre] [Psychology]]}\\
+    \texttt{[[Philips] [/music/genre/artists] [MTV Movie Award for Best Villain]]}\\
+    \texttt{[[Anarcho-punk] [/people/person/profession] [Navy Blue]]}\\
+    \texttt{[[Roger Daltrey] [/people/person/profession] [The Great Gatsby]]}\\
+    \texttt{[[Liverpool F.C.] [/film/film/other\_crew] [al-Qaeda]]}\\
+    \texttt{[[NCAA Mens Division I Basketball] [/music/instrument/instrumentalists] [Sinusitis]]}\\
+    \texttt{[[Clive Owen] [/education/university/local\_tuition] [72nd Academy Awards]]}\\
+    \hline
+\caption{Interpolation of each latent dimension for the RGVAE with $\delta=0.6$ and standard loss.}
+\label{annexA:ipdim95NoPermDelta}
+\end{longtable}

@@ -17,12 +17,12 @@
 \usepackage{layouts}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{multirow}
-\usepackage{pdfpages}
 \usepackage{graphics}
 \usepackage{graphicx}
-\usepackage{svg}
-\usepackage[T1]{fontenc}
 \usepackage{pdfpages}
+\usepackage[toc,page]{appendix}
+\usepackage{longtable}
+
 
 \setlength{\parindent}{3em}
 % \setlength{\parskip}{1em}
@@ -175,22 +175,23 @@ Dr Paul \textsc{Groth}\\
 
 \end{titlepage}
 
-\tableofcontents
 \newpage
-\listoffigures
-\listoftables
-\newpage
+\pagenumbering{roman}
 
+\section*{Acknowledgements}
+\newpage
 \section*{Abstract}
 % We generate Knowledge! \cite{kipf_contrastive_2020}
 
 This thesis aims to be a proof of concept for the potential of Variational Auto-Encoder on representation learning of real-world Knowledge Graphs (KG). Building on successful approaches in the field of molecular graphs, we experiment and evaluate the capabilities and limitation of our model, the relational graph Variational Auto-Encoder (RGVAE), characterized by its permuation invariant loss function. The impact of the modular choices, encoding though convolutions, graph matching and latent space prior, are analyzed and the added value compared. A common criteria in the filed of KGs is link prediction, the task of completing a corrupted triple. We rank the performance of the RGVAE on link prediction in the leaderboard of the two popular datasets FB15K-237 and WN18RR, which is led by embedding based models. To isolate causalities, a variational embedding based model and a RGVAE without latent space prior constrain are implemented. We conclude, that neither convolutions nor permutation invariance alter the scoring. The results show that for exception of the RGVAE with relaxed latent space, the RGVAE does not qualify as link predictor. Furthermore its complexity does not scale to the advantages over the much simpler embedding based solution with lower parameter count.
 Graph VAE on molecular data have shown promising results on interpolation of the latent space, an experiment where either the distance between the latent representation of two triples is linearly interpolated, or the full latent space is explored in a $95$\% confidence interval its distribution. On image data, VAE have been successful assigning each latent dimension to data characterising features. Both interpolation experiments show that the RGVAE learns to reconstruct the adjacency but fails to disentangle and assign the right node and edge attributes. The assumption of an uninformative latent representation is confirmed in the last experiment, for which we present a novel validation method for generated triples from the FB15K-237 dataset. The relation type-constrains of generated triples are filtered and matched with entity types. We observe that the rate of valid generated triples does vary little from the random threshold, while all generated triples are unseen in both train and test set. A comparison between different latent space priors via the $\delta$-VAE method, reveals insights in the behavior of the RGVAE's parameter distribution and its impact on the interpolation of the latent space. Finally we analyze the limitations of our approach compared to molecule generation and propose advanced solutions for successful representation learning of multi-relational KGs. 
 
-
+\tableofcontents
 \newpage
-% \section*{Notes}
-% \input{notes}
+\listoffigures
+\listoftables
+\newpage
+\pagenumbering{arabic}
 
 \section{Introduction}
 \input{sections/section1}
@@ -223,6 +224,19 @@ Graph VAE on molecular data have shown promising results on interpolation of the
 
 \newpage
 \printbibliography
+\newpage
+\renewcommand{\appendixname}{Annex}
+\renewcommand{\appendixtocname}{Annex}
+\renewcommand{\appendixpagename}{Annex}
+
+\begin{appendices}
+    \input{sections/appendixA.tex}
+    \newpage
+    \input{sections/appendixB.tex}    
+    \newpage
+    \input{sections/appendixC.tex}
+\end{appendices}
+
 \end{document}
 
 % \bibliographystyle{unsrt} % We choose the "plain" reference style

@@ -73,7 +73,7 @@ The main contribution of the VAE is the so called reparametrization trick. When 
     \label{fig:varinference}
 \end{figure}
 
-In \ref{fig:varinference} we see, that the true posterior $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ is intractable. Thus, we make the assumption that the prior to the decoder is Gaussian with an approximately diagonal covariance, which gives us the approximated posterior
+In figure \ref{fig:varinference} we see, that the true posterior $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ is intractable. Thus, we make the assumption that the prior to the decoder is Gaussian with an approximately diagonal covariance, which gives us the approximated posterior
 
 \begin{equation}
     \log q_{\phi}\left(\mathbf{z} \mid \mathbf{x}\right)=\log \mathcal{N}\left(\mathbf{z} ; \boldsymbol{\mu}}, \boldsymbol{\sigma}^{2} \mathbf{I}\right) .
@@ -197,7 +197,7 @@ For this thesis, we use the one-shot method, predicting each datapoint independe
 \subsection{Graph Matching}
 \label{ssec:graphmatch}
 % Intro to graph matching on sparse graphs.
-In this subsection we explain the term permutation invariance and present an algorithm to find the optimal permutation in order to match two graphs. We then derive the loss term of the graph VAE \ref{ssec:GVAE} applying the optimal matching matrix to the models prediction.
+In this subsection we explain the term permutation invariance and present an algorithm to find the optimal permutation in order to match two graphs. We then derive the loss term of the graph VAE applying the optimal matching matrix to the models prediction.
 
 \subsubsection{Permutation Invariance}
 
@@ -303,7 +303,7 @@ The core of the hungarian algorithm consist of four main steps, initial reductio
 \label{ssec3:GVAEloss}
 Coming back to our generative model, we now explain how the loss function needs to be adjusted to work with graphs and graph matching, which results in a permutation invariant graph VAE.
 
-The normal VAE maximizes the evidence lower-bound or, in a practical implementation, minimizes the upper-bound on negative log-likelihood. Using the notation of \ref{ssection:VAE} the graph VAE loss is
+The normal VAE maximizes the evidence lower-bound or, in a practical implementation, minimizes the upper-bound on negative log-likelihood. Using the notation of section \ref{ssection:VAE} the graph VAE loss is
 
 \begin{equation}
     \begin{array}{l}

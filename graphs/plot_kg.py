@@ -23,7 +23,7 @@ def plot_graph(data, plot_name, figsize, legend):
     # sns.set()
     sns.set_context("paper")
     # sns.set(rc={'figure.figsize':figsize})
-    palette = 'copper'            #['copper_r', 'BuPu'afmhot_r cool_r] https://medium.com/@morganjonesartist/color-guide-to-seaborn-palettes-da849406d44f
+    palette = 'summer'            #['copper_r', 'BuPu'afmhot_r cool_r] https://medium.com/@morganjonesartist/color-guide-to-seaborn-palettes-da849406d44f
 
     sns.set_theme(style="whitegrid")
 

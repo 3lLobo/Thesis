@@ -22,7 +22,7 @@ def plot_graph(data, metric, plot_name, figsize, legend):
     # sns.set()
     sns.set_context("paper")
     # sns.set(rc={'figure.figsize':figsize})
-    palette = 'copper'            #['copper_r', 'BuPu'afmhot_r cool_r] https://medium.com/@morganjonesartist/color-guide-to-seaborn-palettes-da849406d44f
+    palette = 'summer'            #['copper_r', 'BuPu'afmhot_r cool_r] https://medium.com/@morganjonesartist/color-guide-to-seaborn-palettes-da849406d44f
 
     sns.set_theme(style="whitegrid")
 
@@ -37,7 +37,7 @@ def plot_graph(data, metric, plot_name, figsize, legend):
     if not os.path.isdir(folder):
         os.makedirs(folder)
     # plt.savefig(folder + '{}.pgf'.format(plot_name))
-    plt.savefig(folder + '{}{}.png'.format(plot_name, '' if legend else '_wol'))
+    plt.savefig(folder + '{}{}.png'.format(plot_name, '' if legend else '_wol'), bbox_inches='tight')
 
 
 
@@ -49,11 +49,11 @@ if __name__ == "__main__":
     pd.set_option('display.max_colwidth', None)
 
     col_names = ['hits@1','hits@10','hits@3','mrr']
-    temp_names =['']
-    df_list = list()
-    df_plot = pd.DataFrame()
     legend = True
-    for ds in ['wn',]:
+    for ds in ['fb', 'wn']:
+        temp_names =['']
+        df_list = list()
+        df_plot = pd.DataFrame()
         if ds == 'wn':
             legend = False
         plot_name = 'lp_{}'.format(ds)

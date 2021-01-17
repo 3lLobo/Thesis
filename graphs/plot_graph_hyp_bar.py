@@ -4,7 +4,6 @@ import os
 from matplotlib.pyplot import title
 import seaborn as sns
 import pandas as pd
-from seaborn import palettes
 
 
 
@@ -18,17 +17,20 @@ def plot_graph(data, metric, plot_name, figsize):
     palette = 'summer'            #['copper_r', 'BuPu'afmhot_r cool_r] https://medium.com/@morganjonesartist/color-guide-to-seaborn-palettes-da849406d44f
     fig, ax = plt.subplots(figsize=figsize)
     if metric == 'mrr':
-        sns.barplot(ax=ax, data=data, y=metric, x="beta", palette=palette)
-        plt.xlabel('Beta')
+        sns.set_theme(style="whitegrid")
+
+        g = sns.catplot(data=data, kind="bar", x='beta', y=metric, ci='sd', palette=palette, height=figsize[1], aspect=figsize[0]/figsize[1])
+        g.despine(left=True)
+        g.set(ylim=(0, .1))
+
+
+
+        # sns.barplot(ax=ax, data=data, y=metric, x="beta", palette=palette)
+        plt.xlabel(r'$\beta$')
         plt.ylabel('MRR')
-        plt.ylim=(0, .1)
-    elif metric == 'loss':
-        sns.lineplot(ax=ax, data=data, y=metric, x="epoch", hue='beta', palette=palette)
-        plt.legend(loc='upper right', title=r'$\beta$')
-        plt.xlabel('Epoch')
-        plt.ylabel('ELBO')
+        # plt.ylim(0, .1)
     # plt.title(t_name.replace('_', ' ').title())
-    plt.show()
+    # plt.show()
     folder = os.path.dirname(os.path.abspath(__file__)) + '/plots/'
     if not os.path.isdir(folder):
         os.makedirs(folder)
@@ -46,12 +48,10 @@ if __name__ == "__main__":
 
     textwidth_in = 6.69423
     figsize = [textwidth_in * 0.8, textwidth_in * .5]
-    figsize = [textwidth_in * 0.9, textwidth_in * .7]
     for ds in ['fb', 'wn']:
-        for metric in ['loss']:
+        for metric in ['mrr']:
 
             plot_name = 'beta_{}_{}'.format(metric, ds)
-            
             beta_list = [0,1,10,100]
             df_list = list()
             for beta in beta_list:
