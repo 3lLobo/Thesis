@@ -24,14 +24,23 @@
 \usepackage{longtable}
 \usepackage{blindtext}
 
+% bib style
+% \usepackage[maxbibnames=99]{biblatex}
 
 \setlength{\parindent}{3em}
 % \setlength{\parskip}{1em}
 \newcommand{\red}[1]{{\color{red}{#1}}}
 
-\RequirePackage[backend=bibtex,style=nature]{biblatex}
-
+\RequirePackage[backend=bibtex,style=nature,url=false,eprint=false,maxnames=1,isbn=false, issn=false, doi=false]{biblatex}
 \addbibresource{fullrefs.bib}
+\AtEveryBibitem{%
+  \clearfield{note}%
+}
+\AtEveryBibitem{%
+  \clearlist{language}%
+}
+\DeclareFieldFormat*{title}{#1}
+\DeclareFieldFormat[book]{title}{#1}
 
 \begin{document}
 
@@ -233,6 +242,7 @@ Graph VAE on molecular data have shown promising results on interpolation of the
 % \input{issues}
 
 \newpage
+
 \printbibliography
 \newpage
 \renewcommand{\appendixname}{Annex}
@@ -240,11 +250,9 @@ Graph VAE on molecular data have shown promising results on interpolation of the
 \renewcommand{\appendixpagename}{Annex}
 
 \begin{appendices}
-    \input{sections/appendixA.tex}
+    \input{sections/appendixC.tex}
     \newpage
     \input{sections/appendixB.tex}    
-    \newpage
-    \input{sections/appendixC.tex}
 \end{appendices}
 
 \end{document}
