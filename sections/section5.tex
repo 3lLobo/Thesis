@@ -1,6 +1,6 @@
 % Experiments
 
-This section presents the experiments and results aimed at evaluating our proposed graph generative model. First we run a grid-search on the hyperparameter space to find the optimal configuration of the RGVAE. We use the ELBO and MRR as evaluation metric. The best configurations are used to perform link prediction. Here we compare the model performance with vs. without convolutions. We use the VDistMult as control model for link prediction. Finally we run two proof-of-concept experiments. The first generating triples and filter on a entity class constraining relation, thus we get an insight of how much percent of the generated triples are valid. Secondly we analyze the results of a RGVAE trained on subgraphs with $n=10$. For the experiments we use two multi-relational KG datasets.
+This section presents the experiments and results aimed at evaluating our proposed graph generative model. First we run a grid-search on the hyperparameter space to find the optimal configuration of the RGVAE. We use the ELBO and MRR as evaluation metric. The best configurations are used to perform link prediction. Here we compare the model performance with MLP versus GCN encoder. We use the VDistMult as control model for link prediction. Finally we run two proof-of-concept experiments. The first generating triples and filter on a entity class constraining relation, thus we get an insight of how much percent of the generated triples are valid. Secondly we analyze the results of a RGVAE trained on subgraphs with $n=10$. For the experiments we use two multi-relational KG datasets.
 
 % We covered link and node prediction and compared those to SOTA scores. Further we ran experiments on investigating the coherence of the reproduced graph structure. Lastly we measured the adherence of our model to the KG's underlying syntax.
 
@@ -58,13 +58,13 @@ For the hyperparameter tuning of $\beta \in [0,1,10,100]$ we chose significant v
     \centering
     \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=.9\linewidth]{graphs/plots/beta_loss_fb.png}
+      \includegraphics[width=.9\linewidth, keepaspectratio]{graphs/plots/beta_loss_fb.png}
       \caption{FB15K-237}
       \label{fig5:betafb}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=.9\linewidth]{graphs/plots/beta_loss_wn.png}
+      \includegraphics[width=.9\linewidth, keepaspectratio]{graphs/plots/beta_loss_wn.png}
       \caption{WN18RR}
       \label{fig5:betawn}
     \end{subfigure}
@@ -97,13 +97,13 @@ Especially on the FB15k-237 dataset the $\beta = 0$ configuration converges to a
   \centering
   \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[height=.5\textwidth, keepaspectratio]{graphs/plots/beta_mrr_fb.png}
+    \includegraphics[height=.6\textwidth, keepaspectratio]{graphs/plots/beta_mrr_fb.png}
     \caption{FB15K-237}
     \label{fig5:betamrrfb}
   \end{subfigure}%
   \begin{subfigure}{.5\textwidth}
     \centering
-    \includegraphics[height=.5\textwidth]{graphs/plots/beta_mrr_wn.png}
+    \includegraphics[height=.6\textwidth, keepaspectratio]{graphs/plots/beta_mrr_wn.png}
     \caption{WN18RR}
     \label{fig5:betamrrwn}
   \end{subfigure}
@@ -132,22 +132,21 @@ Lastly, we evaluate the models hidden dimensions $d_h$ and its influence on the 
  
  Due to its sparse graph computation, the RGVAE takes about 7 days to evaluate link prediction on the full test set and even 3 days when prediction tasks run parallel on a node with $4$ GPUs. Since the exemplary link prediction during experimenting with different hyperparameter already gave us an idea of the mediocre performance of our model, we chose to spare computation time and power by running link prediction on a randomly drawn one-third of the complete test set. Each run is repeated three times using a different random seed.
 
-The results are visualized in figure \ref{fig5:lp_final}. We chose a visualization over a table, to emphasize the observed differences between encoders and datasets. For the reason of the mentioned random subset of the test set, are these results not suitable for academically valid comparisons with models trained on the full testset. Note that the figures are scales and to a range $[0,10]$ while all metrics have a maximum of $1$.
+The results are visualized in figure \ref{fig5:lp_final}. We chose a visualization over a table, to emphasize the observed differences between encoders and datasets. For the reason of the mentioned random subset of the test set, are these results not suitable for academically valid comparisons with models trained on the full testset. Note that the figures are scales to a range $[0,0.1]$ while all metrics have a maximum of $1$. The dotted line represents the baseline score of an untrained RGVAE with MLP encoder.
 
-Comparing a MRR of $0.08$ to the DistMult score or $0.4$ our model does not perform competitively on link prediction tasks.
+Comparing a MRR of $0.08$ to the DistMult score or $0.3$ our model does not perform competitively on link prediction tasks.
 
 % Better than random?? I hope so.
 
-Graph convolutions do not yield an advantage over the basemodel. In fact, the RGVAE with convolutions even scores slightly worse. 
+Graph convolutions do not yield an advantage over the MLP encoder. In fact, the RGVAE with GCN encoder even scores slightly worse. 
 
 %  FOR Conclusion: this might be because of the implementation of stacking the matrices.
-The model scores about three times better on the FB15k-237 dataset than on WN18RR. FB15k-237 is a richer dataset with more triples and and a more balanced ratio of entities to relations. WN18RR operates on only 18 relations, what makes the relation most crucial when completing a triple. The architecture of the RGVAE puts twice the emphasis entities, described by the adjacency and the node feature matrices, while the relation is only represented by the overly sparse edge attribute matrix. Thus, we could conclude that our model learns to predict based on the hidden types and topics of the entities. All possible conclusions for this are discussed in chapter \ref{sec:discus}. Relevant for this section is solely, that we chose the FB15k-237 dataset to investigate further, how well the RGVAE's grasps the underlying entity types and triple topics.   
+The model scores about three times better on the FB15K-237 dataset than on WN18RR. FB15k-237 is a richer dataset with more triples and and a more balanced ratio of entities to relations. WN18RR operates on only 18 relations, what makes the relation most crucial when completing a triple. The architecture of the RGVAE puts twice the emphasis entities, described by the adjacency and the node feature matrices, while the relation is only represented by the overly sparse edge attribute matrix. Thus, we could conclude that our model learns to predict based on the hidden types and topics of the entities. All possible conclusions for this are discussed in chapter \ref{sec:discus}. Relevant for this section is solely, that we chose the FB15K-237 dataset to investigate further, how well the RGVAE's grasps the underlying entity types and triple topics.   
 
 %  REASON: fb has more relations, is a more complete KG. wn only 12 relations and more entities. Model emphasizes entities (adj and node features), relations may be less relevant, wn is more about the relation (same/ not the same). This indicates that our model grasps the hidden types and topics of the FB entities.
 
 
  \begin{figure}[H]
-  \centering
   \begin{subfigure}{.5\textwidth}
     \left
     \includegraphics[height=.5\textwidth, keepaspectratio]{graphs/plots/lp_fb.png}
@@ -156,11 +155,11 @@ The model scores about three times better on the FB15k-237 dataset than on WN18R
   \end{subfigure}%
   \begin{subfigure}{.5\textwidth}
     \right
-    \includegraphics[height=.5\textwidth]{graphs/plots/lp_wn_wol.png}
+    \includegraphics[height=.5\textwidth, keepaspectratio]{graphs/plots/lp_wn_wol.png}
     \caption{WN18RR}
     \label{fig5:lpwn}
   \end{subfigure}
-  \caption{Link prediction results in MRR, Hits@1, Hits@3 and Hits@10 for RGVAE and RGCVAE trained on the full trainset of each dataset.}
+  \caption{Link prediction scores of the RGVAE. Dotted line represents MRR baseline of an untrained model. }
   \label{fig5:lp_final}
 \end{figure}
 
@@ -229,7 +228,7 @@ While the results of the relaxed RGVAE might seem promising, Distmult is a much 
 Furthermore we examine the influence of the permutation invariant loss function described in \ref{ssec4:loss}. During training and subset link prediction no significant difference was observed between the RGVAE with versus without matching target and prediction graph. Yet, two observations draw our attention, namely:
 
 \begin{itemize}
-  \item The amount of nodes permuted per batch converges during training from $100$\% to exactly $60$%.
+  \item The amount of nodes permuted per batch converges during training from $100$\% to exactly $80$%.
   \item The RGVAE with permutation invariant loss function learns to predict many variations of adjacency matrix while the standard model predicts similar to the target.
 \end{itemize}
 
@@ -245,8 +244,20 @@ Finally we analyze the impact of permutation invariance on the experiment of gen
 % Graph of permutation during training.
 % loss with vs without 
 
+
 \begin{figure}
-  \caption{(a) Validation loss RGVAE with vs. w/o permutation invariant loss function. (b) Percentage of permuted nodes during training.}
+  \right
+  \begin{subfigure}{.55\textwidth}
+    \left
+    \includegraphics[height=.5\textwidth, keepaspectratio]{graphs/plots/permute_loss.png}
+    \label{fig5:permELBO}
+  \end{subfigure}%
+  \begin{subfigure}{.55\textwidth}
+    \left
+    \includegraphics[height=.5\textwidth]{graphs/plots/permute_permutation_wol.png}
+    \label{fig5:permRate}
+  \end{subfigure}
+  \caption{RGVAE validation loss (a) and rate of permuted nodes (b) during training.}
   \label{fig5:permInv}
 \end{figure}
 
@@ -325,7 +336,7 @@ For this experiment we generate triples until $10e^5$ contain the key type. Thos
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=.25\textwidth, keepaspectratio]{graphs/plots/kg_all.png}
+  \includegraphics[height=.3\textwidth, keepaspectratio]{graphs/plots/kg_all.png}
   \caption{Accuracy of generating valid triples.}
   \label{fig5:syntax}
 \end{figure}
@@ -429,7 +440,7 @@ A difference between standard, appended in the the annex \ref{annexA:ipbtw2Delta
 \end{table}
 
 % show parameters if different
-Finally, we plot the parameter values, both weith and bias to visualize the collapsing decoder. The values are logscaled and plotter per layer number of encoder and decoder as described in table \ref{tab4:archcompare}. The parameters of the decoder behave equally for both $\delta$ values. All values of the 3rd layer conglomerate around zero revealing a bottleneck of the information stream in the decoder. This indicates that the problem of collapsing decoder was not solved by the addition of the new parameter. The parameter distribution for the RGVAE with standard loss are appended in the annex \ref{annexC:deltaParamsP0} and \ref{annexC:normParamsP0}. The impact of the standard los function is a more narrow distributed decoder. Note, the different scales of the value axis, which is $10^2$ larger for  $\delta = 0.6$.
+Finally, we plot the parameter values, both weith and bias to visualize the collapsing decoder. The values are logscaled and plotter per layer number of encoder and decoder as described in table \ref{tab4:archcompare}. The parameters of the decoder behave equally for both $\delta$ values. All values of the 3rd layer conglomerate around zero revealing a bottleneck of the information stream in the decoder. This indicates that the problem of collapsing decoder was not solved by the addition of the new parameter. The parameter distribution for the RGVAE with standard loss are appended in the annex \ref{annexC:deltaParamsP0} and \ref{annexC:normParamsP0}. The impact of the standard loss function is a more narrow distributed decoder. Since the GCN encoder has different layers, a direct parameter comparison to the MLP encoder is not possible, yet we observe the same parameter distribution for the decoder. Note in figure \ref{fig5:deltaParams} the different scales of the value axis, which are $10^2$ larger for $\delta = 0.6$ than for $\delta = 0$.
 
 \begin{figure}[H]
   \centering

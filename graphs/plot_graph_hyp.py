@@ -46,7 +46,6 @@ if __name__ == "__main__":
 
     textwidth_in = 6.69423
     figsize = [textwidth_in * 0.8, textwidth_in * .5]
-    figsize = [textwidth_in * 0.9, textwidth_in * .7]
     for ds in ['fb', 'wn']:
         for metric in ['loss']:
 

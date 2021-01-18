@@ -1,8 +1,6 @@
 import matplotlib
 import matplotlib.pylab as plt
 import os
-from matplotlib.pyplot import legend, title
-from numpy.core.defchararray import array
 import seaborn as sns
 import pandas as pd
 import itertools
@@ -11,7 +9,7 @@ import numpy as np
 
 
 
-def plot_graph(data, metric, plot_name, figsize, legend):
+def plot_graph(data, baseline, plot_name, figsize, legend):
     """
     Plot the input data to latex compatible .pgg format.
     """
@@ -29,6 +27,7 @@ def plot_graph(data, metric, plot_name, figsize, legend):
     g = sns.catplot(data=data, kind="bar", x='model', y='score', hue="Metric", ci='sd', palette=palette, legend=legend, legend_out=True, height=figsize[1], aspect=figsize[0]/figsize[1])
     g.despine(left=True)
     g.set(ylim=(0, .1))
+    g.map(plt.axhline, y=baseline, color='purple', linestyle='dotted')
     # plt.legend(loc='upper right', title='Metric')
     plt.xlabel('')
     plt.ylabel('Score')
@@ -54,8 +53,10 @@ if __name__ == "__main__":
         temp_names =['']
         df_list = list()
         df_plot = pd.DataFrame()
+        baseline = 0.006
         if ds == 'wn':
             legend = False
+            baseline = 0.0015
         plot_name = 'lp_{}'.format(ds)
         textwidth_in = 6.69423
         figsize = [textwidth_in * 0.8, textwidth_in * .5]
@@ -74,7 +75,7 @@ if __name__ == "__main__":
             scale = .5 if ds == 'fb' else .6
             for n in [0, scale,-scale]:
                 df_plot['score'] = np.array(df_1.stack([0]).to_list()) + n*std
-                df_plot['model'] = [model] * len(df_plot)
+                df_plot['model'] = ['RGVAE' if model=='GVAE' else 'cRGVAE'] * len(df_plot)
                 df_plot['Metric'] = col_names
                 df_list.append(df_plot.copy())
             
@@ -87,4 +88,4 @@ if __name__ == "__main__":
         # df_plot.mrr = df_plot.mrr * 500
 
         # df2.to_csv('beta_plot.csv')
-        plot_graph(df_plot, col_names, plot_name, figsize, legend)
+        plot_graph(df_plot, baseline, plot_name, figsize, legend)
