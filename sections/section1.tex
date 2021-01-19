@@ -1,9 +1,10 @@
 
 % Here comes a beautiful introduction. %Promise!
 
-To begin with, we should clarify the intended ambiguity of this work's title. One could argue, that we live in times of the fastest advances in science and technology in the history of humanity, therefore making us the \textit{Knowledge Generation}. While we continuously keep researching and accumulating knowledge, we have historically not been willing to share our knowledge with any other species in this Universe. All scientific milestones are from us, for us. 
+To begin with, we shall clarify the intended ambiguity of this work's title. Before approaching the question behind this thesis in the context of Representational Learning (RL), we would like to present it from a philosophical point of view of AI safety and potential.
+One could argue, that we live in times of the fastest advances in science and technology in the history of humanity, therefore making us the \textit{Knowledge Generation}. While we continuously keep researching and accumulating knowledge, we have historically not been willing to share our knowledge with any other species in this Universe. All scientific milestones are from us, for us. 
 
-The rise of Artificial Intelligence (AI) marked a turning point of this tradition. For the first time we invest in sharing our knowledge and with systems which can act on superhuman dimension. While machine learning models might not be considered a species, they have in fact beaten human intelligence in the game GO \cite{silver_mastering_2017}. This is not only seen as progress but also as danger. The world's richest man, Elon Musk, both build his fortune on AI and respects it as humanity's biggest risk. 
+The rise of AI marked a turning point of this tradition. For the first time we invest in sharing our knowledge and with systems which can act on superhuman dimension. While machine learning models might not be considered a species, they have learned to drive our cars and in fact beaten human intelligence in the game GO \cite{silver_mastering_2017}. This is not only seen as progress but also as danger. The world's richest man, Elon Musk, both build his fortune on AI and respects it as humanity's biggest risk. 
 
 \begin{figure}[H]
     \centering
@@ -26,12 +27,9 @@ Closing the circle to the ambiguity of the title and relating to the popular con
 
 \subsection{Motivation}
 
-Turning away from philosophy, we introduce this thesis in scientific context. A key area of AI is representation learning, where the model learns to identify and disentangle causalities and underlying features of the data. Understanding the semantics of the data is specifically useful for unsupervised learning. 
-
-
+A key area of AI is RL, where the model learns to identify and disentangle characteristics and features of the data. Understanding the semantics of the data is specifically important for unsupervised learning of generative models. 
 % computer vision
 The task of generating data has been widely explored for images. Computer vision has reached a point where a simple image can be semantically segmented, where objects can be detected and classified and even relations between entities inferred \cite{kipf_contrastive_2020}.
-
 
 % molecular graphs
 Advances in the parallel field of graph generation have received less attention, yet showed promising results. Data stored as a graph has a high density of information and rich semantics, which makes it attractive for variational inference. The recent success of Simonovsky et al. \cite{simonovsky_graphvae_2018} on the generation and completion of molecules represented in graph structure, initially inspired our research. Next to molecules, graphs can be used to store knowledge. While real world Knowledge Graphs (KG) have a far higher complexity than molecule graphs, the proposed generative model, Variational Auto-Encoder (VAE) also has proven its capacity to learn from huge datasets with high variance. Inspired by Simonovsky work and motivated by the vision of generating knowledge, we explore the possibilities and limitation of KG generation with VAEs.
@@ -40,7 +38,9 @@ Advances in the parallel field of graph generation have received less attention,
 
 \subsection{Expected Contribution}
 
-The main contributions, which we anticipate for this thesis are firstly the proof of concept that a graph VAE can capture, disentangle and reproduce the underlying semantics of a real world KG. While Simonovsky used small subgraphs with multiple edges, we proof our hypothesis on  generating the smallest possible graph of two nodes, also representable as single triple. The VAE is tested and evaluated in several experiments, including link prediction, latent space interpolation and accuracy of generating valid triples.
+The main contributions of this thesis are threefold. The main objective is to proof the hypothesis that a graph VAE can capture, disentangle and reproduce the underlying semantics of a real world KG, secondly. Further we contribute with a novel implementation of a graph matching algorithm and a validation method for generated triples. 
+
+In Simonovsky \cite{simonovsky_graphvae_2018} work, small subgraphs with multiple edges are used to represent molecule graphs. In contrast we proof the hypothesis by generating the smallest possible graph of two nodes, also representable as single triple. The VAE is tested and evaluated in several experiments, including link prediction, latent space interpolation and accuracy of generating valid triples.
 % Proof of concept KGVAE
 
 
@@ -48,7 +48,7 @@ The main contributions, which we anticipate for this thesis are firstly the proo
 We compare our results to related methods in the filed of KGs and investigate the impact of different hyperparameter. The main focus is be on the influence of the graph matching loss function, the encoding through graph convolutions and stochastic inference. Further, we aim to mimic the success of to molecule generation and will therefore continuously point out similarities and differences to our work.
 
 % Implementation of graph matching in batches
-On a lower level, we hope to contribute with our implementation of the max-pooling graph matching algorithm for tensor batches. While the algorithm has been cited and implemented numerous times, a working implementation, compatible with deep learning tasks, has to the best of our knowledge not yet been published.  
+On a lower level, we hope to contribute with our implementation of Cho's \textit{et al.} max-pooling graph matching algorithm for tensor batches. While the algorithm has been cited and implemented numerous times, a working implementation, compatible with deep learning libraries, has to the best of our knowledge not yet been published.  
 
 % Method for syntax cohearence of generated triples from real world KG
 Lastly we introduce a high-level method for evaluating the validity of generated data, which compares the type constrain of the generated triple's predicate with its entity types and reports accuracy. This is made possible by expanding the existing dataset FB15K-237 with entity types from its original KG Freebase. While this scoring method is error prone, it does give an insight into the level representational potential of the model and the syntax coherence of the generated triples. Future work can use this evaluation method to track progress and compare to the baseline. 

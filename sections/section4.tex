@@ -307,7 +307,7 @@ Finally, the metrics for link prediction are the mean reciprocal rank (MRR) of t
 \label{ssec4:vdistm}
 
 % why do we implement it, which variation
-In the context of link prediction, we implement control model for better interpretability of our results. From the wide range of embedding based models, DistMult reports both good results as well as an efficient architecture. Its bilinear property aligns with the permutation invariance of the RGVAE. Based the original model we implement a variational version of DistMult to isolate the effect of variational inference on multi-relational link prediction.
+In the context of link prediction, we implement control model for better interpretability of our results. From the wide range of embedding-based models, DistMult reports both good results as well as an efficient architecture. Its bilinear property aligns with the permutation invariance of the RGVAE. Based the original model we implement a variational version of DistMult to isolate the effect of variational inference on multi-relational link prediction.
 
 % architecture link to embed
 The DistMult encoder has a linear embedding layer for both sets of entities and relations. The embedded or latent representation is passed through the bilinear scoring function, which is equation \ref{eq2:distmult}. During training the model scores the triples in the training set among a number of corrupted triples. Loss function and optimizer are tunable hyperparameters. The optimal hyperparameter settings for the FB15k-237 dataset are published in Ruffellini \textit{et al.} \cite{ruffinelli_you_2019} and will be the used for our link prediction experiment.
