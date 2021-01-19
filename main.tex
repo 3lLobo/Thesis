@@ -44,6 +44,11 @@
 \DeclareFieldFormat*{title}{#1}
 \DeclareFieldFormat[book]{title}{#1}
 
+%%% emoji sun
+\usepackage{scalerel,xparse}
+\NewDocumentCommand\emojisun{}{
+    \includegraphics[scale=0.11]{data/images/sun.png}
+}
 
 %%% Abstract settings
 
@@ -62,7 +67,6 @@
 \oldabstract}
 {\oldendabstract}
 \makeatother
-
 
 
 \begin{document}
@@ -227,7 +231,8 @@ Graph VAE on molecular data have shown promising results on interpolation of the
 
 \renewcommand{\abstractname}{Acknowledgements}
 \begin{abstract}
- Thanks Mum!
+%  Thanks Mum!
+  \input{sections/thx.tex}
 \end{abstract}
 
 \newpage
