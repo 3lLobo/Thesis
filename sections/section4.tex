@@ -1,13 +1,13 @@
-This section describes the methods used in the experiments of this thesis. We will begin with data formatting and preprocessing, then the presentation the model, mainly the encoder and decoder and their variations. Moving on we explain our implementation of graph matching the loss function of the model and its evaluation metrics. To the end of this chapter we describe the link prediction pipeline which is the main experiment to evaluate our model. Our implementation is written in Python using PyTorch, a high-performance deep-learning library \cite{paszke_pytorch_2019}. All experiments are aimed to be fully reproducible and the model meant to be used in future work, thus the code is openly available on Github \footnote{\url{https://github.com/INDElab/rgvae}}.
+This section describes the methods used in the experiments of this thesis. We will begin with data formatting and preprocessing, then the presentation of the model, mainly the encoder and decoder and their variations. Moving on we explain our implementation of graph matching the loss function of the model and its evaluation metrics. To the end of this chapter we describe the link prediction pipeline which is the main experiment to evaluate our model. Our implementation is written in Python using PyTorch, a high-performance deep-learning library \cite{paszke_pytorch_2019}. All experiments are aimed to be fully reproducible and the model meant to be used in future work, thus the code is openly available on Github: \footnote{\url{https://github.com/INDElab/rgvae}}
 
 \subsection{Knowledge graph data}
 All our presented methods will operate on KG data. While data from other graph domains is possible, this work focuses solely on datasets in triple format. We will explain the sparse graph representation, which is the input format for our model and how to preprocess the original KG triples to match that format.
 
-\subsubsection{Sparse representation}
+\subsubsection{Graph Representation}
 
 % The first step in our pipeline is the representation of the KG in tensor format. In order to represent the graph structure we use an adjacency matrix $A$ of shape $n\times n$ with $n$ being the number of nodes in our graph. The edge attribute or directed relations between the nodes are represented in the matrix $E$ of shape $n\times n\times d_E$ with $d_E$ being the number of edge attributes. Similarly for node attributes we have the matrix $F$ of shape $n\times d_N$ with $d_N$ number of node attributes. The input graph can have less nodes than the maximum $n$ but not more. The diagonal of the adjacency matrix is filled with $1$ if the indexed node exists, and with $0$ otherwise. The number and encoding of the attributes must be predefined and cannot be changed after training. This way we can uniquely represent a KG.
 
-In this work, we opt for the sparse graph representation $G(A,E,F)$, where $A$ denotes the adjacency matrix, $E$ the edge feature matrix and $F$ the node feature matrix. This allows models architectures as discussed in section \ref{ssec:GVAE}. The graph is binary and each matrix is stored in a separate tensor.
+In this work, we opt for the graph representation $G(A,E,F)$, where $A$ denotes the adjacency matrix, $E$ the edge feature matrix and $F$ the node feature matrix. This allows models architectures as discussed in section \ref{ssec:GVAE}. The graph is binary and each matrix is stored in a separate tensor.
 
 % adjacency matrix
 The adjacency matrix $A$ takes the shape $(n\times n)$ with $n$ being the number of nodes in our graph/subgraph. While most of previous work would only allow edges on the upper triangular adjacency matrix and fill the diagonal with ones, we chose a less constrained representation, which we assume is a better fit for representing KGs. In particular, we allow self-loops, meaning a triple where object and subject are the same entity and our relations are directed and can be inverted. Thus $A$ can have a positive signal at any position $A_{i,j}$  $i,j \in \mathbb{R}^{n \times n}$, indicating a directed edge between node of index $i$ and node of index $j$, while $A_{i,j}$ differs from $A_{j,i}$.
@@ -16,11 +16,11 @@ The adjacency matrix $A$ takes the shape $(n\times n)$ with $n$ being the number
 The edge attribute matrix $E$ takes the shape $(n\times n\times d_e)$ with $d_e$ being the number of unique entities in our dataset. For each possible edge in the adjacency matrix we have a one hot encoded vector pointing to the unique relation in the dataset. Stacking these vectors leads to the three dimensional matrix $E$.
 
 % node attribute matrix
-The shape of node attributes matrix $F$ is $(n\times d_e)$ with $d_e$ being the number of node attributes describing the nodes. Considering that we will split the KG in subgraphs, we use the entity index as node attribute, making it possible to assign every node in a subgraph to the entity in the full KG. Thus, the number of node attributes $d_e$ equals the number unique entities in our dataset. Again the node attributes are one hot encoded vectors, which stacked result in the two dimensional $F$ matrix.
+The shape of node attributes matrix $F$ is $(n\times d_e)$ with $d_e$ being the number of node attributes describing the nodes. Considering that we will split the KG in subgraphs, we use the entity index as node attribute, making it possible to assign every node in a subgraph to the entity in the full KG. Thus, the number of node attributes $d_e$ equals the number unique entities in our dataset. Again the node attributes are one hot encoded vectors, which concatenated result in the two dimensional $F$ matrix.
 
 
 \subsubsection{Preprocessing}
-Our datasets consist of three tab separated value files full of triples for training, validation and testing. The preprocessing steps do not only account for generating subgraphs in the right format, but also ensure valuable research by withholding the triples from the test set until the final run.
+Our datasets consist of three tab separated value files full of triples for training, validation and testing. The preprocessing steps convert the triples to subgraphs $G(A,E,F)$ and during postprocessing back into triple format as well as a human readable translation. Best practices of research are followed by withholding the test set until the final run.
 
 % set of entities, set of relations 
 % triple to graph
@@ -33,17 +33,17 @@ From all three sets, we create a set of all occurring entities and similar set f
 Further we create two dictionaries, \textit{head} and \textit{tail} which for all occurring subject and relation combination, contain all entities which would complete it to a real triple in our dataset (similar for all relation and object combinations). This will allows us to filter true triples, which reduces the score bias for link prediction and evaluates the ratio of unseen triples for graph generation. 
 
 %  triple 2 graph
-The final step of preprocessing is a function, which takes a batch of numerical triples and converts them to a batch of binary, multidimensional tensors $A$, $E$ and $F$. While this might sound easy for only one triple per graph, it proves more complex for graphs with $n>2$ facing exemption cases such as self loops or an entity occurring in two triples. We solve this by creating a separate set for head and tail entities, then storing the indices of both in a list, starting with the subject set and finally using this list as keys for a dictionary with values in the range to $n$. In both edge cases, this results in an adjacency matrix with a rank lower than $n$. A similar approach, with less edge cases to consider, is used to apply the inverted translation from tensor matrix to triple.
+The final step of preprocessing is a function, which takes a batch of numerical triples and converts them to a batch of binary, multidimensional tensors $A$, $E$ and $F$. While this might sound easy for only one triple per graph, it proves more complex for graphs with $n>2$ facing exemption cases such as self loops or an entity occurring in two triples. We solve this by creating a separate set for head and tail entities, then storing the indices of both in a list, starting with the subject set and finally using this list as keys for a dictionary with values in the range to $n$. In both edge cases, this results in an adjacency matrix with a rank lower than $n$. A similar approach, with fewer edge cases to consider, is used to convert the tensor matrices back to triples.
 
 % Graph embeddings? unsupervised approach
 
 \subsection{RGVAE}
-The principle of a graph VAE has been explained in section \ref{ssec:GVAE}, which also covers the foundation of our model, the RGVAE. Therefore we will focus on the implementation as well as parameter and hyperparameter choice. Since this work is meant to be a prove of concept rather than aimed at outperforming the state of the art, our model is kept as simple as possible and only as complex as necessary. Our approach is module based for both experiment pipeline and model, meaning independence between sequential modules and compatibility with parallel modules. For the encoder we implemented two variations, a fully connected and a convolutional, while for the decoder we opted for a single fully connected network.
+The principle of a graph VAE has been explained in section \ref{ssec:GVAE}, which also covers the foundation of our model, the RGVAE. Therefore we will focus on the implementation as well as parameter and hyperparameter choice. Since this work is meant to be a proof of concept rather than aimed at outperforming the state of the art, our model is kept as simple as possible and only as complex as necessary. Our approach is modular for both experiment pipeline and model, meaning independence between sequential modules and compatibility with parallel modules. For the encoder we implemented two variations, a fully connected and a convolutional, while for the decoder we opted for a single fully connected network.
 %  just explain the code
 
 \subsubsection{Initialization}
 
-The RGVAE is initialized with a set of hyperparameter, which define the input shape. Table \ref{tab:RGVAEhyp} shows a complete list of those parameters and their default values. It is left to mention that we use the Xavier uniform initialization with a gain of $0,01$ to initialize the parameters \cite{glorot2010understanding}.
+The RGVAE is initialized with a set of hyperparameters, which define the input shape. Table \ref{tab:RGVAEhyp} shows a complete list of those parameters and their default values. It is left to mention that we use the Xavier uniform initialization with a gain of $0.01$ to initialize the parameters \cite{glorot2010understanding}.
 
 \begin{table}[H]
 \centering
@@ -63,7 +63,7 @@ The RGVAE is initialized with a set of hyperparameter, which define the input sh
     $encoder$ & \multicolumn{1}{c|}{\textbf{MLP}}  & Choice of encoder architecture  \\
     \hline
     \end{tabular}
-    \caption{The initial hyperparameter of the RGVAE with default value and description.}
+    \caption{The initial hyperparameters of the RGVAE with default value and description.}
     \label{tab:RGVAEhyp}
 \end{table}
 
@@ -79,17 +79,17 @@ The RGVAE is initialized with a set of hyperparameter, which define the input sh
 % \\Discretization of prediction
 
 % MLP
-The prove-of-concept encoder is a MLP as described in section \ref{ssec:mlp}, which takes the flattened concatenated threefold graph $x=G(A,E,F)$ as batch input. We use the initial parameters to calculate the input
+The proof-of-concept encoder is a MLP as described in section \ref{ssec:mlp}, which takes the flattened concatenated threefold graph $\mathbf{x}=G(A,E,F)$ as batch input. We use the initial parameters to calculate the input
 
 \begin{equation}
-    d_{input} = n\times n + n\times n\times d_r + n\times d_e
+    d_{input} = n^2 + n^2*d_r + n*d_e
     \label{eq4:inputdim}
 \end{equation}
 
-The main encoder architecture is a 3 layer fully connected network, with both layers using ReLU as activation function. The choice for two hidden layers is based on the huge difference between $d_{input}$ and $d_z$. The first layer has a dimension of $2*d_h$ and the option to use dropout, which by default is set to $0.2$. The second (hidden) layer has the dimension $d_h$ which is by default set to $1024$. After the second ReLU activation, the encoder linearly transforms the hidden state to an output vector of $2 \times d_z$. This vector is split and makes the mean and log-variance of size $d_z$ for the reparametrization trick. Sampling $\epsilon$ from an autonomous module, we get the latent representation $z$ of $x$,  the final output of the encoder.
+The main encoder architecture is a 3 layer fully connected network, with both layers using ReLU as activation function. The choice for two hidden layers is based on the huge difference between $d_{input}$ and $d_z$. The first layer has a dimension of $2*d_h$ and the option to use dropout, which by default is set to $0.2$. The second (hidden) layer has the dimension $d_h$ which is by default set to $1024$. After the second ReLU activation, the encoder linearly transforms the hidden state to an output vector of $2 *d_z$. This vector is split and makes the mean and log-variance of size $d_z$ for the reparametrization trick. Sampling $\epsilon$ from an autonomous module, we get the latent representation $\mathbf{z}$.
 
 % % Convolutions
-The second option for our RGVAE encoder is a GCN as described in section \ref{ssec:gcn}. We adopt the architecture from \cite{kipf_semi-supervised_2017} namely two layers of graph convolutions with dropout in between. To match the encoder output to the base model, we then add a flattening and a final linear transformation layer. To substitute the feature matrix used in Kipf's work, we reduce the edge attribute matrix $E$ by one dimension and concatenate it with $F$ resulting in $x_{GCN} \in \mathbb{R}^{n \times (d_e+n*d_r)}$. The forward pass of the adjacency matrix $A$ and $x_{GCN}$ through the first GCN layer with a hidden dimension of $d_h$ and ReLU as activation function is followed by a dropout layer. It should be mentioned that dropout is only applied during learning, not on evaluation. The second GCN layer takes the output from the previous layer, the two dimesntional hidden state and again $A$ as input. Now, instead of having the GCN predict on a number of classes, we use it to output a logits vector of dimension $2\timesd_z$. Therefore we pass the GCN output through a flattening and a linear transformation layer. Similar to the above described encoder we use the reparametrization trick to output the latent reparametrization $z$. Table \ref{tab4:archcompare} shows the two encoder architectures side by side.
+The second option for our RGVAE encoder is a GCN as described in section \ref{ssec:gcn}. We adopt the architecture from \cite{kipf_semi-supervised_2017} namely two layers of graph convolutions with dropout in between. To match the encoder output to the base model, we then add a flattening and a final linear transformation layer. To substitute the feature matrix used in Kipf's work, we reduce the edge attribute matrix $E$ by one dimension and concatenate it with $F$ resulting in $X_{GCN} \in \mathbb{R}^{n \times (d_e+nd_r)}$. The forward pass of the adjacency matrix $A$ and $X_{GCN}$ through the first GCN layer with a hidden dimension of $d_h$ and ReLU as activation function is followed by a dropout layer. It should be mentioned that dropout is only applied during learning, not on evaluation. The second GCN layer takes the output from the previous layer, the two dimesntional hidden state and again $A$ as input. Now, instead of having the GCN predict on a number of classes, we use it to output a logits vector of dimension $2d_z$. Therefore we pass the GCN output through a flattening and a linear transformation layer. Similar to the above described encoder we use the reparametrization trick to output the latent reparametrization $\mathbf{z}$. Table \ref{tab4:archcompare} shows the two encoder architectures side by side.
 
 
 \begin{table}[H]
@@ -99,12 +99,12 @@ The second option for our RGVAE encoder is a GCN as described in section \ref{ss
         \rowcolor[HTML]{EFEFEF}
         \multicolumn{1}{|c}{\textsc{MLP}} & \multicolumn{1}{c}{\textsc{Graph Conv.}} \\\hline
         Flatten($d_{input}$) &   Concatenate \\
-        Linear($d_{input},d_{h}\times 2$) &   Convolution($A,X$) \\
+        Linear($d_{input},2*d_{h}$) &   Convolution($A,X$) \\
         ReLu() &   ReLU() \\   
         Dropout($0.2$) &   Dropout($0.2$) \\
-        Linear($d_{h}\times 2,d_{h}$) &   Convolution($H^{(1)},X$) \\
+        Linear($2*d_{h},d_{h}$) &   Convolution($H^{(1)},X$) \\
         ReLu() &   Flatten \\
-        Linear($d_{h},d_{z}$) &   Linear($d_{H^{(1)}},d_z$) \\
+        Linear($d_{h},2*d_{z}$) &   Linear($d_{H^{(1)}},2*d_z$) \\
         \hline
         \end{tabular}
         \caption{Comparison of the two variants for the encoder of the RGVAE.}
@@ -114,8 +114,7 @@ The second option for our RGVAE encoder is a GCN as described in section \ref{ss
 \subsubsection{Decoder}
 
 
-For our RGVAE decoder, we use the same minimal approach as in \cite{simonovsky_graphvae_2018}, namely an MLP with inverted dimensions. The decoder architecture is similar with inverse dimensions to the MPL encoder described in table \ref{tab4:archcompare}. Since we are decoding the latent space, the input dimension is $d_z$ and the output dimension is $d_{input}$ as calculated in equation \ref{eq4:inputdim}. The flat logits output tensor is split threefold and reshaped to the original input shape of $G(A,E,F)$.   
-
+The RGVAE decoder is a MLP with architecture and dimensions similar but in inverse order to the encoder MLP described in table \ref{tab4:archcompare}. Since we are decoding the latent space, the input dimension is $d_z$ and the output dimension is $d_{input}$ as calculated in equation \ref{eq4:inputdim}. The flat logits output tensor is split threefold and reshaped to the original input shape of $G(A,E,F)$.   
 
 
 To sample from the generated graph we apply the Sigmoid activation function to the logits prediction for the adjacency matrix and use the normalized output as weights for binomial distributions, from which we can sample the discrete $\tilde{A}$. For $\tilde{E}$ and $\tilde{F}$ we take the argmax on the last dimension of both matrices. Each node and edge can have only one attribute, referring to its index in $\mathcal{E}$ and $\mathcal{V}$, thus only the highest predicted value is relevant. The generated sample is a discrete graph $\tilde{G}(\tilde{A},\tilde{E},\tilde{F})$.
@@ -123,7 +122,7 @@ To sample from the generated graph we apply the Sigmoid activation function to t
 
 \subsubsection{Limitations}
 
-The main limitation of the RGVAE is the parabolic increase of model parameters with the increase of nodes per input graph $\mathcal{O}(n^2)$. The number of parameters to train is directly linked with the GPU memory requirements. Even more computationally expensive is the use of permutation invariant graph matching, with a complexity of $\mathcal{O}(n^3)$. Thus, we propose this model only for generating small graphs with $n<30$.
+The main limitation of the RGVAE is the quadratic increase of model parameters with the increase of nodes per input graph $\mathcal{O}(n^2)$. The number of parameters to train is directly linked with the GPU memory requirements. Even more computationally expensive is the use of permutation invariant graph matching, with a complexity of $\mathcal{O}(n^3)$. This sets an empirical limitation for the model to small graphs with $2<n<40$ \cite{simonovsky_graphvae_2018}.
 
 
 % The proposed model is expected to be useful
@@ -152,7 +151,7 @@ The main limitation of the RGVAE is the parabolic increase of model parameters w
 \subsection{RGVAE learning}
 % Lay out pipeline.
 
-In this section we will present our implementation of how to fit the model to the data. Learning a model on data is a mostly standardized procedure, which includes training and evaluation per epoch. During training, the model forward passes the data, computes the loss, then does a backwards pass and updates its parameters. During evaluation, it is presented a split of the dataset unseen during training. Only the forward pass is done and the loss tracked during evaluation. Up to this point the RGVAE does not differ from the vanilla VAE training. Special is the graph matching function which is applied to the predicted graph and the loss function which takes into account the optimal permutation. Thus, we will look deeper into graph matching and derive RGVAE loss.
+In this section we will present our implementation of how to fit the model to the data. Learning a model on data is a mostly standardized procedure, which includes training and evaluation per epoch. During training, the model forward passes the data, computes the loss, then does a backwards pass and updates its parameters. During evaluation, it is presented a split of the dataset unseen during training. Only the forward pass is done and the loss tracked during evaluation. Up to this point the RGVAE does not differ from the vanilla VAE training. Special is the graph matching function which is applied to the predicted graph and the loss function which takes into account the permutation. Thus, we will look deeper into graph matching and derive RGVAE loss.
 The training and all experiments are performed on the GPU cluster LISA of the supercomputer SURFsara on the Dutch national e-infrastructure with the support of SURF Cooperative \cite{fengvaleriu}. Each GPU node is powered by a Nvidia titan RX 25GB. We log our experiments and results using \textit{Weights & Biases}, a cloud-based experiment tracking tool \cite{wandb}.
 
 
@@ -214,8 +213,7 @@ The next step is the graph matching algorithm is the max-pool loop presented in 
 To the best of our knowledge, this is the first time this algorithm is implemented in batch style. Thus, we would like to believe that laying out the implementation in detail will contribute to the academic value of this thesis.  
 
 % Hungarian
-The last step in the graph matching pipeline is the discretization of $X^*$. We adopt Simonovsky's \cite{simonovsky_graphvae_2018} approach which for this purpose uses the Hungarian algorithm as presented in section \ref{ssec3:hung}. To our disappointment and resulting in a bottleneck, no batch nor tensor implementation of the named algorithm has been published so far. Thus, we convert $X^*$ to \texttt{numpy.array()} format and make use of the \textit{Scipy} package \cite{2020SciPy-NMeth}. First we create the cost matrix $X_{cost} = 1 - X^*$ and then, iterating over the batch size, use \texttt{scipy.optimize.linear\_sum\_assignment} which returns the optimal assignment matrix. This is our final permutation matrix $X$, indicating the best match between target and prediction. If no permutation is needed, $X$ is the identity matrix of $A$.
-
+The last step in the graph matching pipeline is the discretization of $X^*$. We adopt Simonovsky's \cite{simonovsky_graphvae_2018} approach which for this purpose uses the Hungarian algorithm as presented in section \ref{ssec3:hung}. To our disappointment and resulting in a bottleneck, no batch nor tensor implementation of the named algorithm has been published so far. Thus, the discrete permutation matrix $X$ is obtained by iterating over the batch dimension \footnote{We convert $X^*$ to \texttt{numpy.array()}, create the cost matrix $X_{cost} = 1 - X^*$ and use the \textit{Scipy} package \cite{2020SciPy-NMeth} \texttt{scipy.optimize.linear\_sum\_assignment} to iteratively calculate the permutation matrix $X$.}. If no permutation is needed, $X$ is the identity matrix of $A$. 
 
 % %  explain the code
 % % batch implementation
@@ -231,9 +229,6 @@ The last step in the graph matching pipeline is the discretization of $X^*$. We 
 \label{ssec4:loss}
 
 The RGVAE uses the ELBO loss from equation \ref{eq3:elbo}, consisting of two terms, the regularization loss and the reconstruction loss. We will present our implementation of both loss terms with graph matching and an alternative loss without graph matching for comparative evaluation of our results 
-
-
-TODO derive why A is permuted on target (BCE) and E and F on prediction (Categorical) when $n \neq k$.
 
 %  reconstruction ref to loss
 %  point out challenges, log, nan
@@ -251,7 +246,7 @@ Alternatively and as ground truth we implement the VAE loss from equation \ref{e
     \label{eg4:normalELBO}
 \end{equation}
 
-We train the model on the negative ELBO. Further we use \textit{Ranger} presented in section \ref{sec3:ranger} as optimizer combining three learning optimization methods. Out of the various optimization parameters, we achived good performance with the default values and  only adjusted the learning rate and the number of lookahead steps. Missing a publication to cite, we refer to the source code of \textit{Ranger}. \footnote{\url{https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer}}
+We train the model on the negative ELBO. Further we use \textit{Ranger} presented in section \ref{sec3:ranger} as optimizer combining three learning optimization methods. Out of the various optimization parameters, we achived good performance with the default values and  only adjusted the learning rate and the number of lookahead steps. Missing a publication to cite, we refer to the source code of \textit{Ranger}: \footnote{\url{https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer}}
 
 
 % optimizer ranger github repo link
@@ -274,7 +269,7 @@ Finally, the metrics for link prediction are the mean reciprocal rank (MRR) of t
 \begin{equation}
     \begin{aligned}
     \operatorname{MRR} &=\frac{1}{2\left|\mathcal{K}_{\text {test }}\right|} \sum_{(s, r, o) \in \mathcal{K}_{\text {lest }}}\left(\frac{1}{\operatorname{rank}(s \mid r, o)}+\frac{1}{\operatorname{rank}(o \mid s, r)}\right) \\
-    \text { Hits@ } k &=\frac{1}{2\left|\mathcal{K}_{\text {test }}\right|} \sum_{(s, r, o) \in \mathcal{k}_{\text {lest }}}(\mathbb{1}[\operatorname{rank}(s \mid r, o) \leq k]+\mathbb{1}[\operatorname{rank}(o \mid s, r) \leq k])
+    \text { Hits@ } k &=\frac{1}{2\left|\mathcal{K}_{\text {test }}\right|} \sum_{(s, r, o) \in \mathcal{k}_{\text {lest }}}([\operatorname{rank}(s \mid r, o) \leq k]+[\operatorname{rank}(o \mid s, r) \leq k])
     \end{aligned}
 \label{eq4:MRR}
 \end{equation}
