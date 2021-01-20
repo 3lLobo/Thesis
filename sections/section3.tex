@@ -217,12 +217,12 @@ In this subsection we explain the term permutation invariance and its impact on 
 % Permutation Invariance
 % The position or rotation of a graph can vary. 
 % Use graph matching to detect similarities between graphs
+
 A visual example of permutation invariance is the image generation of numbers. If the loss function of the model would not be permutation invariant, the generated image could show a perfect replica of the input number, but being translated by one pixel the loss function would penalize the model. Geometrical permutations can be translation, scale or rotation around any axis. 
 
 In the context of sparse graphs the most common, and relevant permutation for this thesis, is the position of a link in the adjacency matrix. By altering its position through matrix-multiplication of the adjacency and the permutation matrix, the original link can change direction or turn into a self-loop. When matching graphs with more $n>2$, permutation can change the nodes which the link connects. Further it is possible to match graphs only on parts of the graph, $k$-factor, instead of the full graph. In the case of different node counts between target and prediction graph, the target graph can be fully (1-factor) matched with the larger prediction graph. 
 
-In context of this thesis, a model or a function is called permutation invariant, if it can match any permutation of the original. For the case of matching between prediction and target graph, from all possible permutations of the predictions, the one with highest similarity to the target should be considered. The similarity can be full or partly as its possible that only parts of the graph match or the graphs in size differ.  
-
+In context of this thesis, a model or a function is called permutation invariant, if it can match any permutation of the original. This allows the model a wider spectrum of predictions instead of penalizing it on the element-wise correct prediction of the adjacency.
 
 % OR: An example is in object detection in images. An object can have geometrical permutations such as translation, scale or rotation, none the less the model should be able to detect and classify it. In that case, the model is not limited by permutations and  is there fore permutation invariant.
 % In our case the object is a graph and the nodes can take different positions in the adjacency matrix. To detect similarities between graphs we apply graph matching.
@@ -236,13 +236,13 @@ In context of this thesis, a model or a function is called permutation invariant
 %     \item one more
 % \end{itemize}
 
-Graph matching of general (not bipartite) graphs is a nontrivial task. Inspired by Simonovsky \cite{simonovsky_graphvae_2018}, the RGVAE uses the max-pool algorithm, which can be effectively integrated in the loss function of the RGVAE. First presented in \cite{cho_finding_2014} in the context of computer vision and successful in matching feature point graphs in an image. It first calculates the affinity between to graphs considering node and edge attributes, then applies edge-wise max-pooling to reduce the affinity matrix to a similarity matrix. Cho \textit{et al.} praise this graph matching approach as resilient to deformations and highly tolerant to outliers. The output is a reliable cost matrix. Notable is, that this algorithm also allows $k$-factor matching, with $k \leq 1 < n$. Thus, subgraphs with different number of nodes can be matched. The final permutation matrix is determined by linear sum assignment of the similarity matrix, a np-hard problem \cite{diestel2016graph}.
+Graph matching of general (not bipartite) graphs is a nontrivial task. Inspired by Simonovsky's approach \cite{simonovsky_graphvae_2018}, the RGVAE uses the max-pool algorithm, which can be effectively integrated in its loss function. Presented in \cite{cho_finding_2014} in the context of computer vision and successful in matching feature point graphs in an image. It first calculates the affinity between two graphs, considering node and edge attributes, then applies edge-wise max-pooling to reduce the affinity matrix to a similarity matrix. Cho \textit{et al.} praise the max-pool graph matching algorithm as resilient to deformations and highly tolerant to outliers compared to the mean or sum alternatives. The output is a normalized similarity matrix in continuous space of the same shape as the target adjacency matrix, indicating the similarity between each node of target and prediction graph. The similarity matrix is subtracted from a unit matrix to receive the cost matrix, necessary for the final step in the graph matching pipeline. Notable is, that this algorithm also allows $k$-factor matching, with $k \leq 1 < n$. Thus, subgraphs with different number of nodes can be matched. The final permutation matrix is determined by linear sum assignment of the cost matrix, a np-hard problem \cite{diestel2016graph}.
 
 % Max-pooling algorithm comes here !!!
-Let us introduce a new sparse representation for a sampled subgraph, where the discrete target graph is $G=(A, E, F)$ and the continuous predicted graph $\widetilde{G}=(\widetilde{A}, \widetilde{E}, \widetilde{F})$. The $A, E, F$ are store the discrete data for the adjacency, for node attributes and the node attribute matrix of form $A \in\{0,1\}^{n \times n^{\prime}}$ with $n$ being the number of nodes in the target graph. $E\in\{0,1\}^{n \times n^{\prime} \times d_e}$ is the edge attribute matrix and a node attribute tensor of the shape $F\in\{0,1\}^{n \times d_n}$ with $d_e$ and $d_n$ being the size of the entity and relation dictionary. For the predicted graph with $k$ nodes, the adjacency matrix is $\widetilde{A} \in[0,1]^{k \times k}$, the edge attribute matrix is $\widetilde{E} \in \mathbb{R}^{k \times k \times d_{e}}$ and the node attribute matrix is $\widetilde{F} \in \mathbb{R}^{k \times d_{n}}$.
+We use the previously presented sparse representation for subgraphs, sampled from a KG. The discrete target graph is $G=(A, E, F)$ and the continuous prediction graph $\widetilde{G}=(\widetilde{A}, \widetilde{E}, \widetilde{F})$. The $A, E, F$ matrices store the discrete data for the adjacency, for node attributes and the node attribute matrix of form $A \in\{0,1\}^{n \times n}$ with $n$ being the number of nodes in the target graph. $E\in\{0,1\}^{n \times n \times d_e}$ is the edge attribute matrix and a node attribute tensor of the shape $F\in\{0,1\}^{n \times d_n}$ with $d_e$ and $d_n$ being the size of the entity and relation dictionary. For the predicted graph with $k$ nodes, the adjacency matrix is $\widetilde{A} \in[0,1]^{k \times k}$, the edge attribute matrix is $\widetilde{E} \in \mathbb{R}^{k \times k \times d_{e}}$ and the node attribute matrix is $\widetilde{F} \in \mathbb{R}^{k \times d_{n}}$.
 
 
-Given these graphs the algorithm aims to find the affinity matrix $S:(i, j) \times(a, b) \rightarrow \mathbb{R}^{+}$ where $i, j \in G$ and $a, b \in \widetilde{G}$. The affinity matrix expresses the similarity of all node pairs between the two graphs and is calculated 
+Given these graphs the algorithm aims to find the affinity matrix $S:(i, j) \times(a, b) \rightarrow \mathbb{R}^{+}$ where $i, j \in G$ and $a, b \in \widetilde{G}$. The affinity matrix returns a score for all node and all edge pairs between the two graphs and is calculated 
 
 \begin{equation}
     \begin{array}{l}
@@ -254,19 +254,21 @@ Given these graphs the algorithm aims to find the affinity matrix $S:(i, j) \tim
 Here the square brackets define Iverson brackets \cite{simonovsky_graphvae_2018}.
 
 
-The next step is to find the similarity matrix $X^* \in[0,1]^{k \times n}$. Therefore we iterate a first-order optimization framework and get the update rule
+While affinity scores resemblances which suggest a common origin, similarity directly refers to the closeness between two nodes.
+The next step is to find the similarity matrix $X^* \in[0,1]^{k \times n}$. 
+Therefore we iterate a first-order optimization framework and get the update rule
 
 \begin{equation}
-    \mathbf{x}_{t+1} \leftarrow \frac{1}{\left\|\mathbf{S} \mathbf{x}_{t}\right\|_{2}} \mathbf{S} \mathbf{x}_{t}.
+    X^*_{t+1} \leftarrow \frac{1}{\left\|\mathbf{S} X^*_{t}\right\|_{2}} \mathbf{S} X^*_{t}.
 \end{equation}
 
-To calculate $\text { Sx }$ we find the best candidate $x_{i,a}$ from the possible pairs in the affinity matrix. Heuristically, taking the argmax over all neighboring node pair affinities yields the best result. Other options are sum-pooling or average-pooling, which do not discard potentially irrelevant information, yet have shown to perform worse. Thus, using the max-pooling approach, we can pairwise calculate
+To calculate $\text { SX^* }$ we find the best candidate $X^*_{i,a}$ from the possible pairs of $i \in \mathbb{N}^{[0,n]}$ and $ai \in \mathbb{N}^{[0,k]}$ in the affinity matrix $S$. Heuristically, taking the argmax over all neighboring node pair affinities yields the best result. Other options are sum-pooling or average-pooling, which do not discard potentially irrelevant information, yet have shown to perform worse. Thus, using the max-pooling approach, we can pairwise calculate
 
 \begin{equation}
-    \mathbf{Sx}_{i a}=\mathbf{x}_{i a} \mathbf{S}_{i a ; i a}+\sum_{j \in \mathbb{N}_{i}} \max _{b \in \mathbb{N}_{a}} \mathbf{x}_{j b} \mathbf{S}_{i a ; j b}.
+    \mathbf{Sx}_{i a}=X^*_{i a} \mathbf{S}_{i a ; i a}+\sum^{n}_{j = 0}} \max _{0 \leq b < k \mathbb{N}_{a}} X^*_{j b} \mathbf{S}_{i a ; j b}.
 \end{equation}
 
-Depending on the matrix size, the number of iterations are adjusted. The resulting similarity matrix $X*$ yields a normalized probability of matching node pairs. In order to get a discrete translation matrix, we need to find the optimal match for each node.
+Depending on the matrix size, the number of iterations are adjusted. The resulting similarity matrix $X*$ yields a normalized similarity score for every node pair. The next step if to converting it to a discrete permutation matrix.
 
 
 
@@ -274,9 +276,9 @@ Depending on the matrix size, the number of iterations are adjusted. The resulti
 \label{ssec3:hung}
 
 %  Find shortest path
-Picking up on the node pair probabilities $X^*$ of last chapter, we reformulate it as a linear assignment problem. Here comes into play an optimization algorithm, the so called hungarian algorithm. It original objective is to optimally assign $n$ resources to $n$ tasks. The cost of assigning task $i \in \mathbb{R}^n$ to $j \in \mathbb{R}^n$ is stored in $x_{ij}$ of the quadratic cost matrix $x \in \mathbb{R}^{n \times n}$. By assuming tasks and resources are simple nodes and taking $C=1-X^*$ we get the cost matrix $C$ for the optimal translation. This algorithm has a complexity of $O\left(n^{4}\right)$, thus is not applicable to complete KGs but only to subgraphs with limited number of nodes per graph \cite{date_gpu-accelerated_2016}.
+Starting with the normalized similarity matrix $X^*$, we reformulate the aim of finding the discrete permutation matrix as a linear assignment problem. Simonovsky \textit{et al.} \cite{silver_mastering_2017}use for this purpose an optimization algorithm, the so called Hungarian algorithm. It original objective is to optimally assign $n$ resources to $n$ tasks, thus $k-n$ rows of the permutation matrix will be left empty. The cost of assigning task $i \in \mathbb{N}^{[0,n]}$ to $a \in \mathbb{N}^{[0,k]}$ is stored in $x_{ia}$ of the cost matrix $C \in \mathbb{N}^{n \times k}$. By assuming tasks and resources are nodes and taking $C=1-X^*$ we get the continuous cost matrix $C$. This algorithm has a complexity of $O\left(n^{4}\right)$, thus is not applicable to complete KGs but only to subgraphs with limited number of nodes per graph \cite{date_gpu-accelerated_2016}.
 
-The core of the hungarian algorithm consist of four main steps, initial reduction, optimality check, augmented search and update. The now presented algorithm is a slight alternative of the original algorithm and improves the complexity of the update step from $O\left(n^{2}\right)$ to $O\left(n\right)$ and thus, reduces the total complexity to $O\left(n^{3}\right)$. It takes as input a bipartie graph $G=(V, U, E)$ and the cost matrix $C \in \mathbb{R}^{n \times n}$ where $V \in \mathbb{R}^n$ and $U \in \mathbb{R}^n$ are sets of nodes and $E \in \mathbb{R}^{n \times n}$ the set of edges between the nodes. The algorithm's output is a discrete matching matrix $M$. To avoid two irrelevant pages of pseudocode, the steps of the algorithm are presented in the following short summary \cite{mills-tettey_dynamic_nodate}.
+The core of the hungarian algorithm consist of four main steps, initial reduction, optimality check, augmented search and update. The presented algorithm is a popular variant of the original algorithm and improves the complexity of the update step from $O\left(n^{2}\right)$ to $O\left(n\right)$ and thus, reduces the total complexity to $O\left(n^{3}\right)$. Since throughout this thesis $n=k$ we will imply the reduction step and continue with a quadratic cost matrix $C$. The following notation is solely to derive the Hungarian algorithm and does not apply to our graph data. The algorithm takes as input a bipartite graph $G=(V, U, E)$ and the cost matrix $C \in \mathbb{R}^{n \times n}$. $G$ bipartite because it considers all possible edges in the cost matrix in one direction and no self-loops. $V \in \mathbb{R}^n$ and $U \in \mathbb{R}^n$ are the resulting sets of nodes and $E \in \mathbb{R}^{n}$ the set of edges between the nodes. The algorithm's output is a discrete matching matrix $M$. To avoid two irrelevant pages of pseudocode, the steps of the algorithm are presented in the following short summary \cite{mills-tettey_dynamic_nodate}.
 
 \begin{enumerate}
     \item Initialization: \\
@@ -292,7 +294,7 @@ The core of the hungarian algorithm consist of four main steps, initial reductio
     \begin{enumerate}
         \item Each unmatched node in $V$ is a root node for a Hungarian tree with completed results in an augmentation path.
         \item Expand the Hungarian trees in the equality subgraph. Store the indices $i$ of $v_i$ encountered in the Hungarian tree in the set $I*$ and similar for $j$ in $u_j$ and the set $J^*$. If an augmentation path is found, skip the next step.
-        \item Update $\alpha$ and $\beta$ to add new edges to the quality subgraph and redo the previous step.
+        \item Update $\alpha$ and $\beta$ to add new edges to the equality subgraph and redo the previous step.
         \begin{align*}
             \theta&=\frac{1}{2} \min _{i \in I^{*}, j \notin J^{*}}\left(c_{i j}-\alpha_{i}-\beta_{j}\right) \\
             \alpha_{i} &\leftarrow\left\{\begin{array}{ll}
@@ -319,11 +321,11 @@ The normal VAE maximizes the evidence lower-bound or, in a practical implementat
 
 \begin{equation}
     \begin{array}{l}
-    \mathcal{L}(\phi, \theta ; G)=\quad=\mathbb{E}_{q_{\phi}(\mathbf{z} \mid G)}\left[-\log p_{\theta}(G \mid \mathbf{z})\right]+\operatorname{KL}\left[q_{\phi}(\mathbf{z} \mid G) \| p(\mathbf{z})\right].
+    \mathcal{L}(\phi, \theta ; G)=\mathbb{E}_{q_{\phi}(\mathbf{z} \mid G)}\left[-\log p_{\theta}(G \mid \mathbf{z})\right]+\beta (\operatorname{KL}\left[q_{\phi}(\mathbf{z} \mid G) \| p(\mathbf{z})\right]).
     \end{array}
 \end{equation}
 
-The loss function $\mathcal{L}$ is a combination of reconstruction term and regularization term. The regularization term is the KL divergence between a standard normal distribution and the latent space distribution of $Z$. This term does not change when adopting to graphs. The reconstruction term is the binary cross entropy between prediction and target, which in the sparse graph representation are threefold with $A, E, F$. 
+The loss function $\mathcal{L}$ is a combination of reconstruction term and regularization term. The regularization term is the KL divergence between a standard normal distribution and the latent space distribution of $\mathbf{z}$. The change to graph data does not influence this term  to graphs. The reconstruction term is the cross entropy between prediction and target, binary for the adjacency matrix and categorical for the edge and node attribute matrices. 
 
 % A sigmoid with logits, E,F, softmax include translation X
 
@@ -331,7 +333,8 @@ The loss function $\mathcal{L}$ is a combination of reconstruction term and regu
 % Ae, whereas edge- and node-wise softmax is applied to obtain
 % Ee and Fe, respectively. A
 
-The predicted output of the decoder is split in three parts and while $\tilde{A}$ is activated through sigmoid, $\tilde{E}$ and $\tilde{F}$ are activated via edge- and nodewise Softmax. The graph matching permutation for $A$ is applied to the target $A^{\prime}=X A X^{T}$ and for $E$ and $F$ on the prediction, $\widetilde{F}^{\prime}=X^{T} \widetilde{F}$ and $\widetilde{E}_{\cdot, \cdot, l}^{\prime}=X^{T} \widetilde{E}_{\cdot, \cdot, l} X$, $l$ being the one-hot encoded edge attribute vector which is permuted. These permuted subgraphs are then used to calculate the maximum log-likelihood estimate \cite{simonovsky_graphvae_2018}:
+The predicted output of the decoder is split in three parts and while $\tilde{A}$ is activated through sigmoid, $\tilde{E}$ and $\tilde{F}$ are activated via edge- and nodewise Softmax. 
+For the case of $n<k$, the target adjacency is permuted $A^{\prime}=X A X^{T}$, so that the model can backpropagate over the full prediction. Since $E$ and $F$ are categorical, permuting prediction or target yields the same cross-entropy. Following Simonovsky's approach \cite{simonovsky_graphvae_2018} we permute the prediction, $\widetilde{F}^{\prime}=X^{T} \widetilde{F}$ and $\widetilde{E}_{\cdot, \cdot, l}^{\prime}=X^{T} \widetilde{E}_{\cdot, \cdot, l} X$. Let $l$ be the one-hot encoded edge attribute vector which is permuted. These permuted subgraphs are then used to calculate the maximum log-likelihood estimate \cite{simonovsky_graphvae_2018}:
 
 \begin{equation}
     \begin{split}
@@ -346,14 +349,15 @@ The predicted output of the decoder is split in three parts and while $\tilde{A}
     \label{eq3:GAVElossEF}
 \end{align}
 
-Note that $k$ can be equal $n$ if target and prediction graphs have the same number of nodes. The normalizing constant $1 / k(k-1)$ takes into account the no self-loops restriction, thus an edge-less diagonal. In the case of self loops this constant would be $1 / k*k$. Similar $1 /\left(\|A\|_{1}-n\right)$ for $\log p(E \mid \mathbf{z})$ where $-n$ accounts for the edge-less diagonal and in case of self-loops would be discarded leaving us with $1 /\left(\|A\|_{1}\right)$.
+The normalizing constant $1 / k(k-1)$ takes into account the no self-loops restriction, thus an edge-less diagonal. In the case of self loops this constant is $1 / k^2$. Similar $1 /\left(\|A\|_{1}-n\right)$ for $\log p(E \mid \mathbf{z})$ where $-n$ accounts for the edge-less diagonal and in case of self-loops is discarded, resulting in $1 /\left(\|A\|_{1}\right)$.
 
 \subsection{Ranger Optimizer}
 \label{sec3:ranger}
 
-Finalizing this chapter, we explain the novel deep learning optimizer Ranger. Ranger combines Rectified Adam (RAdam), lookahead and optionally gradient centralization. let us shortly look into the different components.
+Finalizing this chapter, we explain the novel deep learning optimizer Ranger. Ranger combines Rectified Adam (RAdam), lookahead and optionally gradient centralization. Let us briefly look into the different components.
 RAdam is based on the popular adam optimizer. It improves the learning by dynamically rectifying Adam's adaptive momentum. This is done by reducing the variance of the momentum, which is especially large at the beginning of the training. Thus, leading to a more stable and accelerated start \cite{liu_variance_2020}.
-The Lookahead optimizer was inspired by recent advances in the understanding of loss surfaces of deep neural networks, thus proposes an approach where, a second optimizer 'looks ahead' on a set of parallel trained weights. while the computation and memory cost are negligible, the learning improves and the variance of the main optimizer is reduced \cite{zhang_lookahead_2019}.
+The Lookahead optimizer was inspired by recent advances in the understanding of loss surfaces of deep neural networks, thus proposes an approach where, a second optimizer estimates the gradients behavior for the next steps on a set of parallel trained weights, while the number of 'looks ahead' steps is a hyperparameter.
+This improves learning and reduces the variance of the main optimizer \cite{zhang_lookahead_2019}.
 The last and most novel optimization technique, Gradient Centralization, acts directly on the gradient by normalizing it to a zero mean. Especially on convolutional neural networks, this helps regularizing the gradient and boosts learning. This method can be added to existing optimizers and can be seen as constrain of the loss function \cite{yong_gradient_2020}.
 Concluding we can say that Ranger is a state of the art deep learning optimizer with accelerating and stabilizing properties, incorporating three different optimization methods, which synergize with each other. Considering that generative models are especially unstable during training, we see Ranger as a good fit for this research.
 
