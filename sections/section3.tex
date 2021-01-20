@@ -1,14 +1,14 @@
 
-% In this section we will go over related work and relevant background information for our model and experiments. The depth of the explanation is adopted to the expected prior knowledge of the reader. The reader is supposed to know the basics of machine learning and deep learning, including probability theory and basic knowledge on neural networks and their different architectures. Basic principles such as forward pass, backpropagation and convolutions are expected to be understood. Further the use and functionality of deep learning modules such as the model, the optimizer and the terms target and prediction should be known. This also includes being familiar with the training and testing pipeline of deep learning.
+% In this section we go over related work and relevant background information for our model and experiments. The depth of the explanation is adopted to the expected prior knowledge of the reader. The reader is supposed to know the basics of machine learning and deep learning, including probability theory and basic knowledge on neural networks and their different architectures. Basic principles such as forward pass, backpropagation and convolutions are expected to be understood. Further the use and functionality of deep learning modules such as the model, the optimizer and the terms target and prediction should be known. This also includes being familiar with the training and testing pipeline of deep learning.
 
-This section derives and explains the techniques, which form the backbone of this research. For fundamental background on machine learning and probability theory we refer the reader to Bishops book \cite{bishop_pattern_2006}. We begin with introducing the VAE and its differences to a normal autoencoder. Further we show how convolutional layers can act on graphs and how these layers can be used in an encoder model, the GCN. Building on these modules, we present the main model for this thesis, the Relational Graph VAE (RGVAE). FInally, we present a popular graph matching algorithm, which is intended to match prediction and target graph \cite{paulheim_knowledge_2016}.  
+This section derives and explains the techniques, which form the backbone of this research. For fundamental background on machine learning and probability theory we refer the reader to Bishops book \cite{bishop_pattern_2006}. We begin with introducing the VAE and its differences to a normal autoencoder. Further we show how convolutional layers can act on graphs and how these layers can be used in an encoder model, the GCN. Building on these modules, we present the main model for this thesis, the Relational Graph VAE (RGVAE). Finally, we present a popular graph matching algorithm, which is intended to match prediction and target graph \cite{paulheim_knowledge_2016}.  
 
 
 \subsection{Knowledge Graph}
 
 % Knowledge Graphs are great! The best in the world.
-% Knowledge Graphs which we will be using
-% We will focus on the generation of KGs.
+% Knowledge Graphs which we be using
+% We focus on the generation of KGs.
 % Representation of KG as adjacency, edge feature and node feature matrix
 'Knowledge graph' has become a popular term. Yet, the term is so broad, that its definitions varies depending on domain and use case \cite{ehrlinger2016towards}. In this thesis we focus on KGs in the context of relational machine learning.
 
@@ -22,7 +22,7 @@ Both datasets of this thesis are derived from large-scale KG data in RDF format.
 
 
 
-A human readible format of the entities is given by the \textit{id2text} translation of Wikidata \cite{vrandevcic2014wikidata}.
+A human readable format of the entities is given by the \textit{id2text} translation of Wikidata \cite{vrandevcic2014wikidata}.
 
 \begin{itemize}
     \item Subject $s$:   \texttt{/m/02mjmr Barack Obama}
@@ -34,7 +34,7 @@ A human readible format of the entities is given by the \textit{id2text} transla
 For all triples, $s$ and $o$ are part of a set of entities, while $r$ is part of a set of relations. This is sufficient to define a basic KG \cite{nickel_review_2016}.
 
 % Hierarchy, entities, classes
-Schema-based KG can include type hierarchies and type constraints. Classes group entities of the same type together, based on common criteria, e.g all names of people can be grouped in the class 'person'. Hierarchies define the inheriting structure of classes and subclasses. Picking up our previous example, 'spouse' and 'person' would both be a subclass of 'people' and inherit its properties. At the same time the class of an entity can be the key to a relation with type constraint, since some relations can only be used in conjunction with entities fulfilling the constraining type criteria.
+Schema-based KG can include type hierarchies and type constraints. Classes group entities of the same type together, based on common criteria, e.g. all names of people can be grouped in the class 'person'. Hierarchies define the inheriting structure of classes and subclasses. Picking up our previous example, 'spouse' and 'person' would both be a subclass of 'people' and inherit its properties. At the same time the class of an entity can be the key to a relation with type constraint, since some relations can only be used in conjunction with entities fulfilling the constraining type criteria.
 
 % Ontology - semantics
 These schema based rules of a KG are defined in its ontology. Here properties of classes, subclasses and constraints for relations and many more are defined. Again, we have to differentiate between KGs with open-world or closed-world assumption. In a closed-world assumption all constraints must be sufficiently satisfied before a triple is accepted as valid. This leads to a huge ontology and makes it difficult to expand the KG. On the other hand open-world KGs such as Freebase, accept every triple as valid, as long as it does not violate a constrain. This again leads inevitably to inconsistencies within the KG, yet it is the preferred approach for large KGs. In context of this thesis we refer to the ontology as semantics of a KG, we research if our model can capture the implied closed-world semantics of an open-world KG \cite{nickel_review_2016}.
@@ -47,7 +47,7 @@ These schema based rules of a KG are defined in its ontology. Here properties of
 
 % Usecases of KG
 
-% Knowledge graphs have very different formats. The datasets we will be sorting with are in rdf format.
+% Knowledge graphs have very different formats. The datasets we be sorting with are in rdf format.
 % This format can include an defined onthology or not.
 % This means the KG consists of triples subject, relation, object.
 % when indexing these triples. we get a dense representation of the KG.
@@ -55,7 +55,7 @@ These schema based rules of a KG are defined in its ontology. Here properties of
 
 \subsection{Graph VAE}
 
-Since the graph VAE is a adaptation of the original VAE, we start by introducing the original version, which is unrelated to graph data. Furthermore we present each of the different modules, which compose the final model. This includes the different graph encoders as well as sparse graph loss functions. We define the notation upfront for this chapter, which touches upon three different fields. For the VAE and MLP we consider data in vector format. A bold variable denotes the full vector, e.g $\mathbf{x}$ and variable with index denotes the element at that index, e.g for the vector element at index $i$ we denote $x_i$. Graphs are represented in matrices, which are denoted in capital letters. $A$ typically denotes the adjacency matrix, from there on paths split and we use different notations for different methods. While $X$ is described as feature matrix, we have to specify further when it comes to Simonovsky's GraphVAE, where $E$ is the edge attribute and $F$ the node attribute matrix. The reason we change from features to attributes, is due to the singularity, also one-hot encoding of attributes per node/edge, in contrast to features which can be numerous per node.
+Since the graph VAE is a adaptation of the original VAE, we start by introducing the original version, which is unrelated to graph data. Furthermore we present each of the different modules, which compose the final model. This includes the different graph encoders as well as sparse graph loss functions. We define the notation upfront for this chapter, which touches upon three different fields. For the VAE and MLP we consider data in vector format. A bold variable denotes the full vector, e.g. $\mathbf{x}$ and variable with index denotes the element at that index, e.g. for the vector element at index $i$ we denote $x_i$. Graphs are represented in matrices, which are denoted in capital letters. $A$ typically denotes the adjacency matrix, from there on paths split and we use different notations for different methods. While $X$ is described as feature matrix, we have to specify further when it comes to Simonovsky's GraphVAE, where $E$ is the edge attribute and $F$ the node attribute matrix. The reason we change from features to attributes, is due to the singularity, also one-hot encoding of attributes per node/edge, in contrast to features which can be numerous per node.
 
 
 \subsubsection{VAE}
@@ -90,7 +90,7 @@ Now variational inference can be performed, which allows both $\theta$ the gener
     \label{eq3:elbo}
 \end{equation}
 
-We call the first term the regularization term, as it encourages the approximate posterior to be close to the Gaussian normal prior. This term can be integrated analytically and does not require an estimation.The KL-divergence is a similarity measure between two distributions, resulting in zero for two equal distributions. Thus, the model will get penalized for learning a encoder distribution $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ which is not Standard Gaussian.
+We call the first term the regularization term, as it encourages the approximate posterior to be close to the Gaussian normal prior. This term can be integrated analytically and does not require an estimation. The KL-divergence is a similarity measure between two distributions, resulting in zero for two equal distributions. Thus, the model gets penalized for learning a encoder distribution $p_{{\theta}}(\mathbf{z} \mid \mathbf{x})$ which is not Standard Gaussian.
 
 Higgins \textit{et al.} present a constrained variational framework, the $\beta$-VAE \cite{higgins_beta-vae_2016}. This framework proposes an additional hyperparameter $\beta$ which acts as factor on the regularization term. The new ELBO including $\beta$ is
 
@@ -103,7 +103,7 @@ For $\beta = 0$ the original VAE is restored and for $\beta>0$ the influence of 
 
 The second term represents the reconstruction error, which requires an estimation by sampling. This means using the decoder to generate samples from the latent distribution. In the context of the VAE, these probabilistic samples are the models output, thus, the reconstruction error the similarity between prediction and target\cite{kingma_auto-encoding_2014}.
 
-Once the parameters $\phi$ and $\theta$ of the VAE are learned, the decoder can be used on its own to generate new samples from $p_{{\theta}}(\mathbf{x} \mid z)$. Conventionally, a latent input signal is sampled from $\mathbb{N^{d_z}}$ with $d_z$ being the latent dimension. In the case of discrete binary data, each element of the generated sample is used as probability parameter $p$ for a Bernoulli $\mathbb{B}(1,p)$, from which the final output is sampled. In the case of categorical data, e.g one-hot encoding, the final output is either sampled from a Categorical distribution with the prediction as probability parameters of each class, or simply sampled with the Argmax operator \cite{kingma_introduction_2019}. 
+Once the parameters $\phi$ and $\theta$ of the VAE are learned, the decoder can be used on its own to generate new samples from $p_{{\theta}}(\mathbf{x} \mid z)$. Conventionally, a latent input signal is sampled from $\mathbb{N^{d_z}}$ with $d_z$ being the latent dimension. In the case of discrete binary data, each element of the generated sample is used as probability parameter $p$ for a Bernoulli $\mathbb{B}(1,p)$, from which the final output is sampled. In the case of categorical data, e.g. one-hot encoding, the final output is either sampled from a Categorical distribution with the prediction as probability parameters of each class, or simply sampled with the Argmax operator \cite{kingma_introduction_2019}. 
 
 
 \subsubsection{MLP}
@@ -134,7 +134,7 @@ Since the sigmoid function returns a probability distribution for all classes, t
 
 % TODO pretty write this
 %  Intro on convolutions
-Convolutional layers benefit from the symmetry of data, correlation between neighboring datapoints. Convolutional Neural Nets (CNN) are powerful at classification and object detection on image. Neighboring pixel in an image are not independent and identically distributed {i.i.d.) but rather are highly correlated. Thus, patches of datapoints let the CNN infer and detecting local features. The model can further merged those to high-level features, e.g a face in an image \cite{bishop_pattern_2006}. Similar conditions hold for graphs. Nodes in a graph are not i.i.d and allow inference of missing node or link labels. 
+Convolutional layers benefit from the symmetry of data, correlation between neighboring datapoints. Convolutional Neural Nets (CNN) are powerful at classification and object detection on image. Neighboring pixel in an image are not independent and identically distributed {i.i.d.) but rather are highly correlated. Thus, patches of datapoints let the CNN infer and detecting local features. The model can further merged those to high-level features, e.g. a face in an image \cite{bishop_pattern_2006}. Similar conditions hold for graphs. Nodes in a graph are not i.i.d. and allow inference of missing node or link labels. 
 
 % How do Graph convs work???
 Different approaches for graph convolutions have been published. Here we present the graph convolution network (GCN) of \cite{kipf_semi-supervised_2017}.
@@ -170,13 +170,13 @@ The GCN was first introduced as node classifier, predicting a probability distri
 % Decoder MLP
 % One shot: creating adjacency and feature matrix at once.
 
-% the model we are going to use for challenging KG datasets
+% the model we are  use for challenging KG datasets
 We use the presented modules to compose the RGVAE. While the approaches from the literature for graph generative models differ in terms of the model and graph representation, we focus on the GraphVAE architecture presented by Simonovsky \cite{simonovsky_graphvae_2018}, A sparse graph model with graph convolutions.
 
 % TODO rewrite and describe label condition as addition.
 
 Simonovsky's GraphVAE follows the characterizing encoder decoder architecture.
-The encoder $q_{\phi}(\mathbf{z} \mid {G})$ takes a graph ${G}$ as input, on which graph convolutions are applied. After the convolutions the hidden representation is flattened and concatenated with the node label vector $y$. A MLP encodes the mean $\mu(\mathbf{z})$ and logvariance $\sigma^2(\mathbf{z})$ of the latentspace distribution. Using the reparametrization trick the latent representation is sampled.
+The encoder $q_{\phi}(\mathbf{z} \mid {G})$ takes a graph ${G}$ as input, on which graph convolutions are applied. After the convolutions the hidden representation is flattened and concatenated with the node label vector $y$. A MLP encodes the mean $\mu(\mathbf{z})$ and logvariance $\sigma^2(\mathbf{z})$ of the latent space distribution. Using the reparametrization trick the latent representation is sampled.
 
 For the decoder $p_{\theta}(\mathbf{x} \mid {G})$ the latent representation is again concatenated with the node labels. The decoder architecture for this model is a MLP with the same dimension as the encoder MLP but in inverted order, which outputs a flat prediction of ${\tilde{G}$, which is split and reshaped in to the sparse matrix representation.
 
@@ -200,11 +200,11 @@ Simonovsky's GraphVAE \cite{simonovsky_graphvae_2018} is optimized for molecular
 
 
 % Graphs can be generated recursively or in an one-shot approach. This paper uses the second approach and generates the full graph in one go. ***Cite?***
-% This model will be the starting point for our research.
+% This model be the starting point for our research.
 
 % \subsubsection{One Shot vs. Recursive}
 % One shot: MNIST vs recursive on graphs: Belli
-In figure \ref{fig3:GVAE} the concept of the RGVAE is displayed. Each datapoint $G(A,E,F)$ is a subgraph from the KG dataset. Note that the model propagates batches instead of single datapoints.The RGVAE can generate graphs $\tilde{G}(\tilde{A},\tilde{E},\tilde{F})$ by sampling from the approximated posterior distribution $p_{{\theta}}\left G \mid \mathbf{z}\right)$. Since it predicts on closed sets of relations and entities, the generated subgraphs are either unseen and complement the KG or are already present in the dataset. The subgraph are sparse with $n$ nodes. A single triple being $n=2$ and a subgraph representation $2<n<40$, where $n=40$ was the explored maximum for the GraphVAE \cite{simonovsky_graphvae_2018}.  
+In figure \ref{fig3:GVAE} the concept of the RGVAE is displayed. Each datapoint $G(A,E,F)$ is a subgraph from the KG dataset. Note that the model propagates batches instead of single datapoints. The RGVAE can generate graphs $\tilde{G}(\tilde{A},\tilde{E},\tilde{F})$ by sampling from the approximated posterior distribution $p_{{\theta}}\left G \mid \mathbf{z}\right)$. Since it predicts on closed sets of relations and entities, the generated subgraphs are either unseen and complement the KG or are already present in the dataset. The subgraph are sparse with $n$ nodes. A single triple being $n=2$ and a subgraph representation $2<n<40$, where $n=40$ was the explored maximum for the GraphVAE \cite{simonovsky_graphvae_2018}.  
 
 \subsection{Graph Matching}
 \label{ssec:graphmatch}
@@ -276,9 +276,9 @@ Depending on the matrix size, the number of iterations are adjusted. The resulti
 \label{ssec3:hung}
 
 %  Find shortest path
-Starting with the normalized similarity matrix $X^*$, we reformulate the aim of finding the discrete permutation matrix as a linear assignment problem. Simonovsky \textit{et al.} \cite{silver_mastering_2017}use for this purpose an optimization algorithm, the so called Hungarian algorithm. It original objective is to optimally assign $n$ resources to $n$ tasks, thus $k-n$ rows of the permutation matrix will be left empty. The cost of assigning task $i \in \mathbb{N}^{[0,n]}$ to $a \in \mathbb{N}^{[0,k]}$ is stored in $x_{ia}$ of the cost matrix $C \in \mathbb{N}^{n \times k}$. By assuming tasks and resources are nodes and taking $C=1-X^*$ we get the continuous cost matrix $C$. This algorithm has a complexity of $O\left(n^{4}\right)$, thus is not applicable to complete KGs but only to subgraphs with limited number of nodes per graph \cite{date_gpu-accelerated_2016}.
+Starting with the normalized similarity matrix $X^*$, we reformulate the aim of finding the discrete permutation matrix as a linear assignment problem. Simonovsky \textit{et al.} \cite{silver_mastering_2017}use for this purpose an optimization algorithm, the so called Hungarian algorithm. It original objective is to optimally assign $n$ resources to $n$ tasks, thus $k-n$ rows of the permutation matrix are left empty. The cost of assigning task $i \in \mathbb{N}^{[0,n]}$ to $a \in \mathbb{N}^{[0,k]}$ is stored in $x_{ia}$ of the cost matrix $C \in \mathbb{N}^{n \times k}$. By assuming tasks and resources are nodes and taking $C=1-X^*$ we get the continuous cost matrix $C$. This algorithm has a complexity of $O\left(n^{4}\right)$, thus is not applicable to complete KGs but only to subgraphs with limited number of nodes per graph \cite{date_gpu-accelerated_2016}.
 
-The core of the hungarian algorithm consist of four main steps, initial reduction, optimality check, augmented search and update. The presented algorithm is a popular variant of the original algorithm and improves the complexity of the update step from $O\left(n^{2}\right)$ to $O\left(n\right)$ and thus, reduces the total complexity to $O\left(n^{3}\right)$. Since throughout this thesis $n=k$ we will imply the reduction step and continue with a quadratic cost matrix $C$. The following notation is solely to derive the Hungarian algorithm and does not apply to our graph data. The algorithm takes as input a bipartite graph $G=(V, U, E)$ and the cost matrix $C \in \mathbb{R}^{n \times n}$. $G$ bipartite because it considers all possible edges in the cost matrix in one direction and no self-loops. $V \in \mathbb{R}^n$ and $U \in \mathbb{R}^n$ are the resulting sets of nodes and $E \in \mathbb{R}^{n}$ the set of edges between the nodes. The algorithm's output is a discrete matching matrix $M$. To avoid two irrelevant pages of pseudocode, the steps of the algorithm are presented in the following short summary \cite{mills-tettey_dynamic_nodate}.
+The core of the Hungarian algorithm consist of four main steps, initial reduction, optimality check, augmented search and update. The presented algorithm is a popular variant of the original algorithm and improves the complexity of the update step from $O\left(n^{2}\right)$ to $O\left(n\right)$ and thus, reduces the total complexity to $O\left(n^{3}\right)$. Since throughout this thesis $n=k$ we imply the reduction step and continue with a quadratic cost matrix $C$. The following notation is solely to derive the Hungarian algorithm and does not apply to our graph data. The algorithm takes as input a bipartite graph $G=(V, U, E)$ and the cost matrix $C \in \mathbb{R}^{n \times n}$. $G$ bipartite because it considers all possible edges in the cost matrix in one direction and no self-loops. $V \in \mathbb{R}^n$ and $U \in \mathbb{R}^n$ are the resulting sets of nodes and $E \in \mathbb{R}^{n}$ the set of edges between the nodes. The algorithm's output is a discrete matching matrix $M$. To avoid two irrelevant pages of pseudocode, the steps of the algorithm are presented in the following short summary \cite{mills-tettey_dynamic_nodate}.
 
 \begin{enumerate}
     \item Initialization: \\
@@ -355,7 +355,7 @@ The normalizing constant $1 / k(k-1)$ takes into account the no self-loops restr
 \label{sec3:ranger}
 
 Finalizing this chapter, we explain the novel deep learning optimizer Ranger. Ranger combines Rectified Adam (RAdam), lookahead and optionally gradient centralization. Let us briefly look into the different components.
-RAdam is based on the popular adam optimizer. It improves the learning by dynamically rectifying Adam's adaptive momentum. This is done by reducing the variance of the momentum, which is especially large at the beginning of the training. Thus, leading to a more stable and accelerated start \cite{liu_variance_2020}.
+RAdam is based on the popular Adam optimizer. It improves the learning by dynamically rectifying Adam's adaptive momentum. This is done by reducing the variance of the momentum, which is especially large at the beginning of the training. Thus, leading to a more stable and accelerated start \cite{liu_variance_2020}.
 The Lookahead optimizer was inspired by recent advances in the understanding of loss surfaces of deep neural networks, thus proposes an approach where, a second optimizer estimates the gradients behavior for the next steps on a set of parallel trained weights, while the number of 'looks ahead' steps is a hyperparameter.
 This improves learning and reduces the variance of the main optimizer \cite{zhang_lookahead_2019}.
 The last and most novel optimization technique, Gradient Centralization, acts directly on the gradient by normalizing it to a zero mean. Especially on convolutional neural networks, this helps regularizing the gradient and boosts learning. This method can be added to existing optimizers and can be seen as constrain of the loss function \cite{yong_gradient_2020}.
