@@ -12,7 +12,9 @@ For this sake of comparison with state of the art results, we chose the two most
 % Training models on each dataset for 333 epochs, without early stopping.
 
 \textbf{FB15K-237} is a successor of the FB15K dataset, first introduced by \cite{bordes_translating_2013}, which suffered of major test leakage, meaning that triples from test set could be inferred by inverting triples from the train set. In FB15K-237, introduced in \cite{toutanova_representing_2015} these triples where removed.
-The data was scraped from Freebase, while only the most frequent entities and relations were considered. The huge open-world KG Freebase \cite{bollacker_freebase_2008}, which before its discontinuation had around $1.2$ billion triples and $80$ million entities, was structured by assigning types and classes to entities and type constrains to relations. Thus, a triple can only be formed if the relation constrain matches the entity's type. Freebase was free for everyone to access and expand. This led to inconsistencies,duplicates and highly inconsistent notation, which might have been the reason for its discontinuation. Data dumps of the latest version are still available.
+The data was scraped from Freebase, while only the most frequent entities and relations were considered. The huge open-world KG Freebase \cite{bollacker_freebase_2008}, which before its discontinuation had around $1.2$ billion triples and $80$ million entities, was structured by assigning types and classes to entities and type constrains to relations. Thus, a triple can only be formed if the relation constrain matches the entity's type. Freebase was free for everyone to access and expand. This led to inconsistencies, duplicates and highly inconsistent notation, which might have been the reason for its discontinuation. Data dumps of the latest version are still available. Since the launch date of Freebase, advanced systems for storage and query of large-scale maintenance KGs have evolved \cite{cudre2013nosql}.
+
+
 
 
 

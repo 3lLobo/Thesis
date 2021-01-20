@@ -38,7 +38,7 @@ The final step of preprocessing is a function, which takes a batch of numerical 
 % Graph embeddings? unsupervised approach
 
 \subsection{RGVAE}
-The principle of a graph VAE has been explained in section \ref{ssec:GVAE}, which also covers the foundation of our model, the Relational Graph VAE (RGVAE). Therefore we will focus on the implementation as well as parameter and hyperparameter choice. Since this work is meant to be a prove of concept rather than aimed at outperforming the state of the art, our model is kept as simple as possible and only as complex as necessary. Our approach is module based for both experiment pipeline and model, meaning independence between sequential modules and compatibility with parallel modules. For the encoder we implemented two variations, a fully connected and a convolutional, while for the decoder we opted for a single fully connected network.
+The principle of a graph VAE has been explained in section \ref{ssec:GVAE}, which also covers the foundation of our model, the RGVAE. Therefore we will focus on the implementation as well as parameter and hyperparameter choice. Since this work is meant to be a prove of concept rather than aimed at outperforming the state of the art, our model is kept as simple as possible and only as complex as necessary. Our approach is module based for both experiment pipeline and model, meaning independence between sequential modules and compatibility with parallel modules. For the encoder we implemented two variations, a fully connected and a convolutional, while for the decoder we opted for a single fully connected network.
 %  just explain the code
 
 \subsubsection{Initialization}
